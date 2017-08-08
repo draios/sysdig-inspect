@@ -1,5 +1,3 @@
-/*global process*/
-
 export function isElectron() {
     // Renderer process
     if (typeof window !== 'undefined' && typeof window.process === 'object' && window.process.type === 'renderer') {
