@@ -40,11 +40,12 @@ setup_env() {
 build() {
     cd $APP_DIR
 
-    #
-    # Disabling interactive progress bar, gains 2x performances as stated on https://twitter.com/gavinjoyce/status/691773956144119808
-    # We don't need animated progress bar anyway
-    #
-    npm set progress=false
+    # Disabling interactive progress bar,  and spinnders gains 2x performances as stated on https://twitter.com/gavinjoyce/status/691773956144119808
+    npm config set progress false
+    npm config set spin false
+
+    # install phantomjs test runner
+    npm install -g phantomjs-prebuilt
 
     # reinstall node modules before build
     rm -rf node_modules
@@ -64,9 +65,6 @@ convertsecs() {
 }
 
 run-tests() {
-    # install phantomjs test runner
-    npm install -g phantomjs-prebuilt
-
     start=`date +%s`
 
     ret=0
