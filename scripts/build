@@ -1,0 +1,124 @@
+#!/bin/bash
+
+NODE_VERSION="v6.11.2"
+
+# Fallback to two cores if MAX_CONCURRENCY is not configured
+: ${MAX_CONCURRENCY:=2}
+
+# Log /proc/meminfo and Chrome memory usage
+# Possible values: disabled=0, enabled=1
+: ${LOG_MEMORY_USAGE:=1}
+# needs to be exported as it is accessed from within an exported function
+export LOG_MEMORY_USAGE
+
+echo "Build settings: Max Concurrency = ${MAX_CONCURRENCY}, Log Memory Usage = ${LOG_MEMORY_USAGE}"
+
+set_or_install_node_version() {
+    #check if node version is installed otherwise install it
+    nvm list | grep -v "default" | grep ${NODE_VERSION}
+    if [ ${?} -eq 1 ]; then
+        nvm install ${NODE_VERSION}
+    fi
+    nvm use ${NODE_VERSION}
+}
+
+setup_env() {
+    # This loads nvm and set the node version to use
+
+    set +eu
+        source ~/.bash_profile
+        set_or_install_node_version
+    set -eu
+
+    platform='unknown'
+    unamestr=`uname`
+    if [[ "$unamestr" == 'Linux' ]]; then
+        platform='linux'
+    elif [[ "$unamestr" == 'Darwin' ]]; then
+        platform='osx'
+    fi
+
+    set -exu
+
+    if [[ $platform == 'osx' ]]; then
+        SCRIPT=$(greadlink -f $0)
+    else
+        SCRIPT=$(readlink -f $0)
+    fi
+
+    SCRIPT_DIR=$(dirname $SCRIPT)
+    APP_DIR=$SCRIPT_DIR/..
+}
+
+build() {
+    cd $APP_DIR
+
+    #
+    # Disabling interactive progress bar, gains 2x performances as stated on https://twitter.com/gavinjoyce/status/691773956144119808
+    # We don't need animated progress bar anyway
+    #
+    npm set progress=false
+
+    # reinstall node modules before build
+    rm -rf node_modules
+    npm install
+
+    # do build
+    ./node_modules/.bin/ember electron:make
+}
+
+#
+# convert seconds to human readable format
+#
+convertsecs() {
+    m=`expr $1  % 3600 / 60`
+    s=`expr $1 % 60`
+    printf "%d min %d secs" $m $s
+}
+
+run-tests() {
+    # install phantomjs test runner
+    npm install -g phantomjs-prebuilt
+
+    start=`date +%s`
+
+    ret=0
+    OUTPUT=$(./node_modules/.bin/ember electron:test)
+
+    end=`date +%s`
+    RUNTIME=$((end-start))
+    FORMATTED_RUNTIME=$(convertsecs $RUNTIME)
+
+    TOTAL_TESTS=$(echo "$OUTPUT" | grep "# tests" | grep -o "[0-9]\+")
+    TOTAL_PASSED=$(echo "$OUTPUT" | grep "# pass" | grep -o "[0-9]\+")
+    TOTAL_SKIPPED=$(echo "$OUTPUT" | grep "# skip" | grep -o "[0-9]\+")
+    TOTAL_FAILED=$(echo "$OUTPUT" | grep "# fail" | grep -o "[0-9]\+")
+    TOTAL_EXECUTED=$(( $TOTAL_TESTS - $TOTAL_SKIPPED ))
+    BROWSER_VERSION=$(echo "$OUTPUT" | grep "ok" | head -1 | cut -d "-" -f 1 | awk '{for(i=3;i<=NF;++i)printf "%s ", $i;printf "\n"}')
+
+    echo ""
+    echo "==========================================="
+    echo "Total reported in succesful tests  : ${TOTAL_PASSED}"
+    echo "Total reported from failuring tests: ${TOTAL_FAILED}"
+    echo "-------------------------------------------"
+    echo "Total tests: Executed ${TOTAL_EXECUTED} of ${TOTAL_TESTS}"
+    echo "Total time: ${RUNTIME}s / ${FORMATTED_RUNTIME}"
+    echo "Browser: ${BROWSER_VERSION}"
+    echo "==========================================="
+    echo ""
+
+    if (( $TOTAL_FAILED > 0 )); then
+        ret=1
+    fi
+
+    echo "${ret}"
+
+    if [ $ret -eq 1 ]
+    then
+        exit $ret
+    fi
+}
+
+setup_env
+build
+run-tests
