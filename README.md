@@ -9,6 +9,8 @@ You will need the following things properly installed on your computer.
 * [Node.js](https://nodejs.org/) (with NPM)
 * [Ember CLI](https://ember-cli.com/)
   `npm install -g ember-cli`
+* [PhantomJS](http://phantomjs.org/)
+  `npm install -g phantomjs-prebuilt`
 
 ## Installation
 
@@ -29,9 +31,10 @@ You will need the following things properly installed on your computer.
 
 ### Running Tests
 
-* `ember test`
-* `ember test --server`
+* `ember test` (PhantomJS)
+* `ember test --serve`
 * `ember electron:test`
+* `ember electron:test --serve`
 
 ### Building
 
