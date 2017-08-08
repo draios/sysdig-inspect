@@ -27,6 +27,8 @@ setup_env() {
         platform='osx'
     fi
 
+    set -xeu
+
     if [[ $platform == 'osx' ]]; then
         SCRIPT=$(greadlink -f $0)
     else
