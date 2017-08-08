@@ -45,7 +45,7 @@ build() {
     npm config set spin false
 
     # install phantomjs test runner
-    npm install -g phantomjs-prebuilt
+    # npm install -g phantomjs-prebuilt
 
     # reinstall node modules before build
     rm -rf node_modules
