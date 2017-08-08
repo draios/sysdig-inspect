@@ -1,50 +1,42 @@
-# sysdig-ca
+# wsysdig
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Sysdig capture analyzer. Is an interface for analyze captures using a multiplatform desktop client. It uses [EmberJS](https://emberjs.com/) + [Electron](https://electron.atom.io/).
 
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
 
-* [Git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/) (with NPM)
 * [Ember CLI](https://ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+  `npm install -g ember-cli`
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd sysdig-ca`
+* `git clone https://github.com/draios/wsysdig.git`
+* `cd wsysdig`
 * `npm install`
 
 ## Running / Development
 
+#### Ember web application
+
 * `ember serve`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-### Code Generators
+#### Electron desktop
 
-Make use of the many generators for code, try `ember help generate` for more details
+- `ember electron`
 
 ### Running Tests
 
 * `ember test`
 * `ember test --server`
+* `ember electron:test`
 
 ### Building
 
 * `ember build` (development)
 * `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](http://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+* `ember electron:package` - Create binaries (.app, .exe, etc)
+* `ember electron:make` - Generate platform specific distributables (installers, distribution packages, etc)
+* `ember electron:build` - Build out Ember app with Electron instrumentation (useful for optimizing multi-platform builds)
