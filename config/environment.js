@@ -3,7 +3,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'sysdig-ca',
+    modulePrefix: 'wsysdig',
     environment,
     rootURL: '/',
     locationType: 'auto',
