@@ -1,7 +1,7 @@
 {
   "name": "wsysdig-backend",
   "version": "1.0.0",
-  "description": "Backend for read a capture using sysdig.",
+  "description": "Backend server for run sysdig on a capture end receive json output data.",
   "author": "sysdig inc.",
   "main": "server.js",
   "license": "ISC",

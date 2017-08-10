@@ -1,9 +1,9 @@
 {
-  "name": "sysdig-ca",
+  "name": "wsysdig",
   "version": "0.0.0",
-  "description": "Small description for sysdig-ca goes here",
+  "description": "wsysdig UI for analyze captures with a web interface",
   "license": "MIT",
-  "author": "",
+  "author": "sysdig inc.",
   "directories": {
     "doc": "doc",
     "test": "tests"
