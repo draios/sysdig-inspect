@@ -3,6 +3,9 @@ const electron = require('electron');
 const { app, BrowserWindow, protocol } = electron;
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
+const backendServer = require('../../../backend/server');
+
+const emberAppLocation = 'serve://dist';
 
 let mainWindow = null;
 
@@ -23,49 +26,79 @@ protocolServe({
 //     autoSubmit: true
 // });
 
+function createServer() {
+    let absPath = join(__dirname, '../../../backend/sysdig/');
+
+    backendServer(absPath).start();
+}
+
+function createWindow() {
+    const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
+    mainWindow = new BrowserWindow({
+        width: width * 0.7,
+        height: height * 0.7,
+    });
+
+    // If you want to open up dev tools programmatically, call
+    // mainWindow.openDevTools();
+
+
+    // Load the ember application using our custom protocol/scheme
+    mainWindow.loadURL(emberAppLocation);
+}
+
+function setupListeners() {
+    // If a loading operation goes wrong, we'll send Electron back to
+    // Ember App entry point
+    mainWindow.webContents.on('did-fail-load', () => {
+        mainWindow.loadURL(emberAppLocation);
+    });
+
+    mainWindow.webContents.on('crashed', () => {
+        console.log('Your Ember app (or other code) in the main window has crashed.');
+        console.log('This is a serious issue that needs to be handled and/or debugged.');
+    });
+
+    mainWindow.on('unresponsive', () => {
+        console.log('Your Ember app (or other code) has made the window unresponsive.');
+    });
+
+    mainWindow.on('responsive', () => {
+        console.log('The main window has become responsive again.');
+    });
+
+    mainWindow.on('closed', () => {
+        mainWindow = null;
+    });
+}
+
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
+
+app.on('before-quit', () => {
+    if (window && !window.isDestroyed() && window.isVisible()) {
+        window.removeAllListeners();
+        window.close();
+
+        setTimeout(() => app.exit(), 2000);
+    }
 });
 
 app.on('ready', () => {
-  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
-  mainWindow = new BrowserWindow({
-    width: width * 0.7,
-    height: height * 0.7,
-  });
+    createServer();
+    createWindow();
+    setupListeners();
+});
 
-  // If you want to open up dev tools programmatically, call
-  // mainWindow.openDevTools();
-
-  const emberAppLocation = 'serve://dist';
-
-  // Load the ember application using our custom protocol/scheme
-  mainWindow.loadURL(emberAppLocation);
-
-  // If a loading operation goes wrong, we'll send Electron back to
-  // Ember App entry point
-  mainWindow.webContents.on('did-fail-load', () => {
-    mainWindow.loadURL(emberAppLocation);
-  });
-
-  mainWindow.webContents.on('crashed', () => {
-    console.log('Your Ember app (or other code) in the main window has crashed.');
-    console.log('This is a serious issue that needs to be handled and/or debugged.');
-  });
-
-  mainWindow.on('unresponsive', () => {
-    console.log('Your Ember app (or other code) has made the window unresponsive.');
-  });
-
-  mainWindow.on('responsive', () => {
-    console.log('The main window has become responsive again.');
-  });
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
+app.on('activate', () => {
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) {
+        createWindow();
+    }
 });
 
 // Handle an unhandled error in the main thread
