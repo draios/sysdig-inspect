@@ -1,0 +1,25 @@
+{
+  "name": "wsysdig-backend",
+  "version": "1.0.0",
+  "description": "Backend for read a capture using sysdig.",
+  "author": "sysdig inc.",
+  "main": "server.js",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/draios/wsysdig.git"
+  },
+  "scripts": {
+    "test": "mocha tests/test.js",
+    "start": "nodemon main.js"
+  },
+  "dependencies": {
+    "express": "^4.15.4"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "nodemon": "^1.11.0",
+    "yargs": "^8.0.2"
+  }
+}
