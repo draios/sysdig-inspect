@@ -48,10 +48,11 @@ build() {
 
     # reinstall node modules before build
     rm -rf node_modules
+    rm -rf backend/node_modules
     npm install
 
     # do build
-    ./node_modules/.bin/ember electron:build
+    # ./node_modules/.bin/ember electron:build
 }
 
 #
@@ -61,6 +62,18 @@ convertsecs() {
     m=`expr $1  % 3600 / 60`
     s=`expr $1 % 60`
     printf "%d min %d secs" $m $s
+}
+
+run-backend-test() {
+    cd $APP_DIR/backend
+
+    start=`date +%s`
+
+    OUTPUT=$(npm test)
+
+    end=`date +%s`
+    RUNTIME=$((end-start))
+    FORMATTED_RUNTIME=$(convertsecs $RUNTIME)
 }
 
 run-tests() {
