@@ -1,5 +1,6 @@
 const net = require('net');
 const express = require('express');
+const cors = require('cors');
 const controller = require('./controller');
 
 const BASE_PORT = 3000;
@@ -28,6 +29,7 @@ class Server {
             this.port = port;
 
             const app = express();
+            app.use(cors());            
 
             this._setupRoutes(app);
 
