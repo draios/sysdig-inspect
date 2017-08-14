@@ -1,5 +1,6 @@
 /* eslint-env node */
 const electron = require('electron');
+const argv = require('yargs').argv;
 const { app, BrowserWindow, protocol } = electron;
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
@@ -27,7 +28,12 @@ protocolServe({
 // });
 
 function createServer() {
-    let absPath = join(__dirname, '../../../backend/sysdig/');
+    let absPath = ''
+    if (argv.p) {
+        absPath =  resolve(__dirname, '../../../', argv.p) + '/';
+    } else {
+        absPath = join(__dirname, '../../../backend/sysdig/');
+    }
 
     backendServer(absPath).start();
 }
