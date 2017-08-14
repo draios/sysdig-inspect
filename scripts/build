@@ -116,4 +116,4 @@ run-tests() {
 
 setup_env
 build
-run-tests
+# run-tests
