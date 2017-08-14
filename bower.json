@@ -1,0 +1,19 @@
+{
+  "name": "wsysdig",
+  "description": "wsysdig UI for analyze captures with a web interface",
+  "main": "",
+  "authors": [
+    "sysdig inc."
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/draios/wsysdig",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
