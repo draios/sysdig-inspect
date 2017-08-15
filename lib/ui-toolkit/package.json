@@ -1,0 +1,10 @@
+{
+  "name": "ui-toolkit",
+  "keywords": [
+    "ember-addon"
+  ],
+  "dependencies": {
+    "ember-cli-babel": "^6.8.1",
+    "ember-cli-less": "^1.5.4"
+  }
+}
