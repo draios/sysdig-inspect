@@ -1,1 +1,9 @@
-{{yield}}
+{{#if captureSummary.isLoading}}
+    Loading... ({{captureSummary.loadingProgress}}%)
+{{/if}}
+
+{{#if captureSummary.hasLoaded}}
+    {{#each captureSummary.metrics as |metric|}}
+        {{summary-metric data=metric}}
+    {{/each}}
+{{/if}}

@@ -7,5 +7,10 @@
     "ember-cli-babel": "^6.7.2",
     "ember-cli-htmlbars": "^2.0.3",
     "ember-cli-less": "^1.5.4"
+  },
+  "ember-addon": {
+    "paths": [
+      "lib/ui-toolkit"
+    ]
   }
 }
