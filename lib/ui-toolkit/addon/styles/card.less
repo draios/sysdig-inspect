@@ -1,4 +1,5 @@
 @color-card-background: white;
+@color-card-background-hover: darken(@color-card-background, 2%);
 
 .wsd-card {
     background-color: @color-card-background;
@@ -11,14 +12,50 @@
 
     border-radius: 2px;
 
+    &--compact {
+        margin: @layout-spacing-small / 2;
+    }
+
+    &--can-select {
+        cursor: pointer;
+
+        &:hover {
+            background-color: @color-card-background-hover;
+            .z-shadow-3();
+        }
+    }
+
     &__header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: @layout-padding-regular * 2 + @font-line-height-base;
+
         padding: @layout-padding-regular;
+
+        &--center {
+            align-items: center;
+            text-align: center;
+        }
+
+        &--two-line {
+            height: @layout-padding-regular * 2 + @font-line-height-base * 2;
+        }
     }
     &__header-title {
         font-weight: @font-weight-semibold;
     }
 
     &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
         padding: @layout-padding-regular;
+
+        &--center {
+            align-items: center;
+            text-align: center;
+        }
     }
 }

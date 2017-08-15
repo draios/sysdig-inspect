@@ -1,8 +1,10 @@
 .summary-metric {
-    width: 200px;
-    height: 150px;
+    @card-width: 200px;
+
+    width: @card-width;
+    height: round(@card-width / @golden-ratio);
 
     &__content {
-        font-size: @font-size-xl;
+        font-size: @font-size-xxl;
     }
 }

@@ -1,7 +1,7 @@
-<div class="wsd-card__header">
-    <span class="wsd-card__header-title">{{data.name}}</span>
+<div class="wsd-card__header wsd-card__header--two-line wsd-card__header--center">
+    <div class="wsd-card__header-title">{{data.name}}</div>
 </div>
 
-<div class="wsd-card__content summary-metric__content">
-    {{data.totalValue}}
+<div class="summary-metric__content wsd-card__content wsd-card__content--center">
+    {{number-to-string data.totalValue}}
 </div>
