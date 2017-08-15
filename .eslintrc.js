@@ -16,7 +16,9 @@ module.exports = {
     rules: {
         'indent': [2, 4],
         'no-console': 'off',
-        'ember-suave/no-direct-property-access': 'off'
+        'ember-suave/no-direct-property-access': 'off',
+        'ember-suave/no-const-outside-module-scope': 'off',
+        'comma-dangle': ['error', { 'arrays': 'never', 'objects': 'always-multiline' }]
     },
     globals: {
         module: true,
