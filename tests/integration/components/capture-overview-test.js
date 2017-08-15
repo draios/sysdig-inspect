@@ -2,7 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('capture-overview', 'Integration | Component | capture overview', {
-    integration: true
+    integration: true,
 });
 
 test('it renders', function(assert) {
