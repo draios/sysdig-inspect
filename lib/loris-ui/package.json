@@ -1,0 +1,10 @@
+{
+  "name": "loris-ui",
+  "keywords": [
+    "ember-addon"
+  ],
+  "dependencies": {
+    "ember-cli-babel": "^6.7.2",
+    "ember-cli-htmlbars": "^2.0.3"
+  }
+}

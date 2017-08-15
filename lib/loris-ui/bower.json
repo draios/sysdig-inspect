@@ -1,0 +1,20 @@
+{
+  "name": "loris-ui",
+  "description": "",
+  "main": "index.js",
+  "keywords": [
+    "ember-addon"
+  ],
+  "homepage": "https://github.com/draios/wsysdig",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "^4.10.0"
+  },
+  "private": true
+}
