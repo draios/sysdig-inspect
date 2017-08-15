@@ -58,7 +58,8 @@
   },
   "ember-addon": {
     "paths": [
-      "lib/loris-ui"
+      "lib/loris-ui",
+      "lib/ui-toolkit"
     ]
   }
 }
