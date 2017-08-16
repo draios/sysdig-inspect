@@ -1,0 +1,11 @@
+{
+  "name": "sd-viz",
+  "keywords": [
+    "ember-addon"
+  ],
+  "dependencies": {
+    "ember-cli-babel": "^6.8.1",
+    "ember-cli-htmlbars": "^2.0.3",
+    "ember-cli-less": "^1.5.4"
+  }
+}
