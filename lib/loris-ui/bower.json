@@ -14,9 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "d3": "^4.10.0",
-    "oboe": "^2.1.3",
-    "moment": "^2.18.1"
+    "oboe": "^2.1.3"
   },
   "private": true
 }
