@@ -13,7 +13,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember test",
-    "postinstall": "./node_modules/.bin/bower install && npm install ember-electron/backend"
+    "postinstall": "npm install ember-electron/backend"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
