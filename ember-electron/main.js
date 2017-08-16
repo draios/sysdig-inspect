@@ -4,7 +4,7 @@ const argv = require('yargs').argv;
 const { app, BrowserWindow, protocol } = electron;
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
-const backendServer = require('../../../backend/server');
+const backendServer = require('./backend/server');
 
 const emberAppLocation = 'serve://dist';
 
@@ -32,7 +32,7 @@ function createServer() {
     if (argv.p) {
         absPath =  resolve(__dirname, '../../../', argv.p) + '/';
     } else {
-        absPath = join(__dirname, '../../../backend/sysdig/');
+        absPath = join(__dirname, './backend/sysdig/');
     }
 
     backendServer(absPath).start();
