@@ -13,7 +13,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember test",
-    "postinstall": "cd backend;npm install;cd .."
+    "postinstall": "npm install backend"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
