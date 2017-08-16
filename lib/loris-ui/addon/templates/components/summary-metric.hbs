@@ -3,5 +3,15 @@
 </div>
 
 <div class="summary-metric__content wsd-card__content wsd-card__content--center">
-    {{number-to-string data.totalValue}}
+    <div>
+        {{number-to-string data.totalValue}}
+    </div>
+
+    {{sd-time-series
+        height=50
+        width=168
+        timestampProp="t"
+        valueProp="v"
+        data=data.timeSeries
+    }}
 </div>
