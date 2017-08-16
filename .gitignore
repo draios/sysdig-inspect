@@ -23,3 +23,5 @@ bower.json.ember-try
 package.json.ember-try
 
 electron-out/
+
+package-lock.json
