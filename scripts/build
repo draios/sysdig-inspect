@@ -48,8 +48,11 @@ build() {
 
     # reinstall node modules before build
     rm -rf node_modules
-    rm -rf backend/node_modules
+    rm -rf bower_components
+    rm -rf ember-electron/backend/node_modules
+    
     npm install
+    ./node_modules/.bin/bower install
 
     # do build
     # ./node_modules/.bin/ember electron:build
