@@ -12,7 +12,8 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember test",
+    "postinstall": "npm install backend"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
