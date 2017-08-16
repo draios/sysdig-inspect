@@ -7,4 +7,34 @@
     background-color: @color-background;
 
     display: flex;
+    flex-direction: column;
+    justify-items: stretch;
+
+    &__header {
+        z-index: @z-index-page-header;
+
+        height: 56px;
+
+        padding: 0 @layout-padding-regular;
+
+        display: flex;
+        align-items: stretch;
+
+        background-color: @color-header-background;
+        .z-shadow-1();
+    }
+
+    &__header-title {
+        display: flex;
+        align-items: center;
+
+        font-size: @font-size-xl;
+        font-weight: @font-weight-light;
+    }
+
+    &__content {
+        display: flex;
+        flex: 1;
+        overflow: auto;
+    }
 }

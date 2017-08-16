@@ -7,7 +7,12 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-    this.route('capture');
+    this.route('index',     { path: '/' });
+
+    this.route('capture',   { path: '/capture/:filePath' }, function() {
+        this.route('index',     { path: '/' });
+    });
+
     this.route('electron');
 });
 
