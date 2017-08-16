@@ -19,3 +19,5 @@ testem.log
 
 # sysdig folder
 /sysdig
+
+package-lock.json
