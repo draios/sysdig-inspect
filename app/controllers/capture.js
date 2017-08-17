@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
             if (timelines.includes(metricName)) {
                 newTimelines = timelines.filter((name) => name !== metricName);
             } else {
-                newTimelines = timelines.concat([metricName]);
+                newTimelines = [metricName].concat(timelines);
             }
 
             this.transitionToRoute('capture', {
