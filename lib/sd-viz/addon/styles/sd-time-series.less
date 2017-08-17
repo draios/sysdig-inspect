@@ -1,5 +1,12 @@
 .sd-time-series {
     &__column {
+        fill: @color-time-series-column;
+    }
+
+    &--theme-background &__column {
         fill: @color-time-series-column-muted;
+    }
+    &--is-selected&--theme-background &__column {
+        fill: darken(@color-time-series-column-muted, 8%);
     }
 }
