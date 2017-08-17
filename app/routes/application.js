@@ -5,8 +5,6 @@ export default Ember.Route.extend({
     beforeModel() {
         if (config.isElectron()) {
             this.replaceWith('electron');
-        } else {
-            this.replaceWith('capture', '/Users/davide/Downloads/lo.scap');
         }
     },
 });
