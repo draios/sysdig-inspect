@@ -4,8 +4,15 @@
             <img src="/assets/images/sysdig-white-logo.png">
         </a>
         <div class="wsd-page__header-title">
-            {{captureFilePath}}
+            <span>{{captureFilePath}}</span>
         </div>
+        <ul class="wsd-page__header-menu">
+            <li class="wsd-page__header-menu-option">
+                <a class="wsd-page__header-menu-button" {{action "openFile"}}>
+                    <i class="fa fa-folder-open-o" aria-hidden="true"></i> Open
+                </a>
+            </li>
+        </ul>
     </div>
 
     <div class="wsd-page__content">
