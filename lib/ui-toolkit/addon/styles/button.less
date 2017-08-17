@@ -1,9 +1,17 @@
 .wsd-button {
+    @layout-size-md: 36px;
+    @layout-size-sm: 24px;
+    @layout-padding-md: 16px;
+    @layout-padding-sm: 8px;
+
+    @icon-size-md: 24px;
+    @icon-size-sm: 16px;
+
     display: inline-block;
     position: relative;
-    min-width: 64px;
-    height: 36px;
-    padding: 0 16px;
+    min-width: @layout-size-md * 2;
+    height: @layout-size-md;
+    padding: 0 @layout-padding-md;
     border: none;
     border-radius: 2px;
     outline: none;
@@ -11,7 +19,7 @@
     font-size: 14px;
     font-weight: 500;
     letter-spacing: .04em;
-    line-height: 36px;
+    line-height: @layout-size-md;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
@@ -22,6 +30,10 @@
 
     cursor: pointer;
 
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
     &--raised {
         .z-shadow-1();
 
@@ -30,18 +42,28 @@
         }
     }
 
+    &--highlight-on-hover {
+        opacity: 0.7;
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &--sm {
+        min-width: @layout-size-sm * 2;
+        height: @layout-size-sm;
+        padding: 0 @layout-padding-sm;
+        line-height: @layout-size-sm;
+    }
+
     &--fab {
-        .z-shadow-1();
+        padding: round(@layout-size-md - @icon-size-md) / 2;
+        min-width: @layout-size-md;
 
         border-radius: 50%;
-        padding: 6px;
-        min-width: 36px;
-        min-height: 36px;
-
-
-        &:hover {
-            .z-shadow-2();
-            background-color: rgba(0, 0, 0, 0.1);
-        }
+    }
+    &--sm&--fab {
+        padding: round(@layout-size-sm - @icon-size-sm) / 2;
+        min-width: @layout-size-sm;
     }
 }
