@@ -1,0 +1,47 @@
+.wsd-button {
+    display: inline-block;
+    position: relative;
+    min-width: 64px;
+    height: 36px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    background: rgba(0, 0, 0, 0);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    line-height: 36px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    vertical-align: middle;
+    user-select: none;
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    &--raised {
+        .z-shadow-1();
+
+        &:hover {
+            .z-shadow-2();
+        }
+    }
+
+    &--fab {
+        .z-shadow-1();
+
+        border-radius: 50%;
+        padding: 6px;
+        min-width: 36px;
+        min-height: 36px;
+
+
+        &:hover {
+            .z-shadow-2();
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    }
+}
