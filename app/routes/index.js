@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
     beforeModel() {
-        this.replaceWith('capture', '/Users/davide/Downloads/lo.scap');
+        // this.replaceWith('capture', 'lo.scap');
     },
 
     setupController(...args) {
