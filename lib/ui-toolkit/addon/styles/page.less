@@ -37,16 +37,39 @@
 
     &__header-title {
         align-items: center;
+        flex: 1;
 
-        position: absolute;
-        left: 50%;
-        line-height: 56px;
-        transform: translate(-50%, 0%);
+        span {
+            position: absolute;
+            left: 50%;
+            line-height: @height-page-header;
+            transform: translate(-50%, 0%);
 
-        color: #FFFFFF;
+            color: #FFFFFF;
+            font-size: @font-size-lg;
+            font-weight: @font-weight-regular;
+        }
+    }
 
-        font-size: @font-size-lg;
-        font-weight: @font-weight-light;
+    &__header-menu {
+        list-style: none;
+        font-size: 0;
+        margin: 0;
+        white-space: nowrap;
+
+        &-option {
+            padding: 1px 15px 2px 15px;
+            line-height: 53px;
+
+            &:hover {
+                background-color: rgba(0,0,0,.1);
+            }
+
+            cursor: pointer;
+            color: #FFFFFF;
+            font-weight: @font-weight-regular;
+            font-size: @font-size-lg;
+        }
     }
 
     &__content {
