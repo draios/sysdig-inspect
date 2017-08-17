@@ -1,23 +1,37 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    metricTimelines: null,
-
-    init(...args) {
-        this._super(...args);
-
-        this.set('metricTimelines', []);
+    queryParams: {
+        metricTimelinesParam: 'timelines',
     },
+
+    metricTimelinesParam: null,
+    metricTimelines: Ember.computed('metricTimelinesParam', function() {
+        const names = this.get('metricTimelinesParam');
+
+        if (Ember.isEmpty(names)) {
+            return [];
+        } else {
+            return names.split(',');
+        }
+    }).readOnly(),
 
     actions: {
         toggleMetricTimeline(metricName) {
             const timelines = this.get('metricTimelines');
+            let newTimelines;
 
             if (timelines.includes(metricName)) {
-                this.set('metricTimelines', timelines.filter((name) => name !== metricName));
+                newTimelines = timelines.filter((name) => name !== metricName);
             } else {
-                this.set('metricTimelines', timelines.concat([metricName]));
+                newTimelines = timelines.concat([metricName]);
             }
+
+            this.transitionToRoute('capture', {
+                queryParams: {
+                    timelines: newTimelines.join(','),
+                },
+            });
         },
     },
 });
