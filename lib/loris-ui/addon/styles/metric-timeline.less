@@ -1,0 +1,46 @@
+.metric-timeline {
+    // height: 40px + @layout-padding-regular * 2;
+
+    background-color: @color-card-background;
+    // .z-shadow-1();
+    border: 1px solid transparent;
+
+    display: flex;
+    align-items: center;
+
+    padding: @layout-padding-small @layout-padding-regular;
+
+    //
+    // can select
+    //
+    cursor: pointer;
+
+    &:hover {
+        background-color: @color-card-background-hover;
+        // .z-shadow-3();
+        border-color: @color-separator;
+    }
+
+    &__header {
+        width: 200px;
+    }
+    &__header-title {
+    }
+
+    &__time-series {
+        flex: 1;
+
+        height: 56px - @layout-padding-small * 2;   // 40px
+
+        display: flex;
+        align-items: center;
+    }
+
+    &__value {
+        width: 150px;
+
+        font-size: @font-size-xl;
+        line-height: @font-line-height-xl;
+        text-align: right;
+    }
+}

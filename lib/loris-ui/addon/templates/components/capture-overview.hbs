@@ -1,9 +1,23 @@
 {{#if captureSummary.isLoading}}
-    Loading... ({{captureSummary.loadingProgress}}%)
+    Loading... ({{number-to-string captureSummary.loadingProgress}}%)
 {{/if}}
 
-{{#if captureSummary.hasLoaded}}
-    {{#each captureSummary.metrics as |metric|}}
-        {{summary-metric data=metric}}
+<div class="capture-overview__tiles">
+    {{#if captureSummary.hasLoaded}}
+        {{#each metricsData as |metric|}}
+            {{metric-summary
+                data=metric.data
+                isSelected=metric.isSelected
+                select=(action toggleMetricTimeline)
+            }}
+        {{/each}}
+    {{/if}}
+</div>
+
+<div class="capture-overview__timelines {{if timelinesData "" "capture-overview__timelines--empty"}}">
+    {{#each timelinesData as |timeline|}}
+        {{metric-timeline data=timeline}}
+    {{else}}
+        Select a metric to explore the timeline
     {{/each}}
-{{/if}}
+</div>

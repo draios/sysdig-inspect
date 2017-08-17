@@ -1,14 +1,35 @@
-.wsd-capture-overview {
+.capture-overview {
+    @timeline-height: 30px;
+
     flex: 1;
 
-    &:not(&--list) {
-        align-self: stretch;
+    background-color: @color-background-panel;
+
+    align-self: stretch;
+
+    display: flex;
+    flex-direction: column;
+
+    &__tiles {
+        flex: 1;
 
         display: flex;
         flex-flow: row wrap;
         align-content: flex-start;
         justify-items: stretch;
 
-        // padding: @layout-padding-small / 2;
+        overflow: auto;
+    }
+
+    &__timelines {
+        border-top: 1px solid @color-separator;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__timelines--empty {
+        height: 56px;
+        padding: @layout-padding-regular;
     }
 }

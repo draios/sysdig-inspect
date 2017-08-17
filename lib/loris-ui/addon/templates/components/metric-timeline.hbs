@@ -1,0 +1,17 @@
+<div class="metric-timeline__header">
+    <div class="metric-timeline__header-title">{{data.name}}</div>
+</div>
+
+<div class="metric-timeline__time-series">
+    {{sd-time-series
+        height=timeSeriesHeight
+        width=timeSeriesWidth
+        timestampProp="t"
+        valueProp="v"
+        data=data.timeSeries
+    }}
+</div>
+
+<div class="metric-timeline__value">
+    {{number-to-string data.totalValue}}
+</div>

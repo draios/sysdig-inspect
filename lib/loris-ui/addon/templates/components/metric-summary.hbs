@@ -1,12 +1,12 @@
-<div class="summary-metric__header">
-    <div class="summary-metric__header-title">{{data.name}}</div>
+<div class="metric-summary__header">
+    <div class="metric-summary__header-title">{{data.name}}</div>
 </div>
 
-<div class="summary-metric__value">
+<div class="metric-summary__value">
     {{number-to-string data.totalValue}}
 </div>
 
-<div class="summary-metric__time-series">
+<div class="metric-summary__time-series">
     {{sd-time-series
         height=timeSeriesHeight
         width=timeSeriesWidth
