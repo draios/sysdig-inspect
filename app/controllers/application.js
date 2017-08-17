@@ -10,7 +10,6 @@ export default Ember.Controller.extend({
                 let fileNames = config.openFileDialog();
 
                 if (Ember.isEmpty(fileNames) === false) {
-                    console.log(fileNames);
                     this.transitionToRoute('capture', fileNames[0]);
                 } else {
                     console.log('Not file choosen.');
