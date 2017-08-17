@@ -3,63 +3,63 @@
     @tile-height: 140px;
     @tile-content-min-width: 140px;
     @time-series-height: 30px;
+    &:not(&--list) {
 
-    flex: 1;
-    min-width: @tile-min-width;
-    height: @tile-height;
+        flex: 1;
+        min-width: @tile-min-width;
+        height: @tile-height;
 
-    @media (min-width: 150px) {
-        max-width: 100% / 1;
-    }
-    @media (min-width: 300px) {
-        max-width: 100% / 2;
-    }
-    @media (min-width: 450px) {
-        max-width: 100% / 3;
-    }
-    @media (min-width: 600px) {
-        max-width: 100% / 4;
-    }
-    @media (min-width: 750px) {
-        max-width: 100% / 5;
-    }
-    @media (min-width: 900px) {
-        max-width: 100% / 6;
-    }
-    @media (min-width: 1050px) {
-        max-width: 100% / 7;
-    }
-    @media (min-width: 1200px) {
-        max-width: 100% / 8;
-    }
-    @media (min-width: 1350px) {
-        max-width: 100% / 9;
+        @media (min-width: 150px) {
+            max-width: 100% / 1;
+        }
+        @media (min-width: 300px) {
+            max-width: 100% / 2;
+        }
+        @media (min-width: 450px) {
+            max-width: 100% / 3;
+        }
+        @media (min-width: 600px) {
+            max-width: 100% / 4;
+        }
+        @media (min-width: 750px) {
+            max-width: 100% / 5;
+        }
+        @media (min-width: 900px) {
+            max-width: 100% / 6;
+        }
+        @media (min-width: 1050px) {
+            max-width: 100% / 7;
+        }
+        @media (min-width: 1200px) {
+            max-width: 100% / 8;
+        }
+        @media (min-width: 1350px) {
+            max-width: 100% / 9;
+        }
+
+        background-color: @color-card-background;
+        // .z-shadow-1();
+        border: 1px solid transparent;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        padding-top: @layout-padding-regular;
+
+        //
+        // can select
+        //
+        cursor: pointer;
+
+        &:hover {
+            background-color: @color-card-background-hover;
+            // .z-shadow-3();
+            border-color: @color-separator;
+        }
     }
 
-    background-color: @color-card-background;
-    // .z-shadow-1();
-    border: 1px solid transparent;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    padding-top: @layout-padding-regular;
-
-    border-radius: 2px;
-
-    //
-    // can select
-    //
-    cursor: pointer;
-
-    &:hover {
-        background-color: @color-card-background-hover;
-        // .z-shadow-3();
-        border-color: @color-separator;
-    }
-
-    &__header {
+    &:not(&--list) &__header {
         height: @font-line-height-base * 2;
         width: @tile-content-min-width;
 
@@ -69,10 +69,10 @@
         justify-content: flex-start;
         text-align: center;
     }
-    &__header-title {
+    &:not(&--list) &__header-title {
     }
 
-    &__value {
+    &:not(&--list) &__value {
         flex: 1;
         width: @tile-content-min-width;
 
@@ -88,7 +88,55 @@
         // padding: @layout-padding-regular;
     }
 
-    &__time-series {
+    &:not(&--list) &__time-series {
         height: @time-series-height;
+    }
+
+    &--list {
+        // height: 40px + @layout-padding-regular * 2;
+
+        background-color: @color-card-background;
+        // .z-shadow-1();
+        border: 1px solid transparent;
+
+        display: flex;
+        align-items: center;
+
+        padding: @layout-padding-small @layout-padding-regular;
+
+        //
+        // can select
+        //
+        cursor: pointer;
+
+        &:hover {
+            background-color: @color-card-background-hover;
+            // .z-shadow-3();
+            border-color: @color-separator;
+        }
+    }
+
+    &--list &__header {
+        width: 200px;
+    }
+    &--list &__header-title {
+    }
+
+    &--list &__value {
+        order: 3;
+        width: 150px;
+
+        font-size: @font-size-xl;
+        line-height: @font-line-height-xl;
+        text-align: right;
+    }
+
+    &--list &__time-series {
+        flex: 1;
+
+        height: 30px;
+
+        display: flex;
+        align-items: center;
     }
 }

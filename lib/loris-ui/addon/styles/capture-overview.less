@@ -1,11 +1,14 @@
 .wsd-capture-overview {
     flex: 1;
-    align-self: stretch;
 
-    display: flex;
-    flex-flow: row wrap;
-    align-content: flex-start;
-    justify-items: stretch;
+    &:not(&--list) {
+        align-self: stretch;
 
-    // padding: @layout-padding-small / 2;
+        display: flex;
+        flex-flow: row wrap;
+        align-content: flex-start;
+        justify-items: stretch;
+
+        // padding: @layout-padding-small / 2;
+    }
 }
