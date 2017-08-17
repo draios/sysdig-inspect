@@ -7,7 +7,11 @@ var mergeTrees = require('broccoli-merge-trees');
 
 module.exports = function(defaults) {
     let app = new EmberApp(defaults, {
-        // Add options here
+        svgJar: {
+            sourceDirs: [
+                'lib/ui-toolkit/addon/icons'
+            ]
+        }
     });
 
     // Use `app.import` to add additional libraries to the generated
