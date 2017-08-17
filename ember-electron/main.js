@@ -1,7 +1,7 @@
 /* eslint-env node */
 const electron = require('electron');
 const argv = require('yargs').argv;
-const { app, BrowserWindow, protocol } = electron;
+const { app, BrowserWindow, protocol, globalShortcut } = electron;
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 const backendServer = require('../../../backend/server');
@@ -44,10 +44,12 @@ function createWindow() {
         width: width * 0.7,
         height: height * 0.7,
     });
+    mainWindow.setMenu(null);
 
-    // If you want to open up dev tools programmatically, call
-    // mainWindow.openDevTools();
-
+    // Register a shortcuts for open devTools
+    globalShortcut.register('CommandOrControl+Shift+I', () => {
+        mainWindow.toggleDevTools();
+    });
 
     // Load the ember application using our custom protocol/scheme
     mainWindow.loadURL(emberAppLocation);
