@@ -51,6 +51,11 @@ function createWindow() {
         mainWindow.toggleDevTools();
     });
 
+    // Register a shortcuts for open devTools
+    globalShortcut.register('CommandOrControl+R', () => {
+        mainWindow.reload();
+    });
+
     // Load the ember application using our custom protocol/scheme
     mainWindow.loadURL(emberAppLocation);
 }
