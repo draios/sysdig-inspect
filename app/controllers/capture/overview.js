@@ -50,7 +50,7 @@ export default Ember.Controller.extend({
         },
 
         drillDown(metricName) {
-            debugger;
+            this.transitionToRoute('capture.table')
         },
     },
 });
