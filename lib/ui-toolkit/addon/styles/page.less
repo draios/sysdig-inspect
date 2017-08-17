@@ -13,9 +13,10 @@
     &__header {
         z-index: @z-index-page-header;
 
-        height: 56px;
+        height: @height-page-header;
 
         padding: 0 @layout-padding-regular;
+        margin-bottom: @layout-spacing-small;
 
         display: flex;
         align-items: stretch;
@@ -24,11 +25,27 @@
         .z-shadow-1();
     }
 
+    &__header-logo {
+        height: @height-page-header;
+        padding: 12px 0;
+        opacity: .9;
+
+        img {
+            width: 114px;
+        }
+    }
+
     &__header-title {
-        display: flex;
         align-items: center;
 
-        font-size: @font-size-xl;
+        position: absolute;
+        left: 50%;
+        line-height: 56px;
+        transform: translate(-50%, 0%);
+
+        color: #FFFFFF;
+
+        font-size: @font-size-lg;
         font-weight: @font-weight-light;
     }
 
