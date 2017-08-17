@@ -32,5 +32,5 @@ export function openFileDialog() {
 }
 
 export function addShortcut() {
-    console.log(Mousetrap);
+    // console.log(Mousetrap);
 }
