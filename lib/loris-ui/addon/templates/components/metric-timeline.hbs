@@ -1,3 +1,7 @@
+<div class="metric-timeline__close">
+    {{wsd-button iconName="close" classNames="wsd-button--fab wsd-button--highlight-on-hover" size="sm" click=(action remove)}}
+</div>
+
 <div class="metric-timeline__header">
     {{data.name}}
 </div>
@@ -17,5 +21,5 @@
 </div>
 
 <div class="metric-timeline__control">
-    {{wsd-button iconName="arrow-forward" classNames="wsd-button--fab"}}
+    {{wsd-button iconName="arrow-forward" classNames="wsd-button--fab wsd-button--raised" click=(action drillDown)}}
 </div>

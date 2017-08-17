@@ -1,5 +1,5 @@
 .metric-timeline {
-    // height: 40px + @layout-padding-regular * 2;
+    // height: 40px + @layout-padding-md * 2;
 
     background-color: @color-card-background;
     // .z-shadow-1();
@@ -8,7 +8,11 @@
     display: flex;
     align-items: center;
 
-    padding: @layout-padding-small @layout-padding-regular;
+    padding: @layout-padding-sm @layout-padding-md;
+
+    &__close {
+        margin-right: @layout-spacing-sm;
+    }
 
     &__header {
         width: 200px;
@@ -17,7 +21,7 @@
     &__time-series {
         flex: 1;
 
-        height: 56px - @layout-padding-small * 2;   // 40px
+        height: 56px - @layout-padding-sm * 2;   // 40px
 
         display: flex;
         align-items: center;
@@ -32,7 +36,7 @@
     }
 
     &__control {
-        margin-left: @layout-spacing-regular;
+        margin-left: @layout-spacing-md;
         display: flex;
         justify-content: flex-end;
     }

@@ -33,5 +33,24 @@ export default Ember.Controller.extend({
                 },
             });
         },
+
+        removeMetricTimeline(metricName) {
+            const timelines = this.get('metricTimelines');
+            let newTimelines;
+
+            if (timelines.includes(metricName)) {
+                newTimelines = timelines.filter((name) => name !== metricName);
+
+                this.transitionToRoute('capture', {
+                    queryParams: {
+                        timelines: newTimelines.join(','),
+                    },
+                });
+            }
+        },
+
+        drillDown(metricName) {
+            debugger;
+        },
     },
 });

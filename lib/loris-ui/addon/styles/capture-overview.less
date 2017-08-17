@@ -1,5 +1,5 @@
 .capture-overview {
-    @timeline-height: 30px;
+    @timeline-height: 58px;
 
     flex: 1;
 
@@ -22,14 +22,14 @@
     }
 
     &__timelines {
-        border-top: 1px solid @color-separator;
+        overflow: auto;
+        max-height: @timeline-height * 5.5;
 
-        display: flex;
-        flex-direction: column;
+        border-top: 1px solid @color-separator;
     }
 
     &__timelines--empty {
         height: 56px;
-        padding: @layout-padding-regular;
+        padding: @layout-padding-md;
     }
 }

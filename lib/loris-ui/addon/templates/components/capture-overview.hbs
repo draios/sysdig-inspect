@@ -8,7 +8,7 @@
             {{metric-summary
                 data=metric.data
                 isSelected=metric.isSelected
-                select=(action toggleMetricTimeline)
+                select=(action toggleMetricTimeline metric.data.name)
             }}
         {{/each}}
     {{/if}}
@@ -16,7 +16,11 @@
 
 <div class="capture-overview__timelines {{if timelinesData "" "capture-overview__timelines--empty"}}">
     {{#each timelinesData as |timeline|}}
-        {{metric-timeline data=timeline}}
+        {{metric-timeline
+            data=timeline
+            drillDown=(action drillDown timeline.name)
+            remove=(action removeMetricTimeline timeline.name)
+        }}
     {{else}}
         Select a metric to explore the timeline
     {{/each}}
