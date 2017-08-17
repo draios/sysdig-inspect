@@ -1,15 +1,15 @@
-<div class="wsd-card__header wsd-card__header--two-line wsd-card__header--center">
-    <div class="wsd-card__header-title">{{data.name}}</div>
+<div class="summary-metric__header">
+    <div class="summary-metric__header-title">{{data.name}}</div>
 </div>
 
-<div class="summary-metric__content wsd-card__content wsd-card__content--center">
-    <div>
-        {{number-to-string data.totalValue}}
-    </div>
+<div class="summary-metric__value">
+    {{number-to-string data.totalValue}}
+</div>
 
+<div class="summary-metric__time-series">
     {{sd-time-series
-        height=50
-        width=168
+        height=30
+        width=140
         timestampProp="t"
         valueProp="v"
         data=data.timeSeries
