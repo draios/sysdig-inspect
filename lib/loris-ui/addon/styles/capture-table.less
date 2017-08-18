@@ -1,0 +1,21 @@
+.capture-table {
+    display: flex;
+    align-items: stretch;
+
+    align-self: stretch;
+
+    background-color: @color-background-panel;
+
+    &__list {
+        display: flex;
+        width: 200px;
+        overflow: auto;
+
+        border-right: 1px solid @color-separator;
+    }
+
+    &__content {
+        background-color: blue;
+        flex: 1;
+    }
+}

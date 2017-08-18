@@ -49,8 +49,8 @@ export default Ember.Controller.extend({
             }
         },
 
-        drillDown(metricName) {
-            this.transitionToRoute('capture.table')
+        drillDown(viewName) {
+            this.transitionToRoute('capture.table', viewName);
         },
     },
 });

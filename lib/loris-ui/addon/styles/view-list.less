@@ -1,0 +1,17 @@
+.view-list {
+    padding: @layout-padding-md 0;
+
+    overflow-x: hidden;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        height: @list-item-height-sm;
+
+        padding: 0 @layout-padding-sm;
+
+    }
+    &__item-text {
+        .text-overflow();
+    }
+}

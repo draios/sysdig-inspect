@@ -18,7 +18,7 @@
     {{#each timelinesData as |timeline|}}
         {{metric-timeline
             data=timeline
-            drillDown=(action drillDown timeline.name)
+            drillDown=(action drillDown timeline.targetView)
             remove=(action removeMetricTimeline timeline.name)
         }}
     {{else}}
