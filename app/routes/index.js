@@ -7,10 +7,4 @@ export default Ember.Route.extend({
 
         this.controllerFor('application').set('captureFilePath', null);
     },
-
-    actions: {
-        openFile() {
-            this.controllerFor('application').openFile();
-        }
-    },
 });
