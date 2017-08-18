@@ -1,12 +1,12 @@
 import Ember from 'ember';
-import config from '../appConfig';
+import utils from '../utils';
 
 export default Ember.Controller.extend({
     captureFilePath: null,
 
     openFile() {
-        if (config.isElectron()) {
-            let fileNames = config.openFileDialog();
+        if (utils.isElectron()) {
+            let fileNames = utils.openFileDialog();
 
             if (Ember.isEmpty(fileNames) === false) {
                 this.transitionToRoute('capture', fileNames[0]);
