@@ -7,7 +7,7 @@
         transform: translate(-50%, -50%);
 
         background-color: @color-welcome-panel;
-        width: 500px;
+        width: @width-welcome-panel;
         height: auto;
         .z-shadow-1();
     }
@@ -51,16 +51,21 @@
             &-button {
                 display: block;
                 border-radius: 6px;
-                border: 1px solid #AEAEAE;
+                border: 1px solid @color-option-border;
                 margin: 0 auto;
                 padding: 10px 0;
 
                 cursor: pointer;
 
-                color: #4E4E4E;
+                color: @color-option-text;
                 text-align: center;
                 font-weight: @font-weight-regular;
                 font-size: @font-size-lg;
+
+                svg {
+                    fill: @color-option-text;
+                    vertical-align: middle;
+                }
             }
         }
     }

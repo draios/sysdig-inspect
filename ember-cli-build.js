@@ -2,8 +2,6 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-var funnel = require('broccoli-funnel');
-var mergeTrees = require('broccoli-merge-trees');
 
 module.exports = function(defaults) {
     let app = new EmberApp(defaults, {
@@ -29,14 +27,5 @@ module.exports = function(defaults) {
 
     app.import(app.bowerDirectory + '/normalize-css/normalize.css');
 
-    var fontawesome = new funnel('bower_components/font-awesome/fonts', {
-        srcDir: '/',
-        destDir: 'fonts'
-    });
-
-    var merged = mergeTrees([app.toTree(), fontawesome], {
-        overwrite: true
-    });
-
-    return app.toTree(merged);
+    return app.toTree();
 };
