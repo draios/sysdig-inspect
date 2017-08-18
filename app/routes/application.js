@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     setupController(...args) {
         this._super(...args);
 
-        utils.addShortcut(['command+o', 'ctrl+o'], () => {
+        utils.addShortcut('mod+o', () => {
             this.controllerFor('application').openFile();
         });
     },
