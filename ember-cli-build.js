@@ -26,6 +26,7 @@ module.exports = function(defaults) {
     // along with the exports of each module as its value.
 
     app.import(app.bowerDirectory + '/normalize-css/normalize.css');
+    app.import(app.bowerDirectory + '/mousetrap/mousetrap.min.js');
 
     return app.toTree();
 };

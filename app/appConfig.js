@@ -31,6 +31,6 @@ export function openFileDialog() {
     });
 }
 
-export function addShortcut() {
-    // console.log(Mousetrap);
+export function addShortcut(keys, callback) {
+    Mousetrap.bind(keys, callback);
 }
