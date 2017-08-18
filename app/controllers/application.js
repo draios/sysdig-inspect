@@ -3,6 +3,7 @@ import utils from '../utils';
 
 export default Ember.Controller.extend({
     captureFilePath: null,
+    serverPort: null,
 
     openFile() {
         if (utils.isElectron()) {

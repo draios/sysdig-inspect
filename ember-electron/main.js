@@ -8,14 +8,16 @@ const backendServer = require('./backend/server');
 
 const emberAppLocation = 'serve://dist';
 
+let serverInstance = null;
+let serverPort = null;
 let mainWindow = null;
 
 // Registering a protocol & schema to serve our Ember application
 protocol.registerStandardSchemes(['serve'], { secure: true });
 protocolServe({
-  cwd: join(__dirname || resolve(dirname('')), '..', 'ember'),
-  app,
-  protocol,
+    cwd: join(__dirname || resolve(dirname('')), '..', 'ember'),
+    app,
+    protocol,
 });
 
 // Uncomment the lines below to enable Electron's crash reporter
@@ -28,22 +30,35 @@ protocolServe({
 // });
 
 function createServer() {
-    let absPath = ''
+    let absPath = '';
     if (argv.p) {
         absPath =  resolve(__dirname, '../../../', argv.p) + '/';
     } else {
         absPath = join(__dirname, './backend/sysdig/');
     }
 
-    backendServer(absPath).start();
+    serverInstance = backendServer(absPath)
+    serverInstance.start((port) => {
+        serverPort = port;
+
+        createWindow(port);
+        setupListeners();
+    });
 }
 
-function createWindow() {
+function createParamsUrl(port) {
+    // Add a query param to the ember app URL
+    // in order to provide the server port number for requests
+    return port ? emberAppLocation + '?port=' + port : emberAppLocation;
+}
+
+function createWindow(port) {
     const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
     mainWindow = new BrowserWindow({
         width: width * 0.7,
         height: height * 0.7,
     });
+    // Hide
     mainWindow.setMenu(null);
 
     // Register a shortcuts for open devTools
@@ -51,13 +66,13 @@ function createWindow() {
         mainWindow.toggleDevTools();
     });
 
-    // Register a shortcuts for open devTools
+    // Register a shortcuts for reload page
     globalShortcut.register('CommandOrControl+R', () => {
         mainWindow.reload();
     });
 
     // Load the ember application using our custom protocol/scheme
-    mainWindow.loadURL(emberAppLocation);
+    mainWindow.loadURL(createParamsUrl(port));
 }
 
 function setupListeners() {
@@ -102,15 +117,15 @@ app.on('before-quit', () => {
 
 app.on('ready', () => {
     createServer();
-    createWindow();
-    setupListeners();
 });
 
 app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (mainWindow === null) {
-        createWindow();
+    if (serverInstance === null) {
+        createServer();
+    } else if (mainWindow === null) {
+        createWindow(serverPort);
     }
 });
 
@@ -130,7 +145,7 @@ app.on('activate', () => {
 // resources (e.g. file descriptors, handles, etc) before shutting down the process. It is
 // not safe to resume normal operation after 'uncaughtException'.
 process.on('uncaughtException', (err) => {
-  console.log('An exception in the main thread was not handled.');
-  console.log('This is a serious issue that needs to be handled and/or debugged.');
-  console.log(`Exception: ${err}`);
+    console.log('An exception in the main thread was not handled.');
+    console.log('This is a serious issue that needs to be handled and/or debugged.');
+    console.log(`Exception: ${err}`);
 });
