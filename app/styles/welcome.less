@@ -50,20 +50,18 @@
 
             &-button {
                 display: block;
-                border-radius: 6px;
-                border: 1px solid @color-option-border;
-                margin: 0 auto;
-                padding: 10px 0;
+                margin: auto;
 
-                cursor: pointer;
+                background-color: #3062B8;
+                color: #FFFFFF;
 
-                color: @color-option-text;
-                text-align: center;
-                font-weight: @font-weight-regular;
-                font-size: @font-size-lg;
+                &:hover {
+                    background-color: #3062B8;
+                    transition-duration: 85ms;
+                    opacity: .9;
+                }
 
                 svg {
-                    fill: @color-option-text;
                     vertical-align: middle;
                 }
             }
