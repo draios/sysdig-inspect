@@ -1,6 +1,19 @@
+@color-primary: #3062B8; // see http://www.color-hex.com/color/3062b8
+@color-primary-lighten-1: #C0CFE9;
+@color-primary-lighten-2: #D5DFF0;
+@color-primary-lighten-3: #EAEFF7;
+
+@color-text: #112034;
+
 @color-background: #ECEFF1;
 @color-background-panel: #FFFFFF;
-@color-header-background: #3062B8;
 @color-separator: #DDDDDC;
-@color-selected: #D1E6FA;
-@color-selected-light: #F5FAFE;
+@color-selected: @color-primary-lighten-2;
+@color-selected-light: @color-primary-lighten-3;
+
+@color-header-background: @color-primary;
+
+@color-list-background: @color-background-panel;
+@color-list-item-hover: @color-primary-lighten-3;
+@color-list-item-selected: @color-primary-lighten-2;
+@color-list-item-selected-hover: @color-primary-lighten-1;

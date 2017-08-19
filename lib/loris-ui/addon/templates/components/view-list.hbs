@@ -1,5 +1,7 @@
 {{#each viewListData.views as |view|}}
     <div class="view-list__item">
-        <div class="view-list__item-text">{{view.name}}</div>
+        {{#link-to "capture.views.view" view.id class="view-list__item-link" activeClass="view-list__item-link--selected"}}
+            {{view.name}}
+        {{/link-to}}
     </div>
 {{/each}}

@@ -6,12 +6,34 @@
     &__item {
         display: flex;
         align-items: center;
+
         height: @list-item-height-sm;
+        line-height: @list-item-height-sm;
+    }
+    &__item-link {
+        flex: 1;
+        height: 100%;
 
         padding: 0 @layout-padding-sm;
-
-    }
-    &__item-text {
+        color: @color-text;
+        text-decoration: none;
         .text-overflow();
+
+        background-color: @color-list-background;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            background-color: @color-list-item-hover;
+        }
+
+        &--selected {
+            background-color: @color-list-item-selected;
+
+            &:hover,
+            &:focus {
+                background-color: @color-list-item-selected-hover;
+            }
+        }
     }
 }
