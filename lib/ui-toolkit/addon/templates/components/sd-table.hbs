@@ -1,0 +1,26 @@
+<div class="sd-table__wrap">
+    <div class="sd-table__head">
+        <div class="sd-table__row">
+            {{#each columns as |column|}}
+                <div class="sd-table__head-cell">
+                    <div class="sd-table__cell-content">
+                        {{column.name}}
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="sd-table__body">
+        {{#each rows as |row|}}
+            <div class="sd-table__row">
+                {{#each row.columns as |column|}}
+                    <div class="sd-table__cell">
+                        <div class="sd-table__cell-content">
+                            {{column.value}}
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/each}}
+    </div>
+</div>

@@ -1,7 +1,9 @@
 .view-list {
+    flex: 1;
+
     padding: @layout-padding-md 0;
 
-    width: 100%;
+    background-color: @color-list-background;
 
     &__item {
         display: flex;
@@ -18,8 +20,6 @@
         color: @color-text;
         text-decoration: none;
         .text-overflow();
-
-        background-color: @color-list-background;
         cursor: pointer;
 
         &:hover,

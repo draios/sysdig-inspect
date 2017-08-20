@@ -1,0 +1,58 @@
+.sd-table {
+    @row-height: 24px;
+    @cell-min-width: 30px;
+
+    //
+    // BEGIN OF layout/overflow
+    //
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    overflow-x: hidden;
+
+    &__wrap {
+        display: flex;
+        flex-direction: column;
+
+        flex: 1;
+
+        overflow-x: auto;
+    }
+
+    &__head,
+    &__body {
+        display: flex;
+        flex-direction: column;
+    }
+    &__head {
+        flex: 0 0 @row-height;
+    }
+    &__body {
+        flex: 1;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    &__row {
+        flex: 0 0 @row-height;
+        display: flex;
+        line-height: @row-height;
+    }
+
+    &__head-cell,
+    &__cell {
+        flex: 1 0 @cell-min-width;
+        display: flex;
+        overflow: hidden;
+    }
+    //
+    // END OF layout/overflow
+    //
+
+    &__cell-content {
+        .text-overflow();
+    }
+}
