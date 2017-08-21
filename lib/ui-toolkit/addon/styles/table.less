@@ -40,8 +40,6 @@
         flex: 0 0 @row-height;
         display: flex;
         line-height: @row-height;
-
-        padding-right: @layout-spacing-md;
     }
 
     &__head-cell,
@@ -54,7 +52,16 @@
     // END OF layout/overflow
     //
 
+    &__row {
+        // let padding sit to the far right side of the table
+        padding-right: @layout-spacing-md;
+    }
+
     &__cell-content {
         .text-overflow();
+    }
+
+    &__body {
+        padding-bottom: @layout-spacing-md;
     }
 }

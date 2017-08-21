@@ -1,7 +1,10 @@
 .view-list {
     flex: 1;
 
-    padding: @layout-padding-md 0;
+    overflow: auto;
+
+    // NOTE: Firefox will ignore padding at the bottom (see https://bugzilla.mozilla.org/show_bug.cgi?id=748518)
+    padding-bottom: @layout-padding-md;
 
     &__item {
         display: flex;

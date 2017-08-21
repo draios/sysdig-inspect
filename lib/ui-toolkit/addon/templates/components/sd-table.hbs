@@ -1,34 +1,36 @@
-<div class="sd-table__wrap">
-    <div class="sd-table__head">
-        <div class="sd-table__row">
-            {{#each columns as |column|}}
-                <div class="sd-table__head-cell">
-                    <div class="sd-table__cell-content">
-                        {{column.name}}
-                    </div>
-                </div>
-            {{/each}}
-        </div>
-    </div>
-    <div class="sd-table__body">
-        {{#virtual-each rows
-          height=height
-          itemHeight=24
-          rowPadding=5
-          scrollTimeout=10
-          as |row|
-        }}
-        {{!-- {{#each rows as |row|}} --}}
+{{#if isHeightKnown}}
+    <div class="sd-table__wrap">
+        <div class="sd-table__head">
             <div class="sd-table__row">
-                {{#each row.columns as |column|}}
-                    <div class="sd-table__cell">
+                {{#each columns as |column|}}
+                    <div class="sd-table__head-cell">
                         <div class="sd-table__cell-content">
-                            {{column.value}}
+                            {{column.name}}
                         </div>
                     </div>
                 {{/each}}
             </div>
-        {{!-- {{/each}} --}}
-        {{/virtual-each}}
+        </div>
+        <div class="sd-table__body">
+            {{#virtual-each rows
+              height=height
+              itemHeight=24
+              rowPadding=5
+              scrollTimeout=10
+              as |row|
+            }}
+            {{!-- {{#each rows as |row|}} --}}
+                <div class="sd-table__row">
+                    {{#each row.columns as |column|}}
+                        <div class="sd-table__cell">
+                            <div class="sd-table__cell-content">
+                                {{column.value}}
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{!-- {{/each}} --}}
+            {{/virtual-each}}
+        </div>
     </div>
-</div>
+{{/if}}

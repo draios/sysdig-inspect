@@ -13,6 +13,8 @@
     {{/if}}
 
     {{#if dataStore.hasLoaded}}
-        {{sd-table columns=columns rows=rows}}
+        <div class="capture-view__table-wrapper">
+            {{sd-table columns=columns rows=rows}}
+        </div>
     {{/if}}
 </div>
