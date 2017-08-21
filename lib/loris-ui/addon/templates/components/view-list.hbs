@@ -1,7 +1,13 @@
-{{#each viewListData.views as |view|}}
-    <div class="view-list__item">
-        {{#link-to "capture.views.view" view.id class="view-list__item-link" activeClass="view-list__item-link--selected"}}
-            {{view.name}}
-        {{/link-to}}
-    </div>
-{{/each}}
+{{#if dataStore.isLoading}}
+    Loading...
+{{/if}}
+
+{{#if dataStore.hasLoaded}}
+    {{#each dataStore.views as |view|}}
+        <div class="view-list__item">
+            {{#link-to "capture.views.view" view.id class="view-list__item-link" activeClass="view-list__item-link--selected"}}
+                {{view.name}}
+            {{/link-to}}
+        </div>
+    {{/each}}
+{{/if}}

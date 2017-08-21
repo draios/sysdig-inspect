@@ -1,1 +1,7 @@
-{{sd-table columns=columns rows=rows}}
+{{#if dataStore.isLoading}}
+    Loading... ({{number-to-string dataStore.loadingProgress}}%)
+{{/if}}
+
+{{#if dataStore.hasLoaded}}
+    {{sd-table columns=columns rows=rows}}
+{{/if}}

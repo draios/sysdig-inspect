@@ -1,9 +1,9 @@
-{{#if captureSummary.isLoading}}
-    Loading... ({{number-to-string captureSummary.loadingProgress}}%)
+{{#if dataStore.isLoading}}
+    Loading... ({{number-to-string dataStore.loadingProgress}}%)
 {{/if}}
 
-<div class="capture-overview__tiles">
-    {{#if captureSummary.hasLoaded}}
+{{#if dataStore.hasLoaded}}
+    <div class="capture-overview__tiles">
         {{#each metricsData as |metric|}}
             {{metric-summary
                 data=metric.data
@@ -11,17 +11,17 @@
                 select=(action toggleMetricTimeline metric.data.name)
             }}
         {{/each}}
-    {{/if}}
-</div>
+    </div>
 
-<div class="capture-overview__timelines {{if timelinesData "" "capture-overview__timelines--empty"}}">
-    {{#each timelinesData as |timeline|}}
-        {{metric-timeline
-            data=timeline
-            drillDown=(action drillDown timeline.targetView)
-            remove=(action removeMetricTimeline timeline.name)
-        }}
-    {{else}}
-        Select a metric to explore the timeline
-    {{/each}}
-</div>
+    <div class="capture-overview__timelines {{if timelinesData "" "capture-overview__timelines--empty"}}">
+        {{#each timelinesData as |timeline|}}
+            {{metric-timeline
+                data=timeline
+                drillDown=(action drillDown timeline.targetView)
+                remove=(action removeMetricTimeline timeline.name)
+            }}
+        {{else}}
+            Select a metric to explore the timeline
+        {{/each}}
+    </div>
+{{/if}}
