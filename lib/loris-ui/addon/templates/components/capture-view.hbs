@@ -1,7 +1,18 @@
-{{#if dataStore.isLoading}}
-    Loading... ({{number-to-string dataStore.loadingProgress}}%)
-{{/if}}
+<div class="capture-view__header">
+    {{#if viewDataStore.isLoading}}
+        <h2>Loading view...</h2>
+    {{/if}}
+    {{#if viewDataStore.hasLoaded}}
+        <h2>{{viewDataStore.view.name}}</h2>
+    {{/if}}
+</div>
 
-{{#if dataStore.hasLoaded}}
-    {{sd-table columns=columns rows=rows}}
-{{/if}}
+<div class="capture-view__content">
+    {{#if dataStore.isLoading}}
+        Loading... ({{number-to-string dataStore.loadingProgress}}%)
+    {{/if}}
+
+    {{#if dataStore.hasLoaded}}
+        {{sd-table columns=columns rows=rows}}
+    {{/if}}
+</div>
