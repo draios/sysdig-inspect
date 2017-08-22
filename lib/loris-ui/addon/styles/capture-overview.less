@@ -40,6 +40,9 @@
         min-width: 105px;
         padding: 0 @layout-padding-md;
     }
+    &:not(&--is-vertical-layout) &__category-name {
+        padding: @layout-padding-md @layout-padding-md @layout-padding-sm @layout-padding-md;
+    }
     &__categories {
         flex-direction: row;
     }
