@@ -1,5 +1,6 @@
 .capture-overview {
     @timeline-height: 58px;
+    @tile-height: 140px;
 
     flex: 1;
 
@@ -37,7 +38,7 @@
         align-items: center;
     }
     &--is-vertical-layout &__category-name {
-        min-width: 105px;
+        min-width: 140px;
         padding: 0 @layout-padding-md;
     }
     &:not(&--is-vertical-layout) &__category-name {
@@ -54,6 +55,9 @@
     }
     &--is-vertical-layout &__category-tiles {
         flex-direction: row;
+    }
+    &--is-vertical-layout &__category-tiles {
+        min-height: @tile-height;
     }
 
 
