@@ -21,6 +21,39 @@
         overflow: auto;
     }
 
+    &__categories {
+        flex: 1;
+
+        display: flex;
+        justify-items: stretch;
+
+        overflow: auto;
+    }
+    &__category-tiles {
+        flex: 1;
+
+        display: flex;
+
+        align-items: center;
+    }
+    &--is-vertical-layout &__category-name {
+        min-width: 105px;
+        padding: 0 @layout-padding-md;
+    }
+    &__categories {
+        flex-direction: row;
+    }
+    &--is-vertical-layout &__categories {
+        flex-direction: column;
+    }
+    &__category-tiles {
+        flex-direction: column;
+    }
+    &--is-vertical-layout &__category-tiles {
+        flex-direction: row;
+    }
+
+
     &__timelines {
         overflow: auto;
         max-height: @timeline-height * 5.5;

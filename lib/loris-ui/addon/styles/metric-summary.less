@@ -4,7 +4,6 @@
     @tile-content-min-width: 140px;
     @time-series-height: 30px;
 
-    flex: 1;
     min-width: @tile-min-width;
     height: @tile-height;
 
@@ -75,6 +74,10 @@
     &:hover {
         background-color: @color-card-background-hover;
         border-color: darken(@color-card-background-hover, 4%);
+    }
+
+    &:not(&--is-category-item) {
+        flex: 1;
     }
 
     &--is-selected {

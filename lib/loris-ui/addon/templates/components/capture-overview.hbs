@@ -3,15 +3,33 @@
 {{/if}}
 
 {{#if dataStore.hasLoaded}}
-    <div class="capture-overview__tiles">
-        {{#each metricsData as |metric|}}
-            {{metric-summary
-                data=metric.data
-                isSelected=metric.isSelected
-                select=(action toggleMetricTimeline metric.data.name)
-            }}
-        {{/each}}
-    </div>
+    {{#if isCategoryLayout}}
+        <div class="capture-overview__categories">
+            {{#each categories as |category|}}
+                <div class="capture-overview__category-tiles">
+                    <h3 class="capture-overview__category-name">{{category.name}}</h3>
+                    {{#each category.metricsData as |metric|}}
+                        {{metric-summary
+                            classNames="metric-summary--is-category-item"
+                            data=metric.data
+                            isSelected=metric.isSelected
+                            select=(action toggleMetricTimeline metric.data.name)
+                        }}
+                    {{/each}}
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="capture-overview__tiles">
+            {{#each metricsData as |metric|}}
+                {{metric-summary
+                    data=metric.data
+                    isSelected=metric.isSelected
+                    select=(action toggleMetricTimeline metric.data.name)
+                }}
+            {{/each}}
+        </div>
+    {{/if}}
 
     <div class="capture-overview__timelines {{if timelinesData "" "capture-overview__timelines--empty"}}">
         {{#each timelinesData as |timeline|}}
