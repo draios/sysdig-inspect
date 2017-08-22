@@ -1,5 +1,5 @@
 {{#if canBeRendered}}
-    <g>
+    <g class="columns" transform="translate(0, 0)">
         {{#each columns as |column|}}
             <rect
                 class="sd-time-series__column"
@@ -9,5 +9,17 @@
                 height={{column.h}}
             ></rect>
         {{/each}}
+    </g>
+
+    <g transform="translate(0, 0)" class="brush" fill="none" pointer-events="all" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+        <rect class="overlay" pointer-events="all" cursor="crosshair" x="0" y="0" width="{{width}}" height="{{height}}"></rect>
+
+        {{#if selection}}
+            <rect class="left-selection" pointer-events="none" fill="#777777" fill-opacity="0.3" shape-rendering="crispEdges" style="" x="0" y="0" width="{{selection.left}}" height="{{height}}"></rect>
+
+            <rect class="selection" pointer-events="none" style="" x="{{selection.left}}" y="0" width="{{selection.width}}" height="{{height}}"></rect>
+
+            <rect class="right-selection" pointer-events="none" fill="#777777" fill-opacity="0.3" shape-rendering="crispEdges" style="" x="{{selection.right}}" y="0" width="{{width}}" height="{{height}}"></rect>
+        {{/if}}
     </g>
 {{/if}}
