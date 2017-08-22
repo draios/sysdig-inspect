@@ -21,6 +21,9 @@
     &__time-series {
         flex: 1;
 
+        // prevent child to stretch the container, so that size can always be computed at run-time
+        overflow: hidden;
+
         height: 56px - @layout-padding-sm * 2;   // 40px
 
         display: flex;
