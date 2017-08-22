@@ -10,8 +10,7 @@
   },
   "ember-addon": {
     "paths": [
-      "lib/ui-toolkit",
-      "lib/sd-viz"
+      "lib/ui-toolkit"
     ]
   }
 }
