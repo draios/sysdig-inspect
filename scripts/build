@@ -83,7 +83,7 @@ run-tests() {
     start=`date +%s`
 
     ret=0
-    OUTPUT=$(./node_modules/.bin/ember electron:test)
+    OUTPUT=$(./node_modules/.bin/ember test)
 
     end=`date +%s`
     RUNTIME=$((end-start))
