@@ -50,7 +50,7 @@ build() {
     rm -rf node_modules
     rm -rf bower_components
     rm -rf ember-electron/backend/node_modules
-    
+
     npm install
     ./node_modules/.bin/bower install
 
@@ -119,4 +119,4 @@ run-tests() {
 
 setup_env
 build
-# run-tests
+run-tests
