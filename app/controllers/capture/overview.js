@@ -100,7 +100,7 @@ export default Ember.Controller.extend({
                     queryParams: {
                         timeFrom: this.get('timeFrom'),
                         timeTo: this.get('timeTo'),
-                        filter: viewFilter ? `evt.type != switch and ${viewFilter}` : undefined,
+                        filter: viewFilter,
                     },
                 },
             );
