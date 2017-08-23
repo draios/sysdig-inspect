@@ -1,0 +1,63 @@
+#!/bin/bash
+
+setup_env() {
+    platform='unknown'
+    unamestr=`uname`
+    if [[ "$unamestr" == 'Linux' ]]; then
+        platform='linux'
+    elif [[ "$unamestr" == 'Darwin' ]]; then
+        platform='osx'
+    fi
+
+    if [[ $platform == 'osx' ]]; then
+        SCRIPT=$(greadlink -f $0)
+    else
+        SCRIPT=$(readlink -f $0)
+    fi
+
+    SCRIPT_DIR=$(dirname $SCRIPT)
+    APP_DIR=$SCRIPT_DIR/..
+
+    cd $APP_DIR
+}
+
+install_app() {
+    # reinstall node modules before build
+    rm -rf node_modules
+    rm -rf bower_components
+
+    npm install
+    ./node_modules/.bin/bower install
+}
+
+install_backend() {
+    cd ember-electron/backend
+
+    rm -rf node_modules
+    npm install
+
+    cd ../..
+}
+
+install_addons() {
+    cd lib
+
+    cd loris-ui
+    rm -rf node_modules
+    rm -rf bower_components
+
+    npm install
+    ./node_modules/.bin/bower install
+
+    cd ../ui-toolkit
+    rm -rf node_modules
+    rm -rf bower_components
+
+    npm install
+    ./node_modules/.bin/bower install
+}
+
+setup_env
+install_app
+install_backend
+install_addons
