@@ -3,6 +3,8 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     queryParams: {
         metricTimelinesParam: 'timelines',
+        timeFrom: 'timeFrom',
+        timeTo: 'timeTo',
     },
 
     metricTimelinesParam: null,
@@ -13,6 +15,17 @@ export default Ember.Controller.extend({
             return [];
         } else {
             return names.split(',');
+        }
+    }).readOnly(),
+
+    timeWindow: Ember.computed('timeFrom', 'timeTo', function() {
+        if (Ember.isNone(this.get('timeFrom')) === false && Ember.isNone(this.get('timeTo')) === false) {
+            return {
+                from: this.get('timeFrom'),
+                to: this.get('timeTo'),
+            };
+        } else {
+            return null;
         }
     }).readOnly(),
 
@@ -27,11 +40,14 @@ export default Ember.Controller.extend({
                 newTimelines = [metricName].concat(timelines);
             }
 
-            this.transitionToRoute('capture', {
-                queryParams: {
-                    timelines: newTimelines.join(','),
-                },
-            });
+            this.transitionToRoute(
+                'capture.overview',
+                {
+                    queryParams: {
+                        timelines: newTimelines.join(','),
+                    },
+                }
+            );
         },
 
         removeMetricTimeline(metricName) {
@@ -41,16 +57,53 @@ export default Ember.Controller.extend({
             if (timelines.includes(metricName)) {
                 newTimelines = timelines.filter((name) => name !== metricName);
 
-                this.transitionToRoute('capture', {
-                    queryParams: {
-                        timelines: newTimelines.join(','),
-                    },
-                });
+                this.transitionToRoute(
+                    'capture.overview',
+                    {
+                        queryParams: {
+                            timelines: newTimelines.join(','),
+                        },
+                    }
+                );
             }
         },
 
-        drillDown(viewName) {
-            this.transitionToRoute('capture.views.view', viewName);
+        selectTimeWindow(from, to) {
+            if (Ember.isNone(from) === false && Ember.isNone(to) === false) {
+                this.transitionToRoute(
+                    'capture.overview',
+                    {
+                        queryParams: {
+                            timeFrom: from,
+                            timeTo: to,
+                        },
+                    },
+                );
+            } else {
+                this.transitionToRoute(
+                    'capture.overview',
+                    {
+                        queryParams: {
+                            timeFrom: undefined,
+                            timeTo: undefined,
+                        },
+                    },
+                );
+            }
+        },
+
+        drillDown(viewName, from, to, viewFilter) {
+            this.transitionToRoute(
+                'capture.views.view',
+                viewName,
+                {
+                    queryParams: {
+                        timeFrom: this.get('timeFrom'),
+                        timeTo: this.get('timeTo'),
+                        filter: viewFilter ? `evt.type != switch and ${viewFilter}` : undefined,
+                    },
+                },
+            );
         },
     },
 });

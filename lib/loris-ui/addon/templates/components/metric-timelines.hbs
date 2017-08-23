@@ -27,11 +27,14 @@
             {{/each}}
 
             {{brush-overlay
+                from=timeWindow.from
+                to=timeWindow.to
                 data=brushOverlayData
                 categoryProp="t"
                 width=timelinesWidth
                 height=brushOverlayHeight
                 translateY=brushOverlayOffsetY
+                select=(action selectTimeWindow)
             }}
         </svg>
     {{/if}}
@@ -45,7 +48,11 @@
             </div>
 
             <div class="metric-timelines__button">
-                {{wsd-button iconName="arrow-forward" classNames="wsd-button--fab wsd-button--raised" click=(action drillDown timelineConfiguration.timeline.targetView)}}
+                {{wsd-button
+                    iconName="arrow-forward"
+                    classNames="wsd-button--fab wsd-button--raised"
+                    click=(action drillDown timelineConfiguration.timeline.targetView timeWindow.from timeWindow.to timelineConfiguration.timeline.targetViewFilter)
+                }}
             </div>
         </div>
     {{/each}}

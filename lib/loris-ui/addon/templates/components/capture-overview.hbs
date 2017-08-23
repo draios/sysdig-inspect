@@ -34,7 +34,9 @@
     {{#if timelinesData}}
         <div class="capture-overview__timelines">
             {{metric-timelines
+                timeWindow=timeWindow
                 timelines=timelinesData
+                selectTimeWindow=(action selectTimeWindow)
                 drillDown=(action drillDown)
                 remove=(action removeMetricTimeline)
             }}
