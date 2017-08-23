@@ -19,7 +19,8 @@ module.exports = {
         'object-curly-spacing': ['off'],
         'ember-suave/no-direct-property-access': 'off',
         'ember-suave/no-const-outside-module-scope': 'off',
-        'comma-dangle': ['error', { 'arrays': 'never', 'objects': 'always-multiline' }]
+        'comma-dangle': ['error', { 'arrays': 'never', 'objects': 'always-multiline' }],
+        'indent': ['error', 4, { 'SwitchCase': 1 }],
     },
     globals: {
         module: true,
