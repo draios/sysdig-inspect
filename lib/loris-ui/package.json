@@ -12,5 +12,8 @@
     "paths": [
       "lib/ui-toolkit"
     ]
+  },
+  "devDependencies": {
+    "bower": "^1.8.0"
   }
 }

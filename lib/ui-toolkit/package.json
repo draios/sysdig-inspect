@@ -8,5 +8,8 @@
     "ember-cli-htmlbars": "^2.0.3",
     "ember-cli-less": "^1.5.4",
     "virtual-each": "^0.5.1"
+  },
+  "devDependencies": {
+    "bower": "^1.8.0"
   }
 }
