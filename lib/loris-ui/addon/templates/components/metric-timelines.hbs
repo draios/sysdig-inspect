@@ -1,0 +1,56 @@
+<div class="metric-timelines__headers">
+    {{#each timelines as |timeline|}}
+        <div class="metric-timelines__headers-item">
+            <div class="metric-timelines__close">
+                {{wsd-button iconName="close" classNames="wsd-button--fab wsd-button--highlight-on-hover" size="sm" click=(action remove timeline.name)}}
+            </div>
+
+            <div class="metric-timelines__name">
+                {{timeline.name}}
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+<div class="metric-timelines__contents">
+    {{#if canRenderTimelines}}
+        <svg width="{{timelinesWidth}}" height="{{timelinesHeight}}">
+            {{#each timelinesData key="name" as |timeline|}}
+                {{time-series-item
+                    height=timeSeriesHeight
+                    width=timelinesWidth
+                    timestampProp="t"
+                    valueProp="v"
+                    translateY=timeline.offsetY
+                    data=timeline.timeSeries
+                }}
+            {{/each}}
+
+            {{brush-overlay
+                data=brushOverlayData
+                categoryProp="t"
+                width=timelinesWidth
+                height=brushOverlayHeight
+                translateY=brushOverlayOffsetY
+            }}
+        </svg>
+    {{/if}}
+</div>
+
+<div class="metric-timelines__controls">
+    {{#each timelines as |timeline|}}
+        <div class="metric-timelines__controls-item">
+            <div class="metric-timelines__value">
+                {{number-to-string timeline.totalValue}}
+            </div>
+
+            <div class="metric-timelines__button">
+                {{wsd-button iconName="arrow-forward" classNames="wsd-button--fab wsd-button--raised" click=(action drillDown timeline.name)}}
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+
+
+

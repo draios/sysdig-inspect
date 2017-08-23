@@ -1,0 +1,63 @@
+.metric-timelines {
+    @timeline-height: 56px;
+
+    display: flex;
+    justify-items: stretch;
+
+    &__headers,
+    &__contents,
+    &__controls {
+        display: flex;
+        flex-direction: column;
+
+    }
+    &__headers-item,
+    &__contents-item,
+    &__controls-item {
+        height: @timeline-height;
+
+        display: flex;
+        align-items: center;
+
+        padding: @layout-padding-sm 0;
+    }
+
+    &__headers-item {
+        padding-left: @layout-padding-md;
+        margin-right: @layout-spacing-sm;
+    }
+    &__name {
+        width: 200px;
+    }
+    &__close {
+        margin-right: @layout-spacing-sm;
+    }
+
+    &__contents {
+        flex: 1;
+
+        // prevent child to stretch the container, so that size can always be computed at run-time
+        overflow: hidden;
+    }
+    &__contents-item {
+        margin-right: @layout-spacing-md;
+    }
+
+    &__controls {
+    }
+    &__controls-item {
+        display: flex;
+        justify-content: flex-end;
+
+        padding-right: @layout-spacing-md;
+    }
+    &__value {
+        width: 130px;
+
+        font-size: @font-size-xl;
+        line-height: @font-line-height-xl;
+        text-align: right;
+
+        margin-right: @layout-spacing-md;
+    }
+}

@@ -21,7 +21,7 @@
         </div>
     {{else}}
         <div class="capture-overview__tiles">
-            {{#each metricsData as |metric|}}
+            {{#each metricsData key="data.name" as |metric|}}
                 {{metric-summary
                     data=metric.data
                     isSelected=metric.isSelected
@@ -31,15 +31,17 @@
         </div>
     {{/if}}
 
-    <div class="capture-overview__timelines {{if timelinesData "" "capture-overview__timelines--empty"}}">
-        {{#each timelinesData as |timeline|}}
-            {{metric-timeline
-                data=timeline
-                drillDown=(action drillDown timeline.targetView)
-                remove=(action removeMetricTimeline timeline.name)
+    {{#if timelinesData}}
+        <div class="capture-overview__timelines">
+            {{metric-timelines
+                timelines=timelinesData
+                drillDown=(action drillDown)
+                remove=(action removeMetricTimeline)
             }}
-        {{else}}
+        </div>
+    {{else}}
+        <div class="capture-overview__timelines capture-overview__timelines--empty">
             Select a metric to explore the timeline
-        {{/each}}
-    </div>
+        </div>
+    {{/if}}
 {{/if}}

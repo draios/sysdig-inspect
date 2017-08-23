@@ -1,15 +1,9 @@
 {{#if canBeRendered}}
-    <g class="columns" transform="translate(0, 0)">
-        {{#each columns as |column|}}
-            <rect
-                class="sd-time-series__column"
-                x={{column.x}}
-                y={{column.y}}
-                width={{column.w}}
-                height={{column.h}}
-            ></rect>
-        {{/each}}
-    </g>
-
-    {{brush-overlay data=data categoryProp=timestampProp width=width height=height}}
+    {{time-series-item
+        height=height
+        width=width
+        timestampProp=timestampProp
+        valueProp=valueProp
+        data=data
+    }}
 {{/if}}
