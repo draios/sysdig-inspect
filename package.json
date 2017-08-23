@@ -12,8 +12,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test",
-    "postinstall": "npm install ember-electron/backend"
+    "test": "ember test"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
