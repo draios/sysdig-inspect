@@ -18,6 +18,14 @@ setup_env() {
     SCRIPT_DIR=$(dirname $SCRIPT)
     APP_DIR=$SCRIPT_DIR/..
 
+    if [[ $EUID > 0 ]]; then
+        echo 'Please run as root or using sudo'
+        exit 1
+    fi
+    
+    # install ember-cli globally
+    npm install -g ember-cli
+
     cd $APP_DIR
 }
 
