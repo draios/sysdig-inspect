@@ -20,7 +20,7 @@
               as |row|
             }}
             {{!-- {{#each rows as |row|}} --}}
-                <div class="sd-table__row">
+                <div class="sd-table__row" {{action select row}}>
                     {{#each row.columns as |column|}}
                         <div class="sd-table__cell">
                             <div class="sd-table__cell-content">

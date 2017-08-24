@@ -14,7 +14,7 @@
 
     {{#if dataStore.hasLoaded}}
         <div class="capture-view__table-wrapper">
-            {{sd-table columns=columns rows=rows}}
+        {{sd-table columns=columns rows=rows select=(action "select")}}
         </div>
     {{/if}}
 </div>
