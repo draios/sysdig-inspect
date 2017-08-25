@@ -1,0 +1,28 @@
+.sd-list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    overflow: auto;
+
+    &__item,
+    &__item-divider {
+        flex: 1;
+
+        display: flex;
+        align-items: center;
+
+        height: @list-item-height-lg;
+        line-height: @list-item-height-lg;
+    }
+
+    &__item {
+        .text-overflow();
+        .selectable-with-background();
+    }
+    &__item-divider:before {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid @color-separator;
+    }
+}

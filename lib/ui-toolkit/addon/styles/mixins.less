@@ -31,3 +31,29 @@
     white-space:    nowrap;
     text-overflow:  ellipsis;
 }
+
+.side-panel-width() {
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.selectable-with-background() {
+    .selectable();
+
+    &:hover,
+    &:focus {
+        background-color: @color-list-item-hover;
+    }
+
+    &--is-selected {
+        background-color: @color-list-item-selected;
+
+        &:hover,
+        &:focus {
+            background-color: @color-list-item-selected-hover;
+        }
+    }
+}
+.selectable() {
+    cursor: pointer;
+}

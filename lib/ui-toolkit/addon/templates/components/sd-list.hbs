@@ -1,0 +1,10 @@
+{{#each items key="id" as |item|}}
+    {{#unless item.isDivider}}
+        <div class="sd-list__item {{if item.isSelected "sd-list__item--is-selected"}}" {{action select item.id}}>
+            {{yield item}}
+        </div>
+    {{else}}
+        <div class="sd-list__item-divider">
+        </div>
+    {{/unless}}
+{{/each}}

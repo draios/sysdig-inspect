@@ -1,0 +1,13 @@
+{{#wsd-capture-panel
+    filePath=model.filePath
+    drilldownInfo=drilldownInfo
+    timelines=captureTimelines.timelines
+    timeWindow=timeWindow
+    selectedViewId=selectedViewId
+    navigateTo=(action "navigateTo")
+    selectTimeWindow=(action "selectTimeWindow")
+    drillDown=(action "drillDown")
+    removeMetricTimeline=(action "removeMetricTimeline")
+}}
+    {{outlet}}
+{{/wsd-capture-panel}}

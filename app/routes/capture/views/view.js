@@ -7,4 +7,10 @@ export default Ember.Route.extend({
             filePath: this.modelFor('capture').filePath,
         };
     },
+
+    setupController(controller, model) {
+        this._super(...arguments);
+
+        this.controllerFor('capture').set('selectedViewId', model.id);
+    },
 });

@@ -1,0 +1,21 @@
+.wsd-capture-breadcrumbs {
+    height: 100%;
+
+    display: flex;
+
+    &__home,
+    &__step {
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+
+        padding: @layout-padding-md 0;
+
+        .selectable-with-background();
+    }
+
+    &__home {
+        .side-panel-width();
+    }
+}

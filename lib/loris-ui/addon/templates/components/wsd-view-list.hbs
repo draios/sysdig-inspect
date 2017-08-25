@@ -1,0 +1,9 @@
+{{#if dataStore.isLoading}}
+    Loading...
+{{/if}}
+
+{{#if dataStore.hasLoaded}}
+    {{#sd-list items=views select=(action selectView) as |view|}}
+        {{view.data.name}}
+    {{/sd-list}}
+{{/if}}

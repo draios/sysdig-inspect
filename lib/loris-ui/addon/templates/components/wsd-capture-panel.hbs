@@ -1,0 +1,36 @@
+<div class="wsd-capture-panel__breadcrumbs">
+    {{wsd-capture-breadcrumbs
+        steps=breadcrumbSteps
+        navigateTo=(action navigateTo)
+    }}
+</div>
+
+<div class="wsd-capture-panel__content">
+    <div class="wsd-capture-panel__view-list">
+        {{wsd-view-list
+            selectedViewId=selectedViewId
+            drilldownConfiguration=drilldownConfiguration
+            selectView=(action "selectView")
+        }}
+    </div>
+
+    <div class="wsd-capture-panel__data">
+        {{yield}}
+    </div>
+</div>
+
+<div class="wsd-capture-panel__timelines">
+    {{#if timelinesData}}
+        {{metric-timelines
+            timeWindow=timeWindow
+            timelines=timelinesData
+            selectTimeWindow=(action selectTimeWindow)
+            drillDown=(action drillDown)
+            remove=(action removeMetricTimeline)
+        }}
+    {{else}}
+        <div class="wsd-capture-panel__timelines--empty">
+            Select a metric to explore the timeline
+        </div>
+    {{/if}}
+</div>
