@@ -8,7 +8,7 @@ export default Ember.Route.extend({
     setupController(controller, model) {
         this._super(...arguments);
 
-        this.controllerFor('capture').set('selectedViewId', model.id);
+        this.controllerFor('capture').set('selectedViewId', model.viewId);
     },
 });
 
