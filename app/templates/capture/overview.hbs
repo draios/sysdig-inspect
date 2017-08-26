@@ -2,7 +2,9 @@
     filePath=model.filePath
     timelines=metricTimelines
     timeWindow=timeWindow
-    toggleMetricTimeline=(action "toggleMetricTimeline")
+    drilldownInfoParam=model.queryParams.drilldownInfoParam
+    toggleMetricTimeline=(route-action "toggleMetricTimeline")
+    drillDown=(route-action "drillDown")
 }}
   {{!--   selectTimeWindow=(action "selectTimeWindow")
     drillDown=(action "drillDown")

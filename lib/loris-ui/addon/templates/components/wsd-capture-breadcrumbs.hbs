@@ -1,9 +1,9 @@
-<div class="wsd-capture-breadcrumbs__home {{if home.isCurrent "wsd-capture-breadcrumbs__home--is-selected"}}" {{action "navigateTo" home}}>
-    {{home.name}}
+<div class="wsd-capture-breadcrumbs__home {{if home.isCurrent "wsd-capture-breadcrumbs__home--is-selected"}}" {{action navigateTo home}}>
+    Capture Overview
 </div>
 
 {{#each nextSteps as |step|}}
-    <div class="wsd-capture-breadcrumbs__step" {{action "navigateTo" step}}>
-        {{step.name}}
+    <div class="wsd-capture-breadcrumbs__step" {{action navigateTo step}}>
+        {{step.viewId}}
     </div>
 {{/each}}

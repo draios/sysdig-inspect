@@ -1,10 +1,6 @@
 <div class="metric-timelines__headers">
     {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
         <div class="metric-timelines__headers-item">
-            <div class="metric-timelines__close">
-                {{wsd-button iconName="close" classNames="wsd-button--fab wsd-button--highlight-on-hover" size="sm" click=(action remove timelineConfiguration.timeline.name)}}
-            </div>
-
             <div class="metric-timelines__name">
                 {{timelineConfiguration.timeline.name}}
             </div>
@@ -43,15 +39,12 @@
 <div class="metric-timelines__controls">
     {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
         <div class="metric-timelines__controls-item">
-            <div class="metric-timelines__value">
-                {{number-to-string timelineConfiguration.timeline.totalValue}}
-            </div>
-
             <div class="metric-timelines__button">
                 {{wsd-button
-                    iconName="arrow-forward"
-                    classNames="wsd-button--fab wsd-button--raised"
-                    click=(action drillDown timelineConfiguration.timeline.targetView timeWindow.from timeWindow.to timelineConfiguration.timeline.targetViewFilter)
+                    iconName="close"
+                    classNames="wsd-button--fab wsd-button--highlight-on-hover"
+                    size="sm"
+                    click=(action remove timelineConfiguration.timeline.name)
                 }}
             </div>
         </div>

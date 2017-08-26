@@ -40,6 +40,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-resolver": "^4.0.0",
+    "ember-route-action-helper": "^2.0.6",
     "ember-source": "~2.14.1",
     "ember-svg-jar": "^0.11.1",
     "eslint-plugin-ember-suave": "^1.0.0",

@@ -2,10 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
     model(params) {
-        return {
-            id: params.id,
-            filePath: this.modelFor('capture').filePath,
-        };
+        return new ViewModel(params.id, this.modelFor('capture'));
     },
 
     setupController(controller, model) {
@@ -14,3 +11,10 @@ export default Ember.Route.extend({
         this.controllerFor('capture').set('selectedViewId', model.id);
     },
 });
+
+class ViewModel {
+    constructor(viewId, captureModel) {
+        this.viewId = viewId;
+        this.capture = captureModel;
+    }
+}

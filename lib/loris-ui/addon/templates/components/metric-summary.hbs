@@ -4,6 +4,24 @@
 
 <div class="metric-summary__value">
     {{number-to-string data.totalValue}}
+
+    <div>
+        {{wsd-button
+            iconName=(if isSelected "star_black" "star_border_black")
+            classNames="wsd-button--fab wsd-button--highlight-on-hover"
+            size="sm"
+            click=(action toggleTimeline)
+        }}
+    </div>
+
+    <div>
+        {{wsd-button
+            iconName="info_black"
+            classNames="wsd-button--fab wsd-button--highlight-on-hover"
+            size="sm"
+            click=(action select)
+        }}
+    </div>
 </div>
 
 <div class="metric-summary__time-series">
@@ -12,6 +30,7 @@
         width=timeSeriesWidth
         isSelected=isSelected
         timestampProp="t"
+
         valueProp="v"
         data=data.timeSeries
         theme="background"

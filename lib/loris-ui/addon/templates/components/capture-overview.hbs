@@ -4,20 +4,34 @@
 
 {{#if dataStore.hasLoaded}}
     {{#if isCategoryLayout}}
-        <div class="capture-overview__categories">
-            {{#each categories as |category|}}
-                <div class="capture-overview__category-tiles">
-                    <h3 class="capture-overview__category-name">{{category.name}}</h3>
-                    {{#each category.metricsData as |metric|}}
-                        {{metric-summary
-                            classNames="metric-summary--is-category-item"
-                            data=metric.data
-                            isSelected=metric.isSelected
-                            select=(action toggleMetricTimeline metric.data.name)
-                        }}
-                    {{/each}}
-                </div>
-            {{/each}}
+        <div class="capture-overview__content">
+            <div class="capture-overview__categories">
+                {{#each categories key="name" as |category|}}
+                    <div class="capture-overview__category-tiles">
+                        <div class="metric-summary">
+                            <div class="metric-summary__header">
+                                {{category.name}}
+                            </div>
+
+                            <div class="metric-summary__value">
+                            </div>
+
+                            <div class="metric-summary__time-series">
+                            </div>
+                        </div>
+
+                        {{#each category.metricsData key="data.name" as |metric|}}
+                            {{metric-summary
+                                classNames="metric-summary--is-category-item"
+                                data=metric.data
+                                isSelected=metric.isSelected
+                                select=(action "drillDown" metric.data.name metric.data.targetViewFilter metric.data.targetView)
+                                toggleTimeline=(action toggleMetricTimeline metric.data.name)
+                            }}
+                        {{/each}}
+                    </div>
+                {{/each}}
+            </div>
         </div>
     {{else}}
         <div class="capture-overview__tiles">
@@ -25,7 +39,8 @@
                 {{metric-summary
                     data=metric.data
                     isSelected=metric.isSelected
-                    select=(action toggleMetricTimeline metric.data.name)
+                    select=(action "drillDown" metric.data.name metric.data.targetViewFilter metric.data.targetView)
+                    toggleTimeline=(action toggleMetricTimeline metric.data.name)
                 }}
             {{/each}}
         </div>

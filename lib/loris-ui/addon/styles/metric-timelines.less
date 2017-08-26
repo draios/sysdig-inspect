@@ -22,42 +22,29 @@
         padding: @layout-padding-sm 0;
     }
 
+    &__headers {
+        .side-panel-width();
+    }
     &__headers-item {
         padding-left: @layout-padding-md;
-        margin-right: @layout-spacing-sm;
+        padding-right: @layout-spacing-sm;
     }
     &__name {
-        width: 200px;
-    }
-    &__close {
-        margin-right: @layout-spacing-sm;
+        .text-overflow();
     }
 
     &__contents {
         flex: 1;
 
+        margin-right: @layout-spacing-sm;
+
         // prevent child to stretch the container, so that size can always be computed at run-time
         overflow: hidden;
     }
-    &__contents-item {
-        margin-right: @layout-spacing-md;
-    }
 
     &__controls {
-    }
-    &__controls-item {
-        display: flex;
-        justify-content: flex-end;
-
         padding-right: @layout-spacing-md;
     }
-    &__value {
-        width: 130px;
-
-        font-size: @font-size-xl;
-        line-height: @font-line-height-xl;
-        text-align: right;
-
-        margin-right: @layout-spacing-md;
+    &__controls-item {
     }
 }
