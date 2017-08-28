@@ -2,12 +2,21 @@
     <div class="sd-table__wrap">
         <div class="sd-table__head">
             <div class="sd-table__row">
-                {{#each columns as |column|}}
-                    <div class="sd-table__head-cell">
-                        <div class="sd-table__cell-content">
-                            {{column.name}}
+                {{#each columns key="id" as |column|}}
+                    {{#if column.headComponentName}}
+                        {{component
+                            column.headComponentName
+                            row
+                            isHead=true
+                            click=(action column.clickAction row target=parentView)
+                        }}
+                    {{else}}
+                        <div class="sd-table__head-cell">
+                            <div class="sd-table__cell-content">
+                                {{column.name}}
+                            </div>
                         </div>
-                    </div>
+                    {{/if}}
                 {{/each}}
             </div>
         </div>
@@ -20,13 +29,28 @@
               as |row|
             }}
             {{!-- {{#each rows as |row|}} --}}
-                <div class="sd-table__row" {{action select row}}>
-                    {{#each row.columns as |column|}}
-                        <div class="sd-table__cell">
-                            <div class="sd-table__cell-content">
-                                {{column.value}}
+                <div
+                    class="sd-table__row sd-table__row {{if row.isSelected "sd-table__row--is-selected"}}"
+                    {{action select row}}
+                    {{action "mouseOver" row on="mouseOver"}}
+                >
+                    {{#each row.columns key="@index" as |rowColumn|}}
+                        {{#if rowColumn.configuration.cellComponentName}}
+                            {{component
+                                rowColumn.configuration.cellComponentName
+                                row
+                                isHead=false
+                                isRowMouseOver=false
+                                isRowSelected=row.isSelected
+                                click=(action rowColumn.configuration.clickAction row target=parentView)
+                            }}
+                        {{else}}
+                            <div class="sd-table__cell">
+                                <div class="sd-table__cell-content">
+                                    {{rowColumn.value}}
+                                </div>
                             </div>
-                        </div>
+                        {{/if}}
                     {{/each}}
                 </div>
             {{!-- {{/each}} --}}

@@ -1,1 +1,6 @@
-{{capture-view captureInfo=model.capture}}
+{{capture-view
+    viewId=model.viewId
+    captureInfo=model.capture
+    select=(route-action "select")
+    drillDown=(route-action "drillDown")
+}}

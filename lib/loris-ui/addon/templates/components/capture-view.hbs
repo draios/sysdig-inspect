@@ -8,13 +8,21 @@
 </div>
  --}}
 <div class="capture-view__content">
+    <h2>{{viewDataStore.view.name}}</h2>
+    <p>{{viewDataStore.view.description}}</p>
+
     {{#if dataStore.isLoading}}
         Loading... ({{number-to-string dataStore.loadingProgress}}%)
     {{/if}}
 
     {{#if dataStore.hasLoaded}}
         <div class="capture-view__table-wrapper">
-        {{sd-table columns=columns rows=rows select=(action "select")}}
+        {{sd-table
+            columns=columns
+            rows=rows
+            select=(action "select")
+            drillDown=(action "drillDown")
+        }}
         </div>
     {{/if}}
 </div>

@@ -49,6 +49,14 @@ export default Ember.Route.extend({
             }
         },
 
+        select(drilldownInfo) {
+            this.transitionTo('capture.views.view', drilldownInfo.viewId, {
+                queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
+                    drilldownInfoParam: drilldownInfo.drilldownInfoParam,
+                }),
+            });
+        },
+
         drillDown(drilldownInfo) {
             this.transitionTo('capture.views.view', drilldownInfo.viewId, {
                 queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
@@ -76,7 +84,7 @@ export default Ember.Route.extend({
         },
 
         toggleMetricTimeline(metricName) {
-            this.transitionTo('capture', {
+            this.replaceWith('capture', {
                 queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                     metricTimelinesParam: this.get('captureTimelines').serializeToQueryParam(
                         this.get('captureTimelines').toggle(metricName)
@@ -86,7 +94,7 @@ export default Ember.Route.extend({
         },
 
         removeMetricTimeline(metricName) {
-            this.transitionTo('capture', {
+            this.replaceWith('capture', {
                 queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                     metricTimelinesParam: this.get('captureTimelines').serializeToQueryParam(
                         this.get('captureTimelines').remove(metricName)
