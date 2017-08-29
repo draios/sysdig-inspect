@@ -3,6 +3,7 @@
 
 module.exports = function(environment) {
     let ENV = {
+        targetEnv: 'electron',
         modulePrefix: 'wsysdig',
         environment,
         rootURL: '/',
