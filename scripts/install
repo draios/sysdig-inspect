@@ -108,7 +108,7 @@ run_tests() {
     start=`date +%s`
 
     ret=0
-    OUTPUT=$(ember test)
+    OUTPUT=$(./node_modules/.bin/ember test)
 
     end=`date +%s`
     RUNTIME=$((end-start))
