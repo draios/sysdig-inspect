@@ -50,7 +50,7 @@ install_backend() {
 install_addons() {
     cd lib
 
-    cd loris-ui
+    cd wsd-core
     rm -rf node_modules
     rm -rf bower_components
 
