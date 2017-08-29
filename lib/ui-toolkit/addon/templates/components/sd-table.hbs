@@ -8,7 +8,7 @@
                             column.headComponentName
                             row
                             isHead=true
-                            click=(action column.clickAction row target=parentView)
+                            click=(action column.clickAction target=parentView)
                         }}
                     {{else}}
                         <div class="sd-table__head-cell">
@@ -38,11 +38,11 @@
                         {{#if rowColumn.configuration.cellComponentName}}
                             {{component
                                 rowColumn.configuration.cellComponentName
-                                row
+                                row=row
                                 isHead=false
                                 isRowMouseOver=false
                                 isRowSelected=row.isSelected
-                                click=(action rowColumn.configuration.clickAction row target=parentView)
+                                click=(action rowColumn.configuration.clickAction target=parentView)
                             }}
                         {{else}}
                             <div class="sd-table__cell">
