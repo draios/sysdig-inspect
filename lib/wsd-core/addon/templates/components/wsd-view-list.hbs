@@ -1,9 +1,9 @@
-{{#if dataStore.isLoading}}
+{{#if viewStore.isLoading}}
     Loading...
 {{/if}}
 
-{{#if dataStore.hasLoaded}}
-    {{#sd-list items=views select=(action selectView) as |view|}}
-        {{view.data.name}}
+{{#if viewStore.hasLoaded}}
+    {{#sd-list items=views key="viewId" select=(action "selectView") as |view|}}
+        {{view.name}}
     {{/sd-list}}
 {{/if}}

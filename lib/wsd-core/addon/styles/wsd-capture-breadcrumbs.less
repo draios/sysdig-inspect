@@ -1,21 +1,42 @@
 .wsd-capture-breadcrumbs {
-    height: 100%;
-
     display: flex;
+    align-items: stretch;
 
-    &__home,
+    padding: @layout-spacing-md 0;
+
     &__step {
-        height: 100%;
-
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
 
-        padding: @layout-padding-md 0;
+        height: @list-item-height-lg;
+        line-height: @list-item-height-lg;
+
+        padding: 0 @layout-padding-md;
+
+        font-size: @font-size-lg;
+        font-weight: @font-weight-regular;
 
         .selectable-with-background();
+
+        &--is-home {
+            .side-panel-width();
+
+            padding-left: @layout-padding-md;
+            padding-right: 0;
+        }
     }
 
-    &__home {
-        .side-panel-width();
+    &__name {
+        height: @font-line-height-lg;
+        line-height: @font-line-height-lg;
+        font-size: @font-size-lg;
+    }
+    &__description {
+        height: @font-line-height-md;
+        line-height: @font-line-height-md;
+        font-size: @font-size-md;
+        font-weight: @font-weight-light;
     }
 }

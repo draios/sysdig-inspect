@@ -1,7 +1,7 @@
 <div class="wsd-capture-panel__breadcrumbs">
     {{wsd-capture-breadcrumbs
         steps=drilldownInfo
-        navigateTo=(action "navigateTo")
+        select=(action "navigateTo")
     }}
 </div>
 
@@ -10,7 +10,7 @@
         {{wsd-view-list
             selectedViewId=selectedViewId
             steps=drilldownInfo
-            selectView=(action "selectView")
+            select=(action "selectView")
         }}
     </div>
 
