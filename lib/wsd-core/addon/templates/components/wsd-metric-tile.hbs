@@ -6,18 +6,18 @@
     {{number-to-string data.totalValue}}
 
     <div>
-        {{wsd-button
+        {{sd-button
             iconName=(if isSelected "star_black" "star_border_black")
-            classNames="wsd-button--fab wsd-button--highlight-on-hover"
+            classNames="sd-button--fab sd-button--highlight-on-hover"
             size="sm"
             click=(action toggleTimeline)
         }}
     </div>
 
     <div>
-        {{wsd-button
+        {{sd-button
             iconName="info_black"
-            classNames="wsd-button--fab wsd-button--highlight-on-hover"
+            classNames="sd-button--fab sd-button--highlight-on-hover"
             size="sm"
             click=(action select)
         }}

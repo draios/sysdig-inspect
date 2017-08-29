@@ -40,9 +40,9 @@
     {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
         <div class="metric-timelines__controls-item">
             <div class="metric-timelines__button">
-                {{wsd-button
+                {{sd-button
                     iconName="close"
-                    classNames="wsd-button--fab wsd-button--highlight-on-hover"
+                    classNames="sd-button--fab sd-button--highlight-on-hover"
                     size="sm"
                     click=(action remove timelineConfiguration.timeline.name)
                 }}
