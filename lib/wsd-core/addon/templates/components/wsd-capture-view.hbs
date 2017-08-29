@@ -1,19 +1,17 @@
 <div class="wsd-capture-view__content">
-    <h2>{{viewDataStore.view.name}}</h2>
-    <p>{{viewDataStore.view.description}}</p>
+    <h2 class="wsd-capture-view__header">{{name}}</h2>
 
     {{#if dataStore.isLoading}}
         Loading... ({{number-to-string dataStore.loadingProgress}}%)
     {{/if}}
 
     {{#if dataStore.hasLoaded}}
-        <div class="wsd-capture-view__table-wrapper">
-        {{sd-table
-            columns=columns
-            rows=rows
+        {{component
+            dataComponentName
+            viewConfiguration=viewConfiguration
+            dataStore=dataStore
             select=(action "select")
             drillDown=(action "drillDown")
         }}
-        </div>
     {{/if}}
 </div>
