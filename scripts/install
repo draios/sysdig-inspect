@@ -7,6 +7,18 @@ if [[ $1 = "-t" ]]; then
     TEST_MODE=true
 fi
 
+set_or_install_node_version() {
+    set +eu
+    source ~/.bash_profile
+
+    # check if node version is installed otherwise install it
+    nvm list | grep -v "default" | grep ${NODE_VERSION}
+    if [ ${?} -eq 1 ]; then
+        nvm install ${NODE_VERSION}
+    fi
+    nvm use ${NODE_VERSION}
+ }
+
 setup_env() {
     platform='unknown'
     unamestr=`uname`
@@ -17,6 +29,7 @@ setup_env() {
     fi
 
     if [[ "$TEST_MODE" = true ]]; then
+        set_or_install_node_version
         set -xeu
     fi
 
