@@ -14,8 +14,8 @@ class Controller {
         this.sysdigExe = sysdigPath + 'sysdig';
         this.csysdigExe = sysdigPath + 'csysdig';
 
-        if (!fs.existsSync(this.sysdigExe)) {
-            console.log(`sysdig not found in path ${sysdigPath}`);
+        if (!fs.existsSync(this.sysdigExe) || !fs.existsSync(this.csysdigExe)) {
+            console.log(`sysdig/csysdig executables not found in path ${sysdigPath}`);
             process.exit();
         }
     }
