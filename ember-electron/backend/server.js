@@ -29,7 +29,7 @@ class Server {
             this.port = port;
 
             const app = express();
-            app.use(cors());            
+            app.use(cors());
 
             this._setupRoutes(app);
 
@@ -59,7 +59,7 @@ class Server {
         });
 
         app.get('/capture/:fileName/summary', (req, res) => {
-            this._getIndex(req, res);
+            this._getSummary(req, res);
         });
 
         app.get('/capture/:fileName/:view', (req, res) => {
@@ -79,13 +79,15 @@ class Server {
 
     _listViews(request, response) {
         let args = ['--list-views', '-j'];
+
+        response.setHeader('Content-Type', 'application/json');
         this.sysdigController.runCsysdig(args, response);
     }
 
     _getView(request, response) {
         let fileName = request.params.fileName;
         let viewInfo = JSON.parse(request.params.view);
-        let args = ['-r', fileName, '-v', viewInfo.id, '-j'];
+        let args = ['-r', fileName, '-v', viewInfo.id, '-j', '-pc'];
 
         if ('from' in request.query) {
             args.push('--from');
@@ -105,9 +107,13 @@ class Server {
         this.sysdigController.runCsysdig(args, response);
     }
 
-    _getIndex(request, response) {
+    _getSummary(request, response) {
         let fileName = request.params.fileName;
         let args = ['-r', fileName, '-c', 'wsysdig_summary'];
+
+        if ('filter' in request.query) {
+            args.push(request.query.filter);
+        }
 
         response.setHeader('Content-Type', 'application/json');
         this.sysdigController.runSysdig(args, response);
