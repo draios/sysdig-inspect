@@ -1,14 +1,14 @@
-<div class="metric-timelines__headers">
+<div class="wsd-metric-timelines__headers">
     {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
-        <div class="metric-timelines__headers-item">
-            <div class="metric-timelines__name">
+        <div class="wsd-metric-timelines__headers-item">
+            <div class="wsd-metric-timelines__name">
                 {{timelineConfiguration.timeline.name}}
             </div>
         </div>
     {{/each}}
 </div>
 
-<div class="metric-timelines__contents">
+<div class="wsd-metric-timelines__contents">
     {{#if canRenderTimelines}}
         <svg width="{{timelinesWidth}}" height="{{timelinesHeight}}">
             {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
@@ -36,10 +36,10 @@
     {{/if}}
 </div>
 
-<div class="metric-timelines__controls">
+<div class="wsd-metric-timelines__controls">
     {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
-        <div class="metric-timelines__controls-item">
-            <div class="metric-timelines__button">
+        <div class="wsd-metric-timelines__controls-item">
+            <div class="wsd-metric-timelines__button">
                 {{sd-button
                     iconName="close"
                     classNames="sd-button--fab sd-button--highlight-on-hover"

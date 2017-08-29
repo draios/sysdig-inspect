@@ -4,10 +4,10 @@
 
 {{#if dataStore.hasLoaded}}
     {{#if isCategoryLayout}}
-        <div class="capture-overview__content">
-            <div class="capture-overview__categories">
+        <div class="wsd-capture-overview__content">
+            <div class="wsd-capture-overview__categories">
                 {{#each categories key="name" as |category|}}
-                    <div class="capture-overview__category-tiles">
+                    <div class="wsd-capture-overview__category-tiles">
                         <div class="wsd-metric-tile">
                             <div class="metric-summary__header">
                                 {{category.name}}
@@ -34,7 +34,7 @@
             </div>
         </div>
     {{else}}
-        <div class="capture-overview__tiles">
+        <div class="wsd-capture-overview__tiles">
             {{#each metricsData key="data.name" as |metric|}}
                 {{wsd-metric-tile
                     data=metric.data

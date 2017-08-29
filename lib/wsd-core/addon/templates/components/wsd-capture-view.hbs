@@ -1,13 +1,4 @@
-{{!-- <div class="capture-view__header">
-    {{#if viewDataStore.isLoading}}
-        <h2>Loading view...</h2>
-    {{/if}}
-    {{#if viewDataStore.hasLoaded}}
-        <h2>{{viewDataStore.view.name}}</h2>
-    {{/if}}
-</div>
- --}}
-<div class="capture-view__content">
+<div class="wsd-capture-view__content">
     <h2>{{viewDataStore.view.name}}</h2>
     <p>{{viewDataStore.view.description}}</p>
 
@@ -16,7 +7,7 @@
     {{/if}}
 
     {{#if dataStore.hasLoaded}}
-        <div class="capture-view__table-wrapper">
+        <div class="wsd-capture-view__table-wrapper">
         {{sd-table
             columns=columns
             rows=rows

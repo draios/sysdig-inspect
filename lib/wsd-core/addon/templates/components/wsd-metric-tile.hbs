@@ -1,8 +1,8 @@
-<div class="metric-summary__header">
+<div class="wsd-metric-tile__header">
     {{data.name}}
 </div>
 
-<div class="metric-summary__value">
+<div class="wsd-metric-tile__value">
     {{number-to-string data.totalValue}}
 
     <div>
@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<div class="metric-summary__time-series">
+<div class="wsd-metric-tile__time-series">
     {{sd-time-series
         height=timeSeriesHeight
         width=timeSeriesWidth
