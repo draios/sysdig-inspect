@@ -1,5 +1,24 @@
 #!/bin/bash
 
+NODE_VERSION="v6.11.2"
+TEST_MODE=false
+
+if [[ $1 = "-t" ]]; then
+    TEST_MODE=true
+fi
+
+set_or_install_node_version() {
+    set +eu
+    source ~/.bash_profile
+
+    # check if node version is installed otherwise install it
+    nvm list | grep -v "default" | grep ${NODE_VERSION}
+    if [ ${?} -eq 1 ]; then
+        nvm install ${NODE_VERSION}
+    fi
+    nvm use ${NODE_VERSION}
+ }
+
 setup_env() {
     platform='unknown'
     unamestr=`uname`
@@ -7,6 +26,11 @@ setup_env() {
         platform='linux'
     elif [[ "$unamestr" == 'Darwin' ]]; then
         platform='osx'
+    fi
+
+    if [[ "$TEST_MODE" = true ]]; then
+        set_or_install_node_version
+        set -xeu
     fi
 
     if [[ $platform == 'osx' ]]; then
@@ -18,14 +42,21 @@ setup_env() {
     SCRIPT_DIR=$(dirname $SCRIPT)
     APP_DIR=$SCRIPT_DIR/..
 
+    cd $APP_DIR
+
+    # Disabling interactive progress bar, and spinners gains 2x performances
+    # as stated on https://twitter.com/gavinjoyce/status/691773956144119808
+    npm config set progress false
+    npm config set spin false
+}
+
+install_embercli() {
     if [[ $EUID > 0 ]]; then
-        echo 'Please run as root for install ember-cli globally'
+        echo "Please run as root for install ember-cli globally"
     else
         # install ember-cli globally
         npm install -g ember-cli
     fi
-
-    cd $APP_DIR
 }
 
 install_app() {
@@ -62,9 +93,60 @@ install_addons() {
 
     npm install
     ./node_modules/.bin/bower install
+
+    cd ../..
+}
+
+convertsecs() {
+    # convert seconds to human readable format
+    m=`expr $1  % 3600 / 60`
+    s=`expr $1 % 60`
+    printf "%d min %d secs" $m $s
+}
+
+run_tests() {
+    start=`date +%s`
+
+    ret=0
+    OUTPUT=$(./node_modules/.bin/ember test)
+
+    end=`date +%s`
+    RUNTIME=$((end-start))
+    FORMATTED_RUNTIME=$(convertsecs $RUNTIME)
+
+    TOTAL_TESTS=$(echo "$OUTPUT" | grep "# tests" | grep -o "[0-9]\+")
+    TOTAL_PASSED=$(echo "$OUTPUT" | grep "# pass" | grep -o "[0-9]\+")
+    TOTAL_SKIPPED=$(echo "$OUTPUT" | grep "# skip" | grep -o "[0-9]\+")
+    TOTAL_FAILED=$(echo "$OUTPUT" | grep "# fail" | grep -o "[0-9]\+")
+    TOTAL_EXECUTED=$(( $TOTAL_TESTS - $TOTAL_SKIPPED ))
+    BROWSER_VERSION=$(echo "$OUTPUT" | grep "ok" | head -1 | cut -d "-" -f 1 | awk '{for(i=3;i<=NF;++i)printf "%s ", $i;printf "\n"}')
+
+    echo ""
+    echo "==========================================="
+    echo "Total reported in succesful tests  : ${TOTAL_PASSED}"
+    echo "Total reported from failuring tests: ${TOTAL_FAILED}"
+    echo "-------------------------------------------"
+    echo "Total tests: Executed ${TOTAL_EXECUTED} of ${TOTAL_TESTS}"
+    echo "Total time: ${RUNTIME}s / ${FORMATTED_RUNTIME}"
+    echo "Browser: ${BROWSER_VERSION}"
+    echo "==========================================="
+    echo ""
+
+    if (( $TOTAL_FAILED > 0 )); then
+        ret=1
+    fi
+
+    if [[ $ret -eq 1 ]]; then
+        exit $ret
+    fi
 }
 
 setup_env
 install_app
+install_embercli
 install_backend
 install_addons
+
+if [[ "$TEST_MODE" = true ]]; then
+    run_tests
+fi
