@@ -3,40 +3,27 @@
 {{/if}}
 
 {{#if dataStore.hasLoaded}}
-    {{#if isCategoryLayout}}
-        <div class="wsd-capture-overview__content">
-            <div class="wsd-capture-overview__categories">
-                {{#each categories key="name" as |category|}}
-                    <div class="wsd-capture-overview__category-tiles">
-                        <div class="wsd-metric-tile">
-                            <div class="metric-summary__header">
-                                {{category.name}}
-                            </div>
-                        </div>
+    <div class="wsd-capture-overview__content">
+        {{#each categories key="name" as |category|}}
+            <div class="wsd-capture-overview__category">
+                <div class="wsd-capture-overview__category-item">
+                    <div class="wsd-capture-overview__category-name">
+                        {{category.name}}
+                    </div>
+                </div>
 
-                        {{#each category.metricsData key="data.name" as |metric|}}
-                            {{wsd-metric-tile
-                                classNames="wsd-metric-tile--is-category-item"
-                                data=metric.data
-                                isSelected=metric.isSelected
-                                select=(action "drillDown" metric.data.name metric.data.targetViewFilter metric.data.targetView)
-                                toggleTimeline=(action toggleMetricTimeline metric.data.name)
-                            }}
-                        {{/each}}
+                {{#each category.metricsData key="data.name" as |metric|}}
+                    <div class="wsd-capture-overview__category-item">
+                        {{wsd-metric-tile
+                            classNames="wsd-metric-tile--is-category-item"
+                            data=metric.data
+                            isSelected=metric.isSelected
+                            select=(action "drillDown" metric.data.name metric.data.targetViewFilter metric.data.targetView)
+                            toggleTimeline=(action toggleMetricTimeline metric.data.name)
+                        }}
                     </div>
                 {{/each}}
             </div>
-        </div>
-    {{else}}
-        <div class="wsd-capture-overview__tiles">
-            {{#each metricsData key="data.name" as |metric|}}
-                {{wsd-metric-tile
-                    data=metric.data
-                    isSelected=metric.isSelected
-                    select=(action "drillDown" metric.data.name metric.data.targetViewFilter metric.data.targetView)
-                    toggleTimeline=(action toggleMetricTimeline metric.data.name)
-                }}
-            {{/each}}
-        </div>
-    {{/if}}
+        {{/each}}
+    </div>
 {{/if}}

@@ -1,22 +1,10 @@
-<div class="wsd-metric-tile__header">
-    {{data.name}}
-</div>
-
-<div class="wsd-metric-tile__value">
-    {{number-to-string data.totalValue}}
-
-    <div>
-        {{sd-button
-            iconName=(if isSelected "star_black" "star_border_black")
-            classNames="sd-button--fab sd-button--highlight-on-hover"
-            size="sm"
-            click=(action toggleTimeline)
-        }}
+<div class="wsd-metric-tile__header" {{action select}}>
+    <div class="wsd-metric-tile__header-text">
+        {{data.name}}
     </div>
-
-    <div>
+    <div class="wsd-metric-tile__header-action">
         {{sd-button
-            iconName="info_black"
+            iconName="info_outline"
             classNames="sd-button--fab sd-button--highlight-on-hover"
             size="sm"
             click=(action select)
@@ -24,15 +12,32 @@
     </div>
 </div>
 
-<div class="wsd-metric-tile__time-series">
-    {{sd-time-series
-        height=timeSeriesHeight
-        width=timeSeriesWidth
-        isSelected=isSelected
-        timestampProp="t"
+<div class="wsd-metric-tile__content" {{action select}}>
+    <div class="wsd-metric-tile__value">
+        {{number-to-string data.totalValue}}
+    </div>
+</div>
 
-        valueProp="v"
-        data=data.timeSeries
-        theme="background"
-    }}
+<div class="wsd-metric-tile__footer" {{action toggleTimeline}}>
+    <div class="wsd-metric-tile__time-series">
+        {{sd-time-series
+            height=timeSeriesHeight
+            width=timeSeriesWidth
+            isSelected=isSelected
+            timestampProp="t"
+
+            valueProp="v"
+            data=data.timeSeries
+            theme="background"
+        }}
+    </div>
+
+    <div class="wsd-metric-tile__footer-action">
+        {{sd-button
+            iconName=(if isSelected "star_black" "star_border_black")
+            classNames="sd-button--fab sd-button--highlight-on-hover"
+            size="sm"
+        }}
+    </div>
+
 </div>

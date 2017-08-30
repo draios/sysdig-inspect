@@ -35,15 +35,13 @@
         display: flex;
         flex-direction: column;
 
-        overflow: auto;
-
-        border-top: 1px solid @color-separator;
+        overflow: hidden;
     }
 
     &__timelines {
         overflow: auto;
         max-height: @timeline-height * 4.5;
-
+        padding: @layout-padding-sm 0;
         border-top: 1px solid @color-separator;
     }
 

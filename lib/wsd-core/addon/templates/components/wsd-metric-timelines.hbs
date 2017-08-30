@@ -9,30 +9,38 @@
 </div>
 
 <div class="wsd-metric-timelines__contents">
-    {{#if canRenderTimelines}}
-        <svg width="{{timelinesWidth}}" height="{{timelinesHeight}}">
-            {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
-                {{sd-time-series-item
-                    height=timeSeriesHeight
-                    width=timelinesWidth
-                    timestampProp="t"
-                    valueProp="v"
-                    translateY=timelineConfiguration.offsetY
-                    data=timelineConfiguration.timeline.timeSeries
-                }}
-            {{/each}}
+    {{#if summaryDataStore.isLoading}}
+        <div class="wsd-metric-timelines__empty-content">
+            Loading data...
+        </div>
+    {{/if}}
 
-            {{sd-brush-overlay
-                from=timeWindow.from
-                to=timeWindow.to
-                data=brushOverlayData
-                categoryProp="t"
-                width=timelinesWidth
-                height=brushOverlayHeight
-                translateY=brushOverlayOffsetY
-                select=(action selectTimeWindow)
-            }}
-        </svg>
+    {{#if summaryDataStore.hasLoaded}}
+        {{#if canRenderTimelines}}
+            <svg width="{{timelinesWidth}}" height="{{timelinesHeight}}">
+                {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
+                    {{sd-time-series-item
+                        height=timeSeriesHeight
+                        width=timelinesWidth
+                        timestampProp="t"
+                        valueProp="v"
+                        translateY=timelineConfiguration.offsetY
+                        data=timelineConfiguration.timeline.timeSeries
+                    }}
+                {{/each}}
+
+                {{sd-brush-overlay
+                    from=timeWindow.from
+                    to=timeWindow.to
+                    data=brushOverlayData
+                    categoryProp="t"
+                    width=timelinesWidth
+                    height=brushOverlayHeight
+                    translateY=brushOverlayOffsetY
+                    select=(action selectTimeWindow)
+                }}
+            </svg>
+        {{/if}}
     {{/if}}
 </div>
 

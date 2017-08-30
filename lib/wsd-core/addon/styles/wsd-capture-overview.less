@@ -1,5 +1,5 @@
 .wsd-capture-overview {
-    @timeline-height: 58px;
+    @tile-width: 150px;
     @tile-height: 140px;
 
     flex: 1;
@@ -7,71 +7,31 @@
     display: flex;
     flex-direction: column;
 
+    overflow: hidden;
+
     &__content {
-        flex: 1;
-
-        display: flex;
-        flex-direction: column;
-
-        overflow: auto;
-    }
-    &__tiles {
-        flex: 1;
-
-        display: flex;
-        flex-flow: row wrap;
-        align-content: flex-start;
-        justify-items: stretch;
-
-        overflow: auto;
-    }
-
-    &__categories {
-        flex: 1;
-
-        display: flex;
-        justify-items: stretch;
-
-        overflow: auto;
-    }
-    &__category-tiles {
-        display: flex;
-
-        align-items: center;
-    }
-    &--is-vertical-layout &__category-name {
-        min-width: 140px;
-        padding: 0 @layout-padding-md;
-    }
-    &:not(&--is-vertical-layout) &__category-name {
-        padding: @layout-padding-md @layout-padding-md @layout-padding-sm @layout-padding-md;
-    }
-    &__categories {
-        flex-direction: row;
-    }
-    &--is-vertical-layout &__categories {
-        flex-direction: column;
-    }
-    &__category-tiles {
-        flex-direction: column;
-    }
-    &--is-vertical-layout &__category-tiles {
-        flex-direction: row;
-    }
-    &--is-vertical-layout &__category-tiles {
-        min-height: @tile-height;
-    }
-
-
-    &__timelines {
-        overflow: auto;
-        max-height: @timeline-height * 5.5;
-
-        border-top: 1px solid @color-separator;
-    }
-
-    &__timelines--empty {
-        height: 56px;
         padding: @layout-padding-md;
+
+        overflow: auto;
+    }
+    &__category {
+        display: flex;
+    }
+    &__category-item {
+        margin-right: @layout-padding-sm;
+        margin-bottom: @layout-padding-sm;
+
+        min-width: @tile-width;
+        max-width: @tile-width;
+        height: @tile-height;
+
+        display: flex;
+        align-items: stretch;
+    }
+
+    &__category-name {
+        font-size: @font-size-lg;
+        align-self: center;
+        justify-self: flex-end;
     }
 }

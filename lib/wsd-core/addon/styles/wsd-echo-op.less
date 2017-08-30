@@ -17,7 +17,7 @@
     }
 
     &__header {
-        width: 50%;
+        width: 30%;
         min-width: 200px;
         max-width: 400px;
         border-right: 1px solid @color-separator;
@@ -27,6 +27,9 @@
 
         padding: @layout-padding-xs @layout-padding-sm;
         padding-bottom: @layout-padding-xs / 2;
+
+        .text-overflow();
+        white-space: normal;
     }
     &__content {
         flex: 1;
