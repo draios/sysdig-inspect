@@ -7,6 +7,8 @@
     min-width: @tile-min-width;
     height: @tile-height;
 
+    position: relative;
+
     @media (min-width: 150px) {
         max-width: 100% / 1;
     }
@@ -77,6 +79,20 @@
 
     &:not(&--is-category-item) {
         flex: 1;
+    }
+
+    &--is-noteworthy:before {
+        content: ' ';
+        width: 0;
+        heigth: 0;
+
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-top: 16px solid @color-severity-high;
+        border-right: 16px solid @color-severity-high;
+        border-bottom: 16px solid transparent;
+        border-left: 16px solid transparent;
     }
 
     &--is-category-item {

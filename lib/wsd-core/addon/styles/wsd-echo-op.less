@@ -1,0 +1,42 @@
+.wsd-echo-op {
+    display: flex;
+    border: 1px solid transparent;
+    border-left-width: 4px;
+    border-radius: 2px;
+
+    margin-bottom: @layout-spacing-xs;
+
+
+    &--is-read {
+        border-color: @color-echo-read;
+        background-color: fade(@color-echo-read, 10%);
+    }
+    &--is-write {
+        border-color: @color-echo-write;
+        background-color: fade(@color-echo-write, 10%);
+    }
+
+    &__header {
+        width: 50%;
+        min-width: 200px;
+        max-width: 400px;
+        border-right: 1px solid @color-separator;
+
+        line-height: @font-line-height-md;
+        font-size: @font-size-md;
+
+        padding: @layout-padding-xs @layout-padding-sm;
+        padding-bottom: @layout-padding-xs / 2;
+    }
+    &__content {
+        flex: 1;
+
+        font-family: @font-monospace-family;
+        font-size: @font-size-sm;
+
+        padding: @layout-padding-xs @layout-padding-sm;
+        padding-bottom: @layout-padding-xs / 2;
+
+        overflow: hidden;
+    }
+}

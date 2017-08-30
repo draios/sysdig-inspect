@@ -1,0 +1,9 @@
+<div class="wsd-echo-op__header">
+    {{#if isRead}}
+        Read {{op.l}}B from
+    {{else}}
+        Write {{op.l}}B from
+    {{/if}}
+    {{op.f}} ({{op.p}})
+</div>
+<pre class="wsd-echo-op__content">{{op.v}}</pre>

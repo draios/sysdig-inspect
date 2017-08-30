@@ -1,21 +1,72 @@
 .wsd-capture-breadcrumbs {
-    height: 100%;
-
     display: flex;
+    align-items: stretch;
 
-    &__home,
+    padding: @layout-spacing-md 0;
+
     &__step {
-        height: 100%;
-
         display: flex;
-        align-items: center;
+        align-items: stretch;
+        justify-content: stretch;
 
-        padding: @layout-padding-md 0;
+        background-color: lighten(@color-list-item-hover, 1%);
 
         .selectable-with-background();
+
+        &--is-home {
+            .side-panel-width();
+
+            margin-left: @layout-padding-md - @layout-padding-sm;
+        }
+
+        &:not(&--is-home):before {
+            content: " ";
+            width: 0;
+            height: 0;
+            border-top: 48px/2 solid transparent;
+            border-bottom: 48px/2 solid transparent;
+            border-left: 48px/2 solid @color-background;
+            position: relative;
+            pointer-events: none;
+        }
+        &:after {
+            content: " ";
+            width: 0;
+            height: 0;
+            border-top: 48px/2 solid @color-background;
+            border-bottom: 48px/2 solid @color-background;
+            border-left: 48px/2 solid transparent;
+            position: relative;
+            pointer-events: none;
+        }
     }
 
-    &__home {
-        .side-panel-width();
+    &__content {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+
+        height: @list-item-height-lg;
+        line-height: @list-item-height-lg;
+
+        font-size: @font-size-lg;
+        font-weight: @font-weight-regular;
+
+        padding-left: @layout-padding-sm;
+    }
+
+    &__name {
+        height: @font-line-height-lg;
+        line-height: @font-line-height-lg;
+        font-size: @font-size-lg;
+    }
+    &__description {
+        height: @font-line-height-sm;
+        line-height: @font-line-height-sm;
+        font-size: @font-size-sm;
+        font-weight: @font-weight-light;
     }
 }

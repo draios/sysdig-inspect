@@ -1,6 +1,6 @@
-{{#each items key="id" as |item|}}
+{{#each items key=key as |item|}}
     {{#unless item.isDivider}}
-        <div class="sd-list__item {{if item.isSelected "sd-list__item--is-selected"}}" {{action select item.id}}>
+        <div class="sd-list__item {{if item.isSelected "sd-list__item--is-selected"}}" {{action select item}}>
             {{yield item}}
         </div>
     {{else}}
