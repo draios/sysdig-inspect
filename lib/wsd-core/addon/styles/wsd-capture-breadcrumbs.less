@@ -9,7 +9,7 @@
         align-items: stretch;
         justify-content: stretch;
 
-        background-color: lighten(@color-list-item-hover, 1%);
+        background-color: @color-primary-lighten-3;
 
         .selectable-with-background();
 
@@ -18,27 +18,38 @@
 
             margin-left: @layout-padding-md - @layout-padding-sm;
         }
+    }
 
-        &:not(&--is-home):before {
-            content: " ";
-            width: 0;
-            height: 0;
-            border-top: 48px/2 solid transparent;
-            border-bottom: 48px/2 solid transparent;
-            border-left: 48px/2 solid @color-background;
-            position: relative;
-            pointer-events: none;
-        }
-        &:after {
-            content: " ";
-            width: 0;
-            height: 0;
-            border-top: 48px/2 solid @color-background;
-            border-bottom: 48px/2 solid @color-background;
-            border-left: 48px/2 solid transparent;
-            position: relative;
-            pointer-events: none;
-        }
+    &--is-root &__step:before {
+        border-left: 48px/2 solid transparent;
+    }
+    &--is-root &__step:after {
+        border-top: 48px/2 solid transparent;
+        border-bottom: 48px/2 solid transparent;
+    }
+    &--is-root &__step {
+        background-color: transparent;
+    }
+
+    &__step + &__step:before {
+        content: " ";
+        width: 0;
+        height: 0;
+        border-top: 48px/2 solid transparent;
+        border-bottom: 48px/2 solid transparent;
+        border-left: 48px/2 solid @color-background;
+        position: relative;
+        pointer-events: none;
+    }
+    &__step:after {
+        content: " ";
+        width: 0;
+        height: 0;
+        border-top: 48px/2 solid @color-background;
+        border-bottom: 48px/2 solid @color-background;
+        border-left: 48px/2 solid transparent;
+        position: relative;
+        pointer-events: none;
     }
 
     &__content {

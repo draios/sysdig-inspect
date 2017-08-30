@@ -7,12 +7,15 @@
     display: flex;
     flex-direction: column;
 
-    .z-shadow-1();
-    &:hover {
-        .z-shadow-2();
-    }
-
+    background-color: @color-background;
+    border-radius: 4px;
     cursor: pointer;
+
+    transition: all .3s all;
+
+    &:hover {
+        .z-shadow-1();
+    }
 
     &--is-noteworthy:before {
         content: ' ';
@@ -26,6 +29,10 @@
         border-right: 16px solid @color-severity-high;
         border-bottom: 16px solid transparent;
         border-left: 16px solid transparent;
+    }
+
+    &--is-empty {
+        color: @color-text-muted;
     }
 
     &__header {
