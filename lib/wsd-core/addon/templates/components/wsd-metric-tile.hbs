@@ -1,4 +1,4 @@
-<div class="wsd-metric-tile__header" {{action select}}>
+<div class="wsd-metric-tile__header">
     <div class="wsd-metric-tile__header-text">
         {{data.name}}
     </div>
@@ -7,23 +7,24 @@
             iconName="info_outline"
             classNames="sd-button--fab sd-button--highlight-on-hover"
             size="sm"
-            click=(action select)
+            tabIndex=-1
+            click=(action drillDown)
         }}
     </div>
 </div>
 
-<div class="wsd-metric-tile__content" {{action select}}>
+<div class="wsd-metric-tile__content">
     <div class="wsd-metric-tile__value">
         {{number-to-string data.totalValue}}
     </div>
 </div>
 
-<div class="wsd-metric-tile__footer" {{action toggleTimeline}}>
+<div class="wsd-metric-tile__footer">
     <div class="wsd-metric-tile__time-series">
         {{sd-time-series
             height=timeSeriesHeight
             width=timeSeriesWidth
-            isSelected=isSelected
+            isSelected=isTimelinePinned
             timestampProp="t"
 
             valueProp="v"
@@ -34,8 +35,9 @@
 
     <div class="wsd-metric-tile__footer-action">
         {{sd-button
-            iconName=(if isSelected "star_black" "star_border_black")
+            iconName=(if isTimelinePinned "star_black" "star_border_black")
             classNames="sd-button--fab sd-button--highlight-on-hover"
+            tabIndex=-1
             size="sm"
         }}
     </div>

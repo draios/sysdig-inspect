@@ -11,10 +11,19 @@
     border-radius: 4px;
     cursor: pointer;
 
-    transition: all .3s ease;
+    &:focus {
+        outline: none;
+    }
 
+    transition: box-shadow .3s ease;
     &:hover {
         .z-shadow-1();
+    }
+    &--is-selected {
+        .z-shadow-3();
+    }
+    &--is-selected:hover {
+        .z-shadow-4();
     }
 
     &--is-noteworthy:before {
@@ -96,9 +105,5 @@
     &__footer:hover &__time-series,
     &__footer:hover &__footer-action {
         opacity: 1;
-    }
-    &--is-selected &__time-series,
-    &--is-selected &__footer-action {
-        opacity: 0.7;
     }
 }

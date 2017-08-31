@@ -11,70 +11,32 @@ export default Ember.Route.extend({
             this.controllerFor('application').openFile();
         });
 
-        this.get('shortcutsService').setShortcuts(
+        const shortcuts = this.get('shortcutsService');
+        shortcuts.setShortcuts(
             [
-                this.get('shortcutsService').createCategory(
-                    'general',
-                    'General'
-                ),
-                this.get('shortcutsService').createCategory(
-                    'views',
-                    'Views'
-                ),
-                this.get('shortcutsService').createCategory(
-                    'dataTables',
-                    'Tables'
-                )
+                shortcuts.defineCategory('general', 'General'),
+                shortcuts.defineCategory('views', 'Views'),
+                shortcuts.defineCategory('overview', 'Capture Overview'),
+                shortcuts.defineCategory('dataTables', 'Data tables')
             ],
             [
-                this.get('shortcutsService').createShortcutConfiguration(
-                    'shortcutsHelp',
-                    'general',
-                    'Keyboard shortcuts help',
-                    ['?']
-                ),
-                this.get('shortcutsService').createShortcutConfiguration(
-                    'views.next',
-                    'views',
-                    'Open next view',
-                    ['k']
-                ),
-                this.get('shortcutsService').createShortcutConfiguration(
-                    'views.previous',
-                    'views',
-                    'Open previous view',
-                    ['j']
-                ),
-                this.get('shortcutsService').createShortcutConfiguration(
-                    'dataTables.drillDown',
-                    'dataTables',
-                    'Drill down',
-                    ['enter']
-                ),
-                this.get('shortcutsService').createShortcutConfiguration(
-                    'dataTables.echo',
-                    'dataTables',
-                    'Echo',
-                    ['e']
-                ),
-                this.get('shortcutsService').createShortcutConfiguration(
-                    'dataTables.dig',
-                    'dataTables',
-                    'Dig',
-                    ['d']
-                ),
-                this.get('shortcutsService').createShortcutConfiguration(
-                    'dataTables.selectNext',
-                    'dataTables',
-                    'Select next',
-                    ['down']
-                ),
-                this.get('shortcutsService').createShortcutConfiguration(
-                    'dataTables.selectPrevious',
-                    'dataTables',
-                    'Select previous',
-                    ['up']
-                )
+                shortcuts.defineShortcut('shortcutsHelp',               'general',      'Keyboard shortcuts help',  ['?']),
+
+                shortcuts.defineShortcut('views.next',                  'views',        'Open next view',           ['k']),
+                shortcuts.defineShortcut('views.previous',              'views',        'Open previous view',       ['j']),
+
+                shortcuts.defineShortcut('dataTables.drillDown',        'dataTables',   'Drill down',               ['enter']),
+                shortcuts.defineShortcut('dataTables.echo',             'dataTables',   'Echo',                     ['e']),
+                shortcuts.defineShortcut('dataTables.dig',              'dataTables',   'Dig',                      ['d']),
+                shortcuts.defineShortcut('dataTables.selectNext',       'dataTables',   'Select next view',         ['down']),
+                shortcuts.defineShortcut('dataTables.selectPrevious',   'dataTables',   'Select previous view',     ['up']),
+
+                shortcuts.defineShortcut('overview.drillDown',          'overview',     'Drill down',               ['enter']),
+                shortcuts.defineShortcut('overview.toggleTimeline',     'overview',     'Pin/unpin timeline',       ['t']),
+                shortcuts.defineShortcut('overview.selectLeft',         'overview',     'Select left',              ['left']),
+                shortcuts.defineShortcut('overview.selectRight',        'overview',     'Select right',             ['right']),
+                shortcuts.defineShortcut('overview.selectUp',           'overview',     'Select up',                ['up']),
+                shortcuts.defineShortcut('overview.selectDown',         'overview',     'Select down',              ['down'])
             ]
         );
     },

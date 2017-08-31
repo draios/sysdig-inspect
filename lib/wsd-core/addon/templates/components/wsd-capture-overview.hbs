@@ -18,8 +18,10 @@
                             classNames="wsd-metric-tile--is-category-item"
                             data=metric.data
                             isSelected=metric.isSelected
-                            select=(action "drillDown" metric.data.name metric.data.targetViewFilter metric.data.targetView)
+                            isTimelinePinned=metric.isTimelinePinned
+                            drillDown=(action "drillDown" metric.data.name)
                             toggleTimeline=(action toggleMetricTimeline metric.data.name)
+                            select=(action "select" metric.data.name)
                         }}
                     </div>
                 {{/each}}
