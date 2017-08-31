@@ -36,7 +36,7 @@
         overflow-x: hidden;
     }
 
-    &__row {
+    &__head-row {
         flex: 0 0 @row-height;
         display: flex;
         line-height: @row-height;
@@ -56,13 +56,9 @@
         padding-bottom: @layout-spacing-md;
     }
 
-    &__row {
+    &__head-row {
         // let padding sit to the far right side of the table
         padding-right: @layout-spacing-md;
-    }
-
-    &__body &__row {
-        .selectable-with-background();
     }
 
     &__cell-content {

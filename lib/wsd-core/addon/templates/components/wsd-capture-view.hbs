@@ -6,7 +6,8 @@
     {{#if dataStore.hasLoaded}}
         {{component
             dataComponentName
-            viewConfiguration=viewConfiguration
+            selection=currentDrilldownStep.selection
+            viewDataStore=viewDataStore
             dataStore=dataStore
             select=(action "select")
             drillDown=(action "drillDown")

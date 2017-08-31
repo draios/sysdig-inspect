@@ -34,6 +34,7 @@ export default Ember.Route.extend({
 
     actions: {
         navigateTo(drilldownInfo) {
+            console.debug('route:application.capture', 'navigateTo', ...arguments);
             if (drilldownInfo.viewId === 'overview') {
                 this.transitionTo('capture.overview', {
                     queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
@@ -50,6 +51,7 @@ export default Ember.Route.extend({
         },
 
         select(drilldownInfo) {
+            console.debug('route:application.capture', 'select', ...arguments);
             this.transitionTo('capture.views.view', drilldownInfo.viewId, {
                 queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                     drilldownInfoParam: drilldownInfo.drilldownInfoParam,
@@ -58,6 +60,7 @@ export default Ember.Route.extend({
         },
 
         drillDown(drilldownInfo) {
+            console.debug('route:application.capture', 'drillDown', ...arguments);
             this.transitionTo('capture.views.view', drilldownInfo.viewId, {
                 queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                     drilldownInfoParam: drilldownInfo.drilldownInfoParam,

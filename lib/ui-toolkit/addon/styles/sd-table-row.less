@@ -1,0 +1,12 @@
+.sd-table-row {
+    @row-height: 24px;
+
+    flex: 0 0 @row-height;
+    display: flex;
+    line-height: @row-height;
+
+    // let padding sit to the far right side of the table
+    padding-right: @layout-spacing-md;
+
+    .selectable-with-background();
+}
