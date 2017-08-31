@@ -25,15 +25,8 @@ module.exports = function(defaults) {
     // please specify an object with the list of modules as keys
     // along with the exports of each module as its value.
 
-    const environment = EmberApp.env();
-
-    if (environment === 'development') {
-        app.import(app.bowerDirectory + '/mousetrap/mousetrap.js');
-    } else {
-        app.import(app.bowerDirectory + '/mousetrap/mousetrap.min.js');
-    }
-
     app.import(app.bowerDirectory + '/normalize-css/normalize.css');
+    app.import(app.bowerDirectory + '/mousetrap/mousetrap.min.js');
 
     return app.toTree();
 };
