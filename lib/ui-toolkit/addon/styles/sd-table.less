@@ -1,5 +1,5 @@
 .sd-table {
-    @row-height: 24px;
+    @row-height: 36px;
     @cell-min-width: 30px;
 
     //
@@ -7,6 +7,8 @@
     //
     display: flex;
     flex-direction: column;
+
+    background-color: @color-background;
 
     flex: 1;
 
@@ -57,8 +59,13 @@
     }
 
     &__head-row {
+        font-weight: @font-weight-semibold;
+
         // let padding sit to the far right side of the table
-        padding-right: @layout-spacing-md;
+        padding: 0 @layout-spacing-sm;
+
+        border: 1px solid @color-separator-light;
+        border-top: none;
     }
 
     &__cell-content {

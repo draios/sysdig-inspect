@@ -10,16 +10,26 @@
     overflow: hidden;
 
     &__content {
-        padding: @layout-padding-md;
+        padding: @layout-padding-md 0;
 
         overflow: auto;
     }
     &__category {
         display: flex;
+
+        padding: 0 @layout-padding-md;
+
+        margin-bottom: @layout-spacing-md;
     }
+    &__category + &__category {
+        margin-bottom: @layout-spacing-md;
+    }
+    &__category:last-of-type {
+        margin-bottom: 0;
+    }
+
     &__category-item {
         margin-right: @layout-padding-sm;
-        margin-bottom: @layout-padding-sm;
 
         min-width: @tile-width;
         max-width: @tile-width;
