@@ -1,16 +1,10 @@
 <div class="wsd-capture-view__content">
-    {{#if dataStore.isLoading}}
-        Loading... ({{number-to-string dataStore.loadingProgress}}%)
-    {{/if}}
-
-    {{#if dataStore.hasLoaded}}
-        {{component
-            dataComponentName
-            selection=currentDrilldownStep.selection
-            viewDataStore=viewDataStore
-            dataStore=dataStore
-            select=(action "select")
-            drillDown=(action "drillDown")
-        }}
-    {{/if}}
+    {{component
+        dataComponentName
+        selection=currentDrilldownStep.selection
+        viewDataStore=viewDataStore
+        dataStore=dataStore
+        select=(action "select")
+        drillDown=(action "drillDown")
+    }}
 </div>

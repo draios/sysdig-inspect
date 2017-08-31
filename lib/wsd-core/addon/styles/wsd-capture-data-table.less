@@ -4,6 +4,11 @@
     overflow: hidden;
 
     // can't use padding otherwise the virtual list gets the wrong height
-    margin: @layout-padding-md 0;
-    padding: 0 @layout-padding-md;
+    margin: @layout-padding-md;
+
+    transition: box-shadow .3s ease;
+    outline: none;
+    &:focus {
+        .z-shadow-1();
+    }
 }
