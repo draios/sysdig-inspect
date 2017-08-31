@@ -6,11 +6,15 @@
     overflow: hidden;
 
     &__content {
+        flex: 1;
+
         overflow: auto;
         font-family: @font-monospace-family;
         font-size: @font-size-sm;
 
         padding: @layout-padding-md 0;
+
+        .hide-focus();
     }
 
     &__row {

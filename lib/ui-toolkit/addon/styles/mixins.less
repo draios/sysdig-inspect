@@ -57,3 +57,13 @@
 .selectable() {
     cursor: pointer;
 }
+
+.hide-focus() {
+    outline: none;
+}
+.focusable-with-background() {
+    outline: none;
+    &:focus {
+        background-color: @color-list-item-hover;
+    }
+}
