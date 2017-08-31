@@ -68,15 +68,6 @@ install_app() {
     ./node_modules/.bin/bower install
 }
 
-install_backend() {
-    cd ember-electron/backend
-
-    rm -rf node_modules
-    npm install
-
-    cd ../..
-}
-
 install_addons() {
     cd lib
 
@@ -93,6 +84,15 @@ install_addons() {
 
     npm install
     ./node_modules/.bin/bower install
+
+    cd ../..
+}
+
+install_backend() {
+    cd ember-electron/backend
+
+    rm -rf node_modules
+    npm install
 
     cd ../..
 }
@@ -142,10 +142,10 @@ run_tests() {
 }
 
 setup_env
-install_app
 install_embercli
-install_backend
+install_app
 install_addons
+install_backend
 
 if [[ "$TEST_MODE" = true ]]; then
     run_tests
