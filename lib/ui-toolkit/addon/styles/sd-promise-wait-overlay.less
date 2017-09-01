@@ -1,6 +1,10 @@
 .sd-promise-wait-overlay {
     position: relative;
-    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: hidden;
 
     &__wrapper {
         position:           absolute;
@@ -8,6 +12,7 @@
         bottom:             0;
         left:               0;
         right:              0;
+        width:              100%;
         height:             100%; // so that Safari can compute the top %
         z-index:            1;
 
