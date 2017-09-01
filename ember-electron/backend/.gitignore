@@ -9,6 +9,7 @@
 /bower_components
 
 # misc
+/.vscode
 /.sass-cache
 /connect.lock
 /coverage/*

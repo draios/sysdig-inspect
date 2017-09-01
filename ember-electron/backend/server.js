@@ -114,6 +114,9 @@ class Server {
         if ('filter' in request.query) {
             args.push(request.query.filter);
         }
+        if ('nTimelineSamples' in request.query) {
+            args.push(request.query.nTimelineSamples);
+        }
 
         response.setHeader('Content-Type', 'application/json');
         this.sysdigController.runSysdig(args, response);
