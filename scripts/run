@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Default sysdig executables path
+SYSDIG_PATH='~/git/sysdig/build/userspace/sysdig'
+
+# Custom sysdig executable path
+if [ ! -z "$1" ] && [ -e "$1" ]; then
+    SYSDIG_PATH=$1
+fi
+
+setup_env() {
+    platform='unknown'
+    unamestr=`uname`
+    if [[ "$unamestr" == 'Linux' ]]; then
+        platform='linux'
+    elif [[ "$unamestr" == 'Darwin' ]]; then
+        platform='osx'
+    fi
+
+    if [[ $platform == 'osx' ]]; then
+        SCRIPT=$(greadlink -f $0)
+    else
+        SCRIPT=$(readlink -f $0)
+    fi
+
+    SCRIPT_DIR=$(dirname $SCRIPT)
+    APP_DIR=$SCRIPT_DIR/..
+
+    cd $APP_DIR
+}
+
+run() {
+    cd ember-electron/backend
+
+    # Run backend in an external shell
+    npm start --- -p=${SYSDIG_PATH} &
+
+    cd ../..
+
+    # Serve ember app in the current shell
+    ./node_modules/.bin/ember serve --proxy http://localhost:3000
+}
+
+setup_env
+run
