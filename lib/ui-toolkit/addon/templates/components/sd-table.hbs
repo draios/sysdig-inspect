@@ -29,7 +29,8 @@
             }}
                 {{#sd-table-row
                     row=row
-                    select=(action select row)
+                    select=(action "select" row)
+                    activate=(action "activate" row)
                     as |rowConfiguration|
                 }}
                     {{#each rowConfiguration.data.columns key="@index" as |cell|}}
