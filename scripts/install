@@ -50,15 +50,6 @@ setup_env() {
     npm config set spin false
 }
 
-install_embercli() {
-    if [[ $EUID > 0 ]]; then
-        echo "Please run as root for install ember-cli globally"
-    else
-        # install ember-cli globally
-        npm install -g ember-cli
-    fi
-}
-
 install_app() {
     # reinstall node modules before build
     rm -rf node_modules
@@ -142,7 +133,6 @@ run_tests() {
 }
 
 setup_env
-install_embercli
 install_app
 install_addons
 install_backend

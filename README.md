@@ -9,20 +9,18 @@ You will need the following things properly installed on your computer.
 * [Node.js](https://nodejs.org/) (with NPM)
 * [Ember CLI](https://ember-cli.com/)
   `npm install -g ember-cli`
-* [PhantomJS](http://phantomjs.org/)
-  `npm install -g phantomjs-prebuilt`
 
 ## Installation
 
 * `git clone https://github.com/draios/wsysdig.git`
 * `cd wsysdig`
-* `npm install`
+* `npm run setup`
 
 ## Running / Development
 
 #### Ember web application
 
-* `ember serve`
+* `npm start`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 #### Electron desktop

@@ -11,8 +11,9 @@
   "repository": "",
   "scripts": {
     "build": "ember build",
-    "start": "ember server",
+    "start": "scripts/run",
     "test": "ember test",
+    "setup": "scripts/install",
     "postinstall": "npm install ember-electron/backend"
   },
   "devDependencies": {
