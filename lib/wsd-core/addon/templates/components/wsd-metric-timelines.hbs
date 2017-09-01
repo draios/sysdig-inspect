@@ -9,13 +9,7 @@
 </div>
 
 <div class="wsd-metric-timelines__contents">
-    {{#if summaryDataStore.isLoading}}
-        <div class="wsd-metric-timelines__empty-content">
-            Loading data...
-        </div>
-    {{/if}}
-
-    {{#if summaryDataStore.hasLoaded}}
+    {{#sd-promise-wait-overlay promiseState=summaryDataStore classNames="sd-promise-wait-overlay--sm"}}
         {{#if canRenderTimelines}}
             <svg width="{{timelinesWidth}}" height="{{timelinesHeight}}">
                 {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
@@ -41,7 +35,7 @@
                 }}
             </svg>
         {{/if}}
-    {{/if}}
+    {{/sd-promise-wait-overlay}}
 </div>
 
 <div class="wsd-metric-timelines__controls">

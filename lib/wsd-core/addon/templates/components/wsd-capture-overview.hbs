@@ -1,8 +1,4 @@
-{{#if dataStore.isLoading}}
-    Loading... ({{number-to-string dataStore.loadingProgress}}%)
-{{/if}}
-
-{{#if dataStore.hasLoaded}}
+{{#sd-promise-wait-overlay promiseState=dataStore}}
     <div class="wsd-capture-overview__content">
         {{#each categories key="name" as |category|}}
             <div class="wsd-capture-overview__category">
@@ -28,4 +24,4 @@
             </div>
         {{/each}}
     </div>
-{{/if}}
+{{/sd-promise-wait-overlay}}

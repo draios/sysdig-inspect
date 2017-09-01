@@ -1,9 +1,5 @@
-{{#if viewStore.isLoading}}
-    Loading...
-{{/if}}
-
-{{#if viewStore.hasLoaded}}
+{{#sd-promise-wait-overlay promiseState=viewStore classNames="sd-promise-wait-overlay--sm"}}
     {{#sd-list items=views key="viewId" select=(action "selectView") as |view|}}
         {{view.name}}
     {{/sd-list}}
-{{/if}}
+{{/sd-promise-wait-overlay}}

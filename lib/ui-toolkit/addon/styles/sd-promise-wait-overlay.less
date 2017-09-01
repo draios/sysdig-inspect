@@ -1,0 +1,71 @@
+.sd-promise-wait-overlay {
+    position: relative;
+    width: 100%;
+
+    &__wrapper {
+        position:           absolute;
+        top:                0;
+        bottom:             0;
+        left:               0;
+        right:              0;
+        height:             100%; // so that Safari can compute the top %
+        z-index:            1;
+
+        display:            flex;
+        align-items:        flex-start;
+        justify-content:    center;
+
+        background-color:   rgba(255, 255, 255, 0.5);
+    }
+
+    &__loading-panel,
+    &__empty-panel,
+    &__refreshing-empty-panel,
+    &__error-panel {
+        position:           relative;
+        top:                20%;
+
+        max-width:          600px;
+
+        text-align:         center;
+    }
+
+    &__loading-panel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: @font-size-md;
+        font-weight: @font-weight-light;
+
+        width:                  60px;
+        height:                 60px;
+        border-radius:          50%;
+
+        background-color:       rgba(255, 255, 255, 0.8);
+        box-shadow:             0 0 5px 6px rgba(255, 255, 255, 0.8);
+        background-repeat:      no-repeat;
+        background-position:    50%;
+        background-size:        60px;
+
+        // <svg width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"> <g> <animateTransform attributeName="transform" type="rotate" values="0 33 33;270 33 33" begin="0s" dur="1.4s" fill="freeze" repeatCount="indefinite"/> <circle fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30" stroke-dasharray="187" stroke-dashoffset="610"> <animate attributeName="stroke" values="rgb(48, 98, 184);rgb(238, 90, 76);rgb(255, 204, 51);rgb(126, 194, 91);rgb(48, 98, 184)" begin="0s" dur="5.6s" fill="freeze" repeatCount="indefinite"/> <animateTransform attributeName="transform" type="rotate" values="0 33 33;135 33 33;450 33 33" begin="0s" dur="1.4s" fill="freeze" repeatCount="indefinite"/> <animate attributeName="stroke-dashoffset" values="187;46.75;187" begin="0s" dur="1.4s" fill="freeze" repeatCount="indefinite"/> </circle> </g> </svg>
+        background-image: url("data:image/svg+xml;utf8,%3Csvg width='65px' height='65px' viewBox='0 0 66 66' xmlns='http://www.w3.org/2000/svg'%3E %3Cg%3E %3CanimateTransform attributeName='transform' type='rotate' values='0 33 33;270 33 33' begin='0s' dur='1.4s' fill='freeze' repeatCount='indefinite'/%3E %3Ccircle fill='none' stroke-width='6' stroke-linecap='round' cx='33' cy='33' r='30' stroke-dasharray='187' stroke-dashoffset='610'%3E %3Canimate attributeName='stroke' values='rgb(48, 98, 184);rgb(238, 90, 76);rgb(255, 204, 51);rgb(126, 194, 91);rgb(48, 98, 184)' begin='0s' dur='5.6s' fill='freeze' repeatCount='indefinite'/%3E %3CanimateTransform attributeName='transform' type='rotate' values='0 33 33;135 33 33;450 33 33' begin='0s' dur='1.4s' fill='freeze' repeatCount='indefinite'/%3E %3Canimate attributeName='stroke-dashoffset' values='187;46.75;187' begin='0s' dur='1.4s' fill='freeze' repeatCount='indefinite'/%3E %3C/circle%3E %3C/g%3E %3C/svg%3E");
+    }
+
+    &__text {
+        font-size: @font-size-xl;
+    }
+
+    &--sm &__loading-panel {
+        top:                10%;
+
+        box-shadow:         none;
+        background-color:   initial;
+    }
+
+    &--sm &__loading-panel {
+        width:              30px;
+        height:             30px;
+
+        background-size:    30px;
+    }
+}

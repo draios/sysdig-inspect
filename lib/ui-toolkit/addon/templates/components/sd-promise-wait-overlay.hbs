@@ -1,0 +1,26 @@
+{{#if promiseState.isLoading}}
+    <div class="sd-promise-wait-overlay__wrapper">
+        <div class="sd-promise-wait-overlay__loading-panel">
+            {{number-to-string promiseState.loadingProgress decimalCount=1 type="%"}}
+        </div>
+    </div>
+{{/if}}
+
+{{#if promiseState.hasData}}
+    {{yield}}
+{{/if}}
+
+{{#if promiseState.hasNoData}}
+    <div class="sd-promise-wait-overlay__wrapper">
+        <div class="sd-promise-wait-overlay__empty-panel">
+            <div class="sd-promise-wait-overlay__text">
+                No data
+            </div>
+            {{#if emptyMessage}}
+                <div class="sd-promise-wait-overlay__message">
+                    {{emptyMessage}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+{{/if}}
