@@ -1,11 +1,10 @@
 .wsd-metric-tile {
-    @tile-width: 150px;
-    @tile-height: 140px;
-    @tile-content-min-width: 140px;
-    @time-series-height: 30px;
+    @tile-width: 190px;
 
     display: flex;
     flex-direction: column;
+
+    width: @tile-width;
 
     background-color: @color-background;
     border-radius: 2px;
@@ -24,6 +23,10 @@
     }
     &--is-selected:hover {
         .z-shadow-4();
+    }
+
+    &--is-pinned &__header {
+        color: @color-text;
     }
 
     &--is-noteworthy:before {
@@ -46,64 +49,56 @@
 
     &__header {
         padding: @layout-padding-sm;
-        padding-bottom: @layout-padding-sm / 2;
+        padding-bottom: 0;
 
         height: 48px;
-        line-height: @font-line-height-md;
 
-        display: flex;
-        font-size: @font-size-md;
-    }
-    &__header-text {
-        flex: 1;
-    }
-    &__header-action {
-        width: 24px;
         display: flex;
         align-items: flex-start;
 
-        opacity: 0.2;
+        color: @color-text-muted;
     }
-    &__header:hover &__header-action {
-        opacity: 1;
+    &__name {
+        flex: 1;
+        padding-right: @layout-padding-sm;
+        font-size: @font-size-md;
+    }
+    &__value {
+        font-size: @font-size-xl;
     }
 
     &__content {
-        flex: 1;
-
-        display: flex;
-    }
-    &__value {
-        flex: 1;
-
-        padding: @layout-padding-sm / 2 @layout-padding-sm;
-
-        font-size: @font-size-xl;
+        height: 30px;
 
         display: flex;
         align-items: center;
+        justify-content: center;
+    }
+    &__time-series {
+        flex: 1;
+        display: flex;
+        padding: 0 @layout-padding-sm;
+        opacity: 0.7;
     }
 
     &__footer {
         display: flex;
-        height: @time-series-height + @layout-padding-sm * 2;
 
         padding: @layout-padding-sm;
     }
-    &__time-series {
+    &__footer-left {
         flex: 1;
-
-        opacity: 0.6;
+        display: flex;
+    }
+    &__footer-right {
+        display: flex;
+        justify-content: flex-end;
     }
     &__footer-action {
-        width: 24px;
         display: flex;
         align-items: center;
-
-        opacity: 0.2;
     }
-    &__footer:hover &__time-series,
-    &__footer:hover &__footer-action {
-        opacity: 1;
+    &__footer-action + &__footer-action {
+        margin-left: @layout-padding-md;
     }
 }

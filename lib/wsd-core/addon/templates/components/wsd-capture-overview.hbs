@@ -1,27 +1,25 @@
 {{#sd-promise-wait-overlay promiseState=dataStore}}
-    <div class="wsd-capture-overview__scrollable-content">
-        <div class="wsd-capture-overview__content">
-            {{#each categories key="name" as |category|}}
-                <div class="wsd-capture-overview__category">
-                    <div class="wsd-capture-overview__category-name">
-                        {{category.name}}
-                    </div>
-
-                    {{#each category.metricsData key="data.name" as |metric|}}
-                        <div class="wsd-capture-overview__category-item">
-                            {{wsd-metric-tile
-                                classNames="wsd-metric-tile--is-category-item"
-                                data=metric.data
-                                isSelected=metric.isSelected
-                                isTimelinePinned=metric.isTimelinePinned
-                                drillDown=(action "drillDown" metric.data.name)
-                                toggleTimeline=(action toggleMetricTimeline metric.data.name)
-                                select=(action "select" metric.data.name)
-                            }}
-                        </div>
-                    {{/each}}
+    <div class="wsd-capture-overview__content">
+        {{#each categories key="name" as |category|}}
+            <div class="wsd-capture-overview__category">
+                <div class="wsd-capture-overview__category-name">
+                    {{category.name}}
                 </div>
-            {{/each}}
-        </div>
+
+                {{#each category.metricsData key="data.name" as |metric|}}
+                    <div class="wsd-capture-overview__category-item">
+                        {{wsd-metric-tile
+                            classNames="wsd-metric-tile--is-category-item"
+                            data=metric.data
+                            isSelected=metric.isSelected
+                            isTimelinePinned=metric.isTimelinePinned
+                            drillDown=(action "drillDown" metric.data.name)
+                            toggleTimeline=(action toggleMetricTimeline metric.data.name)
+                            select=(action "select" metric.data.name)
+                        }}
+                    </div>
+                {{/each}}
+            </div>
+        {{/each}}
     </div>
 {{/sd-promise-wait-overlay}}

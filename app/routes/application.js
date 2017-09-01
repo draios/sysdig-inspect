@@ -34,7 +34,7 @@ export default Ember.Route.extend({
                 shortcuts.defineShortcut('dataTables.selectPrevious',   'dataTables',   'Select previous view',     ['up']),
 
                 shortcuts.defineShortcut('overview.drillDown',          'overview',     'Drill down',               ['enter']),
-                shortcuts.defineShortcut('overview.toggleTimeline',     'overview',     'Pin/unpin timeline',       ['t']),
+                shortcuts.defineShortcut('overview.toggleTimeline',     'overview',     'Pin/unpin timeline',       ['space']),
                 shortcuts.defineShortcut('overview.selectLeft',         'overview',     'Select left',              ['left']),
                 shortcuts.defineShortcut('overview.selectRight',        'overview',     'Select right',             ['right']),
                 shortcuts.defineShortcut('overview.selectUp',           'overview',     'Select up',                ['up']),

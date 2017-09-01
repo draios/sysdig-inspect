@@ -1,37 +1,25 @@
 .wsd-capture-overview {
-    @tile-width: 150px;
-    @tile-height: 140px;
-
     flex: 1;
 
     display: flex;
     align-items: stretch;
+    overflow: hidden;
 
-    &__scrollable-content {
-        overflow: auto;
-    }
     &__content {
         flex: 1;
         display: flex;
         justify-content: space-around;
 
-        padding: @layout-padding-md 0;
+        overflow: auto;
 
-        overflow: hidden;
+        padding: @layout-padding-md 0;
     }
     &__category {
-        display: flex;
-        flex-direction: column;
-
-        padding: 0 @layout-padding-md;
+        margin: 0 @layout-spacing-sm;
     }
 
     &__category-item {
         margin-bottom: @layout-padding-sm;
-
-        min-width: @tile-width;
-        max-width: @tile-width;
-        height: @tile-height;
 
         display: flex;
         align-items: stretch;
@@ -39,7 +27,7 @@
 
     &__category-name {
         font-size: @font-size-lg;
-        align-self: center;
+        text-align: center;
 
         margin-bottom: @layout-padding-md;
     }
