@@ -8,21 +8,29 @@
     &__content {
         flex: 1;
         display: flex;
-        justify-content: space-around;
+        justify-content: stretch;
 
         overflow: auto;
 
         padding: @layout-padding-md 0;
     }
     &__category {
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        min-width: 180px;
+
         margin: 0 @layout-spacing-sm;
     }
 
     &__category-item {
-        margin-bottom: @layout-padding-sm;
-
         display: flex;
+        flex-direction: column;
         align-items: stretch;
+
+        margin-bottom: @layout-padding-sm;
     }
 
     &__category-name {

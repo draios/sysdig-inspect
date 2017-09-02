@@ -1,12 +1,3 @@
-<div class="wsd-metric-tile__header">
-    <div class="wsd-metric-tile__name">
-        {{data.name}}
-    </div>
-    <div class="wsd-metric-tile__value">
-        {{number-to-string data.totalValue decimalCount=1}}
-    </div>
-</div>
-
 <div class="wsd-metric-tile__content">
     {{#if isEmpty}}
         No data
@@ -15,30 +6,38 @@
             {{sd-time-series
                 height=timeSeriesHeight
                 width=timeSeriesWidth
-                isSelected=isTimelinePinned
                 timestampProp="t"
 
                 valueProp="v"
                 data=data.timeSeries
                 theme="background"
             }}
+                {{!-- isSelected=isTimelinePinned --}}
+        </div>
+        <div class="wsd-metric-tile__value">
+            {{number-to-string data.totalValue decimalCount=1}}
         </div>
     {{/if}}
 </div>
 
 <div class="wsd-metric-tile__footer">
-    <div class="wsd-metric-tile__footer-action">
+    <div class="wsd-metric-tile__name">
+        {{data.name}}
+    </div>
+{{!--     <div class="wsd-metric-tile__footer-action">
         {{sd-button
             iconName="info_outline"
-            classNames="sd-button--fab sd-button--highlight-on-hover"
+            classNames="sd-button--fab"
+            color=buttonsColor
             tabIndex=-1
             size="sm"
         }}
     </div>
-    <div class="wsd-metric-tile__footer-action">
+ --}}    <div class="wsd-metric-tile__footer-action">
         {{sd-button
             iconName="forward_black"
-            classNames="sd-button--fab sd-button--highlight-on-hover"
+            classNames="sd-button--fab"
+            color=buttonsColor
             tabIndex=-1
             size="sm"
             click=(action drillDown)
