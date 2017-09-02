@@ -27,34 +27,21 @@
 </div>
 
 <div class="wsd-metric-tile__footer">
-    <div class="wsd-metric-tile__footer-left">
-        <div class="wsd-metric-tile__footer-action">
-            {{sd-button
-                iconName=(if isTimelinePinned "check_box_black" "check_box_outline_blank")
-                classNames="sd-button--fab sd-button--highlight-on-hover"
-                tabIndex=-1
-                size="sm"
-                click=(action select)
-            }}
-        </div>
+    <div class="wsd-metric-tile__footer-action">
+        {{sd-button
+            iconName="info_outline"
+            classNames="sd-button--fab sd-button--highlight-on-hover"
+            tabIndex=-1
+            size="sm"
+        }}
     </div>
-    <div class="wsd-metric-tile__footer-right">
-        <div class="wsd-metric-tile__footer-action">
-            {{sd-button
-                iconName="info_outline"
-                classNames="sd-button--fab sd-button--highlight-on-hover"
-                tabIndex=-1
-                size="sm"
-            }}
-        </div>
-        <div class="wsd-metric-tile__footer-action">
-            {{sd-button
-                iconName="forward_black"
-                classNames="sd-button--fab sd-button--highlight-on-hover"
-                tabIndex=-1
-                size="sm"
-                click=(action drillDown)
-            }}
-        </div>
+    <div class="wsd-metric-tile__footer-action">
+        {{sd-button
+            iconName="forward_black"
+            classNames="sd-button--fab sd-button--highlight-on-hover"
+            tabIndex=-1
+            size="sm"
+            click=(action drillDown)
+        }}
     </div>
 </div>

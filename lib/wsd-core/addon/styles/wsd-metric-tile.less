@@ -15,18 +15,16 @@
     }
 
     transition: box-shadow .3s ease;
-    &:hover {
-        .z-shadow-1();
-    }
+    &:hover,
     &--is-selected {
-        .z-shadow-3();
+        .z-shadow-2();
     }
     &--is-selected:hover {
-        .z-shadow-4();
+        .z-shadow-3();
     }
 
-    &--is-pinned &__header {
-        color: @color-text;
+    &--is-pinned {
+        background-color: @color-primary-lighten-3;
     }
 
     &--is-noteworthy:before {
@@ -55,8 +53,6 @@
 
         display: flex;
         align-items: flex-start;
-
-        color: @color-text-muted;
     }
     &__name {
         flex: 1;
@@ -83,16 +79,9 @@
 
     &__footer {
         display: flex;
+        justify-content: flex-end;
 
         padding: @layout-padding-sm;
-    }
-    &__footer-left {
-        flex: 1;
-        display: flex;
-    }
-    &__footer-right {
-        display: flex;
-        justify-content: flex-end;
     }
     &__footer-action {
         display: flex;
