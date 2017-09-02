@@ -10,6 +10,8 @@
     border-radius: 2px;
     cursor: pointer;
 
+    .z-shadow-1();
+
     &:focus {
         outline: none;
     }
@@ -17,10 +19,10 @@
     transition: box-shadow .3s ease;
     &:hover,
     &--is-selected {
-        .z-shadow-2();
+        .z-shadow-3();
     }
     &--is-selected:hover {
-        .z-shadow-3();
+        .z-shadow-4();
     }
 
     &--is-pinned {
