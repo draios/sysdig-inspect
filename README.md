@@ -14,25 +14,27 @@ You will need the following things properly installed on your computer.
 
 * `git clone https://github.com/draios/wsysdig.git`
 * `cd wsysdig`
-* `npm run setup`
+* `npm install`
 
 ## Running / Development
 
 #### Ember web application
 
-* `npm start`
+* `npm run frontend` or `npm run f` or `npm start`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
+
+#### Wsysdig backend
+
+* `npm run backend` or `npm run b` using  the default sysdig executables path `~/git/sysdig/build/userspace/sysdig`
+* `npm run backend --- /path/to/sysdig` using a custom sysdig path as parameter
 
 #### Electron desktop
 
-- `ember electron`
+- `npm run electron` or `npm run e`
 
 ### Running Tests
 
-* `ember test` (PhantomJS)
-* `ember test --serve`
-* `ember electron:test`
-* `ember electron:test --serve`
+* `npm test`
 
 ### Building
 
