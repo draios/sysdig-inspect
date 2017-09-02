@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Default sysdig executables path
-SYSDIG_PATH='~/git/sysdig/build/userspace/sysdig'
-
-# Custom sysdig executable path
-if [ ! -z "$1" ] && [ -e "$1" ]; then
-    SYSDIG_PATH=$1
-fi
+#
+# Parameters:
+#
+# -f            run wsysdig frontend [DEFAULT]
+# -b            run wsysdig backend with default sysdig executables path
+# -b [path]     run wsysdig backend with custom sysdig executables path 
+#
 
 setup_env() {
     platform='unknown'
@@ -30,16 +30,34 @@ setup_env() {
 }
 
 run() {
-    cd ember-electron/backend
-
-    # Run backend in an external shell
-    npm start --- -p=${SYSDIG_PATH} &
-
-    cd ../..
-
-    # Serve ember app in the current shell
-    ./node_modules/.bin/ember serve --proxy http://localhost:3000
+    if [ "$1" = "F" ]
+    then
+        # Serve ember app in the current shell
+        ./node_modules/.bin/ember serve --proxy http://localhost:3000
+    else
+        cd ember-electron/backend
+        # Run backend in an external shell
+        npm start --- -p=${SYSDIG_PATH}
+        cd ../..
+    fi
 }
 
 setup_env
-run
+
+# Default run frontend
+RUN_P="F"
+if [ ! -z "$1" ] && [ "$1" = "-b" ]
+then
+    # or run backend
+    RUN_P="B"
+fi
+
+# Default sysdig executables path
+SYSDIG_PATH='~/git/sysdig/build/userspace/sysdig'
+if [ ! -z "$2" ] && [ -e "$2" ]
+then
+    # or use custom path
+    SYSDIG_PATH=$2
+fi
+
+run $RUN_P $SYSDIG_PATH
