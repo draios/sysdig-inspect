@@ -1,10 +1,20 @@
 #!/bin/bash
 
+#
+# Parameters:
+#
+# -t    complete installation with test; exit 1 if fails
+# -i    avoid `npm install`
+#
+
 NODE_VERSION="v6.11.2"
 TEST_MODE=false
+AVOID_INSTALL=false
 
 if [[ $1 = "-t" ]]; then
     TEST_MODE=true
+elif [[ $1 = "-i" ]]; then
+    AVOID_INSTALL=true
 fi
 
 set_or_install_node_version() {
@@ -28,7 +38,7 @@ setup_env() {
         platform='osx'
     fi
 
-    if [[ "$TEST_MODE" = true ]]; then
+    if [[ $TEST_MODE = true ]]; then
         set_or_install_node_version
         set -xeu
     fi
@@ -51,11 +61,14 @@ setup_env() {
 }
 
 install_app() {
-    # reinstall node modules before build
-    rm -rf node_modules
-    rm -rf bower_components
+    # install node modules before build
+    if [[ $AVOID_INSTALL = false ]]; then
+        rm -rf node_modules
+        npm install
+    fi
 
-    npm install
+    # install bower dependencies
+    rm -rf bower_components
     ./node_modules/.bin/bower install
 }
 
