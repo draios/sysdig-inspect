@@ -10,11 +10,17 @@
   },
   "repository": "",
   "scripts": {
+    "preinstall": "rm -rf node_modules",
+    "postinstall": "scripts/install -i",
     "build": "ember build",
     "start": "scripts/run",
     "test": "ember test",
-    "setup": "scripts/install",
-    "postinstall": "npm install ember-electron/backend"
+    "frontend": "scripts/run",
+    "backend": "scripts/run -b",
+    "electron": "ember electron",
+    "f": "npm run frontend",
+    "b": "npm run backend",
+    "e": "npm run electron"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
