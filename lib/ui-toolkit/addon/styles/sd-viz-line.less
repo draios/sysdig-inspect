@@ -1,0 +1,14 @@
+.sd-viz-line {
+    path {
+        stroke: @color-time-series-column;
+        stroke-width: 2;
+        fill: none;
+    }
+
+    &--theme-background &__column {
+        stroke: @color-time-series-column-light;
+    }
+    &--is-selected&--theme-background &__column {
+        stroke: @color-time-series-column-light;
+    }
+}
