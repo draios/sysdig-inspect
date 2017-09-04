@@ -13,7 +13,7 @@
         {{#if canRenderTimelines}}
             <svg width="{{timelinesWidth}}" height="{{timelinesHeight}}">
                 {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
-                    {{sd-time-series-item
+                    {{sd-viz-histogram-series
                         height=timeSeriesHeight
                         width=timelinesWidth
                         timestampProp="t"
