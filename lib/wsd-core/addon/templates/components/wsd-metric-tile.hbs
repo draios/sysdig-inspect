@@ -1,25 +1,3 @@
-<div class="wsd-metric-tile__content">
-    {{#if isEmpty}}
-        No data
-    {{else}}
-        <div class="wsd-metric-tile__time-series">
-            {{sd-time-series
-                height=timeSeriesHeight
-                width=timeSeriesWidth
-                timestampProp="t"
-
-                valueProp="v"
-                data=data.timeSeries
-                theme="background"
-            }}
-                {{!-- isSelected=isTimelinePinned --}}
-        </div>
-        <div class="wsd-metric-tile__value">
-            {{number-to-string data.totalValue decimalCount=1}}
-        </div>
-    {{/if}}
-</div>
-
 <div class="wsd-metric-tile__footer">
     <div class="wsd-metric-tile__name">
         {{data.name}}
@@ -37,10 +15,31 @@
         {{sd-button
             iconName="forward_black"
             classNames="sd-button--fab"
-            color=buttonsColor
+            color="buttonsColor"
             tabIndex=-1
             size="sm"
             click=(action drillDown)
         }}
     </div>
+</div>
+
+<div class="wsd-metric-tile__content">
+    {{#if isEmpty}}
+        No data
+    {{else}}
+        <div class="wsd-metric-tile__value">
+            {{number-to-string data.totalValue decimalCount=1}}
+        </div>
+        <div class="wsd-metric-tile__time-series">
+            {{sd-time-series
+                height=timeSeriesHeight
+                width=timeSeriesWidth
+                timestampProp="t"
+
+                valueProp="v"
+                data=data.timeSeries
+                theme="background"
+            }}
+        </div>
+    {{/if}}
 </div>
