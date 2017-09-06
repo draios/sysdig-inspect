@@ -108,17 +108,23 @@ class Server {
     }
 
     _getSummary(request, response) {
-        let fileName = request.params.fileName;
-        let args = ['-r', fileName, '-c', 'wsysdig_summary'];
-
-        if ('filter' in request.query) {
-            args.push(request.query.filter);
-        }
-        if ('nTimelineSamples' in request.query) {
-            args.push(request.query.nTimelineSamples);
-        }
-
+        const fileName = request.params.fileName;
+        const filter = request.query.filter;
+        let nTimelineSamples = 0;
+  
         response.setHeader('Content-Type', 'application/json');
+        
+        const args = ['-r', fileName, '-c', 'wsysdig_summary'];
+  
+        if (request.query.nTimelineSamples !== undefined) {
+            nTimelineSamples = request.query.nTimelineSamples;
+        }
+        args.push(nTimelineSamples);
+        
+        if (filter !== undefined) {
+            args.push(filter);
+        }      
+  
         this.sysdigController.runSysdig(args, response);
     }
 }
