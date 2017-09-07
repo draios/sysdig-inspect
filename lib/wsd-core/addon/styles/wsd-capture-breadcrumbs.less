@@ -19,12 +19,13 @@
     }
 
     &__step:not(&__step--is-selected) {
-        color: @color-text-muted;
+        color: @color-text-lighter;
 
         .selectable();
     }
 
     &__step:not(&__step--is-selected):hover {
+        color: @color-text;
         background-color: @color-background-data;
         .z-shadow-2();
     }
@@ -64,7 +65,7 @@
         margin-right: @layout-spacing-sm;
     }
     &__separator {
-        fill: @color-text-muted;
+        fill: @color-text-lighter;
     }
 
     &__step + &__separator {
