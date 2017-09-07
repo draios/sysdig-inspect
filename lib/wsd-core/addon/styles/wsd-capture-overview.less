@@ -1,42 +1,43 @@
 .wsd-capture-overview {
     flex: 1;
-
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
+
     overflow: hidden;
 
-    &__content {
+    &__scrollable {
         flex: 1;
         display: flex;
-        justify-content: space-around;
+        flex-direction: column;
 
         overflow: auto;
+    }
+
+    &__content {
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: space-between;
 
         padding: @layout-padding-md 0;
     }
     &__category {
         flex: 1;
-
+        max-width: 200px;
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        max-width: 210px;
-        min-width: 190px;
 
         margin: 0 @layout-spacing-sm;
     }
 
     &__category-item {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-
         margin-bottom: @layout-padding-sm;
     }
 
     &__category-name {
         font-size: @font-size-lg;
         text-align: center;
+        text-transform: uppercase;
 
         margin-bottom: @layout-padding-md;
     }

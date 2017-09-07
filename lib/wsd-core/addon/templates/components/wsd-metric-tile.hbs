@@ -1,45 +1,35 @@
-<div class="wsd-metric-tile__footer">
-    <div class="wsd-metric-tile__name">
+<div class="wsd-metric-tile__header">
+    <div class="wsd-metric-tile__name" {{action drillDown bubbles=false}}>
         {{data.name}}
     </div>
-{{!--     <div class="wsd-metric-tile__footer-action">
+     <div class="wsd-metric-tile__header-action">
         {{sd-button
-            iconName="info_outline"
+            iconName=(if isTimelinePinned "check_circle_black" "radio_button_unchecked_black")
             classNames="sd-button--fab"
-            color=buttonsColor
             tabIndex=-1
-            size="sm"
-        }}
-    </div>
- --}}    <div class="wsd-metric-tile__footer-action">
-        {{sd-button
-            iconName="forward_black"
-            classNames="sd-button--fab"
-            color="buttonsColor"
-            tabIndex=-1
-            size="sm"
-            click=(action drillDown)
         }}
     </div>
 </div>
 
 <div class="wsd-metric-tile__content">
     {{#if isEmpty}}
-        No data
+        <span class="wsd-metric-tile__empty-value">No data</span>
     {{else}}
-        <div class="wsd-metric-tile__value">
-            {{number-to-string data.totalValue decimalCount=1}}
-        </div>
-        <div class="wsd-metric-tile__time-series">
-            {{sd-time-series
-                height=timeSeriesHeight
-                width=timeSeriesWidth
-                timestampProp="t"
-
-                valueProp="v"
-                data=data.timeSeries
-                theme="background"
-            }}
-        </div>
+        {{number-to-string data.totalValue decimalCount=1 isMultiplierOmitted=true}}
+        <span class="wsd-metric-tile__value-multiplier">
+            {{number-to-string data.totalValue decimalCount=1 isValueOmitted=true}}
+        </span>
     {{/if}}
+</div>
+
+<div class="wsd-metric-tile__footer">
+    {{sd-time-series
+        height=timeSeriesHeight
+        width=timeSeriesWidth
+        timestampProp="t"
+
+        valueProp="v"
+        data=data.timeSeries
+        theme="background"
+    }}
 </div>

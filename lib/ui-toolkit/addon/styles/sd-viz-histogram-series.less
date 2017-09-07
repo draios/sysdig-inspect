@@ -1,6 +1,10 @@
 .sd-viz-histogram-series {
-    rect {
+    &__column {
         fill: @color-time-series-column;
+
+        &--is-empty {
+            fill: @color-time-series-column-empty;
+        }
     }
 
     &--theme-background rect {
