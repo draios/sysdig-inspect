@@ -1,16 +1,35 @@
-{{#each breadcrumbItems as |item|}}
-    <div class="wsd-capture-breadcrumbs__step {{if isRoot "wsd-capture-breadcrumbs__is-root"}} {{if item.isHome "wsd-capture-breadcrumbs__step--is-home"}} {{if item.isSelected "wsd-capture-breadcrumbs__step--is-selected"}}" {{action select item.step}}>
-        <div class="wsd-capture-breadcrumbs__content">
-            {{#if item.description}}
-                <div class="wsd-capture-breadcrumbs__name">
-                    {{item.name}}
+{{#sd-promise-wait-overlay promiseState=viewsManager.store classNames="sd-promise-wait-overlay--sm"}}
+    <div class="wsd-capture-breadcrumbs__content">
+        {{#each breadcrumbItems key="configuration.id" as |item|}}
+            <div
+                class="wsd-capture-breadcrumbs__step
+                    {{if isRoot "wsd-capture-breadcrumbs__step--is-root"}}
+                    {{if item.isHome "wsd-capture-breadcrumbs__step--is-home"}}
+                    {{if item.isSelected "wsd-capture-breadcrumbs__step--is-selected"}}
+                    {{if item.description "wsd-capture-breadcrumbs__step--with-description"}}"
+                {{action select item.step}}
+            >
+                {{#if item.isHome}}
+                    <div class="wsd-capture-breadcrumbs__step-icon">
+                        {{svg-jar "home_black" class=(if item.isSelected "sd-icon sd-icon--primary" "sd-icon sd-icon--muted") width="32px" height="32px"}}
+                    </div>
+                {{/if}}
+
+                <div class="wsd-capture-breadcrumbs__step-content">
+                    <div class="wsd-capture-breadcrumbs__step-name">
+                        {{item.name}}
+                    </div>
+                    <div class="wsd-capture-breadcrumbs__step-description">
+                        {{item.description}}
+                    </div>
                 </div>
-                <div class="wsd-capture-breadcrumbs__description">
-                    {{item.description}}
+            </div>
+
+            {{#unless item.isSelected}}
+                <div class="wsd-capture-breadcrumbs__separator">
+                    {{svg-jar "chevron_right_black" class="sd-icon" width="24px" height="24px"}}
                 </div>
-            {{else}}
-                {{item.name}}
-            {{/if}}
-        </div>
+            {{/unless}}
+        {{/each}}
     </div>
-{{/each}}
+{{/sd-promise-wait-overlay}}

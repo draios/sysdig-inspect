@@ -1,5 +1,5 @@
-{{#sd-promise-wait-overlay promiseState=viewStore classNames="sd-promise-wait-overlay--sm"}}
-    {{#sd-list items=views key="viewId" select=(action "selectView") as |view|}}
-        {{view.name}}
+{{#sd-promise-wait-overlay promiseState=viewsManager.store classNames="sd-promise-wait-overlay--sm"}}
+    {{#sd-list items=views key="configuration.id" select=(action "selectView") as |view|}}
+        {{view.configuration.name}}
     {{/sd-list}}
 {{/sd-promise-wait-overlay}}
