@@ -15,7 +15,9 @@
     {{#if isEmpty}}
         <span class="wsd-metric-tile__empty-value">No data</span>
     {{else}}
-        {{number-to-string data.totalValue decimalCount=1 isMultiplierOmitted=true}}
+        <span class="wsd-metric-tile__value">
+            {{number-to-string data.totalValue decimalCount=1 isMultiplierOmitted=true}}
+        </span>
         <span class="wsd-metric-tile__value-multiplier">
             {{number-to-string data.totalValue decimalCount=1 isValueOmitted=true}}
         </span>
