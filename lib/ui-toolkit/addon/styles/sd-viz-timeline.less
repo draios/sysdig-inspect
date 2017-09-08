@@ -1,8 +1,9 @@
 .sd-viz-timeline {
     @timeline-height: 30px;
 
-    @color-area-out: fade(@color-separator, 75%);
-    @color-handle: darken(@color-area-out, 15%);
+    @color-area-out: fade(@color-separator, 50%);
+    @color-draggable-area: fade(@color-separator, 75%);
+    @color-handle: darken(@color-separator, 15%);
 
     position: relative;
     flex: 1;
@@ -27,7 +28,7 @@
             right: -8px * 2;
             bottom: (@timeline-height - 8px * 2) / 2;
             border: 8px solid transparent;
-            border-left-color: @color-area-out;
+            border-left-color: @color-draggable-area;
         }
     }
     &__right-area {
@@ -41,7 +42,7 @@
             left: -8px * 2;
             bottom: (@timeline-height - 8px * 2) / 2;
             border: 8px solid transparent;
-            border-right-color: @color-area-out;
+            border-right-color: @color-draggable-area;
         }
     }
     &__selected-area {
@@ -68,16 +69,19 @@
 
     &__draggable-handle {
         position: absolute;
-        width: 3px + 2px + 3px;
+        width: 2px + 3px + 2px + 3px + 2px;
         height: 100%;
 
+        padding: 0 2px;
+
+        background-color: @color-draggable-area;
         cursor: ew-resize;
     }
     &__left-area &__draggable-handle {
-        right: 2px;
+        right: 0;
     }
     &__right-area &__draggable-handle {
-        left: 2px;
+        left: 0;
     }
 
     &__handle {
