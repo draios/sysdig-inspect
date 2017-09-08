@@ -3,8 +3,18 @@
 </div>
 
 <div class="sd-viz-timeline__selected-area">
-    <div class="sd-viz-timeline__time sd-viz-timeline__time--is-from">{{selectedFrom}}</div>
-    <div class="sd-viz-timeline__time sd-viz-timeline__time--is-to">{{selectedTo}}</div>
+    <div class="sd-viz-timeline__time
+        {{if isTimeLabelInternal "sd-viz-timeline__time--is-internal" "sd-viz-timeline__time--is-external"}}
+        sd-viz-timeline__time--is-from"
+    >
+        {{date-time-to-string selectedFrom unit="ns" dataType="string"}}
+    </div>
+    <div class="sd-viz-timeline__time
+        {{if isTimeLabelInternal "sd-viz-timeline__time--is-internal" "sd-viz-timeline__time--is-external"}}
+        sd-viz-timeline__time--is-to"
+    >
+        {{date-time-to-string selectedTo unit="ns" dataType="string"}}
+    </div>
 </div>
 
 <div class="sd-viz-timeline__right-area" style={{rightAreaStyle}}>

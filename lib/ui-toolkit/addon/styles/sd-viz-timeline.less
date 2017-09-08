@@ -1,9 +1,13 @@
 .sd-viz-timeline {
-    @timeline-height: 30px;
+    @timeline-height: 38px;
 
     @color-area-out: fade(@color-separator, 50%);
     @color-draggable-area: fade(@color-separator, 75%);
     @color-handle: darken(@color-separator, 15%);
+
+    @handle-arrow-width: 8px;
+    @draggable-handle-width: 2px + 3px + 2px + 3px + 2px;
+    @time-labels-width: 110px;
 
     position: relative;
     flex: 1;
@@ -25,9 +29,9 @@
             position: absolute;
             width: 0;
             height: 0;
-            right: -8px * 2;
-            bottom: (@timeline-height - 8px * 2) / 2;
-            border: 8px solid transparent;
+            right: -@handle-arrow-width * 2;
+            bottom: (@timeline-height - @handle-arrow-width * 2) / 2;
+            border: @handle-arrow-width solid transparent;
             border-left-color: @color-draggable-area;
         }
     }
@@ -39,9 +43,9 @@
             position: absolute;
             width: 0;
             height: 0;
-            left: -8px * 2;
-            bottom: (@timeline-height - 8px * 2) / 2;
-            border: 8px solid transparent;
+            left: -@handle-arrow-width * 2;
+            bottom: (@timeline-height - @handle-arrow-width * 2) / 2;
+            border: @handle-arrow-width solid transparent;
             border-right-color: @color-draggable-area;
         }
     }
@@ -53,23 +57,36 @@
     &__time {
         position: absolute;
         bottom: 0;
+        width: @time-labels-width;
+        z-index: 1; // put it above all areas
 
         line-height: @timeline-height;
         font-size: @font-size-sm;
         color: @color-text-muted;
         pointer-events: none;
 
-        &--is-from {
-            left: 8px + 4px;
+        &--is-internal&--is-from {
+            left: @handle-arrow-width + 2px;
+            text-align: left;
         }
-        &--is-to {
-            right: 8px + 4px;
+        &--is-internal&--is-to {
+            right: @handle-arrow-width + 2px;
+            text-align: right;
+        }
+
+        &--is-external&--is-from {
+            left: -@time-labels-width - @draggable-handle-width - 2px;
+            text-align: right;
+        }
+        &--is-external&--is-to {
+            right: -@time-labels-width - @draggable-handle-width - 2px;
+            text-align: left;
         }
     }
 
     &__draggable-handle {
         position: absolute;
-        width: 2px + 3px + 2px + 3px + 2px;
+        width: @draggable-handle-width;
         height: 100%;
 
         padding: 0 2px;
