@@ -1,0 +1,100 @@
+.sd-viz-timeline {
+    @timeline-height: 30px;
+
+    @color-area-out: fade(@color-separator, 75%);
+    @color-handle: darken(@color-area-out, 15%);
+
+    position: relative;
+    flex: 1;
+
+    display: flex;
+    align-items: stretch;
+
+    cursor: pointer;
+
+    &__left-area,
+    &__right-area {
+        position: relative;
+    }
+    &__left-area {
+        background-color: @color-area-out;
+
+        &:after {
+            content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            right: -8px * 2;
+            bottom: (@timeline-height - 8px * 2) / 2;
+            border: 8px solid transparent;
+            border-left-color: @color-area-out;
+        }
+    }
+    &__right-area {
+        background-color: @color-area-out;
+
+        &:before {
+            content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: -8px * 2;
+            bottom: (@timeline-height - 8px * 2) / 2;
+            border: 8px solid transparent;
+            border-right-color: @color-area-out;
+        }
+    }
+    &__selected-area {
+        flex: 1;
+
+        position: relative;
+    }
+    &__time {
+        position: absolute;
+        bottom: 0;
+
+        line-height: @timeline-height;
+        font-size: @font-size-sm;
+        color: @color-text-muted;
+        pointer-events: none;
+
+        &--is-from {
+            left: 8px + 4px;
+        }
+        &--is-to {
+            right: 8px + 4px;
+        }
+    }
+
+    &__draggable-handle {
+        position: absolute;
+        width: 3px + 2px + 3px;
+        height: 100%;
+
+        cursor: ew-resize;
+    }
+    &__left-area &__draggable-handle {
+        right: 2px;
+    }
+    &__right-area &__draggable-handle {
+        left: 2px;
+    }
+
+    &__handle {
+        position: absolute;
+        bottom: (@timeline-height - 15px) / 2;
+
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+    }
+    &__handle-bar {
+        background-color: @color-handle;
+
+        width: 3px;
+        height: 15px;
+    }
+    &__handle-bar + &__handle-bar {
+        margin-left: 2px;
+    }
+}

@@ -20,18 +20,12 @@
 </div>
 
 <div class="wsd-capture-panel__timelines">
-    {{#if timelines}}
-        {{wsd-metric-timelines
-            timeWindow=timeWindow
-            timelines=timelines
-            filePath=filePath
-            selectTimeWindow=(action selectTimeWindow)
-            drillDown=(action drillDown)
-            remove=(action removeMetricTimeline)
-        }}
-    {{else}}
-        <div class="wsd-capture-panel__timelines--empty">
-            Select a metric to explore the timeline
-        </div>
-    {{/if}}
+    {{wsd-metric-timelines
+        timeWindow=timeWindow
+        timelines=timelines
+        filePath=filePath
+        selectTimeWindow=(action selectTimeWindow)
+        drillDown=(action drillDown)
+        remove=(action removeMetricTimeline)
+    }}
 </div>

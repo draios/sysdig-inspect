@@ -79,8 +79,8 @@ export default Ember.Route.extend({
             } else {
                 this.transitionTo('capture', {
                     queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
-                        timeFrom: null,
-                        timeTo: null,
+                        timeFrom: undefined,
+                        timeTo: undefined,
                     }),
                 });
             }

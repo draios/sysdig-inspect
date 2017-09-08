@@ -2,7 +2,11 @@
     {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
         <div class="wsd-metric-timelines__headers-item">
             <div class="wsd-metric-timelines__name">
-                {{timelineConfiguration.timeline.name}}
+                {{#if timelineConfiguration.timeline}}
+                    {{timelineConfiguration.timeline.name}}
+                {{else}}
+                    bla bla la
+                {{/if}}
             </div>
         </div>
     {{/each}}
@@ -11,29 +15,32 @@
 <div class="wsd-metric-timelines__contents">
     {{#sd-promise-wait-overlay promiseState=summaryDataStore classNames="sd-promise-wait-overlay--sm"}}
         {{#if canRenderTimelines}}
-            <svg width="{{timelinesWidth}}" height="{{timelinesHeight}}">
+            <svg class="wsd-metric-timelines__charts" width="{{timelinesWidth}}" height="{{timelinesHeight}}">
                 {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
-                    {{sd-viz-histogram-series
-                        height=timeSeriesHeight
-                        width=timelinesWidth
-                        timestampProp="t"
-                        valueProp="v"
-                        translateY=timelineConfiguration.offsetY
-                        data=timelineConfiguration.timeline.timeSeries
-                    }}
+                    {{#if timelineConfiguration.timeline}}
+                        {{sd-viz-histogram-series
+                            height=timeSeriesHeight
+                            width=timelinesWidth
+                            timestampProp="t"
+                            valueProp="v"
+                            translateY=timelineConfiguration.offsetY
+                            data=timelineConfiguration.timeline.timeSeries
+                        }}
+                    {{/if}}
                 {{/each}}
+            </svg>
 
-                {{sd-brush-overlay
-                    from=timeWindow.from
-                    to=timeWindow.to
-                    data=brushOverlayData
-                    categoryProp="t"
-                    width=timelinesWidth
-                    height=brushOverlayHeight
-                    translateY=brushOverlayOffsetY
+            <div class="wsd-metric-timelines__overlay">
+                {{sd-viz-timeline
+                    timeline=timeline
+                    timelinesWidth=timelinesWidth
+                    from=captureTimeWindow.from
+                    to=captureTimeWindow.to
+                    selectedFrom=selectedTimeWindow.from
+                    selectedTo=selectedTimeWindow.to
                     select=(action selectTimeWindow)
                 }}
-            </svg>
+            </div>
         {{/if}}
     {{/sd-promise-wait-overlay}}
 </div>
@@ -42,12 +49,14 @@
     {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
         <div class="wsd-metric-timelines__controls-item">
             <div class="wsd-metric-timelines__button">
-                {{sd-button
-                    iconName="close"
-                    classNames="sd-button--fab sd-button--highlight-on-hover"
-                    size="sm"
-                    click=(action remove timelineConfiguration.timeline.name)
-                }}
+                {{#if timelineConfiguration.timeline}}
+                    {{sd-button
+                        iconName="close"
+                        classNames="sd-button--fab sd-button--highlight-on-hover"
+                        size="sm"
+                        click=(action remove timelineConfiguration.timeline.name)
+                    }}
+                {{/if}}
             </div>
         </div>
     {{/each}}

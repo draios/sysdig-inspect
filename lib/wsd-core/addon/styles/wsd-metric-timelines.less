@@ -1,5 +1,6 @@
 .wsd-metric-timelines {
-    @timeline-height: 56px;
+    @timeline-height: 30px;
+    @timeline-draggable-handle-width: 12px;
 
     display: flex;
     justify-items: stretch;
@@ -9,7 +10,6 @@
     &__controls {
         display: flex;
         flex-direction: column;
-
     }
     &__headers-item,
     &__contents-item,
@@ -19,7 +19,7 @@
         display: flex;
         align-items: center;
 
-        padding: @layout-padding-sm 0;
+        margin-bottom: @layout-spacing-sm;
     }
 
     &__headers {
@@ -35,18 +35,26 @@
 
     &__contents {
         flex: 1;
+        align-items: center;
 
         margin-right: @layout-spacing-sm;
 
         // prevent child to stretch the container, so that size can always be computed at run-time
         overflow: hidden;
     }
-    &__empty-content {
-        height: 100%;
+    &__charts {
+        margin: 0 @timeline-draggable-handle-width;
+    }
+    &__overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        text-align: center;
+        align-items: stretch;
     }
 
     &__controls {

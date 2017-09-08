@@ -1,0 +1,12 @@
+<div class="sd-viz-timeline__left-area" style={{leftAreaStyle}}>
+    {{sd-viz-timeline-draggable-handle drag=(action "dragLeft")}}
+</div>
+
+<div class="sd-viz-timeline__selected-area">
+    <div class="sd-viz-timeline__time sd-viz-timeline__time--is-from">{{selectedFrom}}</div>
+    <div class="sd-viz-timeline__time sd-viz-timeline__time--is-to">{{selectedTo}}</div>
+</div>
+
+<div class="sd-viz-timeline__right-area" style={{rightAreaStyle}}>
+    {{sd-viz-timeline-draggable-handle drag=(action "dragRight")}}
+</div>
