@@ -2,56 +2,36 @@
     @timeline-height: 30px;
     @timeline-draggable-handle-width: 12px;
 
+    position: relative;
+
     display: flex;
-    justify-items: stretch;
+    flex-direction: column;
 
-    &__headers,
-    &__contents,
-    &__controls {
-        display: flex;
-        flex-direction: column;
-    }
-    &__headers-item,
-    &__contents-item,
-    &__controls-item {
-        height: @timeline-height;
-
+    &__timeline {
         display: flex;
         align-items: center;
-
-        margin-bottom: @layout-spacing-sm;
+        margin-top: @layout-spacing-sm;
     }
 
-    &__headers {
-        .side-panel-width();
-    }
-    &__headers-item {
-        padding-left: @layout-padding-md;
-        padding-right: @layout-spacing-sm;
-    }
-    &__name {
-        font-size: @font-size-sm;
-        .text-overflow();
-    }
-
-    &__contents {
+    &__content {
         flex: 1;
         align-items: stretch;
+
+        height: @timeline-height;
 
         margin-right: @layout-spacing-sm;
 
         // prevent child to stretch the container, so that size can always be computed at run-time
         overflow: hidden;
     }
-    &__charts {
+    &__chart {
         margin: 0 @timeline-draggable-handle-width;
     }
     &__overlay {
         position: absolute;
-        top: 0;
-        right: 0;
         bottom: 0;
         left: 0;
+        top: 0;
 
         display: flex;
         flex-direction: column;
@@ -59,8 +39,32 @@
     }
 
     &__controls {
+        width: 300px;
+
+        display: flex;
+        align-items: center;
+
         padding-right: @layout-spacing-md;
     }
-    &__controls-item {
+    &__name {
+        flex: 1;
+
+        margin-right: @layout-spacing-sm;
+
+        font-size: @font-size-sm;
+        .text-overflow();
+    }
+    &__value {
+        width: 60px;
+
+        margin-right: @layout-spacing-sm;
+
+        text-align: right;
+        font-size: @font-size-md;
+        font-weight: @font-weight-regular;
+        .text-overflow();
+    }
+    &__value-multiplier {
+        font-weight: @font-weight-light;
     }
 }

@@ -1,12 +1,13 @@
 .sd-viz-timeline {
-    @timeline-height: 38px;
+    @timeline-height: 30px;
 
-    @color-area-out: fade(@color-separator, 50%);
-    @color-draggable-area: fade(@color-separator, 75%);
-    @color-handle: darken(@color-separator, 15%);
+    @color-outer-area-base: #D2D5DD;
+    @color-outer-area: fade(@color-outer-area-base, 50%);
+    @color-draggable-area: fade(@color-outer-area-base, 75%);
+    @color-handle: darken(@color-outer-area-base, 15%);
 
     @handle-arrow-width: 8px;
-    @draggable-handle-width: 2px + 3px + 2px + 3px + 2px;
+    @draggable-handle-width: 2px + 2px + 2px + 2px + 2px;
     @time-labels-width: 110px;
 
     position: relative;
@@ -22,7 +23,7 @@
         position: relative;
     }
     &__left-area {
-        background-color: @color-area-out;
+        background-color: @color-outer-area;
 
         &:after {
             content: ' ';
@@ -36,7 +37,7 @@
         }
     }
     &__right-area {
-        background-color: @color-area-out;
+        background-color: @color-outer-area;
 
         &:before {
             content: ' ';
@@ -103,7 +104,7 @@
 
     &__handle {
         position: absolute;
-        bottom: (@timeline-height - 15px) / 2;
+        bottom: (@timeline-height - 16px) / 2;
 
         display: flex;
         align-items: stretch;
@@ -112,8 +113,8 @@
     &__handle-bar {
         background-color: @color-handle;
 
-        width: 3px;
-        height: 15px;
+        width: 2px;
+        height: 16px;
     }
     &__handle-bar + &__handle-bar {
         margin-left: 2px;
