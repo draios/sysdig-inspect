@@ -26,7 +26,7 @@ If you need to remove all artifacts of the installation and successive builds, y
 
 ## Run the dev environment
 
-2 separate terminals:
+Open 2 separate terminals, one for the backend and one for the frontend:
 
 1. Backend
     * `npm run backend --- [path to sysdig binaries]`
