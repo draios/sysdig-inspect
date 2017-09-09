@@ -1,20 +1,6 @@
 #!/bin/bash
 
-NODE_VERSION="v6.11.2"
-
 setup_env() {
-    set +eu
-    source ~/.bash_profile
-
-    # check if node version is installed otherwise install it
-    nvm list | grep -v "default" | grep ${NODE_VERSION}
-    if [ ${?} -eq 1 ]; then
-        nvm install ${NODE_VERSION}
-    fi
-    nvm use ${NODE_VERSION}
-
-    set -xeu
-
     # Disabling interactive progress bar, and spinners gains 2x performances
     # as stated on https://twitter.com/gavinjoyce/status/691773956144119808
     npm config set progress false

@@ -6,8 +6,6 @@
 # [sysdig path]     run backend with custom sysdig executables path
 #
 
-NODE_VERSION="v6.11.2"
-
 if [ ! -z "$1" ] && [ -e "$1" ]
 then
     # or use custom path
@@ -15,20 +13,6 @@ then
 else
     SYSDIG_PATH='../../../sysdig/build/userspace/sysdig'
 fi
-
-setup_env() {
-    set +eu
-    source ~/.bash_profile
-
-    # check if node version is installed otherwise install it
-    nvm list | grep -v "default" | grep ${NODE_VERSION}
-    if [ ${?} -eq 1 ]; then
-        nvm install ${NODE_VERSION}
-    fi
-    nvm use ${NODE_VERSION}
-
-    set -xeu
-}
 
 run() {
     cd ember-electron/backend
@@ -38,5 +22,4 @@ run() {
     cd ../..
 }
 
-setup_env
 run
