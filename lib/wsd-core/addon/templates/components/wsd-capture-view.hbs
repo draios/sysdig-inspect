@@ -1,12 +1,23 @@
-<div class="wsd-capture-view__content">
-    {{#sd-promise-wait-overlay promiseState=dataStore}}
-        {{component
-            dataComponentName
-            selection=currentDrilldownStep.selection
-            viewDataStore=viewDataStore
-            dataStore=dataStore
-            select=(action "select")
-            drillDown=(action "drillDown")
-        }}
-    {{/sd-promise-wait-overlay}}
-</div>
+{{#if isOverview}}
+    {{wsd-capture-overview
+        filePath=captureInfo.filePath
+        timelines=metricTimelines
+        timeWindow=timeWindow
+        drilldownInfoParam=model.queryParams.drilldownInfoParam
+        toggleMetricTimeline=(action toggleMetricTimeline)
+        drillDown=(action drillDown)
+    }}
+{{else}}
+    <div class="wsd-capture-view__content">
+        {{#sd-promise-wait-overlay promiseState=dataStore}}
+            {{component
+                dataComponentName
+                selection=currentDrilldownStep.selection
+                viewDataStore=viewDataStore
+                dataStore=dataStore
+                select=(action "select")
+                drillDown=(action "drillDown")
+            }}
+        {{/sd-promise-wait-overlay}}
+    </div>
+{{/if}}

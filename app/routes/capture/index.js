@@ -12,23 +12,17 @@ export default Ember.Route.extend({
             });
 
             if (Ember.isEmpty(steps)) {
-                this.replaceWith('capture.overview', {
+                this.replaceWith('capture.views.view', 'overview', {
                     queryParams: Object.assign({}, captureModel.queryParams),
                 });
             } else {
                 const currentStep = steps[steps.length - 1];
-                if (currentStep.viewId === 'overview') {
-                    this.replaceWith('capture.overview', {
-                        queryParams: Object.assign({}, captureModel.queryParams),
-                    });
-                } else {
-                    this.replaceWith('capture.views.view', currentStep.viewId, {
-                        queryParams: Object.assign({}, captureModel.queryParams),
-                    });
-                }
+                this.replaceWith('capture.views.view', currentStep.viewId, {
+                    queryParams: Object.assign({}, captureModel.queryParams),
+                });
             }
         } else {
-            this.replaceWith('capture.overview', {
+            this.replaceWith('capture.views.view', 'overview', {
                 queryParams: Object.assign({}, captureModel.queryParams),
             });
         }
