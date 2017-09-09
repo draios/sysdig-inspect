@@ -14,7 +14,7 @@
     "clean": "scripts/clean",
     "build": "ember build",
     "start": "ember electron",
-    "test": "ember electron:test",
+    "test": "ember test",
     "backend": "scripts/run-backend",
     "dev": "ember serve --proxy http://localhost:3000"
   },
