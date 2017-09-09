@@ -32,7 +32,7 @@ export default Ember.Route.extend({
         );
     },
 
-    deactivate: function() {
+    deactivate() {
         document.title = 'wsysdig';
     },
 
