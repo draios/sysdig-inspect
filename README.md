@@ -18,6 +18,8 @@ You will need the following things properly installed on your computer.
 * `cd wsysdig`
 * `npm install`
 
+If you need to remove all artifacts of the installation and successive builds, you can run `npm run clean`.
+
 ## Run the Electron application
 
 - `npm start`
