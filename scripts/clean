@@ -1,26 +1,5 @@
 #!/bin/bash
 
-setup_env() {
-    platform='unknown'
-    unamestr=`uname`
-    if [[ "$unamestr" == 'Linux' ]]; then
-        platform='linux'
-    elif [[ "$unamestr" == 'Darwin' ]]; then
-        platform='osx'
-    fi
-
-    if [[ $platform == 'osx' ]]; then
-        SCRIPT=$(greadlink -f $0)
-    else
-        SCRIPT=$(readlink -f $0)
-    fi
-
-    SCRIPT_DIR=$(dirname $SCRIPT)
-    APP_DIR=$SCRIPT_DIR/..
-
-    cd $APP_DIR
-}
-
 clean_app() {
     rm -rf node_modules
     rm -rf bower_components
@@ -51,7 +30,6 @@ clean_backend() {
     cd ../..
 }
 
-setup_env
 clean_app
 clean_addons
 clean_backend

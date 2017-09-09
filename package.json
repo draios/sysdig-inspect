@@ -14,9 +14,9 @@
     "clean": "scripts/clean",
     "build": "ember build",
     "start": "ember electron",
-    "test": "ember test",
-    "backend": "scripts/run -b",
-    "dev": "scripts/run"
+    "test": "ember electron:test",
+    "backend": "scripts/run-backend",
+    "dev": "ember serve --proxy http://localhost:3000"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",

@@ -1,56 +1,6 @@
 #!/bin/bash
 
-#
-# Parameters:
-#
-# -t    complete installation with test; exit 1 if fails
-# -i    avoid `npm install`
-#
-
-NODE_VERSION="v6.11.2"
-TEST_MODE=false
-
-if [[ $1 = "-t" ]]; then
-    TEST_MODE=true
-fi
-
-set_or_install_node_version() {
-    set +eu
-    source ~/.bash_profile
-
-    # check if node version is installed otherwise install it
-    nvm list | grep -v "default" | grep ${NODE_VERSION}
-    if [ ${?} -eq 1 ]; then
-        nvm install ${NODE_VERSION}
-    fi
-    nvm use ${NODE_VERSION}
- }
-
 setup_env() {
-    platform='unknown'
-    unamestr=`uname`
-    if [[ "$unamestr" == 'Linux' ]]; then
-        platform='linux'
-    elif [[ "$unamestr" == 'Darwin' ]]; then
-        platform='osx'
-    fi
-
-    if [[ $TEST_MODE = true ]]; then
-        set_or_install_node_version
-        set -xeu
-    fi
-
-    if [[ $platform == 'osx' ]]; then
-        SCRIPT=$(greadlink -f $0)
-    else
-        SCRIPT=$(readlink -f $0)
-    fi
-
-    SCRIPT_DIR=$(dirname $SCRIPT)
-    APP_DIR=$SCRIPT_DIR/..
-
-    cd $APP_DIR
-
     # Disabling interactive progress bar, and spinners gains 2x performances
     # as stated on https://twitter.com/gavinjoyce/status/691773956144119808
     npm config set progress false
@@ -67,12 +17,10 @@ install_addons() {
     cd wsd-core
 
     npm install
-    ./node_modules/.bin/bower install
 
     cd ../ui-toolkit
 
     npm install
-    ./node_modules/.bin/bower install
 
     cd ../..
 }
@@ -85,55 +33,7 @@ install_backend() {
     cd ../..
 }
 
-convertsecs() {
-    # convert seconds to human readable format
-    m=`expr $1  % 3600 / 60`
-    s=`expr $1 % 60`
-    printf "%d min %d secs" $m $s
-}
-
-run_tests() {
-    start=`date +%s`
-
-    ret=0
-    OUTPUT=$(./node_modules/.bin/ember test)
-
-    end=`date +%s`
-    RUNTIME=$((end-start))
-    FORMATTED_RUNTIME=$(convertsecs $RUNTIME)
-
-    TOTAL_TESTS=$(echo "$OUTPUT" | grep "# tests" | grep -o "[0-9]\+")
-    TOTAL_PASSED=$(echo "$OUTPUT" | grep "# pass" | grep -o "[0-9]\+")
-    TOTAL_SKIPPED=$(echo "$OUTPUT" | grep "# skip" | grep -o "[0-9]\+")
-    TOTAL_FAILED=$(echo "$OUTPUT" | grep "# fail" | grep -o "[0-9]\+")
-    TOTAL_EXECUTED=$(( $TOTAL_TESTS - $TOTAL_SKIPPED ))
-    BROWSER_VERSION=$(echo "$OUTPUT" | grep "ok" | head -1 | cut -d "-" -f 1 | awk '{for(i=3;i<=NF;++i)printf "%s ", $i;printf "\n"}')
-
-    echo ""
-    echo "==========================================="
-    echo "Total reported in succesful tests  : ${TOTAL_PASSED}"
-    echo "Total reported from failuring tests: ${TOTAL_FAILED}"
-    echo "-------------------------------------------"
-    echo "Total tests: Executed ${TOTAL_EXECUTED} of ${TOTAL_TESTS}"
-    echo "Total time: ${RUNTIME}s / ${FORMATTED_RUNTIME}"
-    echo "Browser: ${BROWSER_VERSION}"
-    echo "==========================================="
-    echo ""
-
-    if (( $TOTAL_FAILED > 0 )); then
-        ret=1
-    fi
-
-    if [[ $ret -eq 1 ]]; then
-        exit $ret
-    fi
-}
-
 setup_env
 install_app
 install_addons
 install_backend
-
-if [[ "$TEST_MODE" = true ]]; then
-    run_tests
-fi
