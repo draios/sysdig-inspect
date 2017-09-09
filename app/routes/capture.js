@@ -32,19 +32,14 @@ export default Ember.Route.extend({
         );
     },
 
-    actions: {
-        navigateTo(drilldownInfo) {
-            console.debug('route:application.capture', 'navigateTo', ...arguments);
-            this.transitionTo('capture.views.view', drilldownInfo.viewId, {
-                queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
-                    drilldownInfoParam: drilldownInfo.drilldownInfoParam,
-                }),
-            });
-        },
+    deactivate: function() {
+        document.title = 'wsysdig';
+    },
 
+    actions: {
         select(drilldownInfo) {
             console.debug('route:application.capture', 'select', ...arguments);
-            this.transitionTo('capture.views.view', drilldownInfo.viewId, {
+            this.replaceWith('capture.views.view', drilldownInfo.viewId, {
                 queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                     drilldownInfoParam: drilldownInfo.drilldownInfoParam,
                 }),
@@ -62,14 +57,14 @@ export default Ember.Route.extend({
 
         selectTimeWindow(from, to) {
             if (Ember.isNone(from) === false && Ember.isNone(to) === false) {
-                this.transitionTo('capture', {
+                this.replaceWith('capture.views.view', this.controller.get('selectedViewId'), {
                     queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                         timeFrom: from,
                         timeTo: to,
                     }),
                 });
             } else {
-                this.transitionTo('capture', {
+                this.replaceWith('capture.views.view', this.controller.get('selectedViewId'), {
                     queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                         timeFrom: undefined,
                         timeTo: undefined,
@@ -79,7 +74,7 @@ export default Ember.Route.extend({
         },
 
         toggleMetricTimeline(metricName) {
-            this.replaceWith('capture', {
+            this.replaceWith('capture.views.view', this.controller.get('selectedViewId'), {
                 queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                     metricTimelinesParam: this.get('captureTimelines').serializeToQueryParam(
                         this.get('captureTimelines').toggle(metricName)
@@ -89,7 +84,7 @@ export default Ember.Route.extend({
         },
 
         removeMetricTimeline(metricName) {
-            this.replaceWith('capture', {
+            this.replaceWith('capture.views.view', this.controller.get('selectedViewId'), {
                 queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                     metricTimelinesParam: this.get('captureTimelines').serializeToQueryParam(
                         this.get('captureTimelines').remove(metricName)
