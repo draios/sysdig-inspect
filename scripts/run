@@ -53,7 +53,7 @@ then
 fi
 
 # Default sysdig executables path
-SYSDIG_PATH='~/git/sysdig/build/userspace/sysdig'
+SYSDIG_PATH='../../sysdig/build/userspace/sysdig'
 if [ ! -z "$2" ] && [ -e "$2" ]
 then
     # or use custom path

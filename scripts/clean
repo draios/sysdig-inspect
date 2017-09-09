@@ -1,0 +1,57 @@
+#!/bin/bash
+
+setup_env() {
+    platform='unknown'
+    unamestr=`uname`
+    if [[ "$unamestr" == 'Linux' ]]; then
+        platform='linux'
+    elif [[ "$unamestr" == 'Darwin' ]]; then
+        platform='osx'
+    fi
+
+    if [[ $platform == 'osx' ]]; then
+        SCRIPT=$(greadlink -f $0)
+    else
+        SCRIPT=$(readlink -f $0)
+    fi
+
+    SCRIPT_DIR=$(dirname $SCRIPT)
+    APP_DIR=$SCRIPT_DIR/..
+
+    cd $APP_DIR
+}
+
+clean_app() {
+    rm -rf node_modules
+    rm -rf bower_components
+    rm -rf dist
+    rm -rf tmp
+    rm -rf electron-out
+}
+
+clean_addons() {
+    cd lib/wsd-core
+    rm -rf node_modules
+    rm -rf bower_components
+
+    cd ../..
+
+    cd lib/ui-toolkit
+    rm -rf node_modules
+    rm -rf bower_components
+
+    cd ../..
+}
+
+clean_backend() {
+    cd ember-electron/backend
+
+    rm -rf node_modules
+
+    cd ../..
+}
+
+setup_env
+clean_app
+clean_addons
+clean_backend

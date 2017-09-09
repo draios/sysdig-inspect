@@ -7,39 +7,40 @@ Sysdig capture analyzer. Is an interface for analyze captures using a multiplatf
 You will need the following things properly installed on your computer.
 
 * [Node.js](https://nodejs.org/) (with NPM)
-* [Ember CLI](https://ember-cli.com/)
-  `npm install -g ember-cli`
+* [Ember CLI](https://ember-cli.com/): `npm install -g ember-cli`
+* Sysdig!
+    1. clone https://github.com/draios/sysdig (`csysdig_json` branch)
+    2. build the tool following instructions at https://github.com/draios/sysdig/wiki/How-to-Install-Sysdig-from-the-Source-Code#linux-and-osx
 
-## Installation
+## Prepare the environment
 
 * `git clone https://github.com/draios/wsysdig.git`
 * `cd wsysdig`
 * `npm install`
 
-## Running / Development
+## Run the Electron application
 
-#### Ember web application
+- `npm start`
 
-* `npm run frontend` or `npm run f` or `npm start`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+## Run the dev environment
 
-#### Wsysdig backend
+2 separate terminals:
 
-* `npm run backend` or `npm run b` using  the default sysdig executables path `~/git/sysdig/build/userspace/sysdig`
-* `npm run backend --- /path/to/sysdig` using a custom sysdig path as parameter
+1. Backend
+    * `npm run backend --- [path to sysdig binaries]`
 
-#### Electron desktop
+2. Web application
+    * `npm run dev`
+    * Visit your app at http://localhost:4200
 
-- `npm run electron` or `npm run e`
-
-### Running Tests
+## Run the tests
 
 * `npm test`
 
-### Building
+### Build it!
 
-* `ember build` (development)
-* `ember build --environment production` (production)
-* `ember electron:package` - Create binaries (.app, .exe, etc)
-* `ember electron:make` - Generate platform specific distributables (installers, distribution packages, etc)
+* `ember build` (development version)
+* `ember build --environment production` (production version)
+* `ember electron:package` - Create binaries (.app, .exe, etc.)
+* `ember electron:make` - Generate platform specific distributables (installers, distribution packages, etc.)
 * `ember electron:build` - Build out Ember app with Electron instrumentation (useful for optimizing multi-platform builds)

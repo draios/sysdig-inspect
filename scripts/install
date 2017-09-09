@@ -9,12 +9,9 @@
 
 NODE_VERSION="v6.11.2"
 TEST_MODE=false
-AVOID_INSTALL=false
 
 if [[ $1 = "-t" ]]; then
     TEST_MODE=true
-elif [[ $1 = "-i" ]]; then
-    AVOID_INSTALL=true
 fi
 
 set_or_install_node_version() {
@@ -61,14 +58,6 @@ setup_env() {
 }
 
 install_app() {
-    # install node modules before build
-    if [[ $AVOID_INSTALL = false ]]; then
-        rm -rf node_modules
-        npm install
-    fi
-
-    # install bower dependencies
-    rm -rf bower_components
     ./node_modules/.bin/bower install
 }
 
@@ -76,15 +65,11 @@ install_addons() {
     cd lib
 
     cd wsd-core
-    rm -rf node_modules
-    rm -rf bower_components
 
     npm install
     ./node_modules/.bin/bower install
 
     cd ../ui-toolkit
-    rm -rf node_modules
-    rm -rf bower_components
 
     npm install
     ./node_modules/.bin/bower install
@@ -95,7 +80,6 @@ install_addons() {
 install_backend() {
     cd ember-electron/backend
 
-    rm -rf node_modules
     npm install
 
     cd ../..
