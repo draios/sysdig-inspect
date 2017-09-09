@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "mocha tests/test.js",
-    "start": "nodemon main.js"
+    "start": "./node_modules/.bin/nodemon main.js"
   },
   "dependencies": {
     "cors": "^2.8.4",
