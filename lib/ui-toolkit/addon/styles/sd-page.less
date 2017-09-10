@@ -24,6 +24,57 @@
         .z-shadow-1();
     }
 
+    &__secondary-header {
+
+        z-index: @z-index-page-header;
+
+        height: @height-page-header;
+
+        padding: 0 @layout-padding-md;
+
+        display: flex;
+        align-items: stretch;
+
+        background-color: #FFF;
+        .z-shadow-1();
+
+        &__button {
+            padding: 1px 15px 2px 15px;
+            line-height: 53px;
+
+            &:hover {
+                background-color: rgba(0,0,0,.1);
+            }
+
+            cursor: pointer;
+            color: #626262;
+            font-weight: @font-weight-regular;
+            font-size: @font-size-lg;
+
+            svg {
+                fill: #626262;
+                position: relative;
+                top: 6px;
+            }
+        }
+
+        &__title {
+            align-items: center;
+            flex: 1;
+
+            span {
+                position: absolute;
+                left: 50%;
+                line-height: @height-page-header;
+                transform: translate(-50%, 0%);
+
+                color: #626262;
+                font-size: @font-size-lg;
+                font-weight: @font-weight-regular;
+            }
+        }
+    }
+
     &__header-logo {
         height: @height-page-header;
         padding: 12px 0;
