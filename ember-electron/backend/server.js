@@ -110,16 +110,16 @@ class Server {
     _getSummary(request, response) {
         const fileName = request.params.fileName;
         const filter = request.query.filter;
-        let nTimelineSamples = 0;
+        let sampleCount = 0;
   
         response.setHeader('Content-Type', 'application/json');
         
         const args = ['-r', fileName, '-c', 'wsysdig_summary'];
   
-        if (request.query.nTimelineSamples !== undefined) {
-            nTimelineSamples = request.query.nTimelineSamples;
+        if (request.query.sampleCount !== undefined) {
+            sampleCount = request.query.sampleCount;
         }
-        args.push(nTimelineSamples);
+        args.push(sampleCount);
         
         if (filter !== undefined) {
             args.push(filter);
