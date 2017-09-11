@@ -13,16 +13,12 @@
 </div>
 
 <div class="wsd-metric-tile__content">
-    {{#if isEmpty}}
-        <span class="wsd-metric-tile__empty-value">No data</span>
-    {{else}}
-        <span class="wsd-metric-tile__value">
-            {{number-to-string data.totalValue decimalCount=1 isMultiplierOmitted=true}}
-        </span>
-        <span class="wsd-metric-tile__value-multiplier">
-            {{number-to-string data.totalValue decimalCount=1 isValueOmitted=true}}
-        </span>
-    {{/if}}
+    <span class="wsd-metric-tile__value">
+        {{number-to-string data.totalValue decimalCount=1 isMultiplierOmitted=true}}
+    </span>
+    <span class="wsd-metric-tile__value-multiplier">
+        {{number-to-string data.totalValue decimalCount=1 isValueOmitted=true}}
+    </span>
 </div>
 
 <div class="wsd-metric-tile__footer">
