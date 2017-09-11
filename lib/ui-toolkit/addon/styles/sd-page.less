@@ -11,24 +11,37 @@
     justify-items: stretch;
 
     &__header {
-        z-index: @z-index-page-header;
-
-        height: @height-page-header;
-
-        padding: 0 @layout-padding-md;
+        height: 50px;
 
         display: flex;
-        align-items: stretch;
+        align-items: center;
+
+        padding: 0 @layout-padding-md;
 
         background-color: @color-header-background;
         .z-shadow-1();
     }
 
+    &__header-logo {
+        display: flex;
+        align-items: center;
+
+        margin-right: @layout-spacing-lg;
+
+        img {
+            height: 24px;
+        }
+    }
+
+    &__header-title {
+        flex: 1;
+        text-align: right;
+        color: white;
+        font-size: @font-size-lg;
+    }
+
     &__secondary-header {
-
-        z-index: @z-index-page-header;
-
-        height: @height-page-header;
+        height: 50px;
 
         padding: 0 @layout-padding-md;
 
@@ -65,65 +78,12 @@
             span {
                 position: absolute;
                 left: 50%;
-                line-height: @height-page-header;
+                line-height: 50px;
                 transform: translate(-50%, 0%);
 
                 color: #626262;
                 font-size: @font-size-lg;
                 font-weight: @font-weight-regular;
-            }
-        }
-    }
-
-    &__header-logo {
-        height: @height-page-header;
-        padding: 12px 0;
-        padding-left: 10px;
-        opacity: .9;
-
-        img {
-            width: 114px;
-        }
-    }
-
-    &__header-title {
-        align-items: center;
-        flex: 1;
-
-        span {
-            position: absolute;
-            left: 50%;
-            line-height: @height-page-header;
-            transform: translate(-50%, 0%);
-
-            color: #FFFFFF;
-            font-size: @font-size-lg;
-            font-weight: @font-weight-regular;
-        }
-    }
-
-    &__header-menu {
-        list-style: none;
-        font-size: 0;
-        margin: 0;
-        white-space: nowrap;
-
-        &-option {
-            padding: 1px 15px 2px 15px;
-            line-height: 53px;
-
-            &:hover {
-                background-color: rgba(0,0,0,.1);
-            }
-
-            cursor: pointer;
-            color: #FFFFFF;
-            font-weight: @font-weight-regular;
-            font-size: @font-size-lg;
-
-            svg {
-                position: relative;
-                top: 6px;
             }
         }
     }
