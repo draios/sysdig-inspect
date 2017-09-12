@@ -6,7 +6,7 @@
                     {{if isRoot "wsd-capture-breadcrumbs__step--is-root"}}
                     {{if item.isHome "wsd-capture-breadcrumbs__step--is-home"}}
                     {{if item.isSelected "wsd-capture-breadcrumbs__step--is-selected"}}
-                    {{if item.description "wsd-capture-breadcrumbs__step--with-description"}}"
+                    {{if item.selection "wsd-capture-breadcrumbs__step--with-description"}}"
                 {{action select item.step}}
             >
                 {{#if item.isHome}}
@@ -20,7 +20,11 @@
                         {{item.name}}
                     </div>
                     <div class="wsd-capture-breadcrumbs__step-description">
-                        {{item.description}}
+                        {{#if item.key}}
+                            <span class="wsd-capture-breadcrumbs__step-key">{{item.key}} =</span>
+                        {{/if}}
+
+                        {{item.selection}}
                     </div>
                 </div>
             </div>
