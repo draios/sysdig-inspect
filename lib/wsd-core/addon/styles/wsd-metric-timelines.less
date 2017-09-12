@@ -7,6 +7,15 @@
     display: flex;
     flex-direction: column;
 
+    background-color: @color-primary-lighten-3;
+
+    &__header {
+        display: flex;
+        align-items: center;
+
+        width: 200px - 1;
+    }
+
     &__timeline {
         display: flex;
         align-items: center;
@@ -15,6 +24,7 @@
 
     &__content {
         flex: 1;
+        display:flex;
         align-items: stretch;
 
         height: @timeline-height;
@@ -30,7 +40,7 @@
     &__overlay {
         position: absolute;
         bottom: 0;
-        left: 0;
+        left: 200px - 1;
         top: 0;
 
         display: flex;
@@ -39,7 +49,7 @@
     }
 
     &__controls {
-        width: 300px;
+        width: 100px;
 
         display: flex;
         align-items: center;
@@ -49,7 +59,7 @@
     &__name {
         flex: 1;
 
-        margin-right: @layout-spacing-sm;
+        margin: 0 @layout-spacing-sm;
 
         font-size: @font-size-sm;
         .text-overflow();

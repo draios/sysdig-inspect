@@ -22,6 +22,10 @@
         background-color:   rgba(255, 255, 255, 0.5);
     }
 
+    &--no-background &__wrapper {
+        background-color:   transparent;
+    }
+
     &__loading-panel,
     &__empty-panel,
     &__refreshing-empty-panel,
@@ -69,5 +73,17 @@
         background-color:   initial;
 
         font-size:          @font-size-xs;
+    }
+
+    &--xs &__loading-panel {
+        top:                5%;
+        width:              24px;
+        height:             24px;
+
+        box-shadow:         none;
+        background-size:    24px;
+        background-color:   initial;
+
+        color:              transparent;
     }
 }

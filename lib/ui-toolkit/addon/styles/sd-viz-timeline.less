@@ -1,10 +1,9 @@
 .sd-viz-timeline {
     @timeline-height: 30px;
 
-    @color-outer-area-base: #D2D5DD;
-    @color-outer-area: fade(@color-outer-area-base, 50%);
-    @color-draggable-area: fade(@color-outer-area-base, 75%);
-    @color-handle: darken(@color-outer-area-base, 15%);
+    @color-outer-area: fade(@color-primary-lighten-4, 60%);
+    @color-draggable-area: fade(@color-primary, 75%);
+    @color-handle: @color-primary-lighten-5;
 
     @handle-arrow-width: 8px;
     @draggable-handle-width: 2px + 2px + 2px + 2px + 2px;
@@ -25,30 +24,10 @@
     &__left-area {
         background-color: @color-outer-area;
 
-        &:after {
-            content: ' ';
-            position: absolute;
-            width: 0;
-            height: 0;
-            right: -@handle-arrow-width * 2;
-            bottom: (@timeline-height - @handle-arrow-width * 2) / 2;
-            border: @handle-arrow-width solid transparent;
-            border-left-color: @color-draggable-area;
-        }
     }
     &__right-area {
         background-color: @color-outer-area;
 
-        &:before {
-            content: ' ';
-            position: absolute;
-            width: 0;
-            height: 0;
-            left: -@handle-arrow-width * 2;
-            bottom: (@timeline-height - @handle-arrow-width * 2) / 2;
-            border: @handle-arrow-width solid transparent;
-            border-right-color: @color-draggable-area;
-        }
     }
     &__selected-area {
         flex: 1;
@@ -56,32 +35,66 @@
         position: relative;
     }
     &__time {
+        @time-label-height: 12px + 2px;
+
         position: absolute;
-        bottom: 0;
-        width: @time-labels-width;
+        bottom: (38px - @time-label-height) / 2;
+        height: @time-label-height;
+        max-width: @time-labels-width - @layout-padding-sm;
         z-index: 1; // put it above all areas
 
-        line-height: @timeline-height;
+        padding: 2px @layout-padding-sm;
+
+        line-height: @time-label-height - 2px * 2;
         font-size: @font-size-sm;
-        color: @color-text-muted;
+        color: white;
         pointer-events: none;
 
+        background-color: @color-draggable-area;
+        border-radius: 2px;
+
+        &:before {
+            content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: -@time-label-height;
+            top: 0;
+            border: @time-label-height / 2 solid transparent;
+        }
+        &:after {
+            content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            right: -@time-label-height;
+            top: 0;
+            border: @time-label-height / 2 solid transparent;
+        }
         &--is-internal&--is-from {
-            left: @handle-arrow-width + 2px;
             text-align: left;
         }
+        &--is-internal&--is-from&:before {
+            border-right-color: @color-draggable-area;
+        }
         &--is-internal&--is-to {
-            right: @handle-arrow-width + 2px;
             text-align: right;
+        }
+        &--is-internal&--is-to&:after {
+            border-left-color: @color-draggable-area;
         }
 
         &--is-external&--is-from {
-            left: -@time-labels-width - @draggable-handle-width - 2px;
             text-align: right;
         }
+        &--is-external&--is-from&:after {
+            border-left-color: @color-draggable-area;
+        }
         &--is-external&--is-to {
-            right: -@time-labels-width - @draggable-handle-width - 2px;
             text-align: left;
+        }
+        &--is-external&--is-to&:before {
+            border-right-color: @color-draggable-area;
         }
     }
 
@@ -89,6 +102,9 @@
         position: absolute;
         width: @draggable-handle-width;
         height: 100%;
+
+        display: flex;
+        align-items: center;
 
         padding: 0 2px;
 
@@ -103,9 +119,6 @@
     }
 
     &__handle {
-        position: absolute;
-        bottom: (@timeline-height - 16px) / 2;
-
         display: flex;
         align-items: stretch;
         justify-content: space-between;

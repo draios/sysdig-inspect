@@ -1,7 +1,12 @@
-{{#sd-promise-wait-overlay promiseState=summaryDataStore classNames="sd-promise-wait-overlay--sm"}}
-    {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
-        <div class="wsd-metric-timelines__timeline">
-            <div class="wsd-metric-timelines__content">
+{{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
+    <div class="wsd-metric-timelines__timeline">
+        <div class="wsd-metric-timelines__header">
+            <div class="wsd-metric-timelines__name">
+               {{timelineConfiguration.timeline.name}}
+            </div>
+        </div>
+        <div class="wsd-metric-timelines__content">
+            {{#sd-promise-wait-overlay promiseState=summaryDataStore classNames="sd-promise-wait-overlay--xs sd-promise-wait-overlay--no-background"}}
                 {{#if canRenderTimelines}}
                     <svg class="wsd-metric-timelines__chart" width="{{timelinesWidth}}" height="{{timelinesHeight}}">
                         {{#if timelineConfiguration.timeline}}
@@ -16,33 +21,35 @@
                         {{/if}}
                     </svg>
                 {{/if}}
-            </div>
+            {{/sd-promise-wait-overlay}}
+        </div>
 
-            <div class="wsd-metric-timelines__controls">
-                <div class="wsd-metric-timelines__name">
-                   {{timelineConfiguration.timeline.name}}
-                </div>
-                <div class="wsd-metric-timelines__value">
-                    {{number-to-string timelineConfiguration.timeline.totalValue decimalCount=1 isMultiplierOmitted=true}}
-                    <span class="wsd-metric-timelines__value-multiplier">
-                        {{number-to-string timelineConfiguration.timeline.totalValue decimalCount=1 isValueOmitted=true}}
-                    </span>
-                </div>
-                <div class="wsd-metric-timelines__button">
-                    {{sd-button
-                        iconName="close"
-                        classNames="sd-button--fab sd-button--highlight-on-hover"
-                        size="sm"
-                        title="Remove the metric timeline"
-                        click=(action remove timelineConfiguration.timeline.name)
-                    }}
-                </div>
+        <div class="wsd-metric-timelines__controls">
+            <div class="wsd-metric-timelines__value">
+                {{number-to-string timelineConfiguration.timeline.totalValue decimalCount=1 isMultiplierOmitted=true}}
+                <span class="wsd-metric-timelines__value-multiplier">
+                    {{number-to-string timelineConfiguration.timeline.totalValue decimalCount=1 isValueOmitted=true}}
+                </span>
+            </div>
+            <div class="wsd-metric-timelines__button">
+                {{sd-button
+                    iconName="close"
+                    classNames="sd-button--fab sd-button--highlight-on-hover"
+                    size="sm"
+                    title="Remove the metric timeline"
+                    click=(action remove timelineConfiguration.timeline.name)
+                }}
             </div>
         </div>
-    {{/each}}
-{{/sd-promise-wait-overlay}}
+    </div>
+{{/each}}
 
 <div class="wsd-metric-timelines__timeline">
+    <div class="wsd-metric-timelines__header">
+        <div class="wsd-metric-timelines__name">
+           {{timelineConfiguration.timeline.name}}
+        </div>
+    </div>
     <div class="wsd-metric-timelines__content">
         {{#if summaryDataStore.hasLoaded}}
             <div class="wsd-metric-timelines__overlay" style={{overlayStyle}}>
