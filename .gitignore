@@ -23,5 +23,6 @@ bower.json.ember-try
 package.json.ember-try
 
 electron-out/
+ember-electron/resources-darwin/sysdig
 
 package-lock.json
