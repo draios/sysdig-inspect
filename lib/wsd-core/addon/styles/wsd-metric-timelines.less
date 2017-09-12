@@ -40,7 +40,9 @@
         display: flex;
         align-items: center;
 
-        width: @header-width - 1;
+        width: @header-width - @layout-spacing-sm * 2 - 1;
+
+        margin: 0 @layout-spacing-sm;
     }
 
     &__content {
@@ -65,10 +67,14 @@
 
         padding-right: @layout-spacing-md;
     }
+    &__icon {
+        margin-right: @layout-spacing-sm;
+    }
     &__name {
         flex: 1;
 
-        margin: 0 @layout-spacing-sm;
+        display: flex;
+        align-items: center;
 
         font-size: @font-size-sm;
         .text-overflow();
@@ -85,5 +91,15 @@
     }
     &__value-multiplier {
         font-weight: @font-weight-light;
+    }
+
+    &__timeline--is-header {
+        margin-bottom: 0;
+        height: @timeline-height + @layout-spacing-sm;
+    }
+    &__timeline--is-header &__name {
+        color: @color-primary;
+        font-size: @font-size-md;
+        font-weight: @font-weight-regular;
     }
 }
