@@ -6,16 +6,12 @@ const fs = require('fs');
 
 class Controller {
     constructor(sysdigPath) {
-        if (typeof sysdigPath === 'undefined') {
-            sysdigPath = path.join(__dirname, '/sysdig/');
-        }
-
-        this.sysdigPath = sysdigPath;
-        this.sysdigExe = sysdigPath + 'sysdig';
-        this.csysdigExe = sysdigPath + 'csysdig';
+        this.sysdigPath = sysdigPath || path.join(__dirname, '../resources/sysdig/');
+        this.sysdigExe = this.sysdigPath + 'sysdig';
+        this.csysdigExe = this.sysdigPath + 'csysdig';
 
         if (!fs.existsSync(this.sysdigExe) || !fs.existsSync(this.csysdigExe)) {
-            console.log(`sysdig/csysdig executables not found in path ${sysdigPath}`);
+            console.log(`sysdig/csysdig executables not found in path ${this.sysdigPath}`);
             process.exit();
         }
     }

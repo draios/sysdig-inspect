@@ -30,12 +30,7 @@ protocolServe({
 // });
 
 function createServer() {
-    let absPath = '';
-    if (argv.p) {
-        absPath =  resolve(__dirname, '../../../', argv.p) + '/';
-    } else {
-        absPath = join(__dirname, './backend/sysdig/');
-    }
+    const absPath = argv.p ? resolve(__dirname, '../../../', argv.p) + '/' : null;
 
     serverInstance = backendServer(absPath)
     serverInstance.start((port) => {
@@ -102,7 +97,9 @@ function setupListeners() {
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-        app.quit();
+        // Using exit instead of quit for the time being
+        // see: https://github.com/electron/electron/issues/8862#issuecomment-294303518
+        app.exit();
     }
 });
 
