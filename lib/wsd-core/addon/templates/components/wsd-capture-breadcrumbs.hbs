@@ -17,6 +17,12 @@
 
                 <div class="wsd-capture-breadcrumbs__step-content">
                     <div class="wsd-capture-breadcrumbs__step-name">
+                        {{#if item.iconName}}
+                            <div class="wsd-capture-breadcrumbs__step-icon">
+                                {{svg-jar item.iconName class="icon" width="24px" height="24px"}}
+                            </div>
+                        {{/if}}
+
                         {{item.name}}
                     </div>
                     <div class="wsd-capture-breadcrumbs__step-description">
