@@ -7,7 +7,12 @@
             {{captureFilePath}}
         </div>
         <div class="wsd-page__header-button">
-            {{#sd-button color="white" iconName="file_white" click=(action "openFile")}}
+            {{#sd-button
+                iconName="file_white"
+                color="white"
+                title="Open capture"
+                click=(action "openFile")
+            }}
                 Open
             {{/sd-button}}
         </div>

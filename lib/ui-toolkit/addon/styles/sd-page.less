@@ -26,7 +26,7 @@
         display: flex;
         align-items: center;
 
-        margin-right: @layout-spacing-lg;
+        margin-right: 36px;
 
         img {
             height: 24px;
@@ -35,57 +35,12 @@
 
     &__header-title {
         flex: 1;
-        text-align: right;
         color: white;
         font-size: @font-size-lg;
     }
 
-    &__secondary-header {
-        height: 50px;
-
-        padding: 0 @layout-padding-md;
-
-        display: flex;
-        align-items: stretch;
-
-        background-color: #FFF;
-        .z-shadow-1();
-
-        &__button {
-            padding: 1px 15px 2px 15px;
-            line-height: 53px;
-
-            &:hover {
-                background-color: rgba(0,0,0,.1);
-            }
-
-            cursor: pointer;
-            color: #626262;
-            font-weight: @font-weight-regular;
-            font-size: @font-size-lg;
-
-            svg {
-                fill: #626262;
-                position: relative;
-                top: 6px;
-            }
-        }
-
-        &__title {
-            align-items: center;
-            flex: 1;
-
-            span {
-                position: absolute;
-                left: 50%;
-                line-height: 50px;
-                transform: translate(-50%, 0%);
-
-                color: #626262;
-                font-size: @font-size-lg;
-                font-weight: @font-weight-regular;
-            }
-        }
+    &__header-button {
+        font-size: @font-size-lg;
     }
 
     &__content {
