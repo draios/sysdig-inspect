@@ -1,5 +1,7 @@
 .wsd-capture-panel {
-    @timeline-height: 56px;
+    @timeline-height: 30px;
+    @timeline-margin: 8px;
+    @timeline-viewport: @timeline-height + @timeline-margin;
 
     flex: 1;
 
@@ -39,8 +41,10 @@
     }
 
     &__timelines {
-        overflow: auto;
-        max-height: @timeline-height * 4.5;
+        display: flex;
+
+        max-height: @timeline-viewport * (10 + 1);
+
         border-top: 1px solid @color-separator;
         background-color: @color-background-secondary-nav-bar;
     }

@@ -1,5 +1,7 @@
 .sd-viz-timeline {
     @timeline-height: 30px;
+    @timeline-margin: 8px;
+    @timeline-viewport: @timeline-height + @timeline-margin;
 
     @color-outer-area: fade(@color-primary-lighten-4, 60%);
     @color-draggable-area: fade(@color-primary, 75%);
@@ -8,8 +10,8 @@
     @handle-arrow-width: 8px;
     @draggable-handle-width: 2px + 2px + 2px + 2px + 2px;
     @time-labels-width: 110px;
+    @time-label-height: 14px + 2px;
 
-    position: relative;
     flex: 1;
 
     display: flex;
@@ -18,30 +20,63 @@
     cursor: pointer;
 
     &__left-area,
+    &__selected-area,
     &__right-area {
         position: relative;
     }
-    &__left-area {
-        background-color: @color-outer-area;
 
-    }
-    &__right-area {
-        background-color: @color-outer-area;
-
-    }
     &__selected-area {
+        z-index: 1;
+
         flex: 1;
-
-        position: relative;
     }
-    &__time {
-        @time-label-height: 12px + 2px;
 
+    &__left-area,
+    &__right-area {
+        background-color: @color-outer-area;
+    }
+
+    &__draggable-handle {
         position: absolute;
-        bottom: (38px - @time-label-height) / 2;
+        width: @draggable-handle-width;
+        top: 0;
+        bottom: 0;
+
+        padding: 0 2px;
+
+        background-color: @color-draggable-area;
+        cursor: ew-resize;
+    }
+    &__left-area &__draggable-handle {
+        right: 0;
+    }
+    &__right-area &__draggable-handle {
+        left: 0;
+    }
+    &__handle {
+        position: absolute;
+
+        top: (@timeline-viewport - 16px) / 2;
+
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+    }
+    &__handle-bar {
+        background-color: @color-handle;
+
+        width: 2px;
+        height: 16px;
+    }
+    &__handle-bar + &__handle-bar {
+        margin-left: 2px;
+    }
+
+    &__time {
+        position: absolute;
+        top: (@timeline-viewport - @time-label-height) / 2;
         height: @time-label-height;
-        max-width: @time-labels-width - @layout-padding-sm;
-        z-index: 1; // put it above all areas
+        width: @time-labels-width - @layout-padding-sm;
 
         padding: 2px @layout-padding-sm;
 
@@ -51,7 +86,6 @@
         pointer-events: none;
 
         background-color: @color-draggable-area;
-        border-radius: 2px;
 
         &:before {
             content: ' ';
@@ -72,12 +106,14 @@
             border: @time-label-height / 2 solid transparent;
         }
         &--is-internal&--is-from {
+            left: @handle-arrow-width;
             text-align: left;
         }
         &--is-internal&--is-from&:before {
             border-right-color: @color-draggable-area;
         }
         &--is-internal&--is-to {
+            right: @handle-arrow-width;
             text-align: right;
         }
         &--is-internal&--is-to&:after {
@@ -85,12 +121,14 @@
         }
 
         &--is-external&--is-from {
+            left: -(@time-labels-width + @draggable-handle-width);
             text-align: right;
         }
         &--is-external&--is-from&:after {
             border-left-color: @color-draggable-area;
         }
         &--is-external&--is-to {
+            right: -(@time-labels-width + @draggable-handle-width);
             text-align: left;
         }
         &--is-external&--is-to&:before {
@@ -98,38 +136,4 @@
         }
     }
 
-    &__draggable-handle {
-        position: absolute;
-        width: @draggable-handle-width;
-        height: 100%;
-
-        display: flex;
-        align-items: center;
-
-        padding: 0 2px;
-
-        background-color: @color-draggable-area;
-        cursor: ew-resize;
-    }
-    &__left-area &__draggable-handle {
-        right: 0;
-    }
-    &__right-area &__draggable-handle {
-        left: 0;
-    }
-
-    &__handle {
-        display: flex;
-        align-items: stretch;
-        justify-content: space-between;
-    }
-    &__handle-bar {
-        background-color: @color-handle;
-
-        width: 2px;
-        height: 16px;
-    }
-    &__handle-bar + &__handle-bar {
-        margin-left: 2px;
-    }
 }

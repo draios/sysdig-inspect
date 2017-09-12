@@ -1,3 +1,28 @@
+<div class="wsd-metric-timelines__timeline">
+    <div class="wsd-metric-timelines__header">
+        <div class="wsd-metric-timelines__name">
+           {{timelineConfiguration.timeline.name}}
+        </div>
+    </div>
+    <div class="wsd-metric-timelines__content">
+        {{#if summaryDataStore.hasLoaded}}
+            <div class="wsd-metric-timelines__overlay-chart" style={{overlayStyle}}>
+                {{sd-viz-timeline
+                    timeline=timeline
+                    timelinesWidth=timelinesWidth
+                    from=captureTimeWindow.from
+                    to=captureTimeWindow.to
+                    selectedFrom=selectedTimeWindow.from
+                    selectedTo=selectedTimeWindow.to
+                    select=(action selectTimeWindow)
+                }}
+            </div>
+        {{/if}}
+    </div>
+    <div class="wsd-metric-timelines__controls">
+    </div>
+</div>
+
 {{#each timelinesConfiguration key="timeline.name" as |timelineConfiguration|}}
     <div class="wsd-metric-timelines__timeline">
         <div class="wsd-metric-timelines__header">
@@ -8,7 +33,7 @@
         <div class="wsd-metric-timelines__content">
             {{#sd-promise-wait-overlay promiseState=summaryDataStore classNames="sd-promise-wait-overlay--xs sd-promise-wait-overlay--no-background"}}
                 {{#if canRenderTimelines}}
-                    <svg class="wsd-metric-timelines__chart" width="{{timelinesWidth}}" height="{{timelinesHeight}}">
+                    <svg class="wsd-metric-timelines__chart" width="{{timelinesWidth}}" height="{{timeSeriesHeight}}">
                         {{#if timelineConfiguration.timeline}}
                             {{sd-viz-histogram-series
                                 height=timeSeriesHeight
@@ -43,28 +68,3 @@
         </div>
     </div>
 {{/each}}
-
-<div class="wsd-metric-timelines__timeline">
-    <div class="wsd-metric-timelines__header">
-        <div class="wsd-metric-timelines__name">
-           {{timelineConfiguration.timeline.name}}
-        </div>
-    </div>
-    <div class="wsd-metric-timelines__content">
-        {{#if summaryDataStore.hasLoaded}}
-            <div class="wsd-metric-timelines__overlay" style={{overlayStyle}}>
-                {{sd-viz-timeline
-                    timeline=timeline
-                    timelinesWidth=timelinesWidth
-                    from=captureTimeWindow.from
-                    to=captureTimeWindow.to
-                    selectedFrom=selectedTimeWindow.from
-                    selectedTo=selectedTimeWindow.to
-                    select=(action selectTimeWindow)
-                }}
-            </div>
-        {{/if}}
-    </div>
-    <div class="wsd-metric-timelines__controls">
-    </div>
-</div>

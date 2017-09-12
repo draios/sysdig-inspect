@@ -1,33 +1,52 @@
 .wsd-metric-timelines {
     @timeline-height: 30px;
+    @timeline-margin: 8px;
+    @timeline-viewport: @timeline-height + @timeline-margin;
+
     @timeline-draggable-handle-width: 12px;
+    @header-width: 200px;
 
     position: relative;
 
-    display: flex;
-    flex-direction: column;
+    flex: 1;
+    display: block;
 
     background-color: @color-primary-lighten-3;
 
-    &__header {
-        display: flex;
-        align-items: center;
+    &__overlay-chart {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
 
-        width: 200px - 1;
+        z-index: 1;
+
+        left: @header-width - 1;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
     }
 
     &__timeline {
         display: flex;
         align-items: center;
-        margin-top: @layout-spacing-sm;
+        margin-bottom: @layout-spacing-sm;
+
+        height: @timeline-height;
+    }
+    &__header {
+        display: flex;
+        align-items: center;
+
+        width: @header-width - 1;
     }
 
     &__content {
         flex: 1;
         display:flex;
         align-items: stretch;
-
-        height: @timeline-height;
 
         margin-right: @layout-spacing-sm;
 
@@ -36,16 +55,6 @@
     }
     &__chart {
         margin: 0 @timeline-draggable-handle-width;
-    }
-    &__overlay {
-        position: absolute;
-        bottom: 0;
-        left: 200px - 1;
-        top: 0;
-
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
     }
 
     &__controls {
