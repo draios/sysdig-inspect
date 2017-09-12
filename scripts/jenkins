@@ -24,6 +24,6 @@ setup_env() {
 
 setup_env
 npm run clean
-npm install
+npm run prepare
 npm build
 npm test

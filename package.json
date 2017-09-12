@@ -10,13 +10,15 @@
   },
   "repository": "",
   "scripts": {
-    "postinstall": "scripts/install",
+    "prepare": "npm install && scripts/install",
     "clean": "scripts/clean",
-    "build": "ember build",
-    "start": "ember electron",
-    "test": "ember test",
-    "backend": "scripts/run-backend",
-    "dev": "ember serve --proxy http://localhost:3000"
+    "bundle": "scripts/bundle",
+    "package": "npm run prepare && npm run bundle && ember electron:package",
+    "make": "npm run prepare && npm run bundle && ember electron:make",
+    "start:electron": "ember electron",
+    "start:backend": "scripts/run-backend",
+    "start:webapp": "ember serve --proxy http://localhost:3000",
+    "test": "ember test"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",

@@ -1,23 +1,23 @@
 #!/bin/bash
 
 clean_app() {
-    rm -rf node_modules
     rm -rf bower_components
     rm -rf dist
-    rm -rf tmp
     rm -rf electron-out
+    rm -rf node_modules
+    rm -rf tmp
 }
 
 clean_addons() {
     cd lib/wsd-core
-    rm -rf node_modules
     rm -rf bower_components
+    rm -rf node_modules
 
     cd ../..
 
     cd lib/ui-toolkit
-    rm -rf node_modules
     rm -rf bower_components
+    rm -rf node_modules
 
     cd ../..
 }
@@ -30,6 +30,15 @@ clean_backend() {
     cd ../..
 }
 
+clean_bundle() {
+    cd ember-electron/resources-darwin
+
+    rm -rf sysdig
+
+    cd ../..
+}
+
 clean_app
 clean_addons
 clean_backend
+clean_bundle

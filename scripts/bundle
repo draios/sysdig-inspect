@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#
+# Parameters:
+#
+# [sysdig path]     run backend with custom sysdig executables path
+#
+
+if [ ! -z "$1" ] && [ -e "$1" ]
+then
+    # or use custom path
+    SYSDIG_PATH=$1
+else
+    SYSDIG_PATH='../../../sysdig/build/userspace/sysdig'
+fi
+
+copy_sysdig() {
+    cd ember-electron/resources-darwin
+
+    cp -a ${SYSDIG_PATH}/ ./sysdig/
+
+    cd ../..
+}
+
+copy_sysdig
