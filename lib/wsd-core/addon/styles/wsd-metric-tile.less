@@ -1,4 +1,5 @@
 .wsd-metric-tile {
+    position: relative;
     display: flex;
     flex-direction: column;
 
@@ -76,7 +77,8 @@
     }
 
     &__content {
-        height: 32px;
+        height: 28px;
+        line-height: 28px;
 
         display: flex;
         align-items: baseline;
@@ -84,7 +86,6 @@
 
         color: @color-text-muted;
         font-size: @font-size-xxl;
-        line-height: 32px;
 
         .text-overflow();
 
@@ -101,9 +102,95 @@
         font-size: @font-size-xl;
     }
 
-
     &__footer {
         display: flex;
         justify-content: center;
+    }
+
+    @media screen and (max-height: 900px) {
+        padding: @layout-padding-sm;
+
+        &__header {
+            height: 26px;
+
+            line-height: 26px / 2;
+            margin-bottom: @layout-spacing-md + @layout-spacing-sm;
+        }
+        &__name {
+            font-size: @font-size-sm;
+        }
+        &__header-action {
+            top: -2px - @layout-padding-md + 4px;
+            right: -2px - @layout-padding-md + 4px;
+        }
+
+        &__content {
+            height: 18px;
+            line-height: 18px;
+
+            font-size: @font-size-xl;
+
+            margin-bottom: 0;
+        }
+        &__value {
+            font-weight: @font-weight-light;
+        }
+
+        &__footer {
+            position: absolute;
+            bottom: @layout-padding-sm / 2;
+            left: 50%;
+            transform: translate(-50%);
+
+            opacity: 0.2;
+        }
+    }
+
+    @media screen and (min-height: 901px) and (max-height: 1000px) {
+        &__header {
+            margin-bottom: @layout-spacing-md + @layout-spacing-sm;
+        }
+        &__name {
+            font-size: @font-size-sm;
+        }
+        &__content {
+            height: 18px;
+            line-height: 18px;
+
+            font-size: @font-size-xl;
+
+            margin-bottom: 0;
+        }
+        &__value {
+            font-weight: @font-weight-light;
+        }
+
+        &__footer {
+            position: absolute;
+            bottom: @layout-padding-md / 2;
+            left: 50%;
+            transform: translate(-50%);
+
+            opacity: 0.2;
+        }
+    }
+
+    @media screen and (min-height: 1001px) and (max-height: 1100px) {
+        &__content {
+            margin-bottom: 0;
+        }
+
+        &__value {
+            font-weight: @font-weight-light;
+        }
+
+        &__footer {
+            position: absolute;
+            bottom: @layout-padding-md / 2;
+            left: 50%;
+            transform: translate(-50%);
+
+            opacity: 0.2;
+        }
     }
 }
