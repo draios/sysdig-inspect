@@ -94,13 +94,21 @@ class Server {
             args.push(request.query.from);
         }
 
+        if ('to' in request.query) {
+            args.push('--to');
+            args.push(request.query.to);
+        }
+
         if ('filter' in viewInfo) {
             args.push(viewInfo.filter);
         }
 
-        if ('to' in request.query) {
-            args.push('--to');
-            args.push(request.query.to);
+        if ('viewAs' in request.query) {
+            if (request.query.viewAs === 'Hex') {
+                args.push('-X');
+            } else if (request.query.viewAs !== 'dottedAscii') {
+                args.push('-A');
+            }
         }
 
         response.setHeader('Content-Type', 'application/json');
