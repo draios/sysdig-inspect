@@ -1,6 +1,4 @@
-# wsysdig
-
-Sysdig capture analyzer. Is an interface for analyze captures using a multiplatform desktop client. It uses [EmberJS](https://emberjs.com/) + [Electron](https://electron.atom.io/).
+# Sysdig Inspector
 
 ## Prerequisites
 
@@ -12,37 +10,42 @@ You will need the following things properly installed on your computer.
     1. clone https://github.com/draios/sysdig (`csysdig_json` branch)
     2. build the tool following instructions at https://github.com/draios/sysdig/wiki/How-to-Install-Sysdig-from-the-Source-Code#linux-and-osx
 
+
 ## Prepare the environment
 
-* `git clone https://github.com/draios/wsysdig.git`
-* `cd wsysdig`
-* `npm install`
+1. `git clone https://github.com/draios/wsysdig.git`
+2. `cd wsysdig`
+3. `npm run prepare`
 
-If you need to remove all artifacts of the installation and successive builds, you can run `npm run clean`.
+
+## Run the development version, in the browser
+
+You'll need two separate terminals, one for the server and one for the frontend:
+
+1. Server
+    * `npm run start:backend -- [path to sysdig binaries]`
+
+2. Web application
+    * `npm run start:webapp`
+    * Visit your app at http://localhost:4200
+
 
 ## Run the Electron application
 
-- `npm start`
+* `npm run start:electron`
 
-## Run the dev environment
 
-Open 2 separate terminals, one for the backend and one for the frontend:
+## Create the installer
 
-1. Backend
-    * `npm run backend --- [path to sysdig binaries]`
+1. `npm run bundle -- [path to sysdig binaries]`
+2. `npm run make`
 
-2. Web application
-    * `npm run dev`
-    * Visit your app at http://localhost:4200
+**Note**: Only MAC installers are supported for now...
 
-## Run the tests
 
-* `npm test`
+## Clean it up
 
-### Build it!
+The environment setup and app builds will create several artifacts. Here is how to clean it up to
+start fresh:
 
-* `ember build` (development version)
-* `ember build --environment production` (production version)
-* `ember electron:package` - Create binaries (.app, .exe, etc.)
-* `ember electron:make` - Generate platform specific distributables (installers, distribution packages, etc.)
-* `ember electron:build` - Build out Ember app with Electron instrumentation (useful for optimizing multi-platform builds)
+* `npm run clean`
