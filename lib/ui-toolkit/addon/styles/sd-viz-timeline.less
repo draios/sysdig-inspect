@@ -9,8 +9,9 @@
 
     @handle-arrow-width: 8px;
     @draggable-handle-width: 2px + 2px + 2px + 2px + 2px;
-    @time-labels-width: 110px;
+    @time-labels-width: 80px;
     @time-label-height: 14px + 2px;
+    @time-diff-label-width: 120px;
 
     flex: 1;
 
@@ -29,6 +30,8 @@
         z-index: 1;
 
         flex: 1;
+
+        position: relative;
     }
 
     &__left-area,
@@ -41,6 +44,7 @@
         width: @draggable-handle-width;
         top: 0;
         bottom: 0;
+        height: 100%;
 
         padding: 0 2px;
 
@@ -54,9 +58,10 @@
         left: 0;
     }
     &__handle {
-        position: absolute;
+        position: relative;
 
-        top: (@timeline-viewport - 16px) / 2;
+        top: 50%;
+        margin-top: -50%;
 
         display: flex;
         align-items: stretch;
@@ -72,8 +77,8 @@
         margin-left: 2px;
     }
 
-    &__time {
-        position: absolute;
+    &__time,
+    &__time-diff {
         top: (@timeline-viewport - @time-label-height) / 2;
         height: @time-label-height;
         width: @time-labels-width - @layout-padding-sm;
@@ -84,7 +89,41 @@
         font-size: @font-size-sm;
         color: white;
         pointer-events: none;
+    }
 
+    &__time {
+        position: absolute;
+    }
+
+    &__time-diff {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+
+        width: @time-diff-label-width - @layout-padding-sm;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+        color: @color-primary;
+
+        .text-overflow();
+
+        transition: top .3s ease;
+        transition: background-color .3s ease;
+
+        &--is-on-top {
+            top: -@time-label-height / 2;
+            background-color: @color-primary-lighten-5;
+            border: 1px solid @color-separator;
+        }
+    }
+    &__time-diff-icon {
+        width: 16px;
+    }
+
+    &__time {
         background-color: @color-draggable-area;
 
         &:before {
