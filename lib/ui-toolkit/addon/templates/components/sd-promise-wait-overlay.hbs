@@ -1,7 +1,7 @@
 {{#if promiseState.isLoading}}
     <div class="sd-promise-wait-overlay__wrapper">
         <div class="sd-promise-wait-overlay__loading-panel">
-            {{number-to-string promiseState.loadingProgress decimalCount=1 type="%"}}
+            {{number-to-string promiseState.loadingProgress decimalCount=1 op="%"}}
         </div>
     </div>
 {{/if}}
