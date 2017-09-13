@@ -1,5 +1,5 @@
 .sd-viz-timeline {
-    @timeline-height: 30px;
+    @timeline-height: 46px;
     @timeline-margin: 8px;
     @timeline-viewport: @timeline-height + @timeline-margin;
 
@@ -61,7 +61,7 @@
         position: relative;
 
         top: 50%;
-        margin-top: -50%;
+        transform: translate(0, -50%);
 
         display: flex;
         align-items: stretch;
@@ -114,7 +114,8 @@
         transition: background-color .3s ease;
 
         &--is-on-top {
-            top: -@time-label-height / 2;
+            top: 0;
+            z-index: 2;
             background-color: @color-primary-lighten-5;
             border: 1px solid @color-separator;
         }
