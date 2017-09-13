@@ -33,7 +33,7 @@ export default Ember.Route.extend({
     },
 
     deactivate() {
-        document.title = 'wsysdig';
+        document.title = 'Sysdig Inspector';
     },
 
     actions: {

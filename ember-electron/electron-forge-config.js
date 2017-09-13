@@ -5,7 +5,7 @@ module.exports = {
         'linux': ['deb', 'rpm']
     },
     'electronPackagerConfig': {
-        'name': 'wsysdig',
+        'name': 'Sysdig Inspector',
         'all': true,
         'overwrite': true
     },
