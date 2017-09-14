@@ -7,7 +7,7 @@ export function isElectron() {
     }
 
     // Main process
-    if (typeof process !== 'undefined' && typeof process.versions === 'object' && !!process.versions.electron) {
+    if (typeof process !== 'undefined' && typeof process.versions === 'object' && Boolean(process.versions.electron)) {
         return true;
     }
 
