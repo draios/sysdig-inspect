@@ -1,7 +1,4 @@
 .wsd-capture-breadcrumbs {
-    border-bottom: 1px solid @color-separator;
-    background-color: @color-background-secondary-nav-bar;
-
     &__content {
         display: flex;
         align-items: center;
@@ -33,21 +30,27 @@
         .z-shadow-2();
     }
 
-    &__step-name {
+    &__step-header,
+    &__step-description {
+        max-width: 200px;
+    }
+    &__step-header {
+        display: flex;
+        align-items: center;
+
         font-size: @font-size-lg;
         font-weight: @font-weight-regular;
 
         transition: all .3s ease;
-
-        display: flex;
-        align-items: center;
+    }
+    &__step-name {
+        .text-overflow();
     }
     &__step-description {
         line-height: 0;
 
         font-size: @font-size-md;
 
-        max-width: 300px;
         .text-overflow();
 
         transition: all .3s ease;

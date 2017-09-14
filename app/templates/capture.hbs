@@ -4,10 +4,14 @@
     timelines=captureTimelines.timelines
     timeWindow=timeWindow
     selectedViewId=selectedViewId
+    filter=filter
+    searchPattern=searchPattern
     navigateTo=(route-action "drillDown")
     drillDown=(route-action "drillDown")
     selectTimeWindow=(route-action "selectTimeWindow")
     removeMetricTimeline=(route-action "removeMetricTimeline")
+    applyFilter=(route-action "applyFilter")
+    applySearch=(route-action "applySearch")
 }}
     {{outlet}}
 {{/wsd-capture-panel}}

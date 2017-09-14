@@ -10,7 +10,27 @@
     align-items: stretch;
     overflow: hidden;
 
+    &__header {
+        display: flex;
+
+        border-bottom: 1px solid @color-separator;
+        background-color: @color-background-secondary-nav-bar;
+    }
     &__breadcrumbs {
+        flex: 1;
+
+        margin-right: @layout-spacing-md;
+
+        overflow: hidden;
+    }
+    &__controls {
+        display: flex;
+        align-items: center;
+
+        padding-right: @layout-spacing-md;
+    }
+    &__control + &__control {
+        margin-left: @layout-spacing-md;
     }
     &__content {
         flex: 1;
@@ -38,6 +58,48 @@
         overflow: hidden;
 
         background-color: @color-background-panel;
+    }
+
+    &__data-settings-bar {
+        display: flex;
+        flex-direction: column;
+
+        padding: @layout-padding-sm @layout-padding-md;
+    }
+    &__data-settings-filter,
+    &__data-settings-search {
+        display: flex;
+        align-items: center;
+    }
+    &__data-settings-filter {
+        flex: 2;
+        margin-bottom: @layout-spacing-sm;
+    }
+    &__data-settings-search {
+        flex: 1;
+    }
+    &__data-settings-label {
+        width: 100px;
+        margin-right: @layout-spacing-sm;
+
+        display: flex;
+        align-items: center;
+
+        height: 36px;
+        line-height: 36px;
+    }
+    &__data-settings-label-icon {
+        display: flex;
+        margin-right: @layout-spacing-xs;
+    }
+    &__data-settings-label-text {
+        .text-overflow();
+    }
+    &__data-settings-input {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        alig-items: stretch;
     }
 
     &__timelines {

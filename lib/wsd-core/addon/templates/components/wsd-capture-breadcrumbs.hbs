@@ -16,18 +16,20 @@
                 {{/if}}
 
                 <div class="wsd-capture-breadcrumbs__step-content">
-                    <div class="wsd-capture-breadcrumbs__step-name">
+                    <div class="wsd-capture-breadcrumbs__step-header">
                         {{#if item.iconName}}
-                            <div class="wsd-capture-breadcrumbs__step-icon">
+                            <span class="wsd-capture-breadcrumbs__step-icon">
                                 {{svg-jar item.iconName class="icon" width="24px" height="24px"}}
-                            </div>
+                            </span>
                         {{/if}}
 
-                        {{item.name}}
+                        <span class="wsd-capture-breadcrumbs__step-name">
+                            {{item.name}}
+                        </span>
                     </div>
                     <div class="wsd-capture-breadcrumbs__step-description">
                         {{#if item.key}}
-                            <span class="wsd-capture-breadcrumbs__step-key">{{item.key}} =</span>
+                            {{item.key}} =
                         {{/if}}
 
                         {{item.selection}}

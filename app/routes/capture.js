@@ -42,6 +42,7 @@ export default Ember.Route.extend({
             this.replaceWith('capture.views.view', drilldownInfo.viewId, {
                 queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                     drilldownInfoParam: drilldownInfo.drilldownInfoParam,
+                    filter: null,
                 }),
             });
         },
@@ -51,6 +52,25 @@ export default Ember.Route.extend({
             this.transitionTo('capture.views.view', drilldownInfo.viewId, {
                 queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
                     drilldownInfoParam: drilldownInfo.drilldownInfoParam,
+                    filter: null,
+                }),
+            });
+        },
+
+        applyFilter(filter) {
+            console.debug('route:application.capture', 'applyFilter', ...arguments);
+            this.transitionTo('capture.views.view', this.controller.get('selectedViewId'), {
+                queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
+                    filter: Ember.isEmpty(filter) ? undefined : filter,
+                }),
+            });
+        },
+
+        applySearch(searchPattern) {
+            console.debug('route:application.capture', 'applySearch', ...arguments);
+            this.transitionTo('capture.views.view', this.controller.get('selectedViewId'), {
+                queryParams: Object.assign({}, this.get('controller.model.queryParams'), {
+                    searchPattern: Ember.isEmpty(searchPattern) ? undefined : searchPattern,
                 }),
             });
         },

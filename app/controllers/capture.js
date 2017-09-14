@@ -12,6 +12,9 @@ export default Ember.Controller.extend({
 
     selectedViewId: null,
 
+    filter: null,
+    searchPattern: null,
+
     drilldownInfoParam: null,
     metricTimelinesParam: null,
     timeWindow: Ember.computed('model.queryParams.timeFrom', 'model.queryParams.timeTo', function() {
