@@ -22,6 +22,11 @@ export default Ember.Route.extend({
             [
                 shortcuts.defineShortcut('shortcutsHelp',               'general',      'Keyboard shortcuts help',  ['?']),
 
+                shortcuts.defineShortcut('general.cancel',              'general',      'Cancel',                   ['esc']),
+                shortcuts.defineShortcut('general.accept',              'general',      'Accept',                   ['enter']),
+                shortcuts.defineShortcut('general.search',              'general',      'Search',                   ['s']),
+                shortcuts.defineShortcut('general.filter',              'general',      'Filter',                   ['f']),
+
                 shortcuts.defineShortcut('navigation.drillDown',        'navigation',   'Drill down',               ['enter']),
                 shortcuts.defineShortcut('navigation.drillUp',          'navigation',   'Drill up',                 ['backspace']),
 
