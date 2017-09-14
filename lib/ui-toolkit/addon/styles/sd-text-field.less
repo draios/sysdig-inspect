@@ -1,0 +1,32 @@
+.sd-text-field {
+    @color-normal-state: lighten(@color-separator, 5%);
+    @color-hover-state: @color-separator;
+    @color-focus-state: darken(@color-separator, 15%);
+
+    width: 100%;
+    padding: @layout-padding-sm;
+    padding-right: @layout-padding-sm + 24px;
+
+    line-height: @font-line-height-md;
+    min-height: @font-line-height-md;
+
+    user-select: text;
+    text-align: left;
+    font-family: @font-family;
+    font-size: @font-size-md;
+    border: 1px solid @color-normal-state;
+    border-radius: 4px;
+
+    outline: none;
+
+    transition: border-color .1s ease;
+
+    &:hover {
+        border-color: @color-hover-state;
+    }
+
+    &:focus,
+    &:active {
+        border-color: @color-focus-state;
+    }
+}

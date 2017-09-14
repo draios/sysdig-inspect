@@ -1,0 +1,23 @@
+<div class="sd-input__field">
+    {{sd-text-field
+        name=name
+        placeholder=placeholder
+        oneWayValue=changingValue
+        changeValue=(action "changeValue")
+        insert-newline=(action "accept")
+        escape-press=(action "cancel")
+    }}
+</div>
+
+{{#if isChangeFeedbackNeeded}}
+    <div class="sd-input__icon {{if isChangeFeedbackVisible "sd-input__icon--visible"}}">
+        {{sd-button
+            iconName=(if isAccepted "check_black" "keyboard_return_black")
+            title="Apply"
+            size="sm"
+            classNames="sd-button--fab sd-button--highlight-on-hover"
+            tabIndex=-1
+            click=(action "accept")
+        }}
+    </div>
+{{/if}}

@@ -1,0 +1,20 @@
+.sd-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &__field {
+        flex: 1;
+
+        display: flex;
+        align-items: stretch;
+    }
+    &__icon {
+        position: absolute;
+        right: @layout-padding-sm;
+
+        &:not(&--visible) {
+            opacity: 0;
+        }
+    }
+}
