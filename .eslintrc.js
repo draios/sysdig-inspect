@@ -21,6 +21,8 @@ module.exports = {
         'ember-suave/no-const-outside-module-scope': 'off',
         'one-var': ['error', 'never'],
         'comma-dangle': ['error', { 'arrays': 'never', 'objects': 'always-multiline' }],
+        'no-implicit-coercion': ['error'],
+        'no-extra-boolean-cast': ['error'],
         'indent': ['error', 4, { 'SwitchCase': 1 }],
     },
     globals: {
