@@ -55,6 +55,7 @@
                                 placeholder=drilldownFilter
                                 isAcceptChangeMode=true
                                 changeValue=(action applyFilter)
+                                cancel=(action "closeFilter")
                             }}
                         </div>
                     </div>
@@ -71,6 +72,7 @@
                                 value=searchPattern
                                 isDebounceChangeMode=true
                                 changeValue=(action applySearch)
+                                cancel=(action "closeSearch")
                             }}
                         </div>
                     </div>
