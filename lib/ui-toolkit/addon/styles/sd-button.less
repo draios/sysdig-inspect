@@ -47,6 +47,26 @@
         }
     }
 
+    &--is-active {
+        background-color: @color-primary;
+
+        opacity: 1;
+
+        svg {
+            fill: white;
+        }
+
+        &:hover {
+            background-color: darken(@color-primary, 5%);
+        }
+    }
+
+    &:not(&--is-active) {
+        svg {
+            fill: @color-text;
+        }
+    }
+
     &--sm {
         min-width: @layout-size-sm * 2;
         height: @layout-size-sm;
@@ -66,7 +86,6 @@
     }
 
     svg {
-        fill: @color-text;
         height: @icon-size-md;
         width: @icon-size-md;
     }
