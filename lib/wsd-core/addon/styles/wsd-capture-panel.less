@@ -71,12 +71,8 @@
         display: flex;
         align-items: center;
     }
-    &__data-settings-filter {
-        flex: 2;
-        margin-bottom: @layout-spacing-sm;
-    }
-    &__data-settings-search {
-        flex: 1;
+    &__data-settings-filter + &__data-settings-search {
+        margin-top: @layout-spacing-sm;
     }
     &__data-settings-label {
         width: 100px;
