@@ -1,4 +1,4 @@
-{{#if isHeightKnown}}
+{{#if isBodyHeightKnown}}
     <div class="sd-table__wrap">
         <div class="sd-table__head">
             <div class="sd-table__head-row">
@@ -21,11 +21,12 @@
         </div>
         <div class="sd-table__body">
             {{#virtual-each rowsData
-              height=height
-              itemHeight=24
-              rowPadding=5
-              scrollTimeout=10
-              as |row|
+                height=bodyHeight
+                itemHeight=rowHeight
+                rowPadding=5
+                scrollTimeout=10
+                data-ref="body"
+                as |row|
             }}
                 {{#sd-table-row
                     row=row.data
