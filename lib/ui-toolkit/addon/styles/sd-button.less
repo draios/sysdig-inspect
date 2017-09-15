@@ -72,6 +72,8 @@
         height: @layout-size-sm;
         padding: 0 @layout-padding-sm;
         line-height: @layout-size-sm;
+
+        font-size: @font-size-sm;
     }
 
     &--fab {
@@ -88,6 +90,12 @@
     svg {
         height: @icon-size-md;
         width: @icon-size-md;
+    }
+
+    &:not(&--fab){
+        svg {
+            margin-right: @layout-spacing-xs;
+        }
     }
 
     &--sm {
