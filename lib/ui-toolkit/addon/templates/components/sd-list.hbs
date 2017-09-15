@@ -1,7 +1,7 @@
-{{#each items key=key as |item|}}
+{{#each itemsData key=(concat key ".data") as |item|}}
     {{#unless item.isDivider}}
-        <div class="sd-list__item {{if item.isSelected "sd-list__item--is-selected"}}" {{action select item}}>
-            {{yield item}}
+        <div class="sd-list__item {{if item.isSelected "sd-list__item--is-selected"}}" {{action select item.data}}>
+            {{yield item.data}}
         </div>
     {{else}}
         <div class="sd-list__item-divider">

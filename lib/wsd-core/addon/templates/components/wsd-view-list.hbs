@@ -1,5 +1,5 @@
 {{#sd-promise-wait-overlay promiseState=viewsManager.store classNames="sd-promise-wait-overlay--sm"}}
-    {{#sd-list items=views key="configuration.id" select=(action "selectView") as |view|}}
+    {{#sd-list items=views selection=selectedViewId key="configuration.id" select=(action "selectView") as |view|}}
         {{#if view.iconName}}
             <div class="wsd-view-list__icon">
                 {{svg-jar view.iconName class="icon" width="16px" height="16px"}}
