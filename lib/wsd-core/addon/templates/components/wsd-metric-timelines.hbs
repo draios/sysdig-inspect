@@ -23,6 +23,18 @@
         {{/if}}
     </div>
     <div class="wsd-metric-timelines__controls">
+        <div class="wsd-metric-timelines__button">
+            {{#if hasSelection}}
+                {{#sd-button
+                    iconName="zoom_out_map_black"
+                    classNames="sd-button--highlight-on-hover"
+                    size="sm"
+                    click=(action selectTimeWindow null null)
+                }}
+                    Reset
+                {{/sd-button}}
+            {{/if}}
+        </div>
     </div>
 </div>
 
