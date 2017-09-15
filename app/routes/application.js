@@ -30,8 +30,8 @@ export default Ember.Route.extend({
                 shortcuts.defineShortcut('navigation.drillDown',        'navigation',   'Drill down',               ['enter']),
                 shortcuts.defineShortcut('navigation.drillUp',          'navigation',   'Drill up',                 ['backspace']),
 
-                shortcuts.defineShortcut('views.next',                  'views',        'Open next view',           ['k']),
-                shortcuts.defineShortcut('views.previous',              'views',        'Open previous view',       ['j']),
+                shortcuts.defineShortcut('views.previous',              'views',        'Open previous view',       ['k']),
+                shortcuts.defineShortcut('views.next',                  'views',        'Open next view',           ['j']),
 
                 shortcuts.defineShortcut('dataTables.echo',             'dataTables',   'I/O stream',               ['e']),
                 shortcuts.defineShortcut('dataTables.dig',              'dataTables',   'Syscalls',                 ['d']),
