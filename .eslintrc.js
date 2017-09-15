@@ -24,6 +24,7 @@ module.exports = {
         'no-implicit-coercion': ['error'],
         'no-extra-boolean-cast': ['error'],
         'indent': ['error', 4, { 'SwitchCase': 1 }],
+        'operator-linebreak': ["error", "after"]
     },
     globals: {
         module: true,
