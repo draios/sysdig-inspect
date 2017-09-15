@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="sd-table__body">
-            {{#virtual-each rows
+            {{#virtual-each rowsData
               height=height
               itemHeight=24
               rowPadding=5
@@ -28,7 +28,8 @@
               as |row|
             }}
                 {{#sd-table-row
-                    row=row
+                    row=row.data
+                    isSelected=row.isSelected
                     select=(action "select" row)
                     activate=(action "activate" row)
                     as |rowConfiguration|
