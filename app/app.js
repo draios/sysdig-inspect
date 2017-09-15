@@ -11,4 +11,8 @@ const App = Ember.Application.extend({
 
 loadInitializers(App, config.modulePrefix);
 
+Ember.Component.reopen({
+    attributeBindings: ['data-ref'],
+});
+
 export default App;
