@@ -109,8 +109,10 @@ class Server {
             } else if (request.query.viewAs !== 'dottedAscii') {
                 args.push('-A');
             }
-        }
-
+        } else {
+            args.push('-A');        
+          }
+    
         response.setHeader('Content-Type', 'application/json');
         this.sysdigController.runCsysdig(args, response);
     }
