@@ -7,12 +7,10 @@
 
     {{sd-tokenized-output output=fd}}
 
-    (
     {{#if container}}
-        {{sd-tokenized-output output=container}},
+        ({{sd-tokenized-output output=container}}, {{sd-tokenized-output output=proc}})
+    {{else}}
+        ({{sd-tokenized-output output=proc}})
     {{/if}}
-
-    {{sd-tokenized-output output=proc}}
-    )
 </div>
 <pre class="wsd-echo-op__content">{{sd-tokenized-output output=output}}</pre>
