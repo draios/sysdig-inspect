@@ -6,7 +6,7 @@
                     {{if isRoot "wsd-capture-breadcrumbs__step--is-root"}}
                     {{if item.isHome "wsd-capture-breadcrumbs__step--is-home"}}
                     {{if item.isSelected "wsd-capture-breadcrumbs__step--is-selected"}}
-                    {{if item.selection "wsd-capture-breadcrumbs__step--with-description"}}"
+                    {{if item.hasDescription "wsd-capture-breadcrumbs__step--with-description"}}"
                 {{action select item.step}}
             >
                 {{#if item.isHome}}
@@ -19,7 +19,7 @@
                     <div class="wsd-capture-breadcrumbs__step-header">
                         {{#if item.iconName}}
                             <span class="wsd-capture-breadcrumbs__step-icon">
-                                {{svg-jar item.iconName class="icon" width="24px" height="24px"}}
+                                {{svg-jar item.iconName class="icon" width=item.iconSize height=item.iconSize}}
                             </span>
                         {{/if}}
 
