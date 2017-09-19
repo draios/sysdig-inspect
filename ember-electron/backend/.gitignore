@@ -10,15 +10,5 @@
 
 # misc
 /.vscode
-/.sass-cache
-/connect.lock
-/coverage/*
-/libpeerconnection.log
 npm-debug.log*
-yarn-error.log
 testem.log
-
-# sysdig folder
-/sysdig
-
-package-lock.json
