@@ -1,0 +1,21 @@
+.sd-search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &__field {
+        flex: 1;
+
+        display: flex;
+        align-items: stretch;
+    }
+    &__counters {
+        position: absolute;
+        right: @layout-padding-sm;
+
+        max-width: 80px;
+
+        font-size: @font-size-sm;
+        color: @color-text-muted;
+    }
+}

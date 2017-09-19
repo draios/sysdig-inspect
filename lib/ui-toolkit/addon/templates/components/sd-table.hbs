@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="sd-table__body">
-            {{#virtual-each rowsData
+            {{#virtual-each rowsConfiguration
                 height=bodyHeight
                 itemHeight=rowHeight
                 rowPadding=5
@@ -29,27 +29,27 @@
                 as |row|
             }}
                 {{#sd-table-row
-                    row=row.data
+                    row=row.configuration
                     isSelected=row.isSelected
                     select=(action "select" row)
                     activate=(action "activate" row)
                     as |rowConfiguration|
                 }}
-                    {{#each rowConfiguration.data.columns key="@index" as |cell|}}
+                    {{#each rowConfiguration.configuration.columns key="@index" as |cell|}}
                         {{#if cell.configuration.cellComponentName}}
                             {{component
                                 cell.configuration.cellComponentName
-                                row=rowConfiguration.data
+                                row=rowConfiguration.configuration
                                 cell=cell
                                 isHead=false
                                 isRowMouseOver=rowConfiguration.isMouseOver
-                                isRowSelected=rowConfiguration.data.isSelected
-                                click=(action cell.configuration.clickAction target=parentView)
+                                isRowSelected=rowConfiguration.configuration.isSelected
+                                click=(action cell.configuration.properties.clickAction target=parentView)
                             }}
                         {{else}}
                             <div class="sd-table__cell">
                                 <div class="sd-table__cell-content">
-                                    {{cell.value}}
+                                    {{sd-tokenized-output output=cell.output}}
                                 </div>
                             </div>
                         {{/if}}

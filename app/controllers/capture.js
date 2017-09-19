@@ -13,7 +13,6 @@ export default Ember.Controller.extend({
     selectedViewId: null,
 
     filter: null,
-    searchPattern: null,
 
     drilldownInfoParam: null,
     metricTimelinesParam: null,

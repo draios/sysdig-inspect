@@ -1,0 +1,7 @@
+{{#if isTokenized}}
+    {{!-- NOTE: You can't create white-space otherwise there    --}}
+    {{!-- would be a little bit of space between spans          --}}
+    {{#each output key="@index" as |token|}}<span class="sd-tokenized-output__token {{if token.isMatch "sd-tokenized-output__token--is-match"}} {{if token.isMatchSelected "sd-tokenized-output__token--is-match-selected"}}">{{token.output}}</span>{{/each}}
+{{else}}
+    {{output}}
+{{/if}}

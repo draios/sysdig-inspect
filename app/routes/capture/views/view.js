@@ -7,6 +7,7 @@ export default Ember.Route.extend({
     },
 
     viewsManager: Ember.inject.service('views-manager'),
+    dataSearchService: Ember.inject.service('data-search'),
 
     model(params) {
         return new ViewModel(params.id, params.filter, params.searchPattern, this.modelFor('capture'));
@@ -18,8 +19,9 @@ export default Ember.Route.extend({
         this.controllerFor('capture').setProperties({
             selectedViewId: model.viewId,
             filter: model.filter,
-            searchPattern: model.searchPattern,
         });
+
+        this.get('dataSearchService').setSearchPattern(model.searchPattern);
 
         this.get('viewsManager')
             .findViewConfiguration(model.viewId)

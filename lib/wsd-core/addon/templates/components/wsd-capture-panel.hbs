@@ -67,10 +67,8 @@
                             <span class="wsd-capture-panel__data-settings-label-text">Text Search</span>
                         </label>
                         <div class="wsd-capture-panel__data-settings-input">
-                            {{sd-input
+                            {{sd-search-box
                                 name="search"
-                                value=searchPattern
-                                isDebounceChangeMode=true
                                 changeValue=(action applySearch)
                                 cancel=(action "closeSearch")
                             }}

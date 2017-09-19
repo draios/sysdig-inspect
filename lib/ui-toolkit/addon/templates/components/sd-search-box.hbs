@@ -1,0 +1,21 @@
+<div class="sd-search-box__field">
+    {{sd-text-field
+        classNames="sd-text-field--has-extra-right-space"
+        name=name
+        placeholder=placeholder
+        oneWayValue=changingValue
+        changeValue=(action "changeValue")
+        key-down=(action "keyDown")
+        escape-press=(action "cancel")
+    }}
+</div>
+
+{{#if dataSearchService.isSearchReady}}
+    <div class="sd-search-box__counters">
+        {{currentMatchIndex}} / {{matchCount}}
+
+        {{#if dataSearchService.searchDataStore.isMatchCountBeyondMax}}
+            +
+        {{/if}}
+    </div>
+{{/if}}

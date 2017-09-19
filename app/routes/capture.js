@@ -9,6 +9,7 @@ export default Ember.Route.extend({
     },
 
     captureTimelines: Ember.inject.service('capture-timelines'),
+    dataSearchService: Ember.inject.service('data-search'),
 
     model(params) {
         return new CaptureModel(
@@ -42,7 +43,7 @@ export default Ember.Route.extend({
             this.get('controller.model.queryParams'),
             {
                 filter: this.get('controller.filter'),
-                searchPattern: this.get('controller.searchPattern'),
+                searchPattern: this.get('dataSearchService.searchDataStore.searchPattern'),
             },
             overrides
         );
