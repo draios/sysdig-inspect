@@ -27,7 +27,7 @@
     "bower": "^1.8.0",
     "broccoli-asset-rev": "^2.6.0",
     "devtron": "^1.4.0",
-    "electron-prebuilt-compile": "1.7.5",
+    "electron-prebuilt-compile": "1.7.6",
     "ember-ajax": "^3.0.0",
     "ember-cli": "~2.15.1",
     "ember-cli-app-version": "^3.1.0",
