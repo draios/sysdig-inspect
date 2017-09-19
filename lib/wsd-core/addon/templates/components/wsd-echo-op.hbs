@@ -1,9 +1,18 @@
 <div class="wsd-echo-op__header">
     {{#if isRead}}
-        Read {{op.l}}B from
+        Read {{length}}B from
     {{else}}
-        Write {{op.l}}B to
+        Write {{length}}B to
     {{/if}}
-    {{op.f}} ({{op.p}})
+
+    {{sd-tokenized-output output=fd}}
+
+    (
+    {{#if container}}
+        {{sd-tokenized-output output=container}},
+    {{/if}}
+
+    {{sd-tokenized-output output=proc}}
+    )
 </div>
-<pre class="wsd-echo-op__content">{{op.v}}</pre>
+<pre class="wsd-echo-op__content">{{sd-tokenized-output output=output}}</pre>

@@ -1,7 +1,7 @@
 <div class="wsd-capture-data-dig__content" tabIndex="0">
     {{#each rows key="@index" as |row|}}
-        <div class="wsd-capture-data-dig__row">
-            {{row}}
+        <div class="wsd-capture-data-dig__row {{if row.isNotSearchMatch "wsd-capture-data-dig__row--is-not-search-match"}}">
+            {{sd-tokenized-output output=row.data}}
         </div>
     {{/each}}
 </div>
