@@ -1,4 +1,4 @@
-# Sysdig Inspector
+# Sysdig Inspect
 
 ## Prerequisites
 
