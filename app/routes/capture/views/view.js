@@ -26,13 +26,13 @@ export default Ember.Route.extend({
         this.get('viewsManager')
             .findViewConfiguration(model.viewId)
             .then((view) => {
-                document.title = `Sysdig Inspector - ${view.name} on ${model.capture.filePath}`;
+                document.title = `Sysdig Inspect - ${view.name} on ${model.capture.filePath}`;
             })
         ;
     },
 
     deactivate() {
-        document.title = 'Sysdig Inspector';
+        document.title = 'Sysdig Inspect';
     },
 });
 

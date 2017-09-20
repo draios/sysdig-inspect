@@ -1,11 +1,9 @@
 module.exports = {
     'make_targets': {
-        'win32': ['squirrel'],
-        'darwin': ['zip', 'dmg'],
-        'linux': ['deb', 'rpm']
+        'darwin': ['zip', 'dmg']
     },
     'electronPackagerConfig': {
-        'name': 'Sysdig Inspector',
+        'name': 'Sysdig Inspect',
         'all': true,
         'overwrite': true
     },

@@ -34,7 +34,7 @@ export default Ember.Route.extend({
     },
 
     deactivate() {
-        document.title = 'Sysdig Inspector';
+        document.title = 'Sysdig Inspect';
     },
 
     getCurrentQueryParams(overrides) {
