@@ -25,5 +25,6 @@ setup_env() {
 setup_env
 npm run clean
 npm run prepare
-npm build
-npm test
+# npm build
+# npm test
+npm run make:darwin
