@@ -4,7 +4,7 @@
 module.exports = function(environment) {
     let ENV = {
         targetEnv: 'electron',
-        modulePrefix: 'wsysdig',
+        modulePrefix: 'sysdig-inspect',
         environment,
         rootURL: '/',
         locationType: 'hash',

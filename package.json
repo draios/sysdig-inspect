@@ -1,7 +1,7 @@
 {
-  "name": "wsysdig",
-  "version": "0.0.0",
-  "description": "wsysdig UI for analyze captures with a web interface",
+  "name": "sysdig-inspect",
+  "version": "0.1.0",
+  "description": "Sysdig Inspect",
   "license": "MIT",
   "author": "sysdig inc.",
   "directories": {

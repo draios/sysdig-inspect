@@ -13,8 +13,8 @@ You will need the following things properly installed on your computer.
 
 ## Prepare the environment
 
-1. `git clone https://github.com/draios/wsysdig.git`
-2. `cd wsysdig`
+1. `git clone https://github.com/draios/sysdig-inspect.git`
+2. `cd sysdig-inspect`
 3. `npm run prepare`
 
 

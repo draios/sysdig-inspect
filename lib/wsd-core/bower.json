@@ -5,7 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
-  "homepage": "https://github.com/draios/wsysdig",
+  "homepage": "https://github.com/draios/sysdig-inspect",
   "ignore": [
     "**/.*",
     "node_modules",
