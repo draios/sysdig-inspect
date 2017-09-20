@@ -21,10 +21,9 @@ setup_env() {
     npm config set spin false
 }
 
-
 setup_env
 npm run clean
 npm run prepare
-# npm build
-# npm test
-npm run make:darwin
+npm build
+npm test
+npm run package:darwin
