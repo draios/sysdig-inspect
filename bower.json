@@ -1,11 +1,7 @@
 {
   "name": "sysdig-inspect",
   "description": "Sysdig Inspect",
-  "main": "",
-  "authors": [
-    "sysdig inc."
-  ],
-  "homepage": "https://github.com/draios/sysdig-inspect",
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",

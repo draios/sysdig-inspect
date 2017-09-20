@@ -1,14 +1,16 @@
 {
   "name": "sysdig-inspect-backend",
-  "version": "0.1.0",
   "description": "Backend server for run sysdig on a capture end receive json output data.",
-  "author": "sysdig inc.",
-  "main": "server.js",
-  "license": "ISC",
+  "author": "Sysdig Inc.",
+  "license": {
+    "type": "GNU General Public License",
+    "url": "http://www.gnu.org/licenses/"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/draios/sysdig-inspect.git"
   },
+  "main": "server.js",
   "scripts": {
     "test": "mocha tests/test.js",
     "start": "./node_modules/.bin/nodemon main.js"

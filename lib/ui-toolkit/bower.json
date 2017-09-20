@@ -1,11 +1,6 @@
 {
   "name": "ui-toolkit",
-  "description": "",
   "main": "index.js",
-  "keywords": [
-    "ember-addon"
-  ],
-  "homepage": "https://github.com/draios/sysdig-inspect",
   "private": true,
   "ignore": [
     "**/.*",

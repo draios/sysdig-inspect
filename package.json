@@ -1,14 +1,16 @@
 {
   "name": "sysdig-inspect",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sysdig Inspect",
-  "license": "MIT",
-  "author": "sysdig inc.",
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
+  "author": "Sysdig Inc.",
+  "license": {
+    "type": "GNU General Public License",
+    "url": "http://www.gnu.org/licenses/"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/draios/sysdig-inspect.git"
+  },
   "scripts": {
     "prepare": "npm install && scripts/install",
     "clean": "scripts/clean",

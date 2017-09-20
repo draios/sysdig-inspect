@@ -1,11 +1,7 @@
 {
   "name": "wsd-core",
-  "description": "",
   "main": "index.js",
-  "keywords": [
-    "ember-addon"
-  ],
-  "homepage": "https://github.com/draios/sysdig-inspect",
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -17,5 +13,4 @@
     "oboe": "^2.1.3",
     "axios": "^0.16.2"
   },
-  "private": true
 }
