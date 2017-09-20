@@ -37,7 +37,13 @@ Where to start?
 ---
 
 **Installing Sysdig Inspect**  
-(download and install instructions)  
+
+Latest version: 0.1.1.
+
+You can download the installer from http://download.sysdig.com/dev/sysdig-inspect/Sysdig+Inspect-0.1.1.dmg.
+
+**Note**: At this time Sysdig Inspect can be installed on OSX only.
+
 
 **Creating a trace file**  
 Sysdig Inspect works with trace files that have been collcted by [sysdig](https://github.com/draios/sysdig) on a Linux system. The [sysdig user guide](https://github.com/draios/sysdig/wiki/Sysdig-User-Guide) contains a nice introduction to the tool and includes many examples that can guide you through the command line and filtering syntax. 
