@@ -9,12 +9,7 @@
 /**/bower_components
 
 # misc
-/.sass-cache
-/connect.lock
-/coverage/*
-/libpeerconnection.log
 npm-debug.log*
-yarn-error.log
 testem.log
 
 # ember-try
@@ -22,7 +17,6 @@ testem.log
 bower.json.ember-try
 package.json.ember-try
 
+# electron
 electron-out/
 ember-electron/resources-darwin/sysdig
-
-package-lock.json
