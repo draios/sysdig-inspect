@@ -29,29 +29,48 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     overflow: hidden;
 
-    background-color: @color-primary-lighten-3;
+    background-color: @color-primary-lighten-4;
 
     &__timeline {
         display: flex;
         align-items: center;
-        margin-bottom: @layout-spacing-sm;
 
-        height: @timeline-height;
+        padding: @layout-padding-sm / 2 @layout-padding-sm;
+        padding-right: 0;
+        height: @timeline-height + @layout-padding-sm;
     }
     &__header {
         display: flex;
         align-items: center;
 
         width: @header-width - @layout-spacing-sm * 2 - 1;
+        height: 100%;
 
-        margin: 0 @layout-spacing-sm;
+        margin-right: @layout-spacing-sm;
+    }
+    &__icon {
+        margin-right: @layout-spacing-sm;
+    }
+    &__marker {
+        width: 8px;
+        height: 100%;
+
+        margin-right: @layout-spacing-sm / 2;
+    }
+    &__name {
+        flex: 1;
+
+        display: flex;
+        align-items: center;
+
+        font-size: @font-size-sm;
+        .text-overflow();
     }
 
     &__content {
         flex: 1;
         display:flex;
         align-items: stretch;
-
         margin-right: @layout-spacing-sm;
 
         // prevent child to stretch the container, so that size can always be computed at run-time
@@ -68,18 +87,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         align-items: center;
 
         padding-right: @layout-spacing-md;
-    }
-    &__icon {
-        margin-right: @layout-spacing-sm;
-    }
-    &__name {
-        flex: 1;
-
-        display: flex;
-        align-items: center;
-
-        font-size: @font-size-sm;
-        .text-overflow();
     }
     &__value {
         width: 60px;
