@@ -19,6 +19,7 @@ import utils from '../utils';
 
 export default Ember.Route.extend({
     shortcutsService: Ember.inject.service('keyboard-shortcuts'),
+    colorProvider: Ember.inject.service('color-provider'),
 
     setupController(...args) {
         this._super(...args);
@@ -62,5 +63,13 @@ export default Ember.Route.extend({
                 shortcuts.defineShortcut('overview.selectDown',         'overview',     'Select down',              ['down'])
             ]
         );
+
+        this.get('colorProvider').setDefaults({
+            // http://www.color-hex.com/color/6b768e
+            HISTOGRAM_COLUMN_EMPTY: '#E4E4E4',
+            HISTOGRAM_COLUMN_DEFAULT: '#798399',
+            HISTOGRAM_COLUMN_DEFAULT_LIGHT: '#D2D5DD',
+            HISTOGRAM_COLUMN_LIGHT: '#E1E3E8',
+        });
     },
 });
