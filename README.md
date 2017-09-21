@@ -40,7 +40,9 @@ Where to start?
 
 Latest version: 0.1.1.
 
-You can download the installer from http://download.sysdig.com/dev/sysdig-inspect/Sysdig+Inspect-0.1.1.dmg.
+1. Download the application from http://download.sysdig.com/dev/sysdig-inspect/Sysdig+Inspect-0.1.1.zip
+2. Extract the ZIP file
+3. Right click and "Open"
 
 **Note**: At this time Sysdig Inspect can be installed on OSX only.
 
