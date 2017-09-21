@@ -13,7 +13,8 @@ module.exports = {
     ]
   },
   "electronPackagerConfig": {
-    "name": "Sysdig Inspect"
+    "name": "Sysdig Inspect",
+    "osxSign": true,
   },
   "electronWinstallerConfig": {
     "name": ""
