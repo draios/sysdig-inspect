@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     @layout-size-md: 36px;
     @layout-size-sm: 24px;
 
+    @icon-size-lg: 32px;
     @icon-size-md: 24px;
     @icon-size-sm: 16px;
 
@@ -122,6 +123,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         padding: round(@layout-size-sm - @icon-size-sm) / 2;
         min-width: @layout-size-sm;
     }
+    &--lg&--fab {
+        padding: round(@layout-size-lg - @icon-size-lg) / 2;
+        min-width: @layout-size-lg;
+    }
 
     svg {
         height: @icon-size-md;
@@ -138,6 +143,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         svg {
             height: @icon-size-sm;
             width: @icon-size-sm;
+        }
+    }
+
+    &--lg {
+        svg {
+            height: @icon-size-lg;
+            width: @icon-size-lg;
         }
     }
 
