@@ -13,19 +13,25 @@ module.exports = {
     ]
   },
   "electronPackagerConfig": {
+    "appCopyright": "Copyright (C) 2017 Draios inc.",
     "name": "Sysdig Inspect",
+    "versionString": {
+        "CompanyName": "Sysdig",
+        "FileDescription": "Sysdig Inspect for Desktop",
+        "ProductName": "Sysdig Inspect",
+        "InternalName": "Sysdig Inspect"
+    },
+    "icon": "assets/icons/favicon",
     "osxSign": true,
+    "overwrite": true
   },
-  "electronWinstallerConfig": {
-    "name": ""
+  "electronInstallerDMG": {
+    "title": "Sysdig Inspect",
+    "background": "assets/dmg/installer-background.png",
+    "icon-size": 80
   },
-  "electronInstallerDebian": {},
-  "electronInstallerRedhat": {},
   "github_repository": {
-    "owner": "",
-    "name": ""
-  },
-  "windowsStoreConfig": {
-    "packageName": ""
+    "owner": "draios",
+    "name": "sysdig-inspect"
   }
 };
