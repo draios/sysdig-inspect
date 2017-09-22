@@ -41,8 +41,8 @@ export default Ember.Route.extend({
 
                 shortcuts.defineShortcut('general.cancel',              'general',      'Cancel',                   ['esc']),
                 shortcuts.defineShortcut('general.accept',              'general',      'Accept',                   ['enter']),
-                shortcuts.defineShortcut('general.search',              'general',      'Search',                   ['s']),
-                shortcuts.defineShortcut('general.filter',              'general',      'Filter',                   ['f']),
+                shortcuts.defineShortcut('general.search',              'general',      'Text find',                ['f']),
+                shortcuts.defineShortcut('general.filter',              'general',      'Sysdig filter',            ['s']),
 
                 shortcuts.defineShortcut('navigation.drillDown',        'navigation',   'Drill down',               ['enter']),
                 shortcuts.defineShortcut('navigation.drillUp',          'navigation',   'Drill up',                 ['backspace']),
