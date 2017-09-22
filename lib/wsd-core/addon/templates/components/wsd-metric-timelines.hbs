@@ -66,20 +66,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             </div>
         </div>
         <div class="wsd-metric-timelines__content">
-            {{#if canRenderTimelines}}
-                <svg class="wsd-metric-timelines__chart" width="{{timelinesWidth}}" height="{{timeSeriesHeight}}">
-                    {{#if timelineConfiguration.timeline}}
-                        {{sd-viz-histogram-series
-                            height=timeSeriesHeight
-                            width=timelinesWidth
-                            timestampProp="t"
-                            valueProp="v"
-                            translateY=0
-                            columnColor=timelineConfiguration.color
-                            data=timelineConfiguration.timeline.timeSeries
-                        }}
-                    {{/if}}
-                </svg>
+            {{#if summaryDataStore.hasLoaded}}
+                {{#if canRenderTimelines}}
+                    <svg class="wsd-metric-timelines__chart" width="{{timelinesWidth}}" height="{{timeSeriesHeight}}">
+                        {{#if timelineConfiguration.timeline}}
+                            {{sd-viz-histogram-series
+                                height=timeSeriesHeight
+                                width=timelinesWidth
+                                timestampProp="t"
+                                valueProp="v"
+                                translateY=0
+                                columnColor=timelineConfiguration.color
+                                data=timelineConfiguration.timeline.timeSeries
+                            }}
+                        {{/if}}
+                    </svg>
+                {{/if}}
             {{/if}}
         </div>
 
