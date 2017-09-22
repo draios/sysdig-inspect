@@ -21,13 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     @color-outer-area: fade(@color-primary-lighten-4, 75%);
     @color-draggable-area: fade(@color-primary, 75%);
+    @color-time-markers: #6287C9; // exactly like @color-draggable-area, just without transparency
     @color-handle: @color-primary-lighten-5;
 
     @handle-arrow-width: 8px;
     @draggable-handle-width: 2px + 2px + 2px + 2px + 2px;
     @time-labels-width: 80px;
     @time-label-height: 14px + 2px;
-    @time-diff-label-width: 120px;
+    @time-diff-label-width: 160px;
 
     flex: 1;
 
@@ -141,7 +142,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     }
 
     &__time {
-        background-color: @color-draggable-area;
+        background-color: @color-time-markers;
 
         &:before {
             content: ' ';

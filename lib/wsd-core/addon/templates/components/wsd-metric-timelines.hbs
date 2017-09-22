@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </div>
     <div class="wsd-metric-timelines__content">
         <div class="wsd-metric-timelines__overlay-chart" style={{overlayStyle}}>
-            {{#sd-promise-wait-overlay promiseState=summaryDataStore classNames="sd-promise-wait-overlay--sm sd-promise-wait-overlay--no-background"}}
+            {{#sd-promise-wait-overlay promiseState=summaryDataStore classNames="sd-promise-wait-overlay--sm sd-promise-wait-overlay--no-background sd-promise-wait-overlay--no-overflow"}}
                 {{#if summaryDataStore.hasLoaded}}
                     {{sd-viz-timeline
                         timeline=timeline
