@@ -4,11 +4,23 @@
 
 ---
 
-Sysdig Inspect is an interactive sysdig trace file analyzer that runs on your Mac or your PC.
+Sysdig Inspect is an interactive sysdig trace file analyzer that runs on your Mac or PC.
 
-Inspect's user interface is designed to intuitively navigate the data-dense sysdig captures that contain granular system, network and application activity of a Linux system. Sysdig Inspect helps you understand trends, correlate metrics and find the needle in the haystack. It comes packed with features designed to support both performance and security investigations, and fully supports container introspection.
+Inspect's user interface is designed to intuitively navigate the data-dense sysdig captures that contain granular system, network, and application activity of a Linux system. Sysdig Inspect helps you understand trends, correlate metrics and find the needle in the haystack. It comes packed with features designed to support both performance and security investigations, with deep container introspection.
 
 To use Sysdig Inspect, you need trace files collected on Linux with [sysdig](https://github.com/draios/sysdig).
+
+Where to start?
+---
+
+**Installing Sysdig Inspect**  
+
+Latest version: 0.1.1.
+
+You can download the application from http://download.sysdig.com/dev/sysdig-inspect/sysdig-inspect-0.1.1.dmg.
+
+**Note**: At this time Sysdig Inspect can be installed on MAC OSX only.
+
 
 Main Features
 ---
@@ -16,7 +28,7 @@ Main Features
 
 (screenshot)  
 
-The overview page offers an out of the box, at a glance summary of the content of the trace file. Content is organized in tiles, each of which shows the value of a relevant metric and its trend. Tiles are organized in categories to surface useful information more clearly. Tiles are also the starting point for investigation and drill down.
+The overview page offers an out of the box, at a glance summary of the content of the trace file. Content is organized in tiles, each of which shows the value of a relevant metric and its trend. Tiles are organized in categories to surface useful information more clearly and are starting point for investigation and drill down.
 
 **Sub-second microtrends and metric correlation**  
 
@@ -34,22 +46,12 @@ You can double-click on a tile to see the data behind it and start a drill down 
 
 (screenshot)
 
-Every single byte of data that is read or written to a file, to a network connection o to a pipe is recorded in the trace file and Sysdig Inspect makes it easy to observe it. Do you need to troubleshoot an intermittent network issues or determine what a malware wrote to the file system? All the data you need is there. And, of course, you can switch at any time into sysdig mode and look at every single system calls.
+Every single byte of data that is read or written to a file, to a network connection to a pipe is recorded in the trace file and Sysdig Inspect makes it easy to observe it. Do you need to troubleshoot an intermittent network issues or determine what a malware wrote to the file system? All the data you need is there. And, of course, you can switch at any time into sysdig mode and look at every single system calls.
 
-Where to start?
+Collecting & Loading Captures
 ---
-
-**Installing Sysdig Inspect**  
-
-Latest version: 0.1.1.
-
-You can download the application from http://download.sysdig.com/dev/sysdig-inspect/sysdig-inspect-0.1.1.dmg.
-
-**Note**: At this time Sysdig Inspect can be installed on MAC OSX only.
-
-
-**Creating a trace file**  
-Sysdig Inspect works with trace files that have been collcted by [sysdig](https://github.com/draios/sysdig) on a Linux system. The [sysdig user guide](https://github.com/draios/sysdig/wiki/Sysdig-User-Guide) contains a nice introduction to the tool and includes many examples that can guide you through the command line and filtering syntax. 
+**Creating a capture file**  
+Sysdig Inspect works with capture files that have been collcted by [sysdig](https://github.com/draios/sysdig) on a Linux system. The [sysdig user guide](https://github.com/draios/sysdig/wiki/Sysdig-User-Guide) contains a nice introduction to the tool and includes many examples that can guide you through the command line and filtering syntax. 
 
 As a very easy quick start, here's how to capture all of the system events on a Linux box with sysdig:
 
