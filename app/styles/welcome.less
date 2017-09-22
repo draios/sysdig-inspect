@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     display: flex;
     flex-direction: column;
 
-    background-color: #FAFAFA;
+    background-color: #F7F6F5;
 
     &__hero {
         display: flex;
@@ -73,10 +73,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         border-radius: 3px;
         .z-shadow-1();
 
-        cursor: pointer;
-
         &:hover {
             .z-shadow-3();
+        }
+
+        &--selectable {
+            .selectable();
         }
     }
 
