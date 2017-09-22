@@ -48,10 +48,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         background-color: rgba(0, 0, 0, 0.1);
     }
 
+    svg {
+        height: @icon-size-md;
+        width: @icon-size-md;
+    }
+
     &--raised {
         .z-shadow-1();
 
-        &:hover {
+        &:hover,
+        &:focus {
             .z-shadow-2();
         }
     }
@@ -65,6 +71,36 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         &:hover {
             background-color: darken(@color-primary, 10%);
+        }
+    }
+
+    &--is-white {
+        background-color: white;
+        color: @color-text;
+
+        svg {
+            fill: @color-text;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: darken(white, 1%);
+        }
+    }
+    &--is-white&--is-selected {
+        background-color: @color-list-item-selected;
+
+        &:hover,
+        &:focus {
+            background-color: @color-list-item-selected-hover;
+        }
+    }
+
+    &--is-light {
+        color: white;
+
+        svg {
+            fill: white;
         }
     }
 
@@ -89,12 +125,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         }
     }
 
-    // &:not(&--is-active) {
-    //     svg {
-    //         fill: @color-text;
-    //     }
-    // }
-
     &--sm {
         min-width: @layout-size-sm * 2;
         height: @layout-size-sm;
@@ -102,6 +132,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         line-height: @layout-size-sm;
 
         font-size: @font-size-sm;
+
+        svg {
+            height: @icon-size-sm;
+            width: @icon-size-sm;
+        }
     }
 
     &--lg {
@@ -111,6 +146,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         line-height: @layout-size-lg;
 
         font-size: @font-size-lg;
+
+        svg {
+            height: @icon-size-lg;
+            width: @icon-size-lg;
+        }
+    }
+
+    &--big {
+        flex-direction: column;
+        justify-content: center;
+
+        padding: @layout-padding-sm / 2;
+        height: 56px;
+
+        font-size: @font-size-xs;
+        line-height: @layout-size-sm;
     }
 
     &--fab {
@@ -128,35 +179,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         min-width: @layout-size-lg;
     }
 
-    svg {
-        height: @icon-size-md;
-        width: @icon-size-md;
-    }
-
-    &:not(&--fab){
+    &:not(&--fab):not(&--big) {
         svg {
             margin-right: @layout-spacing-xs;
-        }
-    }
-
-    &--sm {
-        svg {
-            height: @icon-size-sm;
-            width: @icon-size-sm;
-        }
-    }
-
-    &--lg {
-        svg {
-            height: @icon-size-lg;
-            width: @icon-size-lg;
-        }
-    }
-
-    &--is-white {
-        color: white;
-        svg {
-            fill: white;
         }
     }
 }
