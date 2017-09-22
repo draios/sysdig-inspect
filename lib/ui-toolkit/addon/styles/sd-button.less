@@ -15,10 +15,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 .sd-button {
+    @layout-size-lg: 48px;
     @layout-size-md: 36px;
     @layout-size-sm: 24px;
-    @layout-padding-md: 16px;
-    @layout-padding-sm: 8px;
 
     @icon-size-md: 24px;
     @icon-size-sm: 16px;
@@ -56,6 +55,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         }
     }
 
+    &--is-primary {
+        background-color: @color-primary;
+        color: white;
+        svg {
+            fill: white;
+        }
+
+        &:hover {
+            background-color: darken(@color-primary, 10%);
+        }
+    }
+
     &--highlight-on-hover {
         opacity: 0.7;
         &:hover {
@@ -77,11 +88,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         }
     }
 
-    &:not(&--is-active) {
-        svg {
-            fill: @color-text;
-        }
-    }
+    // &:not(&--is-active) {
+    //     svg {
+    //         fill: @color-text;
+    //     }
+    // }
 
     &--sm {
         min-width: @layout-size-sm * 2;
@@ -90,6 +101,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         line-height: @layout-size-sm;
 
         font-size: @font-size-sm;
+    }
+
+    &--lg {
+        min-width: @layout-size-lg * 2;
+        height: @layout-size-lg;
+        padding: 0 @layout-padding-md;
+        line-height: @layout-size-lg;
+
+        font-size: @font-size-lg;
     }
 
     &--fab {
