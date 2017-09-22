@@ -18,15 +18,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     {{#link-to "index" class="wsd-page__header-logo"}}
         <img src="/assets/images/sysdig-inspect-logo-white-155x24.svg">
     {{/link-to}}
-    <div class="wsd-page__header-title">
-        {{model.filePath}}
+    <div class="wsd-page__header-title" {{action "openFileBrowser"}}>
+        {{#unless isEditingFilePath}}
+            {{model.filePath}}
+        {{else}}
+            {{sd-input
+                name="file-path"
+                value=model.filePath
+                placeholder="Capture file path"
+                isAcceptChangeMode=true
+                changeValue=(action "openFile")
+                cancel=(action "cancelFilePathEditing")
+            }}
+        {{/unless}}
     </div>
     <div class="wsd-page__header-button">
         {{#sd-button
             iconName="file_white"
             color="white"
             title="Open capture"
-            click=(route-action "openFile")
+            click=(action "openFileBrowser")
         }}
             Open
         {{/sd-button}}
