@@ -42,8 +42,6 @@ export default Ember.Route.extend({
     setupController(controller, model) {
         this._super(controller, model);
 
-        this.controllerFor('application').set('captureFilePath', model.filePath);
-
         this.get('captureTimelines').setCurrent(
             this.get('captureTimelines').deserializeFromQueryParam(model.queryParams.metricTimelinesParam)
         );

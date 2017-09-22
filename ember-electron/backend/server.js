@@ -23,7 +23,7 @@ const BASE_PORT = 3000;
 
 function findAvailablePort(port, callback) {
     let server = net.createServer();
-    server.listen(port, (err) => {
+    server.listen(port, 'localhost', (err) => {
         server.once('close', () => {
             callback(port);
         });
@@ -49,7 +49,7 @@ class Server {
 
             this._setupRoutes(app);
 
-            this.server = app.listen(port, (err) => {
+            this.server = app.listen(port, 'localhost', (err) => {
                 if (err) {
                     console.log('error starting server: ', err);
                     if (typeof callback === 'function') {

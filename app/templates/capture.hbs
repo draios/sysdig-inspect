@@ -14,19 +14,40 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
-{{#wsd-capture-panel
-    filePath=model.filePath
-    drilldownInfoParam=model.queryParams.drilldownInfoParam
-    timelines=captureTimelines.timelines
-    timeWindow=timeWindow
-    selectedViewId=selectedViewId
-    filter=filter
-    navigateTo=(route-action "drillDown")
-    drillDown=(route-action "drillDown")
-    selectTimeWindow=(route-action "selectTimeWindow")
-    removeMetricTimeline=(route-action "removeMetricTimeline")
-    applyFilter=(route-action "applyFilter")
-    applySearch=(route-action "applySearch")
-}}
-    {{outlet}}
-{{/wsd-capture-panel}}
+<div class="wsd-page__header">
+    {{#link-to "index" class="wsd-page__header-logo"}}
+        <img src="/assets/images/sysdig-inspect-logo-white-155x24.svg">
+    {{/link-to}}
+    <div class="wsd-page__header-title">
+        {{model.filePath}}
+    </div>
+    <div class="wsd-page__header-button">
+        {{#sd-button
+            iconName="file_white"
+            color="white"
+            title="Open capture"
+            click=(route-action "openFile")
+        }}
+            Open
+        {{/sd-button}}
+    </div>
+</div>
+
+<div class="wsd-page__content">
+    {{#wsd-capture-panel
+        filePath=model.filePath
+        drilldownInfoParam=model.queryParams.drilldownInfoParam
+        timelines=captureTimelines.timelines
+        timeWindow=timeWindow
+        selectedViewId=selectedViewId
+        filter=filter
+        navigateTo=(route-action "drillDown")
+        drillDown=(route-action "drillDown")
+        selectTimeWindow=(route-action "selectTimeWindow")
+        removeMetricTimeline=(route-action "removeMetricTimeline")
+        applyFilter=(route-action "applyFilter")
+        applySearch=(route-action "applySearch")
+    }}
+        {{outlet}}
+    {{/wsd-capture-panel}}
+</div>

@@ -14,22 +14,67 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
-<div class="welcome__container">
-    <div class="welcome__panel">
-        <header class="welcome__header">
-            <a class="welcome__header-img">
-                <img src="/assets/images/sysdig-white-logo.png">
-            </a>
-            <h1 class="welcome__header-title">Sysdig capture analyser</h1>
-        </header>
-        <section class="welcome__options">
-            <ul class="welcome__menu">
-                <li class="welcome__menu-option">
-                    {{#sd-button iconName="file_white" classNames="sd-button sd-button--raised welcome__menu-option-button" size="md" click=(action "openFile")}}
-                        Open a capture
-                    {{/sd-button}}
-                </li>
-            </ul>
-        </section>
+<div class="wsd-page__content">
+    <div class="wsd-welcome">
+        <div class="wsd-welcome__hero">
+            <img src="/assets/images/sysdig-inspect-logo-color-620x96.png">
+        </div>
+        <div class="wsd-welcome__body">
+            <div class="wsd-welcome__card-list">
+                <div class="wsd-welcome__card">
+                    <div class="wsd-welcome__card-content">
+                        <p>
+                            As a very easy quick start, here's how to capture all of the system events on a Linux box with sysdig:
+                        </p>
+                        <p>
+                            <code>
+                                sudo sysdig -w filename.scap
+                            </code>
+                        </p>
+                    </div>
+                    <div class="wsd-welcome__card-footer">
+                        <a href="https://github.com/draios/sysdig/wiki/Sysdig-User-Guide" class="sd-button sd-button--lg" target="_blank">sysdig user guide</a>
+                    </div>
+                </div>
+                <div class="wsd-welcome__card" {{action "openFileBrowser"}}>
+                    <div class="wsd-welcome__card-content">
+                        Sysdig Inspect works with trace files that have been collcted by sysdig on a Linux system.
+                    </div>
+                    <div class="wsd-welcome__card-footer">
+                        {{#if isElectron}}
+                            {{#sd-button
+                                iconName="file_black"
+                                color="primary"
+                                size="lg"
+                                title="Open capture"
+                                click=(route-action "openFileBrowser")
+                            }}
+                                Open Capture
+                            {{/sd-button}}
+                        {{else}}
+                            {{sd-input
+                                name="file-path"
+                                placeholder="Capture file path"
+                                isAcceptChangeMode=true
+                                changeValue=(route-action "openFile")
+                            }}
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="wsd-welcome__card">
+                    <div class="wsd-welcome__card-content">
+                        <p>
+                            Need help?
+                        </p>
+                        <p>
+                            Join our <a href="https://slack.sysdig.com" target="_blank">public Slack channel</a> for announcements and discussions.
+                        </p>
+                        <p>
+                            For documentation, issues, suggestions, and contributions, please go to <a href="https://github.com/draios/sysdig-inspect" target="_blank">the project on Github</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

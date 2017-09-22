@@ -21,11 +21,11 @@ export default Ember.Route.extend({
     shortcutsService: Ember.inject.service('keyboard-shortcuts'),
     colorProvider: Ember.inject.service('color-provider'),
 
-    setupController(...args) {
-        this._super(...args);
+    setupController() {
+        this._super(...arguments);
 
         utils.addShortcut('mod+o', () => {
-            this.controllerFor('application').openFile();
+            this.send('openFileBrowser').openFile();
         });
 
         const shortcuts = this.get('shortcutsService');
@@ -71,5 +71,29 @@ export default Ember.Route.extend({
             HISTOGRAM_COLUMN_DEFAULT_LIGHT: '#D2D5DD',
             HISTOGRAM_COLUMN_LIGHT: '#E1E3E8',
         });
+
+        utils.setupHookForLinks();
+    },
+
+    actions: {
+        openFileBrowser() {
+            if (utils.isElectron()) {
+                let fileNames = utils.openFileDialog();
+
+                if (Ember.isEmpty(fileNames) === false) {
+                    this.send('openFile', fileNames[0]);
+                } else {
+                    console.log('Not file choosen.');
+                }
+            }
+        },
+
+        openFile(path) {
+            this.transitionTo('capture', path);
+        },
+
+        closeFile() {
+            this.transitionTo('index');
+        },
     },
 });

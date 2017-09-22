@@ -66,8 +66,8 @@ function createParamsUrl(port) {
 function createWindow(port) {
     const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
     mainWindow = new BrowserWindow({
-        width: width * 0.7,
-        height: height * 0.7,
+        width: Math.max(width * 0.9, 1440),
+        height: 900,
     });
     // Hide
     mainWindow.setMenu(null);

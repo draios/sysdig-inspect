@@ -15,26 +15,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
 <div class="wsd-page">
-    <div class="wsd-page__header">
-        <a class="wsd-page__header-logo">
-            <img src="/assets/images/sysdig-inspect-logo-white-155x24.svg">
-        </a>
-        <div class="wsd-page__header-title">
-            {{captureFilePath}}
-        </div>
-        <div class="wsd-page__header-button">
-            {{#sd-button
-                iconName="file_white"
-                color="white"
-                title="Open capture"
-                click=(action "openFile")
-            }}
-                Open
-            {{/sd-button}}
-        </div>
-    </div>
-
-    <div class="wsd-page__content">
-        {{outlet}}
-    </div>
+    {{outlet}}
 </div>

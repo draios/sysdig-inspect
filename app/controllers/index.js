@@ -15,14 +15,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import Ember from 'ember';
+import utils from '../utils';
 
 export default Ember.Controller.extend({
     queryParams: ['port'],
-    appController: Ember.inject.controller('application'),
+    application: Ember.inject.controller('application'),
+
+    isElectron: Ember.computed(function() {
+        return utils.isElectron();
+    }),
 
     actions: {
-        openFile() {
-            this.get('appController').send('openFile');
+        openFileBrowser() {
+            this.get('application').send('openFileBrowser');
         },
     },
 });
