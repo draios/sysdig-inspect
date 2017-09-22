@@ -1,5 +1,8 @@
-Sysdig Inspect
-================
+<p align="center">
+  <img src="/public/assets/images/sysdig-inspect-logo-color-620x96.png" alt="Sysdig Inspect" />
+</p>
+
+---
 
 Sysdig Inspect is an interactive sysdig trace file analyzer that runs on your Mac or your PC.
 
