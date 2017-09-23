@@ -15,10 +15,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
 <div class="wsd-view-list__header">
-<div class="wsd-view-list__header-view">
     Views
 </div>
-</div>
+
 <div class="wsd-view-list__content">
     {{#sd-promise-wait-overlay promiseState=viewsManager.store classNames="sd-promise-wait-overlay--sm"}}
         {{#sd-list items=views selection=selectedViewId key="configuration.id" select=(action "selectView") as |view|}}
@@ -31,8 +30,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         {{/sd-list}}
     {{/sd-promise-wait-overlay}}
 </div>
-<div class="wsd-view-list__fixed-actions">
-    <div class="wsd-view-list__header-control">
+
+<div class="wsd-view-list__footer">
+    <div class="wsd-view-list__control">
         {{#sd-button
             iconName="ic_textsms_black"
             title="I/O streams"
@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             I/O Streams
         {{/sd-button}}
     </div>
-    <div class="wsd-view-list__header-control">
+    <div class="wsd-view-list__control">
         {{#sd-button
             iconName="view_list_black"
             title="Syscalls"

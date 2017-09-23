@@ -28,39 +28,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         padding: @layout-padding-sm @layout-padding-md;
         line-height: 36px;
 
+        font-weight: @font-weight-semibold;
+        text-transform: uppercase;
         background-color: @color-background-panel;
     }
-    &__sub-header {
-        display: flex;
-
-        padding: @layout-padding-sm 0;
-
-        background-color: @color-background-panel;
-    }
-    &__fixed-actions {
+    &__footer {
         display: flex;
         justify-content: space-around;
 
-        padding: @layout-padding-md @layout-padding-sm;
+        padding: @layout-padding-sm;
 
         background-color: @color-background-panel;
     }
 
-    &__header-view {
-        flex: 1;
-
-        font-weight: @font-weight-semibold;
-        text-transform: uppercase;
-    }
-
-    &__header-control {
+    &__control {
         flex: 1;
         display: flex;
         flex-direction: column;
         align-items: stretch;
     }
 
-    &__header-control + &__header-control {
+    &__control + &__control {
         margin-left: @layout-spacing-sm;
     }
 
