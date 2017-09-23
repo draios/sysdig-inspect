@@ -55,6 +55,6 @@ npm run clean
 npm run prepare
 npm build
 npm test
-npm run package:darwin
+npm run package:mac
 
 after_build

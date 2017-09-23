@@ -38,7 +38,7 @@ You'll need two separate terminals, one for the server and one for the frontend:
 ## Create the installer
 
 1. `npm run bundle -- [path to sysdig binaries]`
-2. `npm run make`
+2. `npm run make:mac`
 
 **Note**: Only MAC installers are supported for now...
 

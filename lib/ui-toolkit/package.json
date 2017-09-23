@@ -4,15 +4,12 @@
     "ember-addon"
   ],
   "scripts": {
-    "postinstall": "./node_modules/.bin/bower install"
   },
   "dependencies": {
     "ember-cli-babel": "^6.8.1",
     "ember-cli-htmlbars": "^2.0.3",
-    "ember-cli-less": "^1.5.4",
-    "virtual-each": "^0.5.1"
+    "ember-cli-less": "^1.5.4"
   },
   "devDependencies": {
-    "bower": "^1.8.0"
   }
 }

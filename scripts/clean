@@ -10,13 +10,11 @@ clean_app() {
 
 clean_addons() {
     cd lib/wsd-core
-    rm -rf bower_components
     rm -rf node_modules
 
     cd ../..
 
     cd lib/ui-toolkit
-    rm -rf bower_components
     rm -rf node_modules
 
     cd ../..

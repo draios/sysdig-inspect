@@ -25,7 +25,10 @@ module.exports = function(defaults) {
     // please specify an object with the list of modules as keys
     // along with the exports of each module as its value.
 
+    app.import(app.bowerDirectory + '/d3/d3.js');
+    app.import(app.bowerDirectory + '/mousetrap/mousetrap.js');
     app.import(app.bowerDirectory + '/normalize-css/normalize.css');
+    app.import(app.bowerDirectory + '/oboe/dist/oboe-browser.js');
 
     return app.toTree();
 };
