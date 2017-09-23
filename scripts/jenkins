@@ -21,9 +21,40 @@ setup_env() {
     npm config set spin false
 }
 
+before_build() {
+    AT="14cb6f738471649291365b20fa0e267fd9a6329d"
+    GH_STATUS="pending"
+    GH_DESCRIPTION="Build #${BUILD_NUMBER} started..."
+    GH_URL="https://ci.draios.com/view/sysdig-inspect/job/${JOB_NAME}/${BUILD_NUMBER}/"
+    GH_CONTEXT="jenkins/sysdig-inspect"
+
+    curl 'https://api.github.com/repos/draios/sysdig-inspect/statuses/'"${GIT_COMMIT}"'?access_token='"${AT}"'' \
+    -H 'Content-Type: application/json' \
+    -X POST \
+    -d '{"state": "'"${GH_STATUS}"'", "context": "'"${GH_CONTEXT}"'", "description": "'"${GH_DESCRIPTION}"'", "target_url": "'"${GH_URL}"'"}'
+}
+
+after_build() {
+    AT="14cb6f738471649291365b20fa0e267fd9a6329d"
+    GH_STATUS="success"
+    GH_DESCRIPTION="Build #${BUILD_NUMBER} succeeded"
+    GH_URL="https://ci.draios.com/view/sysdig-inspect/job/${JOB_NAME}/${BUILD_NUMBER}/"
+    GH_CONTEXT="jenkins/sysdig-inspect"
+
+    curl 'https://api.github.com/repos/draios/sysdig-inspect/statuses/'"${GIT_COMMIT}"'?access_token='"${AT}"'' \
+    -H 'Content-Type: application/json' \
+    -X POST \
+    -d '{"state": "'"${GH_STATUS}"'", "context": "'"${GH_CONTEXT}"'", "description": "'"${GH_DESCRIPTION}"'", "target_url": "'"${GH_URL}"'"}'
+}
+
 setup_env
+
+before_build
+
 npm run clean
 npm run prepare
 npm build
 npm test
 npm run package:darwin
+
+after_build
