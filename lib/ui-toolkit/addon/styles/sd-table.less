@@ -83,7 +83,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         border-top: none;
     }
 
-    &__cell-content {
-        .text-overflow();
+    &-head-cell,
+    &-cell {
+        flex: 1 0 @cell-min-width;
+        display: flex;
+        overflow: hidden;
+
+        &__content {
+            .text-overflow();
+        }
     }
 }

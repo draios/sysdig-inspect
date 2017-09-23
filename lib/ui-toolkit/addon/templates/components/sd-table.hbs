@@ -22,15 +22,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     {{#if column.headComponentName}}
                         {{component
                             column.headComponentName
-                            row=row
                             column=column
+                            row=row
                         }}
                     {{else}}
-                        <div class="sd-table__head-cell">
-                            <div class="sd-table__cell-content">
-                                {{column.name}}
-                            </div>
-                        </div>
+                        {{sd-table-head-cell column=column}}
                     {{/if}}
                 {{/each}}
             </div>
@@ -55,6 +51,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                         {{#if cell.configuration.cellComponentName}}
                             {{component
                                 cell.configuration.cellComponentName
+                                column=column
+                                value=cell.output
                                 row=rowConfiguration.configuration
                                 cell=cell
                                 isHead=false
@@ -63,11 +61,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 click=(action cell.configuration.properties.clickAction target=parentView)
                             }}
                         {{else}}
-                            <div class="sd-table__cell">
-                                <div class="sd-table__cell-content">
-                                    {{sd-tokenized-output output=cell.output}}
-                                </div>
-                            </div>
+                            {{sd-table-cell column=column value=cell.output}}
                         {{/if}}
                     {{/each}}
                 {{/sd-table-row}}
