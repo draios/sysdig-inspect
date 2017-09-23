@@ -19,13 +19,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     display: flex;
     flex-direction: column;
 
-    background-color: #F7F6F5;
-
     &__hero {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 10vh 0;
+        padding-top: 10vh;
 
         img {
             width: 80vw;
@@ -40,7 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         flex-direction: column;
         align-items: stretch;
 
-        padding-top: 5vh;
+        padding-top: 10vh;
 
         overflow: auto;
     }
@@ -48,75 +46,69 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     &__card-list {
         display: flex;
         justify-content: center;
+
+        padding: @layout-padding-xl;
     }
 
     &__card {
-        flex-shrink: 0;
+        flex: 1;
 
-        width: (100 - 10*2 - 5) / 3vw;
-        max-width: 350px;
-        min-width: 280px;
+        max-width: 310px;
 
         display: flex;
         flex-direction: column;
         align-items: stretch;
 
-        padding: @layout-padding-lg;
-
-        background-color: white;
-
-        font-size: @font-size-lg;
-        line-height: @font-line-height-lg;
+        font-size: @font-size-xl;
+        line-height: @font-line-height-xl;
         font-weight: @font-weight-light;
-        color: @color-text-muted;
-
-        border-radius: 3px;
-        .z-shadow-1();
-
-        &:hover {
-            .z-shadow-3();
-        }
-
-        &--selectable {
-            .selectable();
-        }
-    }
-
-    code {
-        font-family: @font-monospace-family;
-        font-size: @font-size-md;
+        color: @color-text-lighter;
     }
 
     &__card + &__card {
-        margin-left: 36px;
+        margin-left: @layout-spacing-xl;
     }
 
-    @media screen and (max-width: 900px) {
+    &__card-header {
+        font-size: @font-size-xxl;
+        line-height: @font-line-height-xxl;
+        margin-bottom: @layout-spacing-lg;
+    }
+    &__card-content {
+        flex: 1;
+        margin-bottom: @layout-spacing-lg;
+    }
+    &__card-footer {
+        display: flex;
+        height: 48px;
+        line-height: 48px;
+    }
+
+    &__code {
+        display: block;
+        margin-top: @layout-spacing-md;
+        padding: @layout-padding-sm;
+        background-color: @color-primary-lighten-5;
+        border: 1px solid @color-primary-lighten-4;
+        border-radius: 3px;
+
+        font-family: @font-monospace-family;
+        font-size: @font-size-md;
+        line-height: @font-line-height-md;
+    }
+
+    @media screen and (max-width: 950px) {
         &__card-list {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: block;
         }
         &__card {
+            width: 80vw;
             max-width: 80vw;
-            min-width: 80vw;
         }
 
         &__card + &__card {
             margin-left: 0;
-            margin-top: 24px;
+            margin-top: @layout-spacing-xl;
         }
-    }
-
-    &__card-content {
-        flex: 1;
-        margin-bottom: @layout-spacing-md;
-    }
-    &__card-footer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 48px;
-        line-height: 48px;
     }
 }

@@ -22,21 +22,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <div class="wsd-welcome__body">
             <div class="wsd-welcome__card-list">
                 <div class="wsd-welcome__card">
+                    <div class="wsd-welcome__card-header">
+                        Capture
+                    </div>
                     <div class="wsd-welcome__card-content">
                         <p>
-                            As a very easy quick start, here's how to capture all of the system events on a Linux box with sysdig:
+                            Capture all of the system events on a Linux box with sysdig:
                         </p>
-                        <p>
-                            <code>
-                                sudo sysdig -w filename.scap
-                            </code>
-                        </p>
+                        <code class="wsd-welcome__code">
+                            sudo sysdig -w file.scap
+                        </code>
                     </div>
                     <div class="wsd-welcome__card-footer">
-                        <a href="https://github.com/draios/sysdig/wiki/Sysdig-User-Guide" class="sd-button sd-button--lg" target="_blank">sysdig user guide</a>
+                        <a href="https://github.com/draios/sysdig/wiki/Sysdig-User-Guide" class="sd-button sd-button--lg sd-button--raised" target="_blank">User guide</a>
                     </div>
                 </div>
+
                 <div class="wsd-welcome__card wsd-welcome__card--selectable" {{action "openFileBrowser"}}>
+                    <div class="wsd-welcome__card-header">
+                        Inspect
+                    </div>
                     <div class="wsd-welcome__card-content">
                         Sysdig Inspect works with trace files that have been collcted by sysdig on a Linux system.
                     </div>
@@ -44,7 +49,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                         {{#if isElectron}}
                             {{#sd-button
                                 iconName="file_black"
-                                color="primary"
+                                classNames="sd-button--raised"
                                 size="lg"
                                 title="Open capture"
                                 click=(route-action "openFileBrowser")
@@ -62,16 +67,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </div>
                 </div>
                 <div class="wsd-welcome__card">
+                    <div class="wsd-welcome__card-header">
+                        Participate
+                    </div>
                     <div class="wsd-welcome__card-content">
-                        <p>
-                            Need help?
-                        </p>
-                        <p>
-                            Join our <a href="https://slack.sysdig.com" target="_blank">public Slack channel</a> for announcements and discussions.
-                        </p>
-                        <p>
-                            For documentation, issues, suggestions, and contributions, please go to <a href="https://github.com/draios/sysdig-inspect" target="_blank">the project on Github</a>.
-                        </p>
+                        Join the Slack channel for discussions, help and announcements.
+                    </div>
+                    <div class="wsd-welcome__card-footer">
+                        <a href="https://slack.sysdig.com" class="sd-button sd-button--lg sd-button--raised" target="_blank">slack.sysdig.com</a>
                     </div>
                 </div>
             </div>
