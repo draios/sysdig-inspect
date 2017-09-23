@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     @timeline-margin: 8px;
     @timeline-viewport: @timeline-height + @timeline-margin;
 
-    @timeline-draggable-handle-width: 12px;
+    @timeline-draggable-handle-width: 10px;
     @header-width: 200px;
 
     position: relative;
@@ -101,6 +101,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     }
     &__value-multiplier {
         font-weight: @font-weight-light;
+    }
+    &__button {
+        transition: opacity .1s ease;
+        &--is-hidden {
+            opacity: 0.3;
+        }
     }
 
     &__timeline--is-header {

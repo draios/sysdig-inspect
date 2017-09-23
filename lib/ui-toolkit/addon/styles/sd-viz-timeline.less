@@ -20,15 +20,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     @timeline-viewport: @timeline-height + @timeline-margin;
 
     @color-outer-area: fade(@color-primary-lighten-4, 75%);
-    @color-draggable-area: fade(@color-primary, 75%);
-    @color-time-markers: #6287C9; // exactly like @color-draggable-area, just without transparency
+    @color-draggable-area: fade(@color-primary, 55%);
+    @color-draggable-area-on-hover: fade(@color-primary, 75%);
+    @color-time-markers: @color-primary-lighten-2; // exactly like @color-draggable-area, just without transparency
+    @color-time-text: @color-text;
     @color-handle: @color-primary-lighten-5;
 
     @handle-arrow-width: 8px;
-    @draggable-handle-width: 2px + 2px + 2px + 2px + 2px;
-    @time-labels-width: 80px;
+    @draggable-handle-width: 2px + 2px + 2px;
+    @draggable-handle-width-on-hover: 2px + 2px + 2px + 2px + 2px;
+    @time-labels-width: 82px;
     @time-label-height: 14px + 2px;
-    @time-diff-label-width: 160px;
+    @time-diff-label-width: 140px;
 
     flex: 1;
 
@@ -67,7 +70,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         background-color: @color-draggable-area;
         cursor: ew-resize;
+
+        transition: all .1s ease;
     }
+    &--is-mouse-over &__draggable-handle {
+        width: @draggable-handle-width-on-hover;
+        background-color: @color-draggable-area-on-hover;
+    }
+
     &__left-area &__draggable-handle {
         right: 0;
     }
@@ -87,13 +97,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     &__handle-bar {
         background-color: @color-handle;
 
-        width: 2px;
+        width: 0;
+        margin-left: 0;
+
         height: 16px;
+
+        transition: width .1s ease;
+        transition: margin .1s ease;
     }
     &__handle-bar + &__handle-bar {
+        width: 2px;
+    }
+    &--is-mouse-over &__handle-bar {
+        width: 2px;
+    }
+    &--is-mouse-over &__handle-bar + &__handle-bar {
         margin-left: 2px;
     }
 
+    &__axis {
+        position: absolute;
+        top: (@timeline-viewport - 1) / 2;
+        height: 1px;
+        width: 100%;
+        background-color: @color-primary-lighten-2;
+    }
     &__time,
     &__time-diff {
         top: (@timeline-viewport - @time-label-height) / 2;
@@ -119,22 +147,34 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         width: @time-diff-label-width - @layout-padding-sm;
 
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         text-align: center;
-        color: @color-primary;
 
-        .text-overflow();
+        background-color: @color-time-markers;
+        color: @color-time-text;
 
-        transition: top .3s ease;
-        transition: background-color .3s ease;
+        transition: top .1s ease;
 
         &--is-on-top {
             top: 0;
             z-index: 2;
-            background-color: @color-primary-lighten-5;
-            border: 1px solid @color-separator;
+        }
+
+        &:before,
+        &:after {
+            content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 0;
+            border: @time-label-height / 2 solid transparent;
+        }
+        &:before {
+            left: -@time-label-height;
+            border-right-color: @color-time-markers;
+        }
+        &:after {
+            right: -@time-label-height;
+            border-left-color: @color-time-markers;
         }
     }
     &__time-diff-icon {
@@ -143,38 +183,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     &__time {
         background-color: @color-time-markers;
+        color: @color-time-text;
 
-        &:before {
-            content: ' ';
-            position: absolute;
-            width: 0;
-            height: 0;
-            left: -@time-label-height;
-            top: 0;
-            border: @time-label-height / 2 solid transparent;
-        }
+        transition: all .1s ease;
+
+        &:before,
         &:after {
             content: ' ';
             position: absolute;
             width: 0;
             height: 0;
-            right: -@time-label-height;
             top: 0;
             border: @time-label-height / 2 solid transparent;
+        }
+        &:before {
+            left: -@time-label-height;
+        }
+        &:after {
+            right: -@time-label-height;
         }
         &--is-internal&--is-from {
             left: @handle-arrow-width;
             text-align: left;
         }
         &--is-internal&--is-from&:before {
-            border-right-color: @color-draggable-area;
+            border-right-color: @color-time-markers;
         }
         &--is-internal&--is-to {
             right: @handle-arrow-width;
             text-align: right;
         }
         &--is-internal&--is-to&:after {
-            border-left-color: @color-draggable-area;
+            border-left-color: @color-time-markers;
         }
 
         &--is-external&--is-from {
@@ -182,15 +222,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             text-align: right;
         }
         &--is-external&--is-from&:after {
-            border-left-color: @color-draggable-area;
+            border-left-color: @color-time-markers;
         }
         &--is-external&--is-to {
             right: -(@time-labels-width + @draggable-handle-width);
             text-align: left;
         }
         &--is-external&--is-to&:before {
-            border-right-color: @color-draggable-area;
+            border-right-color: @color-time-markers;
         }
     }
-
+    &--is-mouse-over &__time--is-external&__time--is-from {
+        left: -(@time-labels-width + @draggable-handle-width-on-hover);
+    }
+    &--is-mouse-over &__time--is-external&__time--is-to {
+        right: -(@time-labels-width + @draggable-handle-width-on-hover);
+    }
 }

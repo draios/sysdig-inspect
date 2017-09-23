@@ -14,6 +14,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
+<div class="sd-viz-timeline__axis"></div>
+
 <div class="sd-viz-timeline__left-area" style={{leftAreaStyle}}>
     {{sd-viz-timeline-draggable-handle drag=(action "dragLeft")}}
 </div>
@@ -30,13 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         {{if isTimeDiffLabelOnTop "sd-viz-timeline__time-diff--is-on-top"}}
         "
     >
-        <div class="sd-viz-timeline__time-diff-icon">
-            {{svg-jar "chevron_left_black" class="sd-icon sd-icon--primary" width="16px" height="16px"}}
-        </div>
         duration: {{number-to-string selectedDiff dataType="relativeTime"}}
-        <div class="sd-viz-timeline__time-diff-icon">
-            {{svg-jar "chevron_right_black" class="sd-icon sd-icon--primary" width="16px" height="16px"}}
-        </div>
     </div>
 
     <div class="sd-viz-timeline__time

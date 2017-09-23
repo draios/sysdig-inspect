@@ -29,11 +29,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 {{#if summaryDataStore.hasLoaded}}
                     {{sd-viz-timeline
                         timeline=timeline
+                        captureInfo=captureInfo
                         timelinesWidth=timelinesWidth
                         from=captureTimeWindow.from
                         to=captureTimeWindow.to
                         selectedFrom=selectedTimeWindow.from
                         selectedTo=selectedTimeWindow.to
+                        isMouseOver=isMouseOver
                         select=(action selectTimeWindow)
                     }}
                 {{/if}}
@@ -92,7 +94,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     {{number-to-string timelineConfiguration.timeline.totalValue decimalCount=1 isValueOmitted=true}}
                 </span>
             </div>
-            <div class="wsd-metric-timelines__button">
+            <div class="wsd-metric-timelines__button {{if isMouseOver "" "wsd-metric-timelines__button--is-hidden"}}">
                 {{sd-button
                     iconName="close"
                     classNames="sd-button--fab sd-button--highlight-on-hover"
