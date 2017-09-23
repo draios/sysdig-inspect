@@ -25,7 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     @color-handle: @color-primary-lighten-5;
 
     @handle-arrow-width: 8px;
-    @draggable-handle-width: 2px + 2px + 2px + 2px + 2px;
+    @draggable-handle-width: 2px + 2px;
+    @draggable-handle-width-on-hover: 2px + 2px + 2px + 2px + 2px;
     @time-labels-width: 80px;
     @time-label-height: 14px + 2px;
     @time-diff-label-width: 160px;
@@ -67,7 +68,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         background-color: @color-draggable-area;
         cursor: ew-resize;
+
+        transition: width .1s ease;
     }
+    &:hover &__draggable-handle {
+        width: @draggable-handle-width-on-hover;
+    }
+
     &__left-area &__draggable-handle {
         right: 0;
     }
@@ -144,6 +151,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     &__time {
         background-color: @color-time-markers;
 
+        transition: all .1s ease;
+
         &:before {
             content: ' ';
             position: absolute;
@@ -192,5 +201,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             border-right-color: @color-draggable-area;
         }
     }
-
+    &:hover &__time--is-external&__time--is-from {
+        left: -(@time-labels-width + @draggable-handle-width-on-hover);
+    }
+    &:hover &__time--is-external&__time--is-to {
+        right: -(@time-labels-width + @draggable-handle-width-on-hover);
+    }
 }
