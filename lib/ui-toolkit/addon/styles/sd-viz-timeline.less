@@ -20,13 +20,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     @timeline-viewport: @timeline-height + @timeline-margin;
 
     @color-outer-area: fade(@color-primary-lighten-4, 75%);
-    @color-draggable-area: fade(@color-primary, 75%);
+    @color-draggable-area: fade(@color-primary, 55%);
+    @color-draggable-area-on-hover: fade(@color-primary, 75%);
     @color-time-markers: @color-primary-lighten-2; // exactly like @color-draggable-area, just without transparency
     @color-time-text: @color-text;
     @color-handle: @color-primary-lighten-5;
 
     @handle-arrow-width: 8px;
-    @draggable-handle-width: 2px + 2px;
+    @draggable-handle-width: 2px + 2px + 2px;
     @draggable-handle-width-on-hover: 2px + 2px + 2px + 2px + 2px;
     @time-labels-width: 82px;
     @time-label-height: 14px + 2px;
@@ -70,10 +71,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         background-color: @color-draggable-area;
         cursor: ew-resize;
 
-        transition: width .1s ease;
+        transition: all .1s ease;
     }
-    &:hover &__draggable-handle {
+    &--is-mouse-over &__draggable-handle {
         width: @draggable-handle-width-on-hover;
+        background-color: @color-draggable-area-on-hover;
     }
 
     &__left-area &__draggable-handle {
@@ -95,13 +97,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     &__handle-bar {
         background-color: @color-handle;
 
-        width: 2px;
+        width: 0;
+        margin-left: 0;
+
         height: 16px;
+
+        transition: width .1s ease;
+        transition: margin .1s ease;
     }
     &__handle-bar + &__handle-bar {
+        width: 2px;
+    }
+    &--is-mouse-over &__handle-bar {
+        width: 2px;
+    }
+    &--is-mouse-over &__handle-bar + &__handle-bar {
         margin-left: 2px;
     }
 
+    &__axis {
+        position: absolute;
+        top: (@timeline-viewport - 1) / 2;
+        height: 1px;
+        width: 100%;
+        background-color: @color-primary-lighten-2;
+    }
     &__time,
     &__time-diff {
         top: (@timeline-viewport - @time-label-height) / 2;
@@ -212,10 +232,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             border-right-color: @color-time-markers;
         }
     }
-    &:hover &__time--is-external&__time--is-from {
+    &--is-mouse-over &__time--is-external&__time--is-from {
         left: -(@time-labels-width + @draggable-handle-width-on-hover);
     }
-    &:hover &__time--is-external&__time--is-to {
+    &--is-mouse-over &__time--is-external&__time--is-to {
         right: -(@time-labels-width + @draggable-handle-width-on-hover);
     }
 }
