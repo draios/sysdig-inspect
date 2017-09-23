@@ -115,10 +115,6 @@ class Server {
             args.push(request.query.to);
         }
 
-        if ('filter' in viewInfo) {
-            args.push(viewInfo.filter);
-        }
-
         if ('viewAs' in request.query) {
             if (request.query.viewAs === 'Hex') {
                 args.push('-X');
@@ -127,8 +123,12 @@ class Server {
             }
         } else {
             args.push('-A');        
-          }
+        }
     
+        if ('filter' in viewInfo) {
+            args.push(viewInfo.filter);
+        }
+		
         response.setHeader('Content-Type', 'application/json');
         this.sysdigController.runCsysdig(args, response);
     }
