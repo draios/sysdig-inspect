@@ -58,7 +58,8 @@ As a very easy quick start, here's how to capture all of the system events on a 
 `sudo sysdig -w filename.scap`
 
 **Example Trace files**  
-(link to a couple of trace files that can be used out of the box)
+[502 Error](https://github.com/draios/sysdig-inspect/blob/master/tests/502error.scap)
+[404 Error](https://github.com/draios/sysdig-inspect/blob/master/tests/404Error.scap)
 
 Support
 ---
