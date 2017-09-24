@@ -44,6 +44,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     cursor: pointer;
 
+    a& {
+        &:link,
+        &:active,
+        &:visited {
+            color: @color-text;
+        }
+    }
+
     &:hover {
         background-color: rgba(0, 0, 0, 0.1);
     }
@@ -183,12 +191,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         svg {
             margin-right: @layout-spacing-xs;
         }
-    }
-}
-
-a.sd-button {
-    &:active,
-    &:visited {
-        color: @color-text;
     }
 }
