@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             color="white"
             tabIndex="-1"
             title="Drill down"
-            click=(action click "drillDown" row)
+            click=(action "drillDown" "view" row target=actionsTarget)
         }}
     </div>
     <div class="wsd-table-cell-actions__control">
@@ -38,7 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             color="white"
             tabIndex="-1"
             title="I/O streams"
-            click=(action click "echo" row)
+            click=(action "drillDown" "echo" row target=actionsTarget)
         }}
     </div>
     <div class="wsd-table-cell-actions__control">
@@ -49,7 +49,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             color="white"
             tabIndex="-1"
             title="Syscalls"
-            click=(action click "dig" row)
+            click=(action "drillDown" "dig" row target=actionsTarget)
         }}
     </div>
 </div>

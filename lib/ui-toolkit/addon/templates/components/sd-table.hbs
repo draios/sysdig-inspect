@@ -19,15 +19,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <div class="sd-table__head">
             <div class="sd-table__head-row">
                 {{#each columns key="id" as |column|}}
-                    {{#if column.headComponentName}}
-                        {{component
-                            column.headComponentName
-                            column=column
-                            row=row
-                        }}
-                    {{else}}
-                        {{sd-table-head-cell column=column}}
-                    {{/if}}
+                    {{component
+                        column.headComponentName
+                        column=column
+                        row=row
+                    }}
                 {{/each}}
             </div>
         </div>
@@ -38,31 +34,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 rowPadding=5
                 scrollTimeout=10
                 data-ref="body"
-                as |row|
+                as |dataRow|
             }}
                 {{#sd-table-row
-                    row=row.configuration
-                    isSelected=row.isSelected
-                    select=(action "select" row)
-                    activate=(action "activate" row)
-                    as |rowConfiguration|
+                    row=dataRow.configuration
+                    isSelected=dataRow.isSelected
+                    select=(action "select" dataRow)
+                    activate=(action "activate" dataRow)
+                    as |tableRow|
                 }}
-                    {{#each rowConfiguration.configuration.columns key="@index" as |cell|}}
-                        {{#if cell.configuration.cellComponentName}}
-                            {{component
-                                cell.configuration.cellComponentName
-                                column=column
-                                value=cell.output
-                                row=rowConfiguration.configuration
-                                cell=cell
-                                isHead=false
-                                isRowMouseOver=rowConfiguration.isMouseOver
-                                isRowSelected=row.isSelected
-                                click=(action cell.configuration.properties.clickAction target=parentView)
-                            }}
-                        {{else}}
-                            {{sd-table-cell column=column value=cell.output}}
-                        {{/if}}
+                    {{#each tableRow.configuration.columns key="@index" as |cell|}}
+                        {{component
+                            cell.configuration.cellComponentName
+                            column=cell.configuration
+                            value=cell.output
+                            row=tableRow.configuration
+                            cell=cell
+                            isRowMouseOver=tableRow.isMouseOver
+                            isRowSelected=dataRow.isSelected
+                            actionsTarget=parentView
+                        }}
                     {{/each}}
                 {{/sd-table-row}}
             {{/virtual-each}}

@@ -89,8 +89,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         display: flex;
         overflow: hidden;
 
+        padding: 0 @layout-padding-xs;
+
         &__content {
             .text-overflow();
+        }
+
+        &--is-right-aligned {
+            justify-content: flex-end;
         }
     }
 }
