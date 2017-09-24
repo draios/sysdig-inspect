@@ -15,9 +15,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
 {{#if isTokenized}}
-{{!-- NOTE: You can't create white-space otherwise there    --}}
-{{!-- would be a little bit of space between spans          --}}
-{{#each output key="@index" as |token|}}<span class="sd-tokenized-output__token {{if token.isMatch "sd-tokenized-output__token--is-match"}} {{if token.isMatchSelected "sd-tokenized-output__token--is-match-selected"}}">{{token.output}}</span>{{/each}}
+    {{#if isPre}}
+        {{!-- NOTE: You can't create white-space otherwise there    --}}
+        {{!-- would be a little bit of space between spans          --}}
+        <pre>{{#each output key="@index" as |token|}}<span class="sd-tokenized-output__token {{if token.isMatch "sd-tokenized-output__token--is-match"}} {{if token.isMatchSelected "sd-tokenized-output__token--is-match-selected"}}">{{token.output}}</span>{{/each}}</pre>
+    {{else}}
+        {{!-- NOTE: You can't create white-space otherwise there    --}}
+        {{!-- would be a little bit of space between spans          --}}
+        {{#each output key="@index" as |token|}}
+            <span class="sd-tokenized-output__token {{if token.isMatch "sd-tokenized-output__token--is-match"}} {{if token.isMatchSelected "sd-tokenized-output__token--is-match-selected"}}">
+                {{token.output}}
+            </span>
+        {{/each}}
+    {{/if}}
 {{else}}
-{{output}}
+    {{#if isPre}}
+        <pre>{{output}}</pre>
+    {{else}}
+        {{output}}
+    {{/if}}
 {{/if}}
