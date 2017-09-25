@@ -2,6 +2,9 @@
 'use strict';
 
 module.exports = function(environment) {
+    const userTrackingKeyIndex = process.argv.indexOf('--user-tracking-key');
+    const userTrackingKey = userTrackingKeyIndex >= 0 ? process.argv[userTrackingKeyIndex + 1] : null;
+
     let ENV = {
         targetEnv: 'electron',
         modulePrefix: 'sysdig-inspect',
@@ -22,8 +25,7 @@ module.exports = function(environment) {
         APP: {
             // Here you can pass flags/options to your application instance
             // when it is created
-            IS_USER_TRACKING_ENABLED: false,
-            USER_TRACKING_KEY: null,
+            USER_TRACKING_KEY: userTrackingKey || 'WT6G8p7jNZkbrRp6fcUFjiMyA8qZj7C9',
         }
     };
 
@@ -33,9 +35,6 @@ module.exports = function(environment) {
         // ENV.APP.LOG_TRANSITIONS = true;
         // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
         // ENV.APP.LOG_VIEW_LOOKUPS = true;
-
-        ENV.APP.IS_USER_TRACKING_ENABLED = true;
-        ENV.APP.USER_TRACKING_KEY = 'WT6G8p7jNZkbrRp6fcUFjiMyA8qZj7C9';
     }
 
     if (environment === 'test') {
