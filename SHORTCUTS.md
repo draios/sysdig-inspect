@@ -18,6 +18,8 @@ Here is a list of the shortcuts available in Sysdig Inspect:
 **Tables**
 * Change selection: <kbd>up</kbd>, <kbd>down</kbd>
 * Drill down: <kbd>enter</kbd> (or double-click)
+* I/O streams for selection: <kbd>e</kbd>
+* Syscalls for selection: <kbd>d</kbd>
 * Sysdig filter: <kbd>s</kbd> (apply with <kbd>enter</kbd> and reset with <kbd>esc</kbd>)
 * Text find: <kbd>f</kbd> (you can then reset the filter with <kbd>esc</kbd>)
 
