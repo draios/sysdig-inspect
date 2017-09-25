@@ -14,24 +14,20 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
-{{#if isBodyHeightKnown}}
-    <div class="sd-table__wrap">
+{{#if isSizeKnown}}
+    <div class="sd-table__wrap" style={{tableWrapStyle}}>
+        <style class="style">
+            {{{tableStyle}}}
+        </style>
         <div class="sd-table__head">
             <div class="sd-table__head-row">
                 {{#each columns key="id" as |column|}}
-                    {{#if column.headComponentName}}
-                        {{component
-                            column.headComponentName
-                            row=row
-                            column=column
-                        }}
-                    {{else}}
-                        <div class="sd-table__head-cell">
-                            <div class="sd-table__cell-content">
-                                {{column.name}}
-                            </div>
-                        </div>
-                    {{/if}}
+                    {{component
+                        column.headComponentName
+                        column=column
+                        row=row
+                        columnWidthUnit=columnWidthUnit
+                    }}
                 {{/each}}
             </div>
         </div>
@@ -42,33 +38,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 rowPadding=5
                 scrollTimeout=10
                 data-ref="body"
-                as |row|
+                as |dataRow|
             }}
                 {{#sd-table-row
-                    row=row.configuration
-                    isSelected=row.isSelected
-                    select=(action "select" row)
-                    activate=(action "activate" row)
-                    as |rowConfiguration|
+                    row=dataRow.configuration
+                    isSelected=dataRow.isSelected
+                    actionsTarget=parentView
+                    width=width
+                    scrollX=scrollX
+                    select=(action "select" dataRow)
+                    activate=(action "activate" dataRow)
+                    as |tableRow|
                 }}
-                    {{#each rowConfiguration.configuration.columns key="@index" as |cell|}}
-                        {{#if cell.configuration.cellComponentName}}
-                            {{component
-                                cell.configuration.cellComponentName
-                                row=rowConfiguration.configuration
-                                cell=cell
-                                isHead=false
-                                isRowMouseOver=rowConfiguration.isMouseOver
-                                isRowSelected=row.isSelected
-                                click=(action cell.configuration.properties.clickAction target=parentView)
-                            }}
-                        {{else}}
-                            <div class="sd-table__cell">
-                                <div class="sd-table__cell-content">
-                                    {{sd-tokenized-output output=cell.output}}
-                                </div>
-                            </div>
-                        {{/if}}
+                    {{#each tableRow.configuration.columns key="@index" as |cell|}}
+                        {{component
+                            cell.configuration.cellComponentName
+                            column=cell.configuration
+                            value=cell.output
+                            row=tableRow.configuration
+                            cell=cell
+                            isRowSelected=dataRow.isSelected
+                            columnWidthUnit=columnWidthUnit
+                        }}
                     {{/each}}
                 {{/sd-table-row}}
             {{/virtual-each}}

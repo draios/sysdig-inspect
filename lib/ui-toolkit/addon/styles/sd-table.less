@@ -21,22 +21,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     //
     // BEGIN OF layout/overflow
     //
+    flex: 1;
     display: flex;
-    flex-direction: column;
 
     background-color: @color-background-data;
 
-    flex: 1;
-
-    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
 
     &__wrap {
         display: flex;
         flex-direction: column;
-
-        flex: 1;
-
-        overflow-x: auto;
     }
 
     &__head,
@@ -46,12 +41,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     }
     &__head {
         height: @row-height;
+
+        overflow-y: hidden;
     }
     &__body {
         flex: 1;
-
-        overflow-y: auto;
-        overflow-x: hidden;
     }
 
     &__head-row {
@@ -59,12 +53,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         display: flex;
         line-height: @row-height;
     }
-
-    &__head-cell,
-    &__cell {
-        flex: 1 0 @cell-min-width;
-        display: flex;
-        overflow: hidden;
+    &__head-row {
+        width: 100%;
     }
     //
     // END OF layout/overflow
@@ -74,6 +64,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     }
 
     &__head-row {
+        position: relative;
+
         font-weight: @font-weight-semibold;
 
         // let padding sit to the far right side of the table
@@ -83,7 +75,54 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         border-top: none;
     }
 
-    &__cell-content {
-        .text-overflow();
+    //
+    // BEGIN ON nested components
+    //
+    &-row {
+        position: relative;
+
+        width: 100%;
+
+        height: @row-height;
+        display: flex;
+        line-height: @row-height - @layout-padding-sm;
+
+        // let padding sit to the far right side of the table
+        padding: @layout-padding-sm / 2 @layout-padding-sm;
+
+        border: 1px solid @color-separator-light;
+        border-top: none;
+
+        .selectable-with-background();
+        .focusable-with-background();
+
+        &--is-not-search-match {
+            color: fade(@color-text, 50%)
+        }
     }
+
+    &-head-cell,
+    &-cell {
+        flex: 1;
+        min-width: @cell-min-width;
+        display: flex;
+        overflow: hidden;
+
+        padding: 0 @layout-padding-xs;
+
+        &__content {
+            flex: 1;
+            .text-overflow();
+        }
+
+        &--is-right-aligned {
+            justify-content: flex-end;
+        }
+        &--is-right-aligned &__content {
+            text-align: right;
+        }
+    }
+    //
+    // END ON nested components
+    //
 }
