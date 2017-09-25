@@ -17,7 +17,7 @@ Where to start?
 
 Latest version: 0.1.3.
 
-You can download the application from [download.sysdig.com/stable/sysdig-inspect/sysdig-inspect-0.1.3-mac.dmg](https://goo.gl/PXF52Y).
+You can download the [Sysdig Inspect installer from download.sysdig.com](https://goo.gl/PXF52Y).
 
 **Note**: At this time Sysdig Inspect can be installed on MAC OSX only.
 
