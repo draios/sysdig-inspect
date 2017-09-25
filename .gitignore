@@ -19,4 +19,4 @@ package.json.ember-try
 
 # electron
 electron-out/
-ember-electron/resources-darwin/sysdig
+ember-electron/resources/sysdig

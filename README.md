@@ -4,11 +4,11 @@
 
 ---
 
-Sysdig Inspect is an interactive sysdig trace file analyzer that runs on your Mac or PC.
+Sysdig Inspect is a powerful interface for container troubleshooting and security investigation
 
 Inspect's user interface is designed to intuitively navigate the data-dense sysdig captures that contain granular system, network, and application activity of a Linux system. Sysdig Inspect helps you understand trends, correlate metrics and find the needle in the haystack. It comes packed with features designed to support both performance and security investigations, with deep container introspection.
 
-To use Sysdig Inspect, you need trace files collected on Linux with [sysdig](https://github.com/draios/sysdig).
+To use Sysdig Inspect, you need capture files collected on Linux with [sysdig](https://github.com/draios/sysdig).
 
 Where to start?
 ---
@@ -26,25 +26,25 @@ Main Features
 ---
 **Instant highlights**  
 
-(screenshot)  
+![Instant Highlights](/assets/screenshots/Sysdig-Inspect-1.png)
 
-The overview page offers an out of the box, at a glance summary of the content of the trace file. Content is organized in tiles, each of which shows the value of a relevant metric and its trend. Tiles are organized in categories to surface useful information more clearly and are starting point for investigation and drill down.
+The overview page offers an out of the box, at a glance summary of the content of the capture file. Content is organized in tiles, each of which shows the value of a relevant metric and its trend. Tiles are organized in categories to surface useful information more clearly and are starting point for investigation and drill down.
 
 **Sub-second microtrends and metric correlation**  
 
-(screenshot)  
- 
+![Sub-second microtrends and metric correlation](/assets/screenshots/Sysdig-Inspect-2.png)
+
 Once you click on a tile, you will see the sub-second trend of the metric shown by the tile. Yes, sub-second. You will be amazed at how different your system, containers and applications look at this level of granularity.  Multiple tiles can be selected to see how metrics correlate to each other and identify hot spots.
 
 **Intuitive drill-down-oriented workflow**  
 
-(screenshot)  
+![Intuitive drill-down-oriented workflow](/assets/screenshots/Sysdig-Inspect-3.png)
 
 You can drill down into any tile to see the data behind it and start investigating. At this point you can either use the timeline to restrict what data you are seeing, or further drill down by double clicking on any line of data. You will be able to see processes, files, network connections and much more.
 
 **Payloads and system calls visualization**
 
-(screenshot)
+![Payloads and system calls visualization](/assets/screenshots/Sysdig-Inspect-4.png)
 
 Every single byte of data that is read or written to a file, to a network connection to a pipe is recorded in the trace file and Sysdig Inspect makes it easy to observe it. Do you need to troubleshoot an intermittent network issue or determine what a malware wrote to the file system? All the data you need is there. And, of course, you can switch at any time into sysdig mode and look at every single system call.
 
