@@ -96,7 +96,7 @@ export default Ember.Route.extend({
 
                     return {
                         viewId: step.viewId,
-                        selection: selection,
+                        selection,
                     };
                 });
             } else {
