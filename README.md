@@ -40,13 +40,13 @@ Once you click on a tile, you will see the sub-second trend of the metric shown 
 
 (screenshot)  
 
-You can double-click on a tile to see the data behind it and start a drill down session. At this point you can either use the timeline to restrict what data you are seeing, or further drill down by double clicking on any line of data. You will be able to see processes, files, network connections and much more.
+You can drill down into any tile to see the data behind it and start investigating. At this point you can either use the timeline to restrict what data you are seeing, or further drill down by double clicking on any line of data. You will be able to see processes, files, network connections and much more.
 
 **Payloads and system calls visualization**
 
 (screenshot)
 
-Every single byte of data that is read or written to a file, to a network connection to a pipe is recorded in the trace file and Sysdig Inspect makes it easy to observe it. Do you need to troubleshoot an intermittent network issues or determine what a malware wrote to the file system? All the data you need is there. And, of course, you can switch at any time into sysdig mode and look at every single system calls.
+Every single byte of data that is read or written to a file, to a network connection to a pipe is recorded in the trace file and Sysdig Inspect makes it easy to observe it. Do you need to troubleshoot an intermittent network issue or determine what a malware wrote to the file system? All the data you need is there. And, of course, you can switch at any time into sysdig mode and look at every single system call.
 
 Collecting & Loading Captures
 ---
