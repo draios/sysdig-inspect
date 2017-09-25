@@ -14,8 +14,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: @font-family;
     font-size: @font-size-md;
     font-weight: @font-weight-light;
     line-height: @font-line-height-md;
@@ -23,8 +26,9 @@ body {
     color: @color-text;
 }
 
-* {
-    box-sizing: border-box;
+body,
+button {
+    font-family: @font-family;
 }
 
 p + p {
