@@ -54,15 +54,25 @@ export default Ember.Route.extend({
     },
 
     trackVisit() {
+        const drillDown = serializeDrillDown(this.get('drilldownManager'), this.get('controller.model.viewId'), this.get('controller.model.capture.queryParams.drilldownInfoParam'));
+        const current = drillDown[drillDown.length - 1] || { viewId: 'overview', selection: null };
+        const previous = drillDown[drillDown.length - 2];
+
         this.get('userTracking').visit({
             route: 'capture.views.view',
-            view: this.get('controller.model.viewId'),
-            'sysdig filter': this.get('controller.model.filter'),
-            find: this.get('controller.model.searchPattern'),
+
+            timelines: serializeTimelines(this.get('controller.model.capture.queryParams.metricTimelinesParam')),
+
+            view: current.viewId,
+            'selection': current.selection,
+            'previous view': previous ? previous.viewId : null,
+            'previous selection': previous ? previous.selection : null,
+            'drill down': drillDown.map((step) => `${step.viewId} + ${step.selection}`).join(' > '),
+
+            'sysdig filter': Ember.isEmpty(this.get('controller.model.filter')) ? null : 'set',
+            find: Ember.isEmpty(this.get('controller.model.searchPattern')) ? null : 'set',
             from: this.get('controller.model.capture.queryParams.timeFrom'),
             to: this.get('controller.model.capture.queryParams.timeTo'),
-            timelines: serializeTimelines(this.get('controller.model.capture.queryParams.metricTimelinesParam')),
-            'drill down': serializeDrillDown(this.get('drilldownManager'), this.get('controller.model.viewId'), this.get('controller.model.capture.queryParams.drilldownInfoParam')),
         });
 
         function serializeTimelines(param) {
@@ -77,10 +87,20 @@ export default Ember.Route.extend({
                 });
 
                 return steps.map((step) => {
-                    return `${step.viewId} > ${step.selection || 'no selection'}`;
-                }).join(', ');
+                    let selection;
+                    if (step.viewId === 'overview') {
+                        selection = step.selection || null;
+                    } else {
+                        selection = Ember.isEmpty(step.selection) ? null : 'set';
+                    }
+
+                    return {
+                        viewId: step.viewId,
+                        selection: selection,
+                    };
+                });
             } else {
-                return '';
+                return [];
             }
         }
     },
