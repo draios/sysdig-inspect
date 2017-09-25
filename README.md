@@ -4,11 +4,11 @@
 
 ---
 
-Sysdig Inspect is an interactive sysdig trace file analyzer that runs on your Mac or PC.
+Sysdig Inspect is a powerful interface for container troubleshooting and security investigation
 
 Inspect's user interface is designed to intuitively navigate the data-dense sysdig captures that contain granular system, network, and application activity of a Linux system. Sysdig Inspect helps you understand trends, correlate metrics and find the needle in the haystack. It comes packed with features designed to support both performance and security investigations, with deep container introspection.
 
-To use Sysdig Inspect, you need trace files collected on Linux with [sysdig](https://github.com/draios/sysdig).
+To use Sysdig Inspect, you need capture files collected on Linux with [sysdig](https://github.com/draios/sysdig).
 
 Where to start?
 ---
@@ -28,7 +28,7 @@ Main Features
 
 ![Instant Highlights](/assets/screenshots/Sysdig-Inspect-1.png)
 
-The overview page offers an out of the box, at a glance summary of the content of the trace file. Content is organized in tiles, each of which shows the value of a relevant metric and its trend. Tiles are organized in categories to surface useful information more clearly and are starting point for investigation and drill down.
+The overview page offers an out of the box, at a glance summary of the content of the capture file. Content is organized in tiles, each of which shows the value of a relevant metric and its trend. Tiles are organized in categories to surface useful information more clearly and are starting point for investigation and drill down.
 
 **Sub-second microtrends and metric correlation**  
 
