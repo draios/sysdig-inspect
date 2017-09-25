@@ -30,6 +30,18 @@ module.exports = {
     "background": "assets/dmg/installer-background.png",
     "icon-size": 80
   },
+  "electronInstallerDebian": {
+    src: '...',
+    dest: '...',
+    name: 'sysdig-inspect',
+    bin: 'Sysdig Inspect'
+  },
+  "electronInstallerRedhat": {
+    src: '...',
+    dest: '...',
+    name: 'sysdig-inspect',
+    bin: 'Sysdig Inspect'
+  },
   "github_repository": {
     "owner": "draios",
     "name": "sysdig-inspect"
