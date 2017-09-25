@@ -17,7 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+    userTracking: Ember.inject.service('user-tracking'),
+
     beforeModel(transition) {
         this.controllerFor('application').set('serverPort', transition.queryParams.port);
+    },
+
+    setupController() {
+        this._super(...arguments);
+
+        this.get('userTracking').visit({
+            route: 'index',
+        });
     },
 });
