@@ -22,6 +22,8 @@ module.exports = function(environment) {
         APP: {
             // Here you can pass flags/options to your application instance
             // when it is created
+            IS_USER_TRACKING_ENABLED: false,
+            USER_TRACKING_KEY: null,
         }
     };
 
@@ -31,6 +33,9 @@ module.exports = function(environment) {
         // ENV.APP.LOG_TRANSITIONS = true;
         // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
         // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+        ENV.APP.IS_USER_TRACKING_ENABLED = true;
+        ENV.APP.USER_TRACKING_KEY = 'WT6G8p7jNZkbrRp6fcUFjiMyA8qZj7C9';
     }
 
     if (environment === 'test') {
