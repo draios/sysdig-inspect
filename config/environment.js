@@ -2,6 +2,9 @@
 'use strict';
 
 module.exports = function(environment) {
+    const userTrackingKeyIndex = process.argv.indexOf('--user-tracking-key');
+    const userTrackingKey = userTrackingKeyIndex >= 0 ? process.argv[userTrackingKeyIndex + 1] : null;
+
     let ENV = {
         targetEnv: 'electron',
         modulePrefix: 'sysdig-inspect',
@@ -22,6 +25,7 @@ module.exports = function(environment) {
         APP: {
             // Here you can pass flags/options to your application instance
             // when it is created
+            USER_TRACKING_KEY: userTrackingKey || 'WT6G8p7jNZkbrRp6fcUFjiMyA8qZj7C9',
         }
     };
 

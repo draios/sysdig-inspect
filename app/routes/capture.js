@@ -26,6 +26,7 @@ export default Ember.Route.extend({
 
     captureTimelines: Ember.inject.service('capture-timelines'),
     dataSearchService: Ember.inject.service('data-search'),
+    userTracking: Ember.inject.service('user-tracking'),
 
     model(params) {
         return new CaptureModel(
@@ -85,6 +86,11 @@ export default Ember.Route.extend({
         },
 
         applyFilter(filter) {
+            this.get('userTracking').action(this.get('userTracking').ACTIONS.INTERACTION, {
+                name: 'apply sysdig filter',
+                'is set': Ember.isEmpty(filter) === false,
+            });
+
             console.debug('route:application.capture', 'applyFilter', ...arguments);
             this.transitionTo('capture.views.view', this.controller.get('selectedViewId'), {
                 queryParams: this.getCurrentQueryParams({
@@ -111,6 +117,10 @@ export default Ember.Route.extend({
                     }),
                 });
             } else {
+                this.get('userTracking').action(this.get('userTracking').ACTIONS.INTERACTION, {
+                    name: 'reset timeline selection',
+                });
+
                 this.replaceWith('capture.views.view', this.controller.get('selectedViewId'), {
                     queryParams: this.getCurrentQueryParams({
                         timeFrom: undefined,

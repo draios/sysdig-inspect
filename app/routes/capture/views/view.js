@@ -23,7 +23,9 @@ export default Ember.Route.extend({
     },
 
     viewsManager: Ember.inject.service('views-manager'),
+    drilldownManager: Ember.inject.service('drilldown-manager'),
     dataSearchService: Ember.inject.service('data-search'),
+    userTracking: Ember.inject.service('user-tracking'),
 
     model(params) {
         return new ViewModel(params.id, params.filter, params.searchPattern, this.modelFor('capture'));
@@ -45,6 +47,62 @@ export default Ember.Route.extend({
                 document.title = `Sysdig Inspect - ${view.name} on ${model.capture.filePath}`;
             })
         ;
+
+        // NOTE: Time selection can be changed with the mouse, and this would perform a visit every
+        // "tick"
+        Ember.run.debounce(this, this.trackVisit, 300);
+    },
+
+    trackVisit() {
+        const drillDown = serializeDrillDown(this.get('drilldownManager'), this.get('controller.model.viewId'), this.get('controller.model.capture.queryParams.drilldownInfoParam'));
+        const current = drillDown[drillDown.length - 1] || { viewId: 'overview', selection: null };
+        const previous = drillDown[drillDown.length - 2];
+
+        this.get('userTracking').visit({
+            route: 'capture.views.view',
+
+            timelines: serializeTimelines(this.get('controller.model.capture.queryParams.metricTimelinesParam')),
+
+            view: current.viewId,
+            'selection': current.selection,
+            'previous view': previous ? previous.viewId : null,
+            'previous selection': previous ? previous.selection : null,
+            'drill down': drillDown.map((step) => `${step.viewId} + ${step.selection}`).join(' > '),
+
+            'sysdig filter': Ember.isEmpty(this.get('controller.model.filter')) ? null : 'set',
+            find: Ember.isEmpty(this.get('controller.model.searchPattern')) ? null : 'set',
+            from: this.get('controller.model.capture.queryParams.timeFrom'),
+            to: this.get('controller.model.capture.queryParams.timeTo'),
+        });
+
+        function serializeTimelines(param) {
+            return (param || '').split(',').join(', ');
+        }
+
+        function serializeDrillDown(drilldownManager, viewId, param) {
+            if (param) {
+                const steps = drilldownManager.convertFromUrl({
+                    viewId,
+                    drilldownInfoParam: param,
+                });
+
+                return steps.map((step) => {
+                    let selection;
+                    if (step.viewId === 'overview') {
+                        selection = step.selection || null;
+                    } else {
+                        selection = Ember.isEmpty(step.selection) ? null : 'set';
+                    }
+
+                    return {
+                        viewId: step.viewId,
+                        selection,
+                    };
+                });
+            } else {
+                return [];
+            }
+        }
     },
 
     deactivate() {
