@@ -30,7 +30,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     overflow-x: auto;
 
     &__wrap {
-        flex: 1;
         display: flex;
         flex-direction: column;
     }
@@ -65,6 +64,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     }
 
     &__head-row {
+        position: relative;
+
         font-weight: @font-weight-semibold;
 
         // let padding sit to the far right side of the table
@@ -78,6 +79,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     // BEGIN ON nested components
     //
     &-row {
+        position: relative;
+
         width: 100%;
 
         height: @row-height;

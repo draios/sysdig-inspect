@@ -14,8 +14,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
-{{#if isBodyHeightKnown}}
-    <div class="sd-table__wrap">
+{{#if isSizeKnown}}
+    <div class="sd-table__wrap" style={{tableWrapStyle}}>
+        <style class="style">
+            {{{tableStyle}}}
+        </style>
         <div class="sd-table__head">
             <div class="sd-table__head-row">
                 {{#each columns key="id" as |column|}}
@@ -23,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                         column.headComponentName
                         column=column
                         row=row
+                        columnWidthUnit=columnWidthUnit
                     }}
                 {{/each}}
             </div>
@@ -39,6 +43,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 {{#sd-table-row
                     row=dataRow.configuration
                     isSelected=dataRow.isSelected
+                    actionsTarget=parentView
+                    width=width
+                    scrollX=scrollX
                     select=(action "select" dataRow)
                     activate=(action "activate" dataRow)
                     as |tableRow|
@@ -50,9 +57,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             value=cell.output
                             row=tableRow.configuration
                             cell=cell
-                            isRowMouseOver=tableRow.isMouseOver
                             isRowSelected=dataRow.isSelected
-                            actionsTarget=parentView
+                            columnWidthUnit=columnWidthUnit
                         }}
                     {{/each}}
                 {{/sd-table-row}}

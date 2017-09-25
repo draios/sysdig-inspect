@@ -15,19 +15,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 .wsd-table-cell-actions {
-    &__content {
-        flex: 1;
-        .text-overflow();
-    }
+    @layout-padding: 2px;
+    position: absolute;
+    height: 24px + @layout-padding * 2;
 
-    &__controls {
-        display: none;
-    }
+    display: flex;
+    align-items: center;
 
-    &--are-controls-visible &__controls {
-        display: flex;
-        align-items: center;
-    }
+    padding: @layout-padding;
 
     &__control {
         display: flex;
