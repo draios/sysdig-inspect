@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     min-width: 130px + @layout-padding-sm * 2;
 
-    padding: @layout-padding-sm @layout-padding-md;
+    padding: @layout-padding-sm;
 
     background-color: @color-background-data;
     border-radius: 3px;
@@ -147,5 +147,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         &__action {
             top: 0;
         }
+    }
+
+    @media screen and (min-width: 1380px) {
+        padding: @layout-padding-sm @layout-padding-md;
     }
 }
