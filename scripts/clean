@@ -29,7 +29,7 @@ clean_backend() {
 }
 
 clean_bundle() {
-    cd ember-electron/resources-darwin
+    cd ember-electron/resources
 
     rm -rf sysdig
 
