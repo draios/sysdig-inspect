@@ -20,9 +20,12 @@ import utils from '../utils';
 export default Ember.Route.extend({
     shortcutsService: Ember.inject.service('keyboard-shortcuts'),
     colorProvider: Ember.inject.service('color-provider'),
+    userTracking: Ember.inject.service('user-tracking'),
 
     setupController() {
         this._super(...arguments);
+
+        this.get('userTracking').set('platformInfo', utils.getPlatformInfo());
 
         utils.addShortcut('mod+o', () => {
             this.send('openFileBrowser').openFile();

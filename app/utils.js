@@ -44,6 +44,15 @@ export function setupHookForLinks() {
     }
 }
 
+export function getPlatformInfo() {
+    if (isElectron()) {
+        const { release, platform } = requireNode('os');
+        return `${platform()} ${release()}`;
+    } else {
+        return 'browser';
+    }
+}
+
 export function addShortcut(keys, callback) {
     Mousetrap.bind(keys, callback);
 }
