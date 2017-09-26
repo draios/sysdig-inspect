@@ -59,10 +59,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <div class="wsd-metric-timelines__controls">
         <div class="wsd-metric-timelines__value">
             {{#if hoverTimestamp}}
-                {{date-time-to-string hoverTimestamp unit="ns" dataType="string"}}
+                at {{number-to-string hoverTimestampRelative dataType="relativeTime"}}
             {{/if}}
-        </div>
-        <div class="wsd-metric-timelines__button {{if isMouseOver "" "wsd-metric-timelines__button--is-hidden"}}">
         </div>
     </div>
 </div>
@@ -74,6 +72,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             </div>
             <div class="wsd-metric-timelines__name">
                {{timelineConfiguration.timeline.name}}
+            </div>
+            <div class="wsd-metric-timelines__button {{if isMouseOver "" "wsd-metric-timelines__button--is-hidden"}}">
+                {{sd-button
+                    iconName="close"
+                    classNames="sd-button--fab sd-button--highlight-on-hover"
+                    size="sm"
+                    title="Remove the metric timeline"
+                    click=(action remove timelineConfiguration.timeline.name)
+                }}
             </div>
         </div>
         <div class="wsd-metric-timelines__content">
@@ -105,15 +112,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                         {{number-to-string timelineConfiguration.hoverValue.v decimalCount=1 isValueOmitted=true}}
                     </span>
                 {{/if}}
-            </div>
-            <div class="wsd-metric-timelines__button {{if isMouseOver "" "wsd-metric-timelines__button--is-hidden"}}">
-                {{sd-button
-                    iconName="close"
-                    classNames="sd-button--fab sd-button--highlight-on-hover"
-                    size="sm"
-                    title="Remove the metric timeline"
-                    click=(action remove timelineConfiguration.timeline.name)
-                }}
             </div>
         </div>
     </div>
