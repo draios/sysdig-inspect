@@ -4,7 +4,7 @@
 
 ---
 
-Sysdig Inspect is a powerful interface for container troubleshooting and security investigation
+[Sysdig Inspect](https://sysdig.com/blog/sysdig-inspect) is a powerful interface for container troubleshooting and security investigation
 
 Inspect's user interface is designed to intuitively navigate the data-dense sysdig captures that contain granular system, network, and application activity of a Linux system. Sysdig Inspect helps you understand trends, correlate metrics and find the needle in the haystack. It comes packed with features designed to support both performance and security investigations, with deep container introspection.
 
@@ -71,7 +71,7 @@ Join the Community
 
 * Join our [Public Slack](https://slack.sysdig.com) channel for announcements and discussions.
 * Follow us on [Twitter](https://twitter.com/sysdig)
-* This is our [blog](https://sysdig.com/blog/). There are many like it, but this one is ours.
+* This is our [blog](https://sysdig.com/blog/sysdig-inspect). There are many like it, but this one is ours.
 
 License Terms
 ---
