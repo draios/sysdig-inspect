@@ -71,7 +71,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         flex: 1;
         display:flex;
         align-items: stretch;
-        margin-right: @layout-spacing-sm;
+        margin-right: @layout-spacing-xs;
 
         // prevent child to stretch the container, so that size can always be computed at run-time
         overflow: hidden;
@@ -90,14 +90,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         padding-right: @layout-spacing-md;
     }
     &__value {
-        width: 60px;
+        width: 80px;
 
-        margin-right: @layout-spacing-sm;
+        margin-right: @layout-spacing-xs;
 
         text-align: right;
-        font-size: @font-size-md;
+        font-size: @font-size-sm;
         font-weight: @font-weight-regular;
-        .text-overflow();
     }
     &__value-multiplier {
         font-weight: @font-weight-light;
