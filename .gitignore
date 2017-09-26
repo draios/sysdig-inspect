@@ -19,4 +19,5 @@ package.json.ember-try
 
 # electron
 electron-out/
-ember-electron/resources/sysdig
+ember-electron/resources/sysdig/
+ember-electron/resources/capture-samples/

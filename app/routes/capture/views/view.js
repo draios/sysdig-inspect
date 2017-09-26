@@ -57,10 +57,11 @@ export default Ember.Route.extend({
         const drillDown = serializeDrillDown(this.get('drilldownManager'), this.get('controller.model.viewId'), this.get('controller.model.capture.queryParams.drilldownInfoParam'));
         const current = drillDown[drillDown.length - 1] || { viewId: 'overview', selection: null };
         const previous = drillDown[drillDown.length - 2];
+        const filePath = this.get('controller.model.capture.filePath');
 
         this.get('userTracking').visit({
             route: 'capture.views.view',
-
+            file: filePath.startsWith('capture-samples/') ? filePath : 'n/a',
             timelines: serializeTimelines(this.get('controller.model.capture.queryParams.metricTimelinesParam')),
 
             view: current.viewId,

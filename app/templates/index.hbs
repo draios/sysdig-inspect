@@ -36,9 +36,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <div class="wsd-welcome__card-footer">
                         <a href="https://github.com/draios/sysdig/wiki/Sysdig-User-Guide" class="sd-button sd-button--lg sd-button--raised" target="_blank">User guide</a>
                     </div>
+                    <div class="wsd-welcome__card-extra-footer">
+                    </div>
                 </div>
 
-                <div class="wsd-welcome__card wsd-welcome__card--selectable" {{action "openFileBrowser"}}>
+                <div class="wsd-welcome__card">
                     <div class="wsd-welcome__card-header">
                         Inspect
                     </div>
@@ -65,6 +67,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             }}
                         {{/if}}
                     </div>
+                    <div class="wsd-welcome__card-extra-footer">
+                        {{#if isElectron}}
+                            or try one of the
+                            {{#link-to "capture" "capture-samples/502Error.scap"}}capture{{/link-to}}
+                            {{#link-to "capture" "capture-samples/rootkit_install.scap"}}samples{{/link-to}}
+                        {{/if}}
+                    </div>
                 </div>
                 <div class="wsd-welcome__card">
                     <div class="wsd-welcome__card-header">
@@ -75,6 +84,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </div>
                     <div class="wsd-welcome__card-footer">
                         <a href="https://slack.sysdig.com" class="sd-button sd-button--lg sd-button--raised" target="_blank">slack.sysdig.com</a>
+                    </div>
+                    <div class="wsd-welcome__card-extra-footer">
                     </div>
                 </div>
             </div>
