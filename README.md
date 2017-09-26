@@ -61,15 +61,10 @@ As a very easy quick start, here's how to capture all of the system events on a 
 [502 Error](https://github.com/draios/sysdig-inspect/blob/master/tests/502error.scap) Troubleshooting an HAProxy 502  
 [404 Error](https://github.com/draios/sysdig-inspect/blob/master/tests/404Error.scap) Troubleshooting a 404 error from a leaky file  
 
-Support
----
-
-For support using sysdig, please contact the [the official mailing list](https://groups.google.com/forum/#!forum/sysdig).
-
 Join the Community
 ---
 
-* Join our [Public Slack](https://slack.sysdig.com) channel for announcements and discussions.
+* Join our [Public Slack](https://slack.sysdig.com) channel for announcements discussions, and help
 * Follow us on [Twitter](https://twitter.com/sysdig)
 * This is our [blog](https://sysdig.com/blog/sysdig-inspect). There are many like it, but this one is ours.
 
