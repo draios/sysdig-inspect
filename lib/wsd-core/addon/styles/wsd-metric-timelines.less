@@ -71,7 +71,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         flex: 1;
         display:flex;
         align-items: stretch;
-        margin-right: @layout-spacing-sm;
+        margin-right: @layout-spacing-xs;
 
         // prevent child to stretch the container, so that size can always be computed at run-time
         overflow: hidden;
@@ -81,28 +81,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     }
 
     &__controls {
-        width: 100px;
+        width: 108px;
 
         display: flex;
         align-items: center;
         justify-content: flex-end;
 
-        padding-right: @layout-spacing-md;
+        padding-right: @layout-spacing-sm;
     }
     &__value {
-        width: 60px;
+        flex: 1;
 
-        margin-right: @layout-spacing-sm;
+        margin-right: @layout-spacing-xs;
 
         text-align: right;
-        font-size: @font-size-md;
+        font-size: @font-size-sm;
         font-weight: @font-weight-regular;
-        .text-overflow();
     }
     &__value-multiplier {
         font-weight: @font-weight-light;
     }
-    &__button {
+    &__control-button {
+        width: 24px;
         transition: opacity .1s ease;
         &--is-hidden {
             opacity: 0.3;

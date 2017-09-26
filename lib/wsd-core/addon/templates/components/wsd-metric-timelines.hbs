@@ -22,6 +22,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <div class="wsd-metric-timelines__name">
            TIME
         </div>
+        <div>
+            {{#if hasSelection}}
+                {{#sd-button
+                    iconName="zoom_out_map_black"
+                    classNames="sd-button--highlight-on-hover"
+                    size="sm"
+                    click=(action selectTimeWindow null null)
+                }}
+                    Reset
+                {{/sd-button}}
+            {{/if}}
+        </div>
     </div>
     <div class="wsd-metric-timelines__content">
         <div class="wsd-metric-timelines__overlay-chart" style={{overlayStyle}}>
@@ -36,24 +48,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                         selectedFrom=selectedTimeWindow.from
                         selectedTo=selectedTimeWindow.to
                         isMouseOver=isMouseOver
+                        hoverTimestamp=hoverTimestamp
                         select=(action selectTimeWindow)
+                        hover=(action "hoverTimestamp")
                     }}
                 {{/if}}
             {{/sd-promise-wait-overlay}}
         </div>
     </div>
     <div class="wsd-metric-timelines__controls">
-        <div class="wsd-metric-timelines__button">
-            {{#if hasSelection}}
-                {{#sd-button
-                    iconName="zoom_out_map_black"
-                    classNames="sd-button--highlight-on-hover"
-                    size="sm"
-                    click=(action selectTimeWindow null null)
-                }}
-                    Reset
-                {{/sd-button}}
+        <div class="wsd-metric-timelines__value">
+            {{#if hoverTimestamp}}
+                at {{number-to-string hoverTimestampRelative dataType="relativeTime"}}
             {{/if}}
+        </div>
+        <div class="wsd-metric-timelines__control-button">
         </div>
     </div>
 </div>
@@ -78,6 +87,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 timestampProp="t"
                                 valueProp="v"
                                 translateY=0
+                                hoverTimestamp=hoverTimestamp
                                 columnColor=timelineConfiguration.color
                                 data=timelineConfiguration.timeline.timeSeries
                             }}
@@ -89,12 +99,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         <div class="wsd-metric-timelines__controls">
             <div class="wsd-metric-timelines__value">
-                {{number-to-string timelineConfiguration.timeline.totalValue decimalCount=1 isMultiplierOmitted=true}}
-                <span class="wsd-metric-timelines__value-multiplier">
-                    {{number-to-string timelineConfiguration.timeline.totalValue decimalCount=1 isValueOmitted=true}}
-                </span>
+                {{#if hoverTimestamp}}
+                    {{number-to-string timelineConfiguration.hoverValue.v decimalCount=1 isMultiplierOmitted=true}}
+                    <span class="wsd-metric-timelines__value-multiplier">
+                        {{number-to-string timelineConfiguration.hoverValue.v decimalCount=1 isValueOmitted=true}}
+                    </span>
+                {{/if}}
             </div>
-            <div class="wsd-metric-timelines__button {{if isMouseOver "" "wsd-metric-timelines__button--is-hidden"}}">
+            <div class="wsd-metric-timelines__control-button {{if isMouseOver "" "wsd-metric-timelines__control-button--is-hidden"}}">
                 {{sd-button
                     iconName="close"
                     classNames="sd-button--fab sd-button--highlight-on-hover"

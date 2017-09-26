@@ -16,6 +16,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <div class="sd-viz-timeline__axis"></div>
 
+{{#if hoverTimestamp}}
+    <div class="sd-viz-timeline__hover-marker" style={{hoverMarkerStyle}}></div>
+{{/if}}
+
 <div class="sd-viz-timeline__left-area" style={{leftAreaStyle}}>
     {{sd-viz-timeline-draggable-handle drag=(action "dragLeft")}}
 </div>

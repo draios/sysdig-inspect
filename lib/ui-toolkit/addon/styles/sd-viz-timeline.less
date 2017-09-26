@@ -61,6 +61,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     &__draggable-handle {
         position: absolute;
+        z-index: 2;
         width: @draggable-handle-width;
         top: 0;
         bottom: 0;
@@ -237,5 +238,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     }
     &--is-mouse-over &__time--is-external&__time--is-to {
         right: -(@time-labels-width + @draggable-handle-width-on-hover);
+    }
+
+    &__hover-marker {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 256px;
+
+        width: 5px;
+        height: 100%;
+        background-color: fade(@color-primary-lighten-1, 40%);
     }
 }
