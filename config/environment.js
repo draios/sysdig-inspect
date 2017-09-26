@@ -25,7 +25,7 @@ module.exports = function(environment) {
         APP: {
             // Here you can pass flags/options to your application instance
             // when it is created
-            USER_TRACKING_KEY: userTrackingKey || 'WT6G8p7jNZkbrRp6fcUFjiMyA8qZj7C9',
+            USER_TRACKING_KEY: userTrackingKey,
         }
     };
 
