@@ -69,18 +69,9 @@ function createWindow(port) {
         width: Math.max(width * 0.9, 1440),
         height: 900,
     });
-    // Hide
+
+    // Remove menu bar
     mainWindow.setMenu(null);
-
-    // Register a shortcuts for open devTools
-    globalShortcut.register('CommandOrControl+Shift+I', () => {
-        mainWindow.toggleDevTools();
-    });
-
-    // Register a shortcuts for reload page
-    globalShortcut.register('CommandOrControl+R', () => {
-        mainWindow.reload();
-    });
 
     // Load the ember application using our custom protocol/scheme
     mainWindow.loadURL(createParamsUrl(port));
