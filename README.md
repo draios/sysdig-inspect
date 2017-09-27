@@ -15,11 +15,13 @@ Where to start?
 
 **Installing Sysdig Inspect**  
 
-Latest version: 0.1.42.
+Here are the installers available for the latest version:
 
-[Mac Installer](http://bit.ly/2ynTSr2)  
-[rpm Installer](https://download.sysdig.com/stable/sysdig-inspect/sysdig-inspect-0.1.42.x86_64.rpm)  
-[deb Installer](https://download.sysdig.com/stable/sysdig-inspect/sysdig-inspect_0.1.42_amd64.deb)  
+* MAC installer: https://setns.run/install-inspect
+* Linux installer (RPM version): https://setns.run/install-inspect-rpm
+* Linux installer (DEB version): https://setns.run/install-inspect-deb
+
+You can check the changelog at https://github.com/draios/sysdig-inspect/releases.
 
 
 Main Features
