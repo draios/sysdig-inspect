@@ -59,9 +59,9 @@ As a very easy quick start, here's how to capture all of the system events on a 
 
 `sudo sysdig -w filename.scap`
 
-**Example Trace files**  
-[502 Error](https://github.com/draios/sysdig-inspect/blob/master/tests/502error.scap) Troubleshooting an HAProxy 502  
-[404 Error](https://github.com/draios/sysdig-inspect/blob/master/tests/404Error.scap) Troubleshooting a 404 error from a leaky file  
+**Example Trace files**
+[502 Error](https://github.com/draios/sysdig-inspect/blob/master/capture-samples/502error.scap) Troubleshooting an HAProxy 502
+[404 Error](https://github.com/draios/sysdig-inspect/blob/master/capture-samples/404Error.scap) Troubleshooting a 404 error from a leaky file
 
 Join the Community
 ---
