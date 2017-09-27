@@ -14,20 +14,31 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Ember from 'ember';
-import electronUtils from 'wsd-core/utils/electron';
+.wsd-capture-header {
+    height: 50px;
 
-export default Ember.Controller.extend({
-    queryParams: ['port'],
-    application: Ember.inject.controller('application'),
+    display: flex;
+    align-items: center;
 
-    isElectron: Ember.computed(function() {
-        return electronUtils.isElectron();
-    }),
+    padding: 0 @layout-padding-md;
 
-    actions: {
-        openFileBrowser() {
-            this.get('application').send('openFileBrowser');
-        },
-    },
-});
+    background-color: @color-header-background;
+    .z-shadow-1();
+
+    &__logo {
+        display: flex;
+        align-items: center;
+
+        margin-right: 36px;
+
+        img {
+            height: 24px;
+        }
+    }
+
+    &__title {
+        flex: 1;
+        color: white;
+        font-size: @font-size-lg;
+    }
+}

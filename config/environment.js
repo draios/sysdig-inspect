@@ -2,14 +2,20 @@
 'use strict';
 
 module.exports = function(environment) {
+    const rootURLParamIndex = process.argv.indexOf('--root-url');
+    const rootURL = rootURLParamIndex >= 0 ? process.argv[rootURLParamIndex + 1] : '';
+
+    const targetEnvParamIndex = process.argv.indexOf('--target-env');
+    const targetEnv = targetEnvParamIndex >= 0 ? process.argv[targetEnvParamIndex + 1] : 'electron';
+
     const userTrackingKeyIndex = process.argv.indexOf('--user-tracking-key');
     const userTrackingKey = userTrackingKeyIndex >= 0 ? process.argv[userTrackingKeyIndex + 1] : null;
 
     let ENV = {
-        targetEnv: 'electron',
+        targetEnv,
         modulePrefix: 'sysdig-inspect',
         environment,
-        rootURL: '/',
+        rootURL: `/${rootURL}`,
         locationType: 'hash',
         EmberENV: {
             FEATURES: {
