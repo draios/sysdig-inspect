@@ -56,5 +56,6 @@ npm run prepare
 npm build
 npm test
 npm run package:mac
+npm run make:linux
 
 after_build
