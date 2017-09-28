@@ -47,7 +47,8 @@ after_build() {
 }
 
 uploadArtifacts() {
-    aws s3 sync electron-out s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER} --acl public-read
+    aws s3 sync electron-out/Sysdig\ Inspect-darwin-x64 s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/app/mac --acl public-read
+    aws s3 sync electron-out/make s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/installers/linux --acl public-read
 }
 
 setup_env
