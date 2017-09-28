@@ -19,6 +19,8 @@ setup_env() {
     # as stated on https://twitter.com/gavinjoyce/status/691773956144119808
     npm config set progress false
     npm config set spin false
+
+    GIT_BRANCHNAME=$(echo ${GIT_BRANCH} | cut -d"/" -f2)
 }
 
 before_build() {
@@ -45,7 +47,7 @@ after_build() {
 }
 
 uploadArtifacts() {
-    aws s3 sync electron-out s3://download.draios.com/dev/sysdig-inspect/${JOB_NAME}/${BUILD_NUMBER} --acl public-read
+    aws s3 sync electron-out s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER} --acl public-read
 }
 
 setup_env
