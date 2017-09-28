@@ -24,7 +24,6 @@ setup_env() {
 before_build() {
     GH_STATUS="pending"
     GH_DESCRIPTION="Build #${BUILD_NUMBER} started..."
-    GH_URL="https://ci.draios.com/view/sysdig-inspect/job/${JOB_NAME}/${BUILD_NUMBER}/"
     GH_CONTEXT="jenkins/sysdig-inspect"
 
     curl 'https://api.github.com/repos/draios/sysdig-inspect/statuses/'"${GIT_COMMIT}"'?access_token='"${AT}"'' \
