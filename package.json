@@ -47,7 +47,7 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-uglify": "^1.2.0",
     "ember-data": "^2.15.0",
-    "ember-electron": "2.3.1",
+    "ember-electron": "git://github.com/felixrieseberg/ember-electron.git#3801aaf5651fa46cc564dd946558325960b7f52f",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-moment": "^7.4.1",
