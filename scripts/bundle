@@ -19,7 +19,7 @@ copy_sysdig() {
 
     cp -a ${SYSDIG_PATH}/ ./sysdig/
 
-    mkdir ./sysdig/capture-samples/
+    mkdir -p ./sysdig/capture-samples/
     cp ../../capture-samples/502error.scap ./sysdig/capture-samples/
     cp ../../capture-samples/rootkit_install.scap ./sysdig/capture-samples/
 

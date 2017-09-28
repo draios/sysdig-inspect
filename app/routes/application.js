@@ -15,7 +15,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import Ember from 'ember';
-import utils from '../utils';
+import electronUtils from 'wsd-core/utils/electron';
 
 export default Ember.Route.extend({
     shortcutsService: Ember.inject.service('keyboard-shortcuts'),
@@ -25,9 +25,9 @@ export default Ember.Route.extend({
     setupController() {
         this._super(...arguments);
 
-        this.get('userTracking').set('platformInfo', utils.getPlatformInfo());
+        this.get('userTracking').set('platformInfo', electronUtils.getPlatformInfo());
 
-        utils.addShortcut('mod+o', () => {
+        electronUtils.addShortcut('mod+o', () => {
             this.send('openFileBrowser').openFile();
         });
 
@@ -75,13 +75,13 @@ export default Ember.Route.extend({
             HISTOGRAM_COLUMN_LIGHT: '#E1E3E8',
         });
 
-        utils.setupHookForLinks();
+        electronUtils.setupHookForLinks();
     },
 
     actions: {
         openFileBrowser() {
-            if (utils.isElectron()) {
-                let fileNames = utils.openFileDialog();
+            if (electronUtils.isElectron()) {
+                let fileNames = electronUtils.openFileDialog();
 
                 if (Ember.isEmpty(fileNames) === false) {
                     this.send('openFile', fileNames[0]);

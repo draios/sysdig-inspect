@@ -15,7 +15,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import Ember from 'ember';
-import utils from '../utils';
+import electronUtils from 'wsd-core/utils/electron';
 
 export default Ember.Controller.extend({
     queryParams: {
@@ -27,8 +27,6 @@ export default Ember.Controller.extend({
 
     application: Ember.inject.controller('application'),
     captureTimelines: Ember.inject.service('capture-timelines'),
-
-    isEditingFilePath: false,
 
     selectedViewId: null,
 
@@ -49,20 +47,13 @@ export default Ember.Controller.extend({
 
     actions: {
         openFileBrowser() {
-            if (utils.isElectron()) {
+            if (electronUtils.isElectron()) {
                 this.get('application').send('openFileBrowser');
-            } else {
-                this.set('isEditingFilePath', true);
             }
         },
 
         openFile(value) {
-            this.set('isEditingFilePath', false);
             this.get('application').send('openFile', value);
-        },
-
-        cancelFilePathEditing() {
-            this.set('isEditingFilePath', false);
         },
     },
 });
