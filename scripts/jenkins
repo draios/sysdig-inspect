@@ -44,6 +44,10 @@ after_build() {
     -d '{"state": "'"${GH_STATUS}"'", "context": "'"${GH_CONTEXT}"'", "description": "'"${GH_DESCRIPTION}"'", "target_url": "'"${GH_URL}"'"}'
 }
 
+uploadArtifacts() {
+    aws s3 sync electron-out s3://download.draios.com/dev/sysdig-inspect/${JOB_NAME}/${BUILD_NUMBER} --acl public-read
+}
+
 setup_env
 
 before_build
@@ -54,5 +58,7 @@ npm build
 npm test
 npm run package:mac
 npm run make:linux
+
+uploadArtifacts
 
 after_build
