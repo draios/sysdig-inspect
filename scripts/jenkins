@@ -47,8 +47,6 @@ after_build() {
 }
 
 uploadArtifacts() {
-    ls -lan
-    ls -lan /
     cd electron-out
 
     zip -ry Sysdig\ Inspect-darwin-x64.zip Sysdig\ Inspect-darwin-x64
@@ -70,9 +68,8 @@ npm test
 npm run package:mac
 npm run make:linux
 
-npm run clean
-
 uploadArtifacts
-cleanup
+
+npm run clean
 
 after_build
