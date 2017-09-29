@@ -46,6 +46,19 @@ after_build() {
     -d '{"state": "'"${GH_STATUS}"'", "context": "'"${GH_CONTEXT}"'", "description": "'"${GH_DESCRIPTION}"'", "target_url": "'"${GH_URL}"'"}'
 }
 
+downloadSysdigBinaries() {
+    # Linux binaries
+    SYSDIG_VERSION="0.18.0"
+    id=$(docker create sysdig/sysdig:$SYSDIG_VERSION)
+    docker cp $id:/usr/bin/sysdig deps/sysdig-linux
+    docker rm -v $id
+    docker rmi sysdig/sysdig:$SYSDIG_VERSION
+
+    # Mac binaries
+    aws s3 cp s3://download.draios.com/dependencies/sysdig-sysdig-inspect-${SYSDIG_VERSION}.zip sysdig.zip
+    unzip -d deps/sysdig-mac sysdig.zip
+}
+
 uploadArtifacts() {
     cd electron-out
 
@@ -65,7 +78,12 @@ npm run clean
 npm run prepare
 npm build
 npm test
+
+npm run bundle deps/sysdig-linux
 npm run package:mac
+rm -rf ember-electron/resources/sysdig
+
+npm run bundle deps/sysdig-linux
 npm run make:linux
 
 uploadArtifacts
