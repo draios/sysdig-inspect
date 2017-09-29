@@ -50,7 +50,7 @@ uploadArtifacts() {
     cd electron-out
 
     zip -ry Sysdig\ Inspect-darwin-x64.zip Sysdig\ Inspect-darwin-x64
-    aws s3 cp Sysdig\ Inspect-darwin-x64.zip s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/app/mac --acl public-read
+    aws s3 cp Sysdig\ Inspect-darwin-x64.zip s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/app/mac/Sysdig\ Inspect-darwin-x64.zip --acl public-read
     aws s3 sync make s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/installers/linux --acl public-read
 
     cd ..
