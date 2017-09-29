@@ -13,7 +13,7 @@ To use Sysdig Inspect, you need capture files collected on Linux with [sysdig](h
 Where to start?
 ---
 
-**Installing Sysdig Inspect**  
+**Installing Sysdig Inspect**
 
 Here are the installers available for the latest version:
 
@@ -26,19 +26,19 @@ You can check the changelog at https://github.com/draios/sysdig-inspect/releases
 
 Main Features
 ---
-**Instant highlights**  
+**Instant highlights**
 
 ![Instant Highlights](/assets/screenshots/Sysdig-Inspect-1.png)
 
 The overview page offers an out of the box, at a glance summary of the content of the capture file. Content is organized in tiles, each of which shows the value of a relevant metric and its trend. Tiles are organized in categories to surface useful information more clearly and are starting point for investigation and drill down.
 
-**Sub-second microtrends and metric correlation**  
+**Sub-second microtrends and metric correlation**
 
 ![Sub-second microtrends and metric correlation](/assets/screenshots/Sysdig-Inspect-2.png)
 
 Once you click on a tile, you will see the sub-second trend of the metric shown by the tile. Yes, sub-second. You will be amazed at how different your system, containers and applications look at this level of granularity.  Multiple tiles can be selected to see how metrics correlate to each other and identify hot spots.
 
-**Intuitive drill-down-oriented workflow**  
+**Intuitive drill-down-oriented workflow**
 
 ![Intuitive drill-down-oriented workflow](/assets/screenshots/Sysdig-Inspect-3.png)
 
@@ -52,8 +52,8 @@ Every single byte of data that is read or written to a file, to a network connec
 
 Collecting & Loading Captures
 ---
-**Creating a capture file**  
-Sysdig Inspect works with capture files that have been collcted by [sysdig](https://github.com/draios/sysdig) on a Linux system. The [sysdig user guide](https://github.com/draios/sysdig/wiki/Sysdig-User-Guide) contains a nice introduction to the tool and includes many examples that can guide you through the command line and filtering syntax. 
+**Creating a capture file**
+Sysdig Inspect works with capture files that have been collected by [sysdig](https://github.com/draios/sysdig) on a Linux system. The [sysdig user guide](https://github.com/draios/sysdig/wiki/Sysdig-User-Guide) contains a nice introduction to the tool and includes many examples that can guide you through the command line and filtering syntax.
 
 As a very easy quick start, here's how to capture all of the system events on a Linux box with sysdig:
 
