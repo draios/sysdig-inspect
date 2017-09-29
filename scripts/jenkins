@@ -48,6 +48,7 @@ after_build() {
 
 uploadArtifacts() {
     ls -lan
+    ls -lan /
     cd electron-out
 
     zip -ry Sysdig\ Inspect-darwin-x64.zip Sysdig\ Inspect-darwin-x64
