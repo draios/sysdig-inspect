@@ -79,6 +79,8 @@ npm run prepare
 npm build
 npm test
 
+downloadSysdigBinaries
+
 npm run bundle deps/sysdig-linux
 npm run package:mac
 rm -rf ember-electron/resources/sysdig
