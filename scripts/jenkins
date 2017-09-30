@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SYSDIG_VERSION="0.18.0"
+
 NODE_VERSION="v6.11.2"
 
 setup_env() {
@@ -47,13 +49,13 @@ after_build() {
 }
 
 download_sysdig_binaries() {
-    SYSDIG_VERSION="0.18.0"
 
     # Linux binaries
     aws s3 cp s3://download.draios.com/stable/tgz/i686/sysdig-${SYSDIG_VERSION}-i686.tar.gz deps/sysdig-linux/sysdig.tar
     cd deps/sysdig-linux
     tar -xvf sysdig.tar
-    ls -lna
+    rm -rf sysdig.tar
+    ls -lna sysdig-${SYSDIG_VERSION}-i686
     cd ../..
 
     # id=$(docker create sysdig/sysdig:$SYSDIG_VERSION)
@@ -92,7 +94,7 @@ npm run bundle deps/sysdig-mac
 npm run package:mac
 
 rm -rf ember-electron/resources/sysdig
-npm run bundle deps/sysdig-linux
+npm run bundle deps/sysdig-linux/sysdig-${SYSDIG_VERSION}-i686
 npm run make:linux
 
 upload_artifacts
