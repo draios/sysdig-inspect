@@ -50,8 +50,10 @@ download_sysdig_binaries() {
     SYSDIG_VERSION="0.18.0"
 
     # Linux binaries
-    aws s3 cp s3://download.draios.com/stable/tgz/i686/sysdig-${SYSDIG_VERSION}-i686.tar.gz sysdig.tar.gz
-    unzip -d deps/sysdig-linux sysdig.zip
+    aws s3 cp s3://download.draios.com/stable/tgz/i686/sysdig-${SYSDIG_VERSION}-i686.tar.gz deps/sysdig-linux/sysdig.tar
+    ls -lna deps/sysdig-linux
+    tar -xfz deps/sysdig-linux/sysdig.tar
+    ls -lna deps/sysdig-linux
     # id=$(docker create sysdig/sysdig:$SYSDIG_VERSION)
     # docker cp $id:/usr/bin/sysdig deps/sysdig-linux
     # docker rm -v $id
