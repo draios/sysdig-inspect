@@ -49,13 +49,14 @@ after_build() {
 }
 
 download_sysdig_binaries() {
+    rm -rf deps
 
     # Linux binaries
     aws s3 cp s3://download.draios.com/stable/tgz/i686/sysdig-${SYSDIG_VERSION}-i686.tar.gz deps/sysdig-linux/sysdig.tar
     cd deps/sysdig-linux
     tar -xvf sysdig.tar
     cp -a sysdig-${SYSDIG_VERSION}-i686/usr/share/sysdig/ dist/
-    cp -a sysdig-${SYSDIG_VERSION}-i686/usr/bin/ dist/
+    cp sysdig-${SYSDIG_VERSION}-i686/usr/bin/* dist/
     ls -lna dist
     cd ../..
 
