@@ -57,7 +57,6 @@ download_sysdig_binaries() {
     tar -xvf sysdig.tar
     cp -a sysdig-${SYSDIG_VERSION}-i686/usr/share/sysdig/ dist/
     cp sysdig-${SYSDIG_VERSION}-i686/usr/bin/* dist/
-    ls -lna dist
     cd ../..
 
     # id=$(docker create sysdig/sysdig:$SYSDIG_VERSION)
@@ -68,6 +67,8 @@ download_sysdig_binaries() {
     # Mac binaries
     aws s3 cp s3://download.draios.com/dependencies/sysdig-sysdig-inspect-${SYSDIG_VERSION}.zip sysdig.zip
     unzip -d deps/sysdig-mac sysdig.zip
+
+    ls deps *
 }
 
 upload_artifacts() {
