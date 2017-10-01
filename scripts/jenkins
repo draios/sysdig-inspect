@@ -67,9 +67,6 @@ download_sysdig_binaries() {
     # Mac binaries
     aws s3 cp s3://download.draios.com/dependencies/sysdig-sysdig-inspect-${SYSDIG_VERSION}.zip sysdig.zip
     unzip -d deps/sysdig-mac sysdig.zip
-
-    ls deps/sysdig-linux/dist *
-    ls deps/sysdig-mac *
 }
 
 upload_artifacts() {
