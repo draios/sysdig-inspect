@@ -2,6 +2,19 @@
 
 SYSDIG_VERSION="0.18.0"
 
+set +u
+
+#
+# Set default user tracking key
+#
+if [ -z ${USER_TRACKING_KEY} ]
+then
+    USER_TRACKING_KEY=
+fi
+
+set -u
+
+
 NODE_VERSION="v6.11.2"
 
 setup_env() {
