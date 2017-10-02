@@ -99,11 +99,11 @@ npm test
 download_sysdig_binaries
 
 npm run bundle deps/sysdig-mac
-npm run package:mac
+npm run package:mac -- --environment ${ENVIRONMENT} --user-tracking-key ${USER_TRACKING_KEY}
 
 sudo rm -rf ember-electron/resources/sysdig
 npm run bundle deps/sysdig-linux
-npm run make:linux
+npm run make:linux -- --environment ${ENVIRONMENT} --user-tracking-key ${USER_TRACKING_KEY}
 
 upload_artifacts
 
