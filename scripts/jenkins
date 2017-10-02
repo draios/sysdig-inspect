@@ -64,14 +64,6 @@ after_build() {
 download_sysdig_binaries() {
     sudo rm -rf deps
 
-    # Linux binaries
-    # aws s3 cp s3://download.draios.com/stable/tgz/i686/sysdig-${SYSDIG_VERSION}-i686.tar.gz deps/sysdig-linux/sysdig.tar
-    # cd deps/sysdig-linux
-    # tar -xvf sysdig.tar
-    # cp -a sysdig-${SYSDIG_VERSION}-i686/usr/share/sysdig/ dist/
-    # cp sysdig-${SYSDIG_VERSION}-i686/usr/bin/* dist/
-    # cd ../..
-
     mkdir -p deps/sysdig-linux
     mkdir -p deps/sysdig-mac
 
@@ -81,12 +73,10 @@ download_sysdig_binaries() {
     sudo docker cp $id:/usr/share/sysdig/chisels deps/sysdig-linux
     sudo docker rm -v $id
     sudo docker rmi sysdig/sysdig:$SYSDIG_VERSION
-    ls -lna deps/sysdig-linux
 
     # Mac binaries
     aws s3 cp s3://download.draios.com/dependencies/sysdig-sysdig-inspect-${SYSDIG_VERSION}.zip sysdig.zip
     unzip -d deps/sysdig-mac sysdig.zip
-    ls -lna deps/sysdig-mac
 }
 
 upload_artifacts() {
@@ -114,7 +104,7 @@ download_sysdig_binaries
 npm run bundle deps/sysdig-mac
 npm run package:mac -- --environment ${ENVIRONMENT} --user-tracking-key ${USER_TRACKING_KEY}
 
-sudo rm -rf ember-electron/resources/sysdig
+rm -rf ember-electron/resources/sysdig
 npm run bundle deps/sysdig-linux
 npm run make:linux -- --environment ${ENVIRONMENT} --user-tracking-key ${USER_TRACKING_KEY}
 
