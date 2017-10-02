@@ -101,7 +101,7 @@ download_sysdig_binaries
 npm run bundle deps/sysdig-mac
 npm run package:mac
 
-rm -rf ember-electron/resources/sysdig
+sudo rm -rf ember-electron/resources/sysdig
 npm run bundle deps/sysdig-linux
 npm run make:linux
 
