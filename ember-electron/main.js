@@ -22,10 +22,9 @@ const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 const backendServer = require('./backend/server');
 
-const emberAppLocation = 'serve://dist';
+const APP_URL = 'serve://dist';
 
 let serverInstance = null;
-let serverPort = null;
 let mainWindow = null;
 
 // Registering a protocol & schema to serve our Ember application
@@ -49,21 +48,14 @@ function createServer() {
     const absPath = argv.p ? resolve(__dirname, '../../../', argv.p) + '/' : null;
 
     serverInstance = backendServer(absPath)
-    serverInstance.start((port) => {
-        serverPort = port;
-
-        createWindow(port);
+    serverInstance.start((serverPort) => {
+        global.serverPort = serverPort;
+        createWindow();
         setupListeners();
     });
 }
 
-function createParamsUrl(port) {
-    // Add a query param to the ember app URL
-    // in order to provide the server port number for requests
-    return port ? emberAppLocation + '?port=' + port : emberAppLocation;
-}
-
-function createWindow(port) {
+function createWindow() {
     const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
     mainWindow = new BrowserWindow({
         width: Math.max(width * 0.9, 1440),
@@ -74,14 +66,14 @@ function createWindow(port) {
     mainWindow.setMenu(null);
 
     // Load the ember application using our custom protocol/scheme
-    mainWindow.loadURL(createParamsUrl(port));
+    mainWindow.loadURL(APP_URL);
 }
 
 function setupListeners() {
     // If a loading operation goes wrong, we'll send Electron back to
     // Ember App entry point
     mainWindow.webContents.on('did-fail-load', () => {
-        mainWindow.loadURL(emberAppLocation);
+        mainWindow.loadURL(APP_URL);
     });
 
     mainWindow.webContents.on('crashed', () => {
