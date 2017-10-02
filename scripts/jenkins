@@ -60,9 +60,9 @@ download_sysdig_binaries() {
     # cd ../..
 
     id=$(sudo docker create sysdig/sysdig:$SYSDIG_VERSION)
-    docker cp $id:/usr/bin/sysdig deps/sysdig-linux/dist
-    docker rm -v $id
-    docker rmi sysdig/sysdig:$SYSDIG_VERSION
+    sudo docker cp $id:/usr/bin/sysdig deps/sysdig-linux/dist
+    sudo docker rm -v $id
+    sudo docker rmi sysdig/sysdig:$SYSDIG_VERSION
 
     # Mac binaries
     aws s3 cp s3://download.draios.com/dependencies/sysdig-sysdig-inspect-${SYSDIG_VERSION}.zip sysdig.zip
