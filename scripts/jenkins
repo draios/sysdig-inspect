@@ -52,17 +52,17 @@ download_sysdig_binaries() {
     rm -rf deps
 
     # Linux binaries
-    aws s3 cp s3://download.draios.com/stable/tgz/i686/sysdig-${SYSDIG_VERSION}-i686.tar.gz deps/sysdig-linux/sysdig.tar
-    cd deps/sysdig-linux
-    tar -xvf sysdig.tar
-    cp -a sysdig-${SYSDIG_VERSION}-i686/usr/share/sysdig/ dist/
-    cp sysdig-${SYSDIG_VERSION}-i686/usr/bin/* dist/
-    cd ../..
+    # aws s3 cp s3://download.draios.com/stable/tgz/i686/sysdig-${SYSDIG_VERSION}-i686.tar.gz deps/sysdig-linux/sysdig.tar
+    # cd deps/sysdig-linux
+    # tar -xvf sysdig.tar
+    # cp -a sysdig-${SYSDIG_VERSION}-i686/usr/share/sysdig/ dist/
+    # cp sysdig-${SYSDIG_VERSION}-i686/usr/bin/* dist/
+    # cd ../..
 
-    # id=$(docker create sysdig/sysdig:$SYSDIG_VERSION)
-    # docker cp $id:/usr/bin/sysdig deps/sysdig-linux
-    # docker rm -v $id
-    # docker rmi sysdig/sysdig:$SYSDIG_VERSION
+    id=$(sudo docker create sysdig/sysdig:$SYSDIG_VERSION)
+    docker cp $id:/usr/bin/sysdig deps/sysdig-linux/dist
+    docker rm -v $id
+    docker rmi sysdig/sysdig:$SYSDIG_VERSION
 
     # Mac binaries
     aws s3 cp s3://download.draios.com/dependencies/sysdig-sysdig-inspect-${SYSDIG_VERSION}.zip sysdig.zip
