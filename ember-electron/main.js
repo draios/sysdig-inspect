@@ -109,15 +109,6 @@ app.on('window-all-closed', () => {
     }
 });
 
-app.on('before-quit', () => {
-    if (window && !window.isDestroyed() && window.isVisible()) {
-        window.removeAllListeners();
-        window.close();
-
-        setTimeout(() => app.exit(), 2000);
-    }
-});
-
 app.on('ready', () => {
     createServer();
 });
