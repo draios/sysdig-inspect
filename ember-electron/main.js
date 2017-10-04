@@ -50,8 +50,10 @@ function createServer() {
     serverInstance = backendServer(absPath)
     serverInstance.start((serverPort) => {
         global.serverPort = serverPort;
-        createWindow();
-        setupListeners();
+
+        if (mainWindow === null) {
+            createWindow();
+        }
     });
 }
 
@@ -67,6 +69,8 @@ function createWindow() {
 
     // Load the ember application using our custom protocol/scheme
     mainWindow.loadURL(APP_URL);
+
+    setupListeners();
 }
 
 function setupListeners() {
