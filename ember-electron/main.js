@@ -99,6 +99,9 @@ function setupListeners() {
 }
 
 app.on('window-all-closed', () => {
+    serverInstance.stop();
+    serverInstance = null;
+
     if (process.platform !== 'darwin') {
         // Using exit instead of quit for the time being
         // see: https://github.com/electron/electron/issues/8862#issuecomment-294303518
