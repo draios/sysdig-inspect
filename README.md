@@ -48,7 +48,7 @@ You can drill down into any tile to see the data behind it and start investigati
 
 ![Payloads and system calls visualization](/assets/screenshots/Sysdig-Inspect-4.png)
 
-Every single byte of data that is read or written to a file, to a network connection to a pipe is recorded in the trace file and Sysdig Inspect makes it easy to observe it. Do you need to troubleshoot an intermittent network issue or determine what a malware wrote to the file system? All the data you need is there. And, of course, you can switch at any time into sysdig mode and look at every single system call.
+Every single byte of data that is read or written to a file (provided the appropriate `--snaplen` parameter is used while creating the capture), to a network connection to a pipe is recorded in the trace file and Sysdig Inspect makes it easy to observe it. Do you need to troubleshoot an intermittent network issue or determine what a malware wrote to the file system? All the data you need is there. And, of course, you can switch at any time into sysdig mode and look at every single system call.
 
 Collecting & Loading Captures
 ---
