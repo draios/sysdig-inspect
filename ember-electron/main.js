@@ -128,7 +128,7 @@ app.on('activate', () => {
     if (serverInstance === null) {
         createServer();
     } else if (mainWindow === null) {
-        createWindow(serverPort);
+        createWindow();
     }
 });
 
