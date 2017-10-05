@@ -50,8 +50,10 @@ function createServer() {
     serverInstance = backendServer(absPath)
     serverInstance.start((serverPort) => {
         global.serverPort = serverPort;
-        createWindow();
-        setupListeners();
+
+        if (mainWindow === null) {
+            createWindow();
+        }
     });
 }
 
@@ -67,6 +69,8 @@ function createWindow() {
 
     // Load the ember application using our custom protocol/scheme
     mainWindow.loadURL(APP_URL);
+
+    setupListeners();
 }
 
 function setupListeners() {
@@ -95,19 +99,13 @@ function setupListeners() {
 }
 
 app.on('window-all-closed', () => {
+    serverInstance.stop();
+    serverInstance = null;
+
     if (process.platform !== 'darwin') {
         // Using exit instead of quit for the time being
         // see: https://github.com/electron/electron/issues/8862#issuecomment-294303518
         app.exit();
-    }
-});
-
-app.on('before-quit', () => {
-    if (window && !window.isDestroyed() && window.isVisible()) {
-        window.removeAllListeners();
-        window.close();
-
-        setTimeout(() => app.exit(), 2000);
     }
 });
 
@@ -121,7 +119,7 @@ app.on('activate', () => {
     if (serverInstance === null) {
         createServer();
     } else if (mainWindow === null) {
-        createWindow(serverPort);
+        createWindow();
     }
 });
 
