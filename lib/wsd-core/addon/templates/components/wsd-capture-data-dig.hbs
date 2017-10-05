@@ -16,8 +16,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <div class="wsd-capture-data-dig__content" tabIndex="0">
     {{#each rows key="@index" as |row|}}
-        <div class="wsd-capture-data-dig__row {{if row.isNotSearchMatch "wsd-capture-data-dig__row--is-not-search-match"}}">
-            {{sd-tokenized-output output=row.data}}
-        </div>
+        <div class="wsd-capture-data-dig__row {{if row.isNotSearchMatch "wsd-capture-data-dig__row--is-not-search-match"}}">{{sd-tokenized-output output=row.data isPre=true}}</div>
     {{/each}}
 </div>
