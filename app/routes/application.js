@@ -60,7 +60,7 @@ export default Ember.Route.extend({
 
                 shortcuts.defineShortcut('data.viewAsPrintableAscii',   'data',         'View as printable ASCII',  ['v+a']),
                 shortcuts.defineShortcut('data.viewAsDottedAscii',      'data',         'View as dotted ASCII',     ['v+d']),
-                shortcuts.defineShortcut('data.viewAsHex',              'data',         'View as hex',              ['v+x']),
+                shortcuts.defineShortcut('data.viewAsHexAscii',         'data',         'View as hex',              ['v+x']),
 
                 shortcuts.defineShortcut('overview.drillDown',          'overview',     'Drill down',               ['enter']),
                 shortcuts.defineShortcut('overview.toggleTimeline',     'overview',     'Pin/unpin timeline',       ['space']),
