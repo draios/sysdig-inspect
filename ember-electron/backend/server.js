@@ -105,24 +105,17 @@ class Server {
         let viewInfo = JSON.parse(request.params.view);
         let args = ['-r', fileName, '-v', viewInfo.id, '-j', '-pc'];
 
-        if ('from' in request.query) {
-            args.push('--from');
-            args.push(request.query.from);
-        }
-
-        if ('to' in request.query) {
-            args.push('--to');
-            args.push(request.query.to);
-        }
-
-        if ('viewAs' in request.query) {
-            if (request.query.viewAs === 'Hex') {
+        switch (viewInfo.viewAs) {
+            case 'dottedAscii':
+                // no argument needed
+                break;
+            case 'hex':
                 args.push('-X');
-            } else if (request.query.viewAs !== 'dottedAscii') {
+                break;
+            default:
+                // default to printable ASCII
                 args.push('-A');
-            }
-        } else {
-            args.push('-A');
+                break;
         }
 
         if ('filter' in viewInfo) {
