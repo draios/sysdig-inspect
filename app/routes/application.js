@@ -58,6 +58,10 @@ export default Ember.Route.extend({
                 shortcuts.defineShortcut('dataTables.selectNext',       'dataTables',   'Select next row',          ['down']),
                 shortcuts.defineShortcut('dataTables.selectPrevious',   'dataTables',   'Select previous row',      ['up']),
 
+                shortcuts.defineShortcut('data.viewAsPrintableAscii',   'data',         'View as printable ASCII',  ['v+a']),
+                shortcuts.defineShortcut('data.viewAsDottedAscii',      'data',         'View as dotted ASCII',     ['v+d']),
+                shortcuts.defineShortcut('data.viewAsHex',              'data',         'View as hex',              ['v+x']),
+
                 shortcuts.defineShortcut('overview.drillDown',          'overview',     'Drill down',               ['enter']),
                 shortcuts.defineShortcut('overview.toggleTimeline',     'overview',     'Pin/unpin timeline',       ['space']),
                 shortcuts.defineShortcut('overview.selectLeft',         'overview',     'Select left',              ['left']),
