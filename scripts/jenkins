@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SYSDIG_VERSION="0.18.0"
+SYSDIG_VERSION="0.19.1"
 
 set +u
 
