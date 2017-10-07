@@ -17,25 +17,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .wsd-capture-data-dig {
     flex: 1;
 
+    overflow: auto;
+
     display: flex;
-    align-items: stretch;
-    overflow: hidden;
+    flex-direction: column;
+
+    .hide-focus();
 
     &__content {
         flex: 1;
+        width: fit-content;
 
-        overflow: auto;
-        font-family: @font-monospace-family;
-        font-size: @font-size-sm;
-
-        padding: @layout-padding-md 0;
-
-        .hide-focus();
+        padding: @layout-padding-md;
     }
 
     &__row {
-        padding: 0 @layout-padding-md;
         white-space: nowrap;
+
+        font-family: @font-monospace-family;
+        font-size: @font-size-sm;
 
         &--is-not-search-match {
             color: fade(@color-text, 50%)

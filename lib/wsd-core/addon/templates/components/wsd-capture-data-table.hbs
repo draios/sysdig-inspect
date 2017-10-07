@@ -14,11 +14,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
-{{sd-table
-    columns=columns
-    rows=rows
-    selection=selection
-    select=(action "select")
-    activate=(action "activate")
-    drillDown=(action "drillDown")
-}}
+{{#sd-promise-wait-overlay promiseState=dataStore}}
+    {{sd-table
+        columns=columns
+        rows=rows
+        selection=selection
+        actionsTarget=this
+        select=(action "select")
+        drillDown=(action "drillDown")
+        activate=(action "activate")
+    }}
+{{/sd-promise-wait-overlay}}
