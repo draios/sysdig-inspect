@@ -122,13 +122,13 @@ class Server {
                 args.push('-A');
             }
         } else {
-            args.push('-A');        
+            args.push('-A');
         }
-    
+
         if ('filter' in viewInfo) {
             args.push(viewInfo.filter);
         }
-		
+
         response.setHeader('Content-Type', 'application/json');
         this.sysdigController.runCsysdig(args, response);
     }
@@ -137,20 +137,20 @@ class Server {
         const fileName = request.params.fileName;
         const filter = request.query.filter;
         let sampleCount = 0;
-  
+
         response.setHeader('Content-Type', 'application/json');
-        
+
         const args = ['-r', fileName, '-c', 'wsysdig_summary'];
-  
+
         if (request.query.sampleCount !== undefined) {
             sampleCount = request.query.sampleCount;
         }
         args.push(sampleCount);
-        
+
         if (filter !== undefined) {
             args.push(filter);
-        }      
-  
+        }
+
         this.sysdigController.runSysdig(args, response);
     }
 }

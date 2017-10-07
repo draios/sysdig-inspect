@@ -33,6 +33,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     @time-label-height: 14px + 2px;
     @time-diff-label-width: 140px;
 
+    @z-index-marker: 1;
+    @z-index-selected-area: 2;
+    @z-index-handles: 3;
+    @z-index-labels: 4;
+
     flex: 1;
 
     display: flex;
@@ -47,8 +52,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     }
 
     &__selected-area {
-        z-index: 1;
-
         flex: 1;
 
         position: relative;
@@ -57,11 +60,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     &__left-area,
     &__right-area {
         background-color: @color-outer-area;
+        z-index: @z-index-selected-area;
     }
 
     &__draggable-handle {
         position: absolute;
-        z-index: 2;
+        z-index: @z-index-handles;
         width: @draggable-handle-width;
         top: 0;
         bottom: 0;
@@ -157,7 +161,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         &--is-on-top {
             top: 0;
-            z-index: 2;
         }
 
         &:before,
@@ -178,6 +181,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             border-left-color: @color-time-markers;
         }
     }
+    &__time,
+    &__time-diff {
+        z-index: @z-index-labels;
+    }
+
     &__time-diff-icon {
         width: 16px;
     }
@@ -242,7 +250,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     &__hover-marker {
         position: absolute;
-        z-index: 1;
+        z-index: @z-index-marker;
         top: 0;
         left: 256px;
 

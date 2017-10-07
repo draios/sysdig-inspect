@@ -17,5 +17,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    serverPort: null,
 });

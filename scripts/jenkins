@@ -1,5 +1,20 @@
 #!/bin/bash
 
+SYSDIG_VERSION="0.19.1"
+
+set +u
+
+#
+# Set default user tracking key
+#
+if [ -z ${USER_TRACKING_KEY} ]
+then
+    USER_TRACKING_KEY=
+fi
+
+set -u
+
+
 NODE_VERSION="v6.11.2"
 
 setup_env() {
@@ -19,6 +34,8 @@ setup_env() {
     # as stated on https://twitter.com/gavinjoyce/status/691773956144119808
     npm config set progress false
     npm config set spin false
+
+    GIT_BRANCHNAME=$(echo ${GIT_BRANCH} | cut -d"/" -f2)
 }
 
 before_build() {
@@ -44,14 +61,57 @@ after_build() {
     -d '{"state": "'"${GH_STATUS}"'", "context": "'"${GH_CONTEXT}"'", "description": "'"${GH_DESCRIPTION}"'", "target_url": "'"${GH_URL}"'"}'
 }
 
+download_sysdig_binaries() {
+    sudo rm -rf deps
+
+    mkdir -p deps/sysdig-linux
+    mkdir -p deps/sysdig-mac
+
+    id=$(sudo docker create sysdig/sysdig:$SYSDIG_VERSION)
+    sudo docker cp $id:/usr/bin/sysdig deps/sysdig-linux
+    sudo docker cp $id:/usr/bin/csysdig deps/sysdig-linux
+    sudo docker cp $id:/usr/share/sysdig/chisels deps/sysdig-linux
+    sudo docker rm -v $id
+    sudo docker rmi sysdig/sysdig:$SYSDIG_VERSION
+
+    # Mac binaries
+    aws s3 cp s3://download.draios.com/dependencies/sysdig-${SYSDIG_VERSION}-mac.zip sysdig.zip
+    unzip -d deps/sysdig-mac sysdig.zip
+}
+
+upload_artifacts() {
+    cd electron-out
+
+    zip -ry Sysdig\ Inspect-darwin-x64.zip Sysdig\ Inspect-darwin-x64
+    # aws s3 cp Sysdig\ Inspect-darwin-x64.zip s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/app/mac/Sysdig\ Inspect-darwin-x64.zip --acl public-read
+    aws s3 cp Sysdig\ Inspect-darwin-x64.zip s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/app/mac/Sysdig\ Inspect-darwin-x64.zip --acl public-read
+    # aws s3 sync make s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/installers/linux --acl public-read
+    aws s3 sync make s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/installers/linux --acl public-read
+
+    cd ..
+}
+
 setup_env
 
 before_build
 
 npm run clean
+
 npm run prepare
 npm build
 npm test
-npm run package:mac
+
+download_sysdig_binaries
+
+npm run bundle deps/sysdig-mac
+npm run package:mac -- --environment ${ENVIRONMENT} --user-tracking-key ${USER_TRACKING_KEY}
+
+rm -rf ember-electron/resources/sysdig
+npm run bundle deps/sysdig-linux
+npm run make:linux -- --environment ${ENVIRONMENT} --user-tracking-key ${USER_TRACKING_KEY}
+
+upload_artifacts
+
+npm run clean
 
 after_build

@@ -11,17 +11,17 @@ then
     # or use custom path
     SYSDIG_PATH=$1
 else
-    SYSDIG_PATH='../../../sysdig/build/userspace/sysdig'
+    SYSDIG_PATH='../sysdig/build/userspace/sysdig'
 fi
 
 copy_sysdig() {
     cd ember-electron/resources
 
-    cp -a ${SYSDIG_PATH}/ ./sysdig/
+    cp -a ../../${SYSDIG_PATH}/ ./sysdig/
 
     mkdir -p ./sysdig/capture-samples/
-    cp ../../capture-samples/502error.scap ./sysdig/capture-samples/
-    cp ../../capture-samples/rootkit_install.scap ./sysdig/capture-samples/
+    cp ../../capture-samples/502Error.scap ./sysdig/capture-samples/
+    cp ../../capture-samples/404Error.scap ./sysdig/capture-samples/
 
     cd ../..
 }
