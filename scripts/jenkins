@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SYSDIG_VERSION="0.18.0"
+SYSDIG_VERSION="0.19.1"
 
 set +u
 
@@ -75,7 +75,7 @@ download_sysdig_binaries() {
     sudo docker rmi sysdig/sysdig:$SYSDIG_VERSION
 
     # Mac binaries
-    aws s3 cp s3://download.draios.com/dependencies/sysdig-sysdig-inspect-${SYSDIG_VERSION}.zip sysdig.zip
+    aws s3 cp s3://download.draios.com/dependencies/sysdig-${SYSDIG_VERSION}-mac.zip sysdig.zip
     unzip -d deps/sysdig-mac sysdig.zip
 }
 
@@ -83,8 +83,10 @@ upload_artifacts() {
     cd electron-out
 
     zip -ry Sysdig\ Inspect-darwin-x64.zip Sysdig\ Inspect-darwin-x64
-    aws s3 cp Sysdig\ Inspect-darwin-x64.zip s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/app/mac/Sysdig\ Inspect-darwin-x64.zip --acl public-read
-    aws s3 sync make s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/installers/linux --acl public-read
+    # aws s3 cp Sysdig\ Inspect-darwin-x64.zip s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/app/mac/Sysdig\ Inspect-darwin-x64.zip --acl public-read
+    aws s3 cp Sysdig\ Inspect-darwin-x64.zip s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/app/mac/Sysdig\ Inspect-darwin-x64.zip --acl public-read
+    # aws s3 sync make s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/${BUILD_NUMBER}/installers/linux --acl public-read
+    aws s3 sync make s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/installers/linux --acl public-read
 
     cd ..
 }
