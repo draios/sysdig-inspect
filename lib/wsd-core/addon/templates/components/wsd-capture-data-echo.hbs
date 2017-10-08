@@ -14,10 +14,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
-{{#sd-promise-wait-overlay promiseState=dataStore classNames="sd-promise-wait-overlay--is-block"}}
-    <div class="wsd-capture-data-echo__content">
-        {{#each rows key="@index" as |row|}}
-            {{wsd-echo-op op=row}}
-        {{/each}}
+{{#sd-promise-wait-overlay promiseState=dataStore alwaysShowData=true}}
+    <div class="wsd-capture-data-dig__scrollable" tabIndex="0">
+        <div class="wsd-capture-data-echo__content">
+            {{#each rows key="@index" as |row|}}
+                {{wsd-echo-op op=row}}
+            {{/each}}
+        </div>
     </div>
 {{/sd-promise-wait-overlay}}

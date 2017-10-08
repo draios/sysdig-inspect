@@ -17,18 +17,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .wsd-capture-data-dig {
     flex: 1;
 
-    overflow: auto;
-
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     .hide-focus();
 
-    &__content {
+    &__scrollable {
         flex: 1;
-        width: fit-content;
+        overflow: auto;
+    }
+    &__content {
+        display: inline-flex;
+        flex-direction: column;
 
         padding: @layout-padding-md;
+        padding-right: 0;
+        margin-right: @layout-padding-md;
     }
 
     &__row {
