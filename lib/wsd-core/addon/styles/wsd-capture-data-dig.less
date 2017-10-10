@@ -18,24 +18,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     flex: 1;
 
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
     overflow: hidden;
 
-    &__content {
+    &__scrollable {
         flex: 1;
-
         overflow: auto;
-        font-family: @font-monospace-family;
-        font-size: @font-size-sm;
-
-        padding: @layout-padding-md 0;
 
         .hide-focus();
     }
+    &__content {
+        display: inline-flex;
+        flex-direction: column;
+
+        padding: @layout-padding-md;
+        padding-right: 0;
+        margin-right: @layout-padding-md;
+    }
 
     &__row {
-        padding: 0 @layout-padding-md;
         white-space: nowrap;
+
+        font-family: @font-monospace-family;
+        font-size: @font-size-sm;
 
         &--is-not-search-match {
             color: fade(@color-text, 50%)

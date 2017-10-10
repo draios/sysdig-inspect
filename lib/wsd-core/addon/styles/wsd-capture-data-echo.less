@@ -19,18 +19,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
-    &__content {
+    &__scrollable {
+        flex: 1;
         overflow: auto;
-
-        padding: @layout-padding-md;
 
         .hide-focus();
     }
+    &__content {
+        display: inline-flex;
+        flex-direction: column;
 
-    &__row {
-        white-space: nowrap;
-
-        font-family: @font-monospace-family;
+        padding: @layout-padding-md;
+        padding-right: 0;
+        margin-right: @layout-padding-md;
     }
 }

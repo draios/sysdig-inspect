@@ -14,10 +14,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
-<div class="wsd-capture-data-dig__content" tabIndex="0">
-    {{#each rows key="@index" as |row|}}
-        <div class="wsd-capture-data-dig__row {{if row.isNotSearchMatch "wsd-capture-data-dig__row--is-not-search-match"}}">
-            {{sd-tokenized-output output=row.data}}
+{{#sd-promise-wait-overlay promiseState=dataStore alwaysShowData=true}}
+    <div class="wsd-capture-data-dig__scrollable" tabIndex="0">
+        <div class="wsd-capture-data-dig__content">
+            {{#each rows key="@index" as |row|}}
+                <div class="wsd-capture-data-dig__row {{if row.isNotSearchMatch "wsd-capture-data-dig__row--is-not-search-match"}}">
+                    {{sd-tokenized-output output=row.data}}
+                </div>
+            {{/each}}
         </div>
-    {{/each}}
-</div>
+    </div>
+{{/sd-promise-wait-overlay}}
