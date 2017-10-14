@@ -30,4 +30,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         display: flex;
         align-items: stretch;
     }
+
+    &__settings-bar {
+        display: flex;
+
+        padding: @layout-padding-sm @layout-padding-md;
+
+        background-color: @color-background-panel;
+        border-top: 1px solid @color-separator;
+    }
+    &__settings-bar-label {
+        margin-right: @layout-spacing-md;
+
+        display: flex;
+        align-items: center;
+    }
+    &__settings-bar-control + &__settings-bar-control {
+        margin-left: @layout-spacing-sm;
+    }
 }
