@@ -15,7 +15,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 .wsd-echo-op {
-    display: flex;
+    display: inline-flex;
+
     border: 1px solid transparent;
     border-left-width: 4px;
     border-radius: 2px;
@@ -36,9 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     }
 
     &__header {
-        width: 30%;
-        min-width: 200px;
-        max-width: 400px;
+        width: 250px;
         border-right: 1px solid @color-separator;
 
         line-height: @font-line-height-md;
@@ -58,7 +57,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         padding: @layout-padding-xs @layout-padding-sm;
         padding-bottom: @layout-padding-xs / 2;
-
-        overflow: auto;
     }
 }
