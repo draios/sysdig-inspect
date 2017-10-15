@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     position: relative;
     min-width: @layout-size-md * 2;
     height: @layout-size-md;
@@ -37,6 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     font-weight: @font-weight-regular;
     letter-spacing: .04em;
     line-height: @layout-size-md;
+    text-align: center;
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
@@ -70,6 +72,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         }
     }
 
+    &--is-active,
+    &--is-white&--is-active {
+        background-color: @color-list-item-selected;
+
+        &:hover,
+        &:focus {
+            background-color: @color-list-item-selected-hover;
+        }
+    }
+
     &--is-primary {
         background-color: @color-primary;
         color: white;
@@ -95,14 +107,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             background-color: darken(white, 1%);
         }
     }
-    &--is-white&--is-selected {
-        background-color: @color-list-item-selected;
-
-        &:hover,
-        &:focus {
-            background-color: @color-list-item-selected-hover;
-        }
-    }
 
     &--is-light {
         color: white;
@@ -119,18 +123,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         }
     }
 
-    &--is-active {
-        background-color: @color-primary;
-
-        opacity: 1;
-
-        svg {
-            fill: white;
-        }
-
-        &:hover {
-            background-color: darken(@color-primary, 5%);
-        }
+    &--no-text-transform {
+        text-transform: none;
     }
 
     &--sm {
@@ -177,6 +171,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         min-width: @layout-size-md;
 
         border-radius: 50%;
+    }
+
+    &--fab&--is-active {
+        background-color: @color-primary;
+
+        opacity: 1;
+
+        svg {
+            fill: white;
+        }
+
+        &:hover {
+            background-color: darken(@color-primary, 5%);
+        }
     }
     &--sm&--fab {
         padding: round(@layout-size-sm - @icon-size-sm) / 2;
