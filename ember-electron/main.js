@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* eslint-env node */
 const electron = require('electron');
 const argv = require('yargs').argv;
-const { app, BrowserWindow, protocol, globalShortcut } = electron;
+const { app, BrowserWindow, Menu, protocol, globalShortcut } = electron;
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 const backendServer = require('./backend/server');
@@ -98,6 +98,24 @@ function setupListeners() {
     });
 }
 
+function enableMacMenus() {
+    // Create menu entries if running on Mac
+    if (process.platform === 'darwin') {
+        Menu.setApplicationMenu(Menu.buildFromTemplate([
+            {
+                label: app.getName(),
+                submenu: [
+                    { role: 'about', label: 'About' },
+                    { type: 'separator'},
+                    { role: 'quit', label: 'Quit' }
+                ]
+            },
+            { role: 'editMenu' },
+            { role: 'windowMenu' }
+        ]));
+    }
+}
+
 app.on('window-all-closed', () => {
     serverInstance.stop();
     serverInstance = null;
@@ -111,6 +129,7 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
     createServer();
+    enableMacMenus();
 });
 
 app.on('activate', () => {
