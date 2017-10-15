@@ -109,7 +109,7 @@ class Server {
             case 'dottedAscii':
                 // no argument needed
                 break;
-            case 'hex':
+            case 'Hex':
                 args.push('-X');
                 break;
             default:
