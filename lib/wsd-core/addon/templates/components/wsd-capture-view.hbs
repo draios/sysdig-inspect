@@ -14,6 +14,44 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
+{{#if isViewAsSupported}}
+    <div class="wsd-capture-view__settings-bar">
+        <label class="wsd-capture-view__settings-bar-label">
+            <span class="wsd-capture-view__settings-bar-label-text">View As</span>
+        </label>
+        <div class="wsd-capture-view__settings-bar-control">
+            {{#sd-button
+                classNames="sd-button--raised sd-button--no-text-transform sd-button--highlight-on-hover"
+                isActive=isViewAsDottedAscii
+                size="sm"
+                click=(action "setViewAs" dataStoreConstants.VIEW_AS_DOTTED_ASCII)
+            }}
+                Dotted ASCII
+            {{/sd-button}}
+        </div>
+        <div class="wsd-capture-view__settings-bar-control">
+            {{#sd-button
+                classNames="sd-button--raised sd-button--no-text-transform sd-button--highlight-on-hover"
+                isActive=isViewAsPrintableAscii
+                size="sm"
+                click=(action "setViewAs" dataStoreConstants.VIEW_AS_PRINTABLE_ASCII)
+            }}
+                Printable ASCII
+            {{/sd-button}}
+        </div>
+        <div class="wsd-capture-view__settings-bar-control">
+            {{#sd-button
+                classNames="sd-button--raised sd-button--no-text-transform sd-button--highlight-on-hover"
+                isActive=isViewAsHexAscii
+                size="sm"
+                click=(action "setViewAs" dataStoreConstants.VIEW_AS_HEX_ASCII)
+            }}
+                Hex ASCII
+            {{/sd-button}}
+        </div>
+    </div>
+{{/if}}
+
 {{#if isOverview}}
     {{wsd-capture-overview
         filePath=captureInfo.filePath
@@ -25,15 +63,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     }}
 {{else}}
     <div class="wsd-capture-view__content">
-        {{#sd-promise-wait-overlay promiseState=dataStore}}
-            {{component
-                drillDownComponentName
-                selection=currentDrilldownStep.selection
-                viewDataStore=viewDataStore
-                dataStore=dataStore
-                select=(action "select")
-                drillDown=(action "drillDown")
-            }}
-        {{/sd-promise-wait-overlay}}
+        {{component
+            drillDownComponentName
+            selection=currentDrilldownStep.selection
+            viewDataStore=viewDataStore
+            dataStore=dataStore
+            select=(action "select")
+            drillDown=(action "drillDown")
+        }}
     </div>
 {{/if}}

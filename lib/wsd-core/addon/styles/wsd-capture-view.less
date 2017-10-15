@@ -28,6 +28,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     &__content {
         flex: 1;
         display: flex;
+        flex-direction: column;
         align-items: stretch;
+
+        overflow: hidden;
+    }
+
+    &__settings-bar {
+        display: flex;
+
+        padding: @layout-padding-sm @layout-padding-md;
+
+        background-color: @color-background-panel;
+        border-bottom: 1px solid @color-separator;
+    }
+    &__settings-bar-label {
+        margin-right: @layout-spacing-md;
+
+        display: flex;
+        align-items: center;
+    }
+    &__settings-bar-control + &__settings-bar-control {
+        margin-left: @layout-spacing-sm;
     }
 }
