@@ -14,28 +14,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
-{{#if isOverview}}
-    {{wsd-capture-overview
-        filePath=captureInfo.filePath
-        timelines=metricTimelines
-        timeWindow=timeWindow
-        drilldownInfoParam=model.queryParams.drilldownInfoParam
-        toggleMetricTimeline=(action toggleMetricTimeline)
-        drillDown=(action drillDown)
-    }}
-{{else}}
-    <div class="wsd-capture-view__content">
-        {{component
-            drillDownComponentName
-            selection=currentDrilldownStep.selection
-            viewDataStore=viewDataStore
-            dataStore=dataStore
-            select=(action "select")
-            drillDown=(action "drillDown")
-        }}
-    </div>
-{{/if}}
-
 {{#if isViewAsSupported}}
     <div class="wsd-capture-view__settings-bar">
         <label class="wsd-capture-view__settings-bar-label">
@@ -71,5 +49,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 Hex ASCII
             {{/sd-button}}
         </div>
+    </div>
+{{/if}}
+
+{{#if isOverview}}
+    {{wsd-capture-overview
+        filePath=captureInfo.filePath
+        timelines=metricTimelines
+        timeWindow=timeWindow
+        drilldownInfoParam=model.queryParams.drilldownInfoParam
+        toggleMetricTimeline=(action toggleMetricTimeline)
+        drillDown=(action drillDown)
+    }}
+{{else}}
+    <div class="wsd-capture-view__content">
+        {{component
+            drillDownComponentName
+            selection=currentDrilldownStep.selection
+            viewDataStore=viewDataStore
+            dataStore=dataStore
+            select=(action "select")
+            drillDown=(action "drillDown")
+        }}
     </div>
 {{/if}}
