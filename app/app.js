@@ -14,12 +14,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Ember from 'ember';
+import Component from '@ember/component';
+
+import Application from '@ember/application';
 import Resolver from './resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 
-const App = Ember.Application.extend({
+const App = Application.extend({
     modulePrefix: config.modulePrefix,
     podModulePrefix: config.podModulePrefix,
     Resolver,
@@ -27,7 +29,7 @@ const App = Ember.Application.extend({
 
 loadInitializers(App, config.modulePrefix);
 
-Ember.Component.reopen({
+Component.reopen({
     attributeBindings: ['data-ref'],
 });
 
