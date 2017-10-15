@@ -22,21 +22,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <div class="wsd-capture-view__settings-bar-control">
             {{#sd-button
                 classNames="sd-button--raised sd-button--no-text-transform sd-button--highlight-on-hover"
-                isActive=isViewAsPrintableAscii
-                size="sm"
-                click=(action "setViewAs" dataStoreConstants.VIEW_AS_PRINTABLE_ASCII)
-            }}
-                Printable ASCII
-            {{/sd-button}}
-        </div>
-        <div class="wsd-capture-view__settings-bar-control">
-            {{#sd-button
-                classNames="sd-button--raised sd-button--no-text-transform sd-button--highlight-on-hover"
                 isActive=isViewAsDottedAscii
                 size="sm"
                 click=(action "setViewAs" dataStoreConstants.VIEW_AS_DOTTED_ASCII)
             }}
                 Dotted ASCII
+            {{/sd-button}}
+        </div>
+        <div class="wsd-capture-view__settings-bar-control">
+            {{#sd-button
+                classNames="sd-button--raised sd-button--no-text-transform sd-button--highlight-on-hover"
+                isActive=isViewAsPrintableAscii
+                size="sm"
+                click=(action "setViewAs" dataStoreConstants.VIEW_AS_PRINTABLE_ASCII)
+            }}
+                Printable ASCII
             {{/sd-button}}
         </div>
         <div class="wsd-capture-view__settings-bar-control">
