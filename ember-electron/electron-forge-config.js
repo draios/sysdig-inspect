@@ -28,19 +28,32 @@ module.exports = {
   "electronInstallerDMG": {
     "title": "Sysdig Inspect",
     "background": "assets/dmg/installer-background.png",
+    "icon": "assets/icons/favicon.icns",
     "icon-size": 80
   },
   "electronInstallerDebian": {
-    src: '...',
-    dest: '...',
-    name: 'sysdig-inspect',
-    bin: 'Sysdig Inspect'
+    "name": "sysdig-inspect",
+    "bin": "Sysdig Inspect",
+    "productName": "Sysdig Inspect",
+    "productDescription": "Sysdig's interactive UI",
+    "homepage": "https://www.sysdig.org/",
+    "genericName": "Monitoring tool",
+    "icon": "assets/icons/favicon.png",
+    "categories": [
+      "System"
+    ]
   },
   "electronInstallerRedhat": {
-    src: '...',
-    dest: '...',
-    name: 'sysdig-inspect',
-    bin: 'Sysdig Inspect'
+    "name": "sysdig-inspect",
+    "bin": "Sysdig Inspect",
+    "productName": "Sysdig Inspect",
+    "productDescription": "Sysdig's interactive UI",
+    "homepage": "https://www.sysdig.org/",
+    "genericName": "Monitoring tool",
+    "icon": "assets/icons/favicon.png",
+    "categories": [
+      "System"
+    ]
   },
   "github_repository": {
     "owner": "draios",
