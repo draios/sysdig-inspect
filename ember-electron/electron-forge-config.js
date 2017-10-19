@@ -23,7 +23,30 @@ module.exports = {
     },
     "icon": "assets/icons/favicon",
     "osxSign": true,
-    "overwrite": true
+    "overwrite": true,
+    "extendInfo": {
+      "CFBundleTypeRole": "Viewer",
+      "CFBundleTypeIconFile": "electron.icns",
+      "UTExportedTypeDeclarations": [
+        {
+          "UTTypeConformsTo": [ "public.data" ],
+          "UTTypeDescription": "Sysdig capture file",
+          "UTTypeIdentifier": "com.sysdig.capturefile",
+          "UTTypeTagSpecification":
+            {
+              "public.filename-extension": [ "scap" ]
+            }
+        }
+      ],
+      "CFBundleDocumentTypes": [
+        {
+         "CFBundleTypeIconFiles": [],
+         "CFBundleTypeName": "Sysdig capture file",
+         "LSHandlerRank": "Owner",
+         "LSItemContentTypes": [ "com.sysdig.capturefile" ]
+        }
+      ]
+    }
   },
   "electronInstallerDMG": {
     "title": "Sysdig Inspect",
