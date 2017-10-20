@@ -26,6 +26,7 @@ const APP_URL = 'serve://dist';
 
 let serverInstance = null;
 let mainWindow = null;
+let fileToOpen = null;
 
 // Registering a protocol & schema to serve our Ember application
 protocol.registerStandardSchemes(['serve'], { secure: true });
@@ -57,6 +58,10 @@ function createServer() {
     });
 }
 
+function getCaptureUrl() {
+    return APP_URL + '/#/capture/' + encodeURIComponent(fileToOpen);
+}
+
 function createWindow() {
     const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
     mainWindow = new BrowserWindow({
@@ -67,8 +72,10 @@ function createWindow() {
     // Remove menu bar
     mainWindow.setMenu(null);
 
+    let appUrl = fileToOpen ? getCaptureUrl() : APP_URL;
+
     // Load the ember application using our custom protocol/scheme
-    mainWindow.loadURL(APP_URL);
+    mainWindow.loadURL(appUrl);
 
     setupListeners();
 }
@@ -115,6 +122,19 @@ function enableMacMenus() {
         ]));
     }
 }
+
+app.on('open-file', (event, path) => {
+    // Fired on file open
+    // Distinguishing bewtween OSX and other for use path or argv
+    // see: https://electron.atom.io/docs/api/app/#event-open-file-macos
+    event.preventDefault();
+
+    if (process.platform == 'darwin') {
+      fileToOpen = path;
+    } else {
+      fileToOpen = argv[1];
+    }
+});
 
 app.on('window-all-closed', () => {
     serverInstance.stop();
