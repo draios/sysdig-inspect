@@ -134,6 +134,10 @@ app.on('open-file', (event, path) => {
     } else {
       fileToOpen = argv[1];
     }
+
+    if (app.isReady() && mainWindow) {
+        mainWindow.webContents.send('open-file', fileToOpen);
+    }
 });
 
 app.on('window-all-closed', () => {

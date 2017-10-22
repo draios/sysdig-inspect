@@ -21,6 +21,7 @@ export default Ember.Route.extend({
     shortcutsService: Ember.inject.service('keyboard-shortcuts'),
     colorProvider: Ember.inject.service('color-provider'),
     userTracking: Ember.inject.service('user-tracking'),
+    ipc: Ember.inject.service('ipc'),
 
     setupController() {
         this._super(...arguments);
@@ -80,6 +81,14 @@ export default Ember.Route.extend({
         });
 
         electronUtils.setupHookForLinks();
+
+        if (electronUtils.isElectron()) {
+            const ipc = this.get('ipc');
+
+            // initialize only on Electron
+            ipc.setup();
+            ipc.on('open-file', (path) => this.send('openFile', path));
+        }
     },
 
     actions: {
