@@ -15,6 +15,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import Ember from 'ember';
+import electronUtils from 'wsd-core/utils/electron';
 
 export default Ember.Route.extend({
     queryParams: {
@@ -38,6 +39,12 @@ export default Ember.Route.extend({
                 timeTo: params.timeTo,
             }
         );
+    },
+
+    afterModel(captureModel) {
+        if (electronUtils.isElectron()) {
+            electronUtils.addRecentDocument(captureModel.filePath);
+        }
     },
 
     setupController(controller, model) {

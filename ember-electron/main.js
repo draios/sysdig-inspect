@@ -150,6 +150,8 @@ app.on('window-all-closed', () => {
 app.on('ready', () => {
     createServer();
     enableMacMenus();
+
+    require('./utils/ipc');
 });
 
 app.on('activate', () => {
