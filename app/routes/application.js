@@ -82,13 +82,8 @@ export default Ember.Route.extend({
 
         electronUtils.setupHookForLinks();
 
-        if (electronUtils.isElectron()) {
-            const ipc = this.get('ipc');
-
-            // initialize only on Electron
-            ipc.setup();
-            ipc.on('open-file', (path) => this.send('openFile', path));
-        }
+        // Setup open-file callback for IPC event, in a file is opened with the app in Electron 
+        this.get('ipc').on('open-file', (path) => this.send('openFile', path));
     },
 
     actions: {
