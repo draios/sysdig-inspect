@@ -23,8 +23,14 @@ const fs = require('fs');
 class Controller {
     constructor(sysdigPath) {
         this.sysdigPath = sysdigPath || path.join(__dirname, '../resources/sysdig/');
-        this.sysdigExe = this.sysdigPath + 'sysdig';
-        this.csysdigExe = this.sysdigPath + 'csysdig';
+
+        if (process.platform === 'win32') {
+            this.sysdigExe = this.sysdigPath + 'sysdig.exe';
+            this.csysdigExe = this.sysdigPath + 'csysdig.exe';
+        } else {
+            this.sysdigExe = this.sysdigPath + 'sysdig';
+            this.csysdigExe = this.sysdigPath + 'csysdig';
+        }
 
         if (!fs.existsSync(this.sysdigExe) || !fs.existsSync(this.csysdigExe)) {
             console.log(`sysdig/csysdig executables not found in path ${this.sysdigPath}`);
