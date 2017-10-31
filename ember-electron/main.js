@@ -21,11 +21,18 @@ const { app, BrowserWindow, Menu, protocol, globalShortcut } = electron;
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 const backendServer = require('./backend/server');
+const squirrel = require('./utils/squirrel');
 
 const APP_URL = 'serve://dist';
 
 let serverInstance = null;
 let mainWindow = null;
+
+// this should be placed at top of main.js to handle setup events quickly
+if (squirrel.handleSquirrelEvents()) {
+    // squirrel event handled and app will exit in 1000ms, so don't do anything else
+    return;
+}
 
 // Registering a protocol & schema to serve our Ember application
 protocol.registerStandardSchemes(['serve'], { secure: true });
