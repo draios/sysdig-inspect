@@ -21,7 +21,13 @@
     "start:electron": "ember electron",
     "start:backend": "scripts/run-backend",
     "start:webapp": "ember serve --proxy http://localhost:3000",
-    "test": "ember test"
+    "test": "ember test",
+    "setup:win": "npm install && scripts\\install.bat",
+    "clean:win": "scripts\\clean.bat",
+    "bundle:win": "scripts\\bundle.bat",
+    "package:win": "ember electron:package --platform=win32",
+    "make:win": "ember electron:make --platform=win32",
+    "start:win:backend": "scripts\\run-backend.bat"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "6.24.1",
