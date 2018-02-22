@@ -12,7 +12,7 @@
     "url": "https://github.com/draios/sysdig-inspect.git"
   },
   "scripts": {
-    "prepare": "npm install && scripts/install",
+    "setup": "npm install && scripts/install",
     "clean": "scripts/clean",
     "bundle": "scripts/bundle",
     "package:mac": "ember electron:package --platform=darwin",

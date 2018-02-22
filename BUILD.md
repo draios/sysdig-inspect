@@ -15,7 +15,7 @@ You will need the following things properly installed on your computer.
 
 1. `git clone https://github.com/draios/sysdig-inspect.git`
 2. `cd sysdig-inspect`
-3. `npm run prepare`
+3. `npm run setup`
 
 
 ## Run the development version, in the browser
