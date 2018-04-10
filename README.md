@@ -18,6 +18,7 @@ Where to start?
 Here are the installers available for the latest version:
 
 * MAC installer: https://setns.run/install-inspect
+* Windows installer: https://setns.run/install-inspect-windows
 * Linux installer (RPM version): https://setns.run/install-inspect-rpm
 * Linux installer (DEB version): https://setns.run/install-inspect-deb
 
