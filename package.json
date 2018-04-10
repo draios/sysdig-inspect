@@ -12,7 +12,7 @@
     "url": "https://github.com/draios/sysdig-inspect.git"
   },
   "scripts": {
-    "prepare": "npm install && scripts/install",
+    "setup": "npm install && scripts/install",
     "clean": "scripts/clean",
     "bundle": "scripts/bundle",
     "package:mac": "ember electron:package --platform=darwin",
@@ -21,7 +21,13 @@
     "start:electron": "ember electron",
     "start:backend": "scripts/run-backend",
     "start:webapp": "ember serve --proxy http://localhost:3000",
-    "test": "ember test"
+    "test": "ember test",
+    "setup:win": "npm install && scripts\\install.bat",
+    "clean:win": "scripts\\clean.bat",
+    "bundle:win": "scripts\\bundle.bat",
+    "package:win": "ember electron:package --platform=win32",
+    "make:win": "ember electron:make --platform=win32",
+    "start:win:backend": "scripts\\run-backend.bat"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "6.24.1",
@@ -31,6 +37,7 @@
     "broccoli-asset-rev": "2.6.0",
     "devtron": "1.4.0",
     "electron-prebuilt-compile": "1.7.9",
+    "electron-squirrel-startup": "1.0.0",
     "ember-ajax": "3.0.0",
     "ember-cli": "2.16.2",
     "ember-cli-app-version": "3.1.0",
@@ -65,7 +72,9 @@
   "private": true,
   "dependencies": {
     "electron-compile": "6.4.2",
-    "electron-protocol-serve": "1.3.0"
+    "electron-protocol-serve": "1.3.0",
+    "cors": "2.8.4",
+    "express": "4.16.2"
   },
   "config": {
     "forge": "./ember-electron/electron-forge-config.js"

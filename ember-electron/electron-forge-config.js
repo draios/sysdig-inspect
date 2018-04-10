@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   "make_targets": {
     "win32": [
@@ -24,6 +26,15 @@ module.exports = {
     "icon": "assets/icons/favicon",
     "osxSign": true,
     "overwrite": true
+  },
+  "electronWinstallerConfig": {
+    "title": "Sysdig Inspect",
+    "name": "SysdigInspect",
+    "description": "A powerful opensource interface for container troubleshooting and security investigation",
+    "iconUrl": `https://raw.githubusercontent.com/draios/sysdig-inspect/win-integration/assets/icons/favicon.ico`,
+    "setupIcon": path.join(__dirname, '../assets/icons/favicon.ico'),
+    "loadingGif": path.join(__dirname, '../assets/win/loading.gif'),
+    "noMsi": true
   },
   "electronInstallerDMG": {
     "title": "Sysdig Inspect",
