@@ -97,7 +97,7 @@ before_build
 
 npm run clean
 
-npm run prepare
+npm run setup
 npm build
 npm test
 
