@@ -9,6 +9,10 @@ You will need the following things properly installed on your computer.
 * Sysdig!
     1. clone https://github.com/draios/sysdig (`csysdig_json` branch)
     2. build the tool following instructions at https://github.com/draios/sysdig/wiki/How-to-Install-Sysdig-from-the-Source-Code#linux-and-osx
+* NPM nodemon
+  * `npm install -g nodemon`
+  * Will be expected to be installed when running the backend component (see below).
+  * More info: https://www.npmjs.com/package/nodemon
 
 
 ## MAC/Linux
