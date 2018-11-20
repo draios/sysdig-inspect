@@ -17,9 +17,8 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-# Set environment
+# Setup environment
 ENV NODE_ENV production
-# ENV DEBUG *
 ENV SYSDIG_SERVER_PORT 3000
 ENV SYSDIG_PATH /usr/bin
 ENV SYSDIG_SERVER_HOSTNAME 0.0.0.0
