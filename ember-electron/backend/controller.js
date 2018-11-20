@@ -22,27 +22,24 @@ const fs = require('fs');
 
 class Controller {
     constructor(sysdigPath) {
-        this.sysdigPath = sysdigPath || path.join(__dirname, '../resources/sysdig/');
+        this.sysdigPath = sysdigPath;
 
         if (process.platform === 'win32') {
-            this.sysdigExe = this.sysdigPath + 'sysdig.exe';
-            this.csysdigExe = this.sysdigPath + 'csysdig.exe';
+            this.sysdigExe = path.join(this.sysdigPath, '/sysdig.exe');
+            this.csysdigExe = path.join(this.sysdigPath, '/csysdig.exe');
         } else {
-            this.sysdigExe = this.sysdigPath + 'sysdig';
-            this.csysdigExe = this.sysdigPath + 'csysdig';
+            this.sysdigExe = path.join(this.sysdigPath, '/sysdig');
+            this.csysdigExe = path.join(this.sysdigPath, '/csysdig');
         }
 
-        if (!fs.existsSync(this.sysdigExe) || !fs.existsSync(this.csysdigExe)) {
-            console.log(`sysdig/csysdig executables not found in path ${this.sysdigPath}`);
+        if (fs.existsSync(this.sysdigExe) === false) {
+            console.error(`sysdig executable not found at ${this.sysdigExe}`);
             process.exit();
         }
-    }
-
-    sendError(message, response) {
-        let resBody = { reason: message };
-
-        response.status(500);
-        response.send(JSON.stringify(resBody));
+        if (fs.existsSync(this.csysdigExe) === false) {
+            console.error(`csysdig executable not found at ${this.csysdigExe}`);
+            process.exit();
+        }
     }
 
     runCsysdig(args, response) {
@@ -60,29 +57,31 @@ class Controller {
     _run(exe, args, response) {
         let options = { cwd: this.sysdigPath };
 
-        console.log(`spawning ${exe} with args: ${args}`);
-        this.prc = spawn(exe, args, options);
+        console.log(`spawning ${this.sysdigPath}/${exe} with args`, args);
+        const prc = spawn(exe, args, options);
 
-        this.prc.stdout.setEncoding('utf8');
-        this.prc.stderr.setEncoding('utf8');
-        this.prc.stdin.setEncoding('utf8');
+        prc.stdout.setEncoding('utf8');
+        prc.stderr.setEncoding('utf8');
+        prc.stdin.setEncoding('utf8');
 
-        this.prc.stdout.on('data', (data) => {
+        prc.stdout.on('data', (data) => {
             response.write(data);
         });
 
-        this.prc.stderr.on('data', (data) => {
-            this.sendError(data, response);
+        prc.stderr.on('data', (data) => {
+            console.error(`${exe} error`, data);
+            response.status(500);
+            response.send(JSON.stringify({ reason: data }));
         });
 
-        this.prc.on('close', (code) => {
+        prc.on('close', (code) => {
             response.end();
-            console.log(`sysdig process exited with code ${code}`);
+            console.error(`${exe} exited with code ${code}`);
         });
 
-        this.prc.on('error', (err) => {
-            console.log('Cannot start csysdig. Make sure sysdig is installed correctly.');
-            console.log(err);
+        prc.on('error', (err) => {
+            console.error(`${exe} error: cannot start (make sure sysdig is installed correctly)`);
+            console.error(err);
         });
     }
 }
