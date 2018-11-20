@@ -31,5 +31,5 @@ build_client() {
 set -ex
     setup_env
     build_server
-    # build_client
+    build_client
 set +ex
