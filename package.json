@@ -27,7 +27,8 @@
     "bundle:win": "scripts\\bundle.bat",
     "package:win": "ember electron:package --platform=win32",
     "make:win": "ember electron:make --platform=win32",
-    "start:win:backend": "scripts\\run-backend.bat"
+    "start:win:backend": "scripts\\run-backend.bat",
+    "make:docker-image": "scripts/build-docker-image"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "6.24.1",
