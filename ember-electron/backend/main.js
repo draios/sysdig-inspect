@@ -18,7 +18,14 @@ const path = require('path');
 const argv = require('yargs').argv;
 const backendServer = require('./server');
 
-let absPath = argv.p ? path.resolve(__dirname, argv.p) + '/' : undefined;
+let absPath;
+if (argv.p) {
+    absPath = path.resolve(__dirname, argv.p);
+} else if (process.env.SYSDIG_PATH) {
+    absPath = path.resolve(__dirname, process.env.SYSDIG_PATH);
+} else {
+    absPath = path.join(__dirname, '../resources/sysdig/');
+}
 
-backendServer(absPath).start();
+backendServer(absPath, process.env.SYSDIG_SERVER_PORT, process.env.SYSDIG_SERVER_HOSTNAME).start();
 console.log('press CTRL+C for exit');
