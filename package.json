@@ -12,7 +12,7 @@
     "url": "https://github.com/draios/sysdig-inspect.git"
   },
   "scripts": {
-    "setup": "npm install && scripts/install",
+    "setup": "npm ci && scripts/install",
     "clean": "scripts/clean",
     "bundle": "scripts/bundle",
     "package:mac": "ember electron:package --platform=darwin",
@@ -22,7 +22,7 @@
     "start:backend": "scripts/run-backend",
     "start:webapp": "ember serve --proxy http://localhost:3000",
     "test": "ember test",
-    "setup:win": "npm install && scripts\\install.bat",
+    "setup:win": "npm ci && scripts\\install.bat",
     "clean:win": "scripts\\clean.bat",
     "bundle:win": "scripts\\bundle.bat",
     "package:win": "ember electron:package --platform=win32",
