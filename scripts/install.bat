@@ -8,11 +8,11 @@
 
     cd wsd-core
 
-    npm install
+    npm ci
 
     cd ..\ui-toolkit
 
-    npm install
+    npm ci
 
     cd ..\..
 
@@ -21,7 +21,7 @@
 :install_backend
     cd ember-electron\backend
 
-    npm install
+    npm ci
 
     cd ..\..
 

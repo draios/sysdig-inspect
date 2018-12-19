@@ -15,7 +15,7 @@ fi
 set -u
 
 
-NODE_VERSION="v6.11.2"
+NODE_VERSION="v10.5.0"
 
 setup_env() {
     set +eu

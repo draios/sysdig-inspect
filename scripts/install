@@ -16,11 +16,11 @@ install_addons() {
 
     cd wsd-core
 
-    npm install
+    npm ci
 
     cd ../ui-toolkit
 
-    npm install
+    npm ci
 
     cd ../..
 }
@@ -28,7 +28,7 @@ install_addons() {
 install_backend() {
     cd ember-electron/backend
 
-    npm install
+    npm ci
 
     cd ../..
 }
