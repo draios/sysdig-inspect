@@ -110,13 +110,15 @@ npm run make:docker-image
 docker build . -t sysdig-inspect:0.1
 ```
 
-You can now start the container. Note that:
-
-1. it's recommended to mount the directory where you have the Sysdig capture files (`/Users/davide` in the example) to the directory you will use in Sysdig Inspect (`/captures` in the example)
-2. You can pick the TCP port you'll use in the browser to launch Sysdig Inspect (`5000` in the example). The container will expose port 3000/tcp.
+You can now start the container:
 
 ```
-docker run -d -v /Users/davide/:/captures -p5000:3000 sysdig-inspect:0.1
+docker run -d -v /local/path/to/captures/:/captures -p8080:3000 sysdig-inspect:0.1
 ```
 
-And that's it! Now you can open http://localhost:5000 and open a capture file like `/captures/test.scap`.
+Note that:
+
+1. It's recommended to mount the directory where you have the Sysdig capture files (`/local/path/to/captures` in the example) to the directory you will use in Sysdig Inspect (`/captures` in the example)
+2. You can pick the TCP port you'll use in the browser to launch Sysdig Inspect (`8080` in the example). The container will expose port 3000/tcp
+
+And that's it! Now you can open http://localhost:8080 and open a capture file like `/captures/my-capture.scap`.
