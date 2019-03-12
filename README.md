@@ -12,8 +12,18 @@ To use Sysdig Inspect, you need capture files collected on Linux with [sysdig](h
 
 Where to start?
 ---
+**Sysdig Inspect container**
 
-**Installing Sysdig Inspect**
+Sysdig Inspect is available as Docker container image.
+
+```
+docker run -d -v [capture folder path]:/captures -p8080:3000 sysdiglabs/sysdig-inspect:0.1.0-dev
+```
+
+Sysdig Inspect will be available in your browser at http://localhost:8080!
+
+
+**Sysdig Inspect desktop**
 
 Here are the installers available for the latest version:
 
