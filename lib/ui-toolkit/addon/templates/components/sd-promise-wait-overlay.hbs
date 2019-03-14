@@ -22,6 +22,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </div>
 {{/if}}
 
+{{#if promiseState.hasFailed}}
+    <div class="sd-promise-wait-overlay__wrapper">
+        <div class="sd-promise-wait-overlay__empty-panel">
+            <div class="sd-promise-wait-overlay__text">
+                Unable to load data
+            </div>
+            {{#if promiseState.error.message}}
+                <div class="sd-promise-wait-overlay__message">
+                    {{promiseState.error.message}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+{{/if}}
+
 {{#if canShowData}}
     {{yield}}
 {{/if}}
