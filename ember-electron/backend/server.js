@@ -73,8 +73,35 @@ class Server {
     _setupRoutes(app) {
         app.use(express.static(path.join(__dirname, 'public')));
 
+        app.get('/health', (req, res) => {
+            this._loadViews().then(() => {
+                res.send({
+                    ok: true,
+                });
+            }).catch(() => {
+                res.status(500).send({
+                    ok: true,
+                });
+            });
+        });
+        app.get('/ready', (req, res) => {
+            this._loadViews().then(() => {
+                res.send({
+                    ok: true,
+                });
+            }).catch(() => {
+                res.status(500).send({
+                    ok: true,
+                });
+            });
+        });
+
         app.get('/capture/views', (req, res) => {
-            this._listViews(req, res);
+            this._listViews(req, res)
+                .catch((error) => {
+                    console.error('view listing failed', error);
+                })
+            ;
         });
 
         app.get('/capture/:fileName/summary', (req, res) => {
@@ -100,7 +127,14 @@ class Server {
         let args = ['--list-views', '-j'];
 
         response.setHeader('Content-Type', 'application/json');
-        this.sysdigController.runCsysdig(args, response);
+
+        return this.sysdigController.runCsysdig(args, response);
+    }
+
+    _loadViews() {
+        let args = ['--list-views', '-j'];
+
+        return this.sysdigController.runCsysdig(args);
     }
 
     _getView(request, response) {
@@ -126,8 +160,12 @@ class Server {
         }
 
         response.setHeader('Content-Type', 'application/json');
-        this.sysdigController.runCsysdig(args, response);
-    }
+        this.sysdigController.runCsysdig(args, response)
+            .catch((error) => {
+                console.error('csysdig execution failed', error);
+            })
+        ;
+}
 
     _getSummary(request, response) {
         const fileName = untildify(request.params.fileName);
@@ -147,7 +185,11 @@ class Server {
             args.push(filter);
         }
 
-        this.sysdigController.runSysdig(args, response);
+        this.sysdigController.runSysdig(args, response)
+            .catch((error) => {
+                console.error('sysdig execution failed', error);
+            })
+        ;
     }
 }
 
