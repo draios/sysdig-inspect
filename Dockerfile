@@ -34,6 +34,12 @@ ADD dist /usr/bin/sysdig-inspect
 WORKDIR /usr/bin/sysdig-inspect
 
 #
+# Configure health check
+#
+HEALTHCHECK --interval=1m --timeout=20s \
+  CMD curl -f http://localhost:3000/health || exit 1
+
+#
 # Expose Sysdig Inspect UI endpoint
 #
 EXPOSE 3000
