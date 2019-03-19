@@ -95,3 +95,30 @@ The environment setup and app builds will create several artifacts. Here is how 
 start fresh:
 
 * `npm run clean:win`
+
+
+## Container
+
+You can also create a Docker image to run Sysdig Inspect. This will make Sysdig Inspect available as web application, already bundled with sysdig.
+
+First, make sure to follow the _Prepare the environment_ sections above. Then, here's how you can build the image:
+
+```
+npm run make:docker-image
+
+# build the image with Docker
+docker build . -t sysdig-inspect:0.1
+```
+
+You can now start the container:
+
+```
+docker run -d -v /local/path/to/captures/:/captures -p8080:3000 sysdig-inspect:0.1
+```
+
+Note that:
+
+1. It's recommended to mount the directory where you have the Sysdig capture files (`/local/path/to/captures` in the example) to the directory you will use in Sysdig Inspect (`/captures` in the example)
+2. You can pick the TCP port you'll use in the browser to launch Sysdig Inspect (`8080` in the example). The container will expose port 3000/tcp
+
+And that's it! Now you can open http://localhost:8080 and open a capture file like `/captures/my-capture.scap`.

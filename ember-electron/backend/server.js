@@ -18,30 +18,31 @@ const net = require('net');
 const express = require('express');
 const cors = require('cors');
 const controller = require('./controller');
+const path = require('path');
+const untildify = require('untildify');
 
-const BASE_PORT = 3000;
-
-function findAvailablePort(port, callback) {
+function findAvailablePort(port, hostname, callback) {
     let server = net.createServer();
-    server.listen(port, 'localhost', (err) => {
+    server.listen(port, hostname, (err) => {
         server.once('close', () => {
             callback(port);
         });
         server.close();
     }).on('error', (err) => {
         // try another port sequentially
-        findAvailablePort(port+1, callback);
+        findAvailablePort(port+1, hostname, callback);
     });
 }
 
 class Server {
-    constructor(sysdigPath, port) {
-        this.port = port || BASE_PORT;
+    constructor(sysdigPath, port, hostname) {
+        this.port = port || 3000;
+        this.hostname = hostname ||  'localhost';
         this.sysdigController = controller(sysdigPath);
     }
 
     start(callback) {
-        findAvailablePort(this.port, (port) => {
+        findAvailablePort(this.port, this.hostname, (port) => {
             this.port = port;
 
             const app = express();
@@ -49,7 +50,7 @@ class Server {
 
             this._setupRoutes(app);
 
-            this.server = app.listen(port, 'localhost', (err) => {
+            this.server = app.listen(port, this.hostname, (err) => {
                 if (err) {
                     console.log('error starting server: ', err);
                     if (typeof callback === 'function') {
@@ -57,7 +58,7 @@ class Server {
                     }
                 }
 
-                console.log('server is listening on port ' + port);
+                console.log(`server is listening on ${this.hostname}:${port}`);
                 if (typeof callback === 'function') {
                     callback(port);
                 }
@@ -70,8 +71,37 @@ class Server {
     }
 
     _setupRoutes(app) {
+        app.use(express.static(path.join(__dirname, 'public')));
+
+        app.get('/health', (req, res) => {
+            this._loadViews().then(() => {
+                res.send({
+                    ok: true,
+                });
+            }).catch(() => {
+                res.status(500).send({
+                    ok: true,
+                });
+            });
+        });
+        app.get('/ready', (req, res) => {
+            this._loadViews().then(() => {
+                res.send({
+                    ok: true,
+                });
+            }).catch(() => {
+                res.status(500).send({
+                    ok: true,
+                });
+            });
+        });
+
         app.get('/capture/views', (req, res) => {
-            this._listViews(req, res);
+            this._listViews(req, res)
+                .catch((error) => {
+                    console.error('view listing failed', error);
+                })
+            ;
         });
 
         app.get('/capture/:fileName/summary', (req, res) => {
@@ -97,13 +127,20 @@ class Server {
         let args = ['--list-views', '-j'];
 
         response.setHeader('Content-Type', 'application/json');
-        this.sysdigController.runCsysdig(args, response);
+
+        return this.sysdigController.runCsysdig(args, response);
+    }
+
+    _loadViews() {
+        let args = ['--list-views', '-j'];
+
+        return this.sysdigController.runCsysdig(args);
     }
 
     _getView(request, response) {
-        let fileName = request.params.fileName;
+        let fileName = untildify(request.params.fileName);
         let viewInfo = JSON.parse(request.params.view);
-        let args = ['-r', fileName, '-v', viewInfo.id, '-j', '-pc'];
+        let args = ['-r', path.resolve(fileName), '-v', viewInfo.id, '-j', '-pc'];
 
         switch (viewInfo.viewAs) {
             case 'dottedAscii':
@@ -123,17 +160,21 @@ class Server {
         }
 
         response.setHeader('Content-Type', 'application/json');
-        this.sysdigController.runCsysdig(args, response);
-    }
+        this.sysdigController.runCsysdig(args, response)
+            .catch((error) => {
+                console.error('csysdig execution failed', error);
+            })
+        ;
+}
 
     _getSummary(request, response) {
-        const fileName = request.params.fileName;
+        const fileName = untildify(request.params.fileName);
         const filter = request.query.filter;
         let sampleCount = 0;
 
         response.setHeader('Content-Type', 'application/json');
 
-        const args = ['-r', fileName, '-c', 'wsysdig_summary'];
+        const args = ['-r', path.resolve(fileName), '-c', 'wsysdig_summary'];
 
         if (request.query.sampleCount !== undefined) {
             sampleCount = request.query.sampleCount;
@@ -144,12 +185,16 @@ class Server {
             args.push(filter);
         }
 
-        this.sysdigController.runSysdig(args, response);
+        this.sysdigController.runSysdig(args, response)
+            .catch((error) => {
+                console.error('sysdig execution failed', error);
+            })
+        ;
     }
 }
 
-function createServer(sysdigPath, port) {
-    return new Server(sysdigPath, port);
+function createServer(sysdigPath, port, hostname) {
+    return new Server(sysdigPath, port, hostname);
 }
 
 module.exports = createServer;

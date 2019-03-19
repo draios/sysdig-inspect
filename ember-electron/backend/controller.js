@@ -22,27 +22,24 @@ const fs = require('fs');
 
 class Controller {
     constructor(sysdigPath) {
-        this.sysdigPath = sysdigPath || path.join(__dirname, '../resources/sysdig/');
+        this.sysdigPath = sysdigPath;
 
         if (process.platform === 'win32') {
-            this.sysdigExe = this.sysdigPath + 'sysdig.exe';
-            this.csysdigExe = this.sysdigPath + 'csysdig.exe';
+            this.sysdigExe = path.join(this.sysdigPath, '/sysdig.exe');
+            this.csysdigExe = path.join(this.sysdigPath, '/csysdig.exe');
         } else {
-            this.sysdigExe = this.sysdigPath + 'sysdig';
-            this.csysdigExe = this.sysdigPath + 'csysdig';
+            this.sysdigExe = path.join(this.sysdigPath, '/sysdig');
+            this.csysdigExe = path.join(this.sysdigPath, '/csysdig');
         }
 
-        if (!fs.existsSync(this.sysdigExe) || !fs.existsSync(this.csysdigExe)) {
-            console.log(`sysdig/csysdig executables not found in path ${this.sysdigPath}`);
+        if (fs.existsSync(this.sysdigExe) === false) {
+            console.error(`sysdig executable not found at ${this.sysdigExe}`);
             process.exit();
         }
-    }
-
-    sendError(message, response) {
-        let resBody = { reason: message };
-
-        response.status(500);
-        response.send(JSON.stringify(resBody));
+        if (fs.existsSync(this.csysdigExe) === false) {
+            console.error(`csysdig executable not found at ${this.csysdigExe}`);
+            process.exit();
+        }
     }
 
     runCsysdig(args, response) {
@@ -60,29 +57,101 @@ class Controller {
     _run(exe, args, response) {
         let options = { cwd: this.sysdigPath };
 
-        console.log(`spawning ${exe} with args: ${args}`);
-        this.prc = spawn(exe, args, options);
+        console.log(`spawning ${this.sysdigPath}/${exe} with args`, args);
+        const prc = spawn(exe, args, options);
 
-        this.prc.stdout.setEncoding('utf8');
-        this.prc.stderr.setEncoding('utf8');
-        this.prc.stdin.setEncoding('utf8');
+        prc.stdout.setEncoding('utf8');
+        prc.stderr.setEncoding('utf8');
+        prc.stdin.setEncoding('utf8');
 
-        this.prc.stdout.on('data', (data) => {
-            response.write(data);
-        });
+        //
+        // Use state to understand how to handle responses:
+        // - If data has been received, you can only change the status and you'll need to close the stream
+        // - If no data has been received, in case of failure you can send the error message
+        // - Don't handle errors more than once
+        //
+        let execState = 'STARTED';
 
-        this.prc.stderr.on('data', (data) => {
-            this.sendError(data, response);
-        });
+        return new Promise((resolve, reject) => {
+            prc.stdout.on('data', (data) => {
+                console.log(`${this.sysdigPath}/${exe}`, args, 'receiving data');
 
-        this.prc.on('close', (code) => {
-            response.end();
-            console.log(`sysdig process exited with code ${code}`);
-        });
+                if (execState !== 'FAILED') {
+                    if (response) {
+                        response.write(data);
+                    }
 
-        this.prc.on('error', (err) => {
-            console.log('Cannot start csysdig. Make sure sysdig is installed correctly.');
-            console.log(err);
+                    execState = 'DATA_RECEIVED';
+                }
+            });
+
+            prc.stderr.on('data', (data) => {
+                console.error(`${this.sysdigPath}/${exe}`, args, 'error read from STDERR', data);
+
+                if (execState !== 'FAILED') {
+                    const message = { reason: data };
+
+                    if (response) {
+                        response.status(500);
+
+                        if (execState === 'STARTED') {
+                            response.send(JSON.stringify(message));
+                        }
+                    }
+
+                    execState = 'FAILED';
+
+                    reject(message);
+                }
+            });
+
+            prc.on('error', (err) => {
+                //
+                // NOTE: Exit event may or may not fire after
+                //
+                console.error(`${this.sysdigPath}/${exe}`, args, 'error: cannot start (make sure sysdig is installed correctly)', err);
+
+                if (execState !== 'FAILED') {
+                    const message = { reason: 'Cannot start csysdig. Make sure sysdig is installed correctly.', details: err };
+
+                    if (response) {
+                        response.status(500);
+
+                        if (execState === 'STARTED') {
+                            response.send(JSON.stringify({ reason: message.reason }));
+                        }
+                    }
+
+                    execState = 'FAILED';
+
+                    reject(message);
+                }
+            });
+
+            prc.on('close', (code, signal) => {
+                console.error(`${this.sysdigPath}/${exe}`, args, `exited with code ${code} ${signal}`);
+
+                if (response) {
+                    if (execState === 'DATA_RECEIVED') {
+                        // Close stream only if anything has been sent
+                        response.end();
+                    } else if (execState === 'STARTED') {
+                        // Send 'no content' if nothing happened
+                        response.status(204).send();
+                    }
+                }
+
+                if (execState !== 'FAILED') {
+                    if (code === 0) {
+                        resolve({code});
+                    } else {
+                        const message = { reason: 'Unexpected exit', details: code };
+                        reject(message);
+                    }
+                }
+
+                execState = 'COMPLETED';
+            });
         });
     }
 }

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+setup_env() {
+    # Disabling interactive progress bar, and spinners gains 2x performances
+    # as stated on https://twitter.com/gavinjoyce/status/691773956144119808
+    npm config set progress false
+    npm config set spin false
+
+}
+
+build_server() {
+    mkdir -p dist
+    cp -r ember-electron/backend/* dist
+    mkdir -p dist/public
+    cp -r public/* dist/public
+
+    cd dist
+    rm -rf tests
+    rm -rf node_modules
+
+    npm i
+
+    cd ..
+}
+
+build_client() {
+    npm run setup
+    ember build -o dist/public
+}
+
+set -ex
+    setup_env
+    build_server
+    build_client
+set +ex
