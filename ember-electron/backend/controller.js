@@ -74,8 +74,6 @@ class Controller {
 
         return new Promise((resolve, reject) => {
             prc.stdout.on('data', (data) => {
-                console.log(`${this.sysdigPath}/${exe}`, args, 'receiving data');
-
                 if (execState !== 'FAILED') {
                     if (response) {
                         response.write(data);
