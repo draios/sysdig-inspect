@@ -140,7 +140,7 @@ class Server {
     _getView(request, response) {
         let fileName = untildify(request.params.fileName);
         let viewInfo = JSON.parse(request.params.view);
-        let args = ['-r', path.resolve(fileName), '-v', viewInfo.id, '-j', '-pc'];
+        let args = ['-r', path.resolve(this.sysdigController.sysdigPath, fileName), '-v', viewInfo.id, '-j', '-pc'];
 
         switch (viewInfo.viewAs) {
             case 'dottedAscii':
@@ -174,7 +174,7 @@ class Server {
 
         response.setHeader('Content-Type', 'application/json');
 
-        const args = ['-r', path.resolve(fileName), '-c', 'wsysdig_summary'];
+        const args = ['-r', path.resolve(this.sysdigController.sysdigPath, fileName), '-c', 'wsysdig_summary'];
 
         if (request.query.sampleCount !== undefined) {
             sampleCount = request.query.sampleCount;

@@ -52,7 +52,7 @@ protocolServe({
 // });
 
 function createServer() {
-    const absPath = argv.p ? resolve(__dirname, '../../../', argv.p) + '/' : null;
+    const absPath = argv.p ? resolve(__dirname, '../../../', argv.p) + '/' : join(__dirname, 'resources/sysdig/');
 
     serverInstance = backendServer(absPath)
     serverInstance.start((serverPort) => {
