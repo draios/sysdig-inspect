@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SYSDIG_VERSION="0.25"
+SYSDIG_VERSION="0.24.1"
 
 # Env parameters
 # - CLEANUP (default: true)
