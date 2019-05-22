@@ -1,0 +1,78 @@
+pipeline {
+    agent {
+        label 'builder-backend-j8'
+    }
+
+    options {
+        disableConcurrentBuilds()
+    }
+
+    environment {
+        BUILDER = "sysdiglabs/sysdig-inspect-builder:0.2"
+        VERSION = readFile "VERSION"
+        INSPECT_USER_TRACKING_KEY = credentials('INSPECT_USER_TRACKING_KEY')
+    }
+
+    stages {
+        stage('Prepare') {
+            steps {
+                // At this point, Jenkins checked out the repository already.
+                // Also, the workspace is persistent.
+                // Since the previous build might have left some artifacts then now we're going to
+                // remove everything and checkout the repository again
+                step([$class: 'WsCleanup'])
+
+                sh "docker rm sysdig-inspect-builder || echo \\\"Builder image not found\\\""
+
+                // NOTE: 'checkout scm' is equivalent to
+                // git url: "https://github.com/:account/:repository", branch: "${env.BRANCH_NAME}", credentialsId: ${env.MY_CREDENTAILS_NAME}"
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            environment {
+                CWD = sh(script: 'pwd', , returnStdout: true).trim()
+            }
+            steps {
+                sh "docker run --name sysdig-inspect-builder -v ${CWD}:/usr/bin/sysdig-inspect -v /var/run/docker.sock:/var/run/docker.sock -e 'INSTALL_DEPS=true' -e 'PUBLISH_ARTIFACTS=true' -e 'GIT_BRANCH=${env.BRANCH_NAME}' -e 'USER_TRACKING_KEY=${env.INSPECT_USER_TRACKING_KEY}' ${env.BUILDER}"
+            }
+        }
+
+        stage('Publish') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: "docker-hub", passwordVariable: "DOCKER_PASSWORD", usernameVariable: "DOCKER_USERNAME")]) {
+                    sh "docker login -u=${env.DOCKER_USERNAME} -p=${env.DOCKER_PASSWORD}"
+                    sh "GIT_BRANCH=${env.BRANCH_NAME} ./build/publish.sh"
+                }            
+            }
+        }
+
+        stage('Tag') {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo "Tagging repository v${VERSION}"
+
+                withCredentials([usernamePassword(credentialsId: "github-jenkins-user-token", passwordVariable: "GIT_PASSWORD", usernameVariable: "GIT_USERNAME")]) {
+                    sh("git tag -a v${VERSION} -m 'Release v${VERSION}'")
+                    sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/draios/sysdig-inspect --tags")
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            //
+            // Cleanup
+            //
+            // NOTE: All artifacts that need to be stored should be uploaded to permanent storage by now!
+            //
+            step([$class: 'WsCleanup'])
+
+            sh "docker rm sysdig-inspect-builder || echo \\\"Builder image not found\\\""
+        }
+    }
+}
