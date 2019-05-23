@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # Env parameters
+# - BUILD_LINUX (default: true)
+# - BUILD_CONTAINER (default: true)
+# - BUILD_MAC (default: true)
+# - BUILD_MAC_INSTALLER (default: false)
 # - GIT_BRANCH (default: dev)
 
 setup_env() {
@@ -11,6 +15,22 @@ setup_env() {
     #
     # Set default variables
     #
+    if [ -z ${BUILD_LINUX} ]
+    then
+        BUILD_LINUX=true
+    fi
+    if [ -z ${BUILD_CONTAINER} ]
+    then
+        BUILD_CONTAINER=true
+    fi
+    if [ -z ${BUILD_MAC} ]
+    then
+        BUILD_MAC=true
+    fi
+    if [ -z ${BUILD_MAC_INSTALLER} ]
+    then
+        BUILD_MAC_INSTALLER=false
+    fi
     if [ -z ${GIT_BRANCH} ]
     then
         GIT_BRANCH=dev
@@ -49,30 +69,45 @@ setup_env() {
 publish_artifacts() {
     echo "Uploading artifacts to S3 dev..."
 
-    # Linux DEB package
-    aws s3 cp out/linux/installers/sysdig-inspect_${INSPECT_USER_VERSION}_amd64.deb s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/sysdig-inspect_${INSPECT_VERSION}_amd64.deb --acl public-read
-    if [ "${ENVIRONMENT}" = "production" ]; then
-        aws s3 cp out/linux/installers/sysdig-inspect_${INSPECT_USER_VERSION}_amd64.deb s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect_${INSPECT_VERSION}_amd64.deb --acl public-read
-        aws s3 cp out/linux/installers/sysdig-inspect_${INSPECT_USER_VERSION}_amd64.deb s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect_latest_amd64.deb --acl public-read
+    if [ "${BUILD_LINUX}" = "true" ]; then
+        # Linux DEB package
+        aws s3 cp out/linux/installers/sysdig-inspect_${INSPECT_USER_VERSION}_amd64.deb s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/sysdig-inspect_${INSPECT_VERSION}_amd64.deb --acl public-read
+        if [ "${ENVIRONMENT}" = "production" ]; then
+            aws s3 cp out/linux/installers/sysdig-inspect_${INSPECT_USER_VERSION}_amd64.deb s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect_${INSPECT_VERSION}_amd64.deb --acl public-read
+            aws s3 cp out/linux/installers/sysdig-inspect_${INSPECT_USER_VERSION}_amd64.deb s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect_latest_amd64.deb --acl public-read
+        fi
+
+        # Linux RPM package
+        aws s3 cp out/linux/installers/sysdig-inspect-${INSPECT_USER_VERSION}.x86_64.rpm s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/sysdig-inspect-${INSPECT_VERSION}.x86_64.rpm --acl public-read
+        if [ "${ENVIRONMENT}" = "production" ]; then
+            aws s3 cp out/linux/installers/sysdig-inspect-${INSPECT_USER_VERSION}.x86_64.rpm s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect-${INSPECT_VERSION}.x86_64.rpm --acl public-read
+            aws s3 cp out/linux/installers/sysdig-inspect-${INSPECT_USER_VERSION}.x86_64.rpm s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect-latest.x86_64.rpm --acl public-read
+        fi
     fi
 
-    # Linux RPM package
-    aws s3 cp out/linux/installers/sysdig-inspect-${INSPECT_USER_VERSION}.x86_64.rpm s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/sysdig-inspect-${INSPECT_VERSION}.x86_64.rpm --acl public-read
-    if [ "${ENVIRONMENT}" = "production" ]; then
-        aws s3 cp out/linux/installers/sysdig-inspect-${INSPECT_USER_VERSION}.x86_64.rpm s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect-${INSPECT_VERSION}.x86_64.rpm --acl public-read
-        aws s3 cp out/linux/installers/sysdig-inspect-${INSPECT_USER_VERSION}.x86_64.rpm s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect-latest.x86_64.rpm --acl public-read
+    if [ "${BUILD_MAC}" = "true" ]; then
+        # MAC zip bundle
+        aws s3 cp out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.zip s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/app/mac/sysdig-inspect-${INSPECT_VERSION}-mac.zip --acl public-read
+        if [ "${ENVIRONMENT}" = "production" ]; then
+            aws s3 cp out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.zip s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect-${INSPECT_VERSION}-mac.zip --acl public-read
+            aws s3 cp out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.zip s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect-latest-mac.zip --acl public-read
+        fi
     fi
 
-    # MAC zip bundle
-    aws s3 cp out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.zip s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/app/mac/sysdig-inspect-${INSPECT_VERSION}-mac.zip --acl public-read
-    if [ "${ENVIRONMENT}" = "production" ]; then
-        aws s3 cp out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.zip s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect-${INSPECT_VERSION}-mac.zip --acl public-read
-        aws s3 cp out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.zip s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect-latest-mac.zip --acl public-read
+    if [ "${BUILD_MAC_INSTALLER}" = "true" ]; then
+        # MAC zip bundle
+        aws s3 cp out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.dmg s3://download.draios.com/dev/sysdig-inspect/${GIT_BRANCHNAME}/app/mac/sysdig-inspect-${INSPECT_VERSION}-mac.dmg --acl public-read
+        if [ "${GIT_BRANCH}" = "master" ]; then
+            aws s3 cp out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.dmg s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect-${INSPECT_VERSION}-mac.dmg --acl public-read
+            aws s3 cp out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.dmg s3://download.draios.com/stable/sysdig-inspect/sysdig-inspect-latest-mac.dmg --acl public-read
+        fi
     fi
 
-    echo "Publishing image to Docker hub..."
+    if [ "${BUILD_CONTAINER}" = "true" ]; then
+        echo "Publishing image to Docker hub..."
 
-    docker push ${DOCKER_IMAGE_TAG}
+        docker push ${DOCKER_IMAGE_TAG}
+    fi
 }
 
 cleanup() {
