@@ -2,6 +2,8 @@
 
 clean_app() {
     rm -rf bower_components
+    rm -rf deps
+    rm -rf out
     rm -rf dist
     rm -rf electron-out
     rm -rf node_modules
