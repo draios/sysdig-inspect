@@ -65,20 +65,32 @@ setup_env() {
     then
         GIT_COMMIT=
     fi
+    if [ -z ${BUILD_NUMBER} ]
+    then
+        BUILD_NUMBER=42
+    fi
 
     set -u
 
-    INSPECT_VERSION=`cat VERSION`
+    GIT_BRANCHNAME=$(echo ${GIT_BRANCH} | cut -d"/" -f2)
+
+    if [ "${GIT_BRANCHNAME}" = "master" ]; then
+        ENVIRONMENT=production
+    fi
+
+    INSPECT_USER_VERSION=`cat VERSION`
+    if [ "${ENVIRONMENT}" = "production" ]; then
+        INSPECT_VERSION=${INSPECT_USER_VERSION}
+    else
+        INSPECT_VERSION=${INSPECT_USER_VERSION}.${BUILD_NUMBER}
+    fi
 
     # Disabling interactive progress bar, and spinners gains 2x performances
     # as stated on https://twitter.com/gavinjoyce/status/691773956144119808
     npm config set progress false
     npm config set spin false
 
-    GIT_BRANCHNAME=$(echo ${GIT_BRANCH} | cut -d"/" -f2)
-
-    if [ "${GIT_BRANCHNAME}" = "master" ]; then
-        ENVIRONMENT=production
+    if [ "${ENVIRONMENT}" = "production" ]; then
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}
     else
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}-${GIT_BRANCHNAME}
@@ -195,7 +207,7 @@ build() {
         cp electron-out/Sysdig\ Inspect-darwin-x64.zip out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.zip
         if [ "${BUILD_MAC_INSTALLER}" = "true" ]; then
             mkdir -p out/mac/installers
-            cp electron-out/make/Sysdig\ Inspect-${INSPECT_VERSION}.dmg out/mac/installers/sysdig-inspect-${INSPECT_VERSION}-mac.dmg
+            cp electron-out/make/Sysdig\ Inspect-${INSPECT_USER_VERSION}.dmg out/mac/installers/sysdig-inspect-${INSPECT_VERSION}-mac.dmg
         fi
     fi
 }
