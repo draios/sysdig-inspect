@@ -5,6 +5,7 @@
 # - BUILD_CONTAINER (default: true)
 # - BUILD_MAC (default: true)
 # - BUILD_MAC_INSTALLER (default: false)
+# - ENVIRONMENT (default: development)
 # - GIT_BRANCH (default: dev)
 
 setup_env() {
@@ -30,6 +31,10 @@ setup_env() {
     if [ -z ${BUILD_MAC_INSTALLER} ]
     then
         BUILD_MAC_INSTALLER=false
+    fi
+    if [ -z ${ENVIRONMENT} ]
+    then
+        ENVIRONMENT=development
     fi
     if [ -z ${GIT_BRANCH} ]
     then

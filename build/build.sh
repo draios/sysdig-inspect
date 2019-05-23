@@ -12,10 +12,7 @@ SYSDIG_VERSION="0.24.1"
 # - ENVIRONMENT (default: development)
 # - USER_TRACKING_KEY (default: empty)
 # - BUILD_NUMBER
-# - JOB_NAME
 # - GIT_BRANCH (default: dev)
-# - GIT_COMMIT (default: empty)
-# - AT
 
 setup_env() {
     echo "Prepare environment..."
@@ -61,10 +58,6 @@ setup_env() {
     then
         GIT_BRANCH=dev
     fi
-    if [ -z ${GIT_COMMIT} ]
-    then
-        GIT_COMMIT=
-    fi
     if [ -z ${BUILD_NUMBER} ]
     then
         BUILD_NUMBER=42
@@ -94,23 +87,6 @@ setup_env() {
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}
     else
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}-${GIT_BRANCHNAME}
-    fi
-}
-
-before_build() {
-    if [ -z ${GIT_COMMIT} ]; then
-        echo "Skip status check update"
-    else
-        echo "Updating commit status check..."
-
-        GH_STATUS="pending"
-        GH_DESCRIPTION="Build #${BUILD_NUMBER} started..."
-        GH_CONTEXT="jenkins/sysdig-inspect"
-
-        curl 'https://api.github.com/repos/draios/sysdig-inspect/statuses/'"${GIT_COMMIT}"'?access_token='"${AT}"'' \
-        -H 'Content-Type: application/json' \
-        -X POST \
-        -d '{"state": "'"${GH_STATUS}"'", "context": "'"${GH_CONTEXT}"'", "description": "'"${GH_DESCRIPTION}"'", "target_url": "'"${GH_URL}"'"}'
     fi
 }
 
@@ -225,31 +201,11 @@ cleanup() {
     fi
 }
 
-after_build() {
-    if [ -z ${GIT_COMMIT} ]; then
-        echo "Skip status check update"
-    else
-        echo "Updating commit status check..."
-
-        GH_STATUS="success"
-        GH_DESCRIPTION="Build #${BUILD_NUMBER} succeeded"
-        GH_URL="https://ci.draios.com/view/sysdig-inspect/job/${JOB_NAME}/${BUILD_NUMBER}/"
-        GH_CONTEXT="jenkins/sysdig-inspect"
-
-        curl 'https://api.github.com/repos/draios/sysdig-inspect/statuses/'"${GIT_COMMIT}"'?access_token='"${AT}"'' \
-        -H 'Content-Type: application/json' \
-        -X POST \
-        -d '{"state": "'"${GH_STATUS}"'", "context": "'"${GH_CONTEXT}"'", "description": "'"${GH_DESCRIPTION}"'", "target_url": "'"${GH_URL}"'"}'
-    fi
-}
-
 set -ex
     setup_env
-    before_build
     cleanup
     install_dependencies
     build
-    after_build
 set +ex
 
 echo "Done!"
