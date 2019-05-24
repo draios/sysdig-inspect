@@ -12,10 +12,7 @@ SYSDIG_VERSION="0.24.1"
 # - ENVIRONMENT (default: development)
 # - USER_TRACKING_KEY (default: empty)
 # - BUILD_NUMBER
-# - JOB_NAME
 # - GIT_BRANCH (default: dev)
-# - GIT_COMMIT (default: empty)
-# - AT
 
 setup_env() {
     echo "Prepare environment..."
@@ -61,44 +58,35 @@ setup_env() {
     then
         GIT_BRANCH=dev
     fi
-    if [ -z ${GIT_COMMIT} ]
+    if [ -z ${BUILD_NUMBER} ]
     then
-        GIT_COMMIT=
+        BUILD_NUMBER=42
     fi
 
     set -u
 
-    INSPECT_VERSION=`cat VERSION`
+    GIT_BRANCHNAME=$(echo ${GIT_BRANCH} | cut -d"/" -f2)
+
+    if [ "${GIT_BRANCHNAME}" = "master" ]; then
+        ENVIRONMENT=production
+    fi
+
+    INSPECT_USER_VERSION=`cat VERSION`
+    if [ "${ENVIRONMENT}" = "production" ]; then
+        INSPECT_VERSION=${INSPECT_USER_VERSION}
+    else
+        INSPECT_VERSION=${INSPECT_USER_VERSION}.${BUILD_NUMBER}
+    fi
 
     # Disabling interactive progress bar, and spinners gains 2x performances
     # as stated on https://twitter.com/gavinjoyce/status/691773956144119808
     npm config set progress false
     npm config set spin false
 
-    GIT_BRANCHNAME=$(echo ${GIT_BRANCH} | cut -d"/" -f2)
-
-    if [ "${GIT_BRANCHNAME}" = "master" ]; then
-        ENVIRONMENT=production
+    if [ "${ENVIRONMENT}" = "production" ]; then
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}
     else
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}-${GIT_BRANCHNAME}
-    fi
-}
-
-before_build() {
-    if [ -z ${GIT_COMMIT} ]; then
-        echo "Skip status check update"
-    else
-        echo "Updating commit status check..."
-
-        GH_STATUS="pending"
-        GH_DESCRIPTION="Build #${BUILD_NUMBER} started..."
-        GH_CONTEXT="jenkins/sysdig-inspect"
-
-        curl 'https://api.github.com/repos/draios/sysdig-inspect/statuses/'"${GIT_COMMIT}"'?access_token='"${AT}"'' \
-        -H 'Content-Type: application/json' \
-        -X POST \
-        -d '{"state": "'"${GH_STATUS}"'", "context": "'"${GH_CONTEXT}"'", "description": "'"${GH_DESCRIPTION}"'", "target_url": "'"${GH_URL}"'"}'
     fi
 }
 
@@ -195,7 +183,7 @@ build() {
         cp electron-out/Sysdig\ Inspect-darwin-x64.zip out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.zip
         if [ "${BUILD_MAC_INSTALLER}" = "true" ]; then
             mkdir -p out/mac/installers
-            cp electron-out/make/Sysdig\ Inspect-${INSPECT_VERSION}.dmg out/mac/installers/sysdig-inspect-${INSPECT_VERSION}-mac.dmg
+            cp electron-out/make/Sysdig\ Inspect-${INSPECT_USER_VERSION}.dmg out/mac/installers/sysdig-inspect-${INSPECT_VERSION}-mac.dmg
         fi
     fi
 }
@@ -213,31 +201,11 @@ cleanup() {
     fi
 }
 
-after_build() {
-    if [ -z ${GIT_COMMIT} ]; then
-        echo "Skip status check update"
-    else
-        echo "Updating commit status check..."
-
-        GH_STATUS="success"
-        GH_DESCRIPTION="Build #${BUILD_NUMBER} succeeded"
-        GH_URL="https://ci.draios.com/view/sysdig-inspect/job/${JOB_NAME}/${BUILD_NUMBER}/"
-        GH_CONTEXT="jenkins/sysdig-inspect"
-
-        curl 'https://api.github.com/repos/draios/sysdig-inspect/statuses/'"${GIT_COMMIT}"'?access_token='"${AT}"'' \
-        -H 'Content-Type: application/json' \
-        -X POST \
-        -d '{"state": "'"${GH_STATUS}"'", "context": "'"${GH_CONTEXT}"'", "description": "'"${GH_DESCRIPTION}"'", "target_url": "'"${GH_URL}"'"}'
-    fi
-}
-
 set -ex
     setup_env
-    before_build
     cleanup
     install_dependencies
     build
-    after_build
 set +ex
 
 echo "Done!"

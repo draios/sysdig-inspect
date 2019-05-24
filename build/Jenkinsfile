@@ -35,7 +35,7 @@ pipeline {
                 CWD = sh(script: 'pwd', , returnStdout: true).trim()
             }
             steps {
-                sh "docker run --name sysdig-inspect-builder -v ${CWD}:/usr/bin/sysdig-inspect -v /var/run/docker.sock:/var/run/docker.sock -e 'INSTALL_DEPS=true' -e 'PUBLISH_ARTIFACTS=true' -e 'GIT_BRANCH=${env.BRANCH_NAME}' -e 'USER_TRACKING_KEY=${env.INSPECT_USER_TRACKING_KEY}' ${env.BUILDER}"
+                sh "docker run --name sysdig-inspect-builder -v ${CWD}:/usr/bin/sysdig-inspect -v /var/run/docker.sock:/var/run/docker.sock -e 'INSTALL_DEPS=true' -e 'PUBLISH_ARTIFACTS=true' -e 'GIT_BRANCH=${env.BRANCH_NAME}' -e 'BUILD_NUMBER=${env.BUILD_NUMBER}' -e 'USER_TRACKING_KEY=${env.INSPECT_USER_TRACKING_KEY}' ${env.BUILDER}"
             }
         }
 
