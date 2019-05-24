@@ -1,6 +1,7 @@
 #!/bin/bash
 
-SYSDIG_VERSION="0.24.1"
+SYSDIG_VERSION="0.26.0"
+SYSDIG_VERSION_MAC="0.25"
 
 # Env parameters
 # - CLEANUP (default: true)
@@ -107,7 +108,7 @@ install_dependencies() {
         docker rmi sysdig/sysdig:$SYSDIG_VERSION
 
         # Mac binaries
-        curl https://download.sysdig.com/dependencies/sysdig-${SYSDIG_VERSION}-mac.zip -o sysdig.zip
+        curl https://download.sysdig.com/dependencies/sysdig-${SYSDIG_VERSION_MAC}-mac.zip -o sysdig.zip
         unzip -d deps/sysdig-mac sysdig.zip
     fi
 }
