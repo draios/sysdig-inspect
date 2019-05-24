@@ -97,19 +97,27 @@ install_dependencies() {
 
         rm -rf deps
 
-        mkdir -p deps/sysdig-linux
-        mkdir -p deps/sysdig-mac
+        if [ "${BUILD_LINUX}" = "true" ] || [ "${BUILD_CONTAINER}" = "true" ]; then
+            # Linux binaries
 
-        id=$(docker create sysdig/sysdig:$SYSDIG_VERSION)
-        docker cp $id:/usr/bin/sysdig deps/sysdig-linux
-        docker cp $id:/usr/bin/csysdig deps/sysdig-linux
-        docker cp $id:/usr/share/sysdig/chisels deps/sysdig-linux
-        docker rm -v $id
-        docker rmi sysdig/sysdig:$SYSDIG_VERSION
+            mkdir -p deps/sysdig-linux
+    
+            id=$(docker create sysdig/sysdig:$SYSDIG_VERSION)
+            docker cp $id:/usr/bin/sysdig deps/sysdig-linux
+            docker cp $id:/usr/bin/csysdig deps/sysdig-linux
+            docker cp $id:/usr/share/sysdig/chisels deps/sysdig-linux
+            docker rm -v $id
+            docker rmi sysdig/sysdig:$SYSDIG_VERSION
+        fi
 
-        # Mac binaries
-        curl https://download.sysdig.com/dependencies/sysdig-${SYSDIG_VERSION_MAC}-mac.zip -o sysdig.zip
-        unzip -d deps/sysdig-mac sysdig.zip
+        if [ "${BUILD_MAC}" = "true" ] || [ "${BUILD_MAC_INSTALLER}" = "true" ]; then
+            # Mac binaries
+            
+            mkdir -p deps/sysdig-mac
+            
+            curl https://download.sysdig.com/dependencies/sysdig-${SYSDIG_VERSION_MAC}-mac.zip -o sysdig.zip
+            unzip -d deps/sysdig-mac sysdig.zip
+        fi
     fi
 }
 
