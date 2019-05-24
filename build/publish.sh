@@ -40,10 +40,6 @@ setup_env() {
     then
         GIT_BRANCH=dev
     fi
-    if [ -z ${GIT_COMMIT} ]
-    then
-        GIT_COMMIT=
-    fi
     if [ -z ${BUILD_NUMBER} ]
     then
         BUILD_NUMBER=42
