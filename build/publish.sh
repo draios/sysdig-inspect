@@ -105,9 +105,11 @@ publish_artifacts() {
     fi
 
     if [ "${BUILD_CONTAINER}" = "true" ]; then
-        echo "Publishing image to Docker hub..."
+        if [ "${ENVIRONMENT}" = "production" ] || [ "${GIT_BRANCH}" = "dev" ]; then
+            echo "Publishing image to Docker hub..."
 
-        docker push ${DOCKER_IMAGE_TAG}
+            docker push ${DOCKER_IMAGE_TAG}
+        fi
     fi
 }
 
