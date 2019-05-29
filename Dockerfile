@@ -1,4 +1,4 @@
-FROM sysdig/sysdig:0.24.1
+FROM sysdig/sysdig:0.26.1
 
 #
 # Install node.js (v10)
