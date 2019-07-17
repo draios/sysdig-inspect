@@ -68,7 +68,7 @@ setup_env() {
 }
 
 publish_artifacts() {
-    echo "Uploading artifacts to S3 dev..."
+    echo "Uploading artifacts to S3..."
 
     if [ "${BUILD_LINUX}" = "true" ]; then
         # Linux DEB package

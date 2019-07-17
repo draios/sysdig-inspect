@@ -47,13 +47,6 @@ RUN apt-get update && \
    apt-get update && \
    apt-get -y install docker-ce
 
-# Install AWS CLI
-# (ref. https://docs.aws.amazon.com/cli/latest/userguide/install-bundle.html)
-RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
-    unzip awscli-bundle.zip && \
-    ./awscli-bundle/install -b ~/bin/aws
-ENV PATH ~/bin:$PATH
-
 # Install Node.js v10
 # (ref. https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
@@ -66,7 +59,7 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ###############################################################################
 #                                                                             #
-# Prepare build environment                                                   #
+# Prepare environment                                                         #
 #                                                                             #
 ###############################################################################
 
