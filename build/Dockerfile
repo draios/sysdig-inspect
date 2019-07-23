@@ -31,6 +31,11 @@ RUN apt-get install -y \
     apt-get install -f && \
     apt-get clean
 
+# Install Node.js v10
+# (ref. https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
+    apt-get install -y nodejs
+
 # Install the latest Docker CE binaries
 # From https://github.com/getintodevops/jenkins-withdocker/blob/master/Dockerfile
 RUN apt-get update && \
@@ -46,11 +51,6 @@ RUN apt-get update && \
       stable" && \
    apt-get update && \
    apt-get -y install docker-ce
-
-# Install Node.js v10
-# (ref. https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
-    apt-get install -y nodejs
 
 # Cleanup
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
