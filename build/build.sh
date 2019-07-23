@@ -107,7 +107,9 @@ install_dependencies() {
             docker cp $id:/usr/bin/csysdig deps/sysdig-linux
             docker cp $id:/usr/share/sysdig/chisels deps/sysdig-linux
             docker rm -v $id
-            docker rmi sysdig/sysdig:$SYSDIG_VERSION
+
+            # note: force is required because the builder container is using sysdig/sysdig referenced image
+            docker rmi --force sysdig/sysdig:$SYSDIG_VERSION
         fi
 
         if [ "${BUILD_MAC}" = "true" ] || [ "${BUILD_MAC_INSTALLER}" = "true" ]; then
