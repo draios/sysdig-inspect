@@ -10,10 +10,20 @@ FROM sysdig/sysdig:0.26.1
 
 #
 # Install Node.js v10
-# (ref. https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
 #
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
-    apt-get install -y nodejs
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 10.5.0
+ENV NVM_VERSION 0.31.2
+
+RUN curl -s -o- https://raw.githubusercontent.com/creationix/nvm/v$NVM_VERSION/install.sh | bash
+
+RUN /bin/bash -c "source $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION && \
+    nvm alias default $NODE_VERSION && \
+    nvm use default"
+
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 #
 # Cleanup
