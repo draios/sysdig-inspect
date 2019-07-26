@@ -23,3 +23,6 @@ package.json.ember-try
 electron-out/
 ember-electron/resources*/sysdig/
 ember-electron/resources/capture-samples/
+
+# virtualenv
+/venv
