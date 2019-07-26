@@ -62,13 +62,14 @@ setup_env() {
 
     if [ "${ENVIRONMENT}" = "production" ]; then
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}
+        DOCKER_IMAGE_LATEST_TAG=sysdig/sysdig-inspect:latest
     else
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}-${GIT_BRANCHNAME}
     fi
 }
 
 publish_artifacts() {
-    echo "Uploading artifacts to S3 dev..."
+    echo "Uploading artifacts to S3..."
 
     if [ "${BUILD_LINUX}" = "true" ]; then
         # Linux DEB package
@@ -109,6 +110,10 @@ publish_artifacts() {
             echo "Publishing image to Docker hub..."
 
             docker push ${DOCKER_IMAGE_TAG}
+
+            if [ "${ENVIRONMENT}" = "production" ]; then
+                docker push ${DOCKER_IMAGE_LATEST_TAG}
+            fi
         fi
     fi
 }

@@ -86,6 +86,7 @@ setup_env() {
 
     if [ "${ENVIRONMENT}" = "production" ]; then
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}
+        DOCKER_IMAGE_LATEST_TAG=sysdig/sysdig-inspect:latest
     else
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}-${GIT_BRANCHNAME}
     fi
@@ -107,7 +108,9 @@ install_dependencies() {
             docker cp $id:/usr/bin/csysdig deps/sysdig-linux
             docker cp $id:/usr/share/sysdig/chisels deps/sysdig-linux
             docker rm -v $id
-            docker rmi sysdig/sysdig:$SYSDIG_VERSION
+
+            # note: force is required because the builder container is using sysdig/sysdig referenced image
+            docker rmi --force sysdig/sysdig:$SYSDIG_VERSION
         fi
 
         if [ "${BUILD_MAC}" = "true" ] || [ "${BUILD_MAC_INSTALLER}" = "true" ]; then
@@ -168,6 +171,10 @@ build() {
         mkdir -p dist
         cp -r out/container/* dist  
         docker build . -t ${DOCKER_IMAGE_TAG}
+
+        if [ "${ENVIRONMENT}" = "production" ]; then
+            docker tag ${DOCKER_IMAGE_TAG} ${DOCKER_IMAGE_LATEST_TAG}
+        fi
     fi
 
     if [ "${BUILD_MAC}" = "true" ] || [ "${BUILD_MAC_INSTALLER}" = "true" ]; then

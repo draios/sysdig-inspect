@@ -13,6 +13,7 @@ You will need the following things properly installed on your computer.
   * `npm install -g nodemon`
   * Will be expected to be installed when running the backend component (see below).
   * More info: https://www.npmjs.com/package/nodemon
+* [Python v2.7](https://www.python.org/download/releases/2.7/): Some npm dependencies require Python to be compiled (see [node-gyp](https://github.com/nodejs/node-gyp)). It is recommended to use [virtualenv](https://docs.python-guide.org/dev/virtualenvs/#lower-level-virtualenv) to properly configure the Python environment
 
 
 ## MAC/Linux

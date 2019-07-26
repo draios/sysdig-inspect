@@ -17,7 +17,7 @@ Where to start?
 Sysdig Inspect is available as Docker container image.
 
 ```
-docker run -d -v /local/path/to/captures:/captures -p8080:3000 sysdig/sysdig-inspect:0.4.0
+docker run -d -v /local/path/to/captures:/captures -p8080:3000 sysdig/sysdig-inspect:latest
 ```
 
 Sysdig Inspect will be available in your browser at http://localhost:8080!
