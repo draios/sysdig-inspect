@@ -65,7 +65,6 @@ setup_env() {
         DOCKER_IMAGE_LATEST_TAG=sysdig/sysdig-inspect:latest
     else
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}-${GIT_BRANCHNAME}
-        DOCKER_IMAGE_LATEST_TAG=sysdig/sysdig-inspect:dev
     fi
 }
 
@@ -110,11 +109,11 @@ publish_artifacts() {
         if [ "${ENVIRONMENT}" = "production" ] || [ "${GIT_BRANCH}" = "dev" ]; then
             echo "Publishing image to Docker hub..."
 
-            if [ "${ENVIRONMENT}" = "production" ]; then
-                docker push ${DOCKER_IMAGE_TAG}
-            fi
+            docker push ${DOCKER_IMAGE_TAG}
 
-            docker push ${DOCKER_IMAGE_LATEST_TAG}
+            if [ "${ENVIRONMENT}" = "production" ]; then
+                docker push ${DOCKER_IMAGE_LATEST_TAG}
+            fi
         fi
     fi
 }

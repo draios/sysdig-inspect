@@ -89,7 +89,6 @@ setup_env() {
         DOCKER_IMAGE_LATEST_TAG=sysdig/sysdig-inspect:latest
     else
         DOCKER_IMAGE_TAG=sysdig/sysdig-inspect:${INSPECT_VERSION}-${GIT_BRANCHNAME}
-        DOCKER_IMAGE_LATEST_TAG=sysdig/sysdig-inspect:dev
     fi
 }
 
@@ -173,7 +172,7 @@ build() {
         cp -r out/container/* dist  
         docker build . -t ${DOCKER_IMAGE_TAG}
 
-        if [ "${ENVIRONMENT}" = "production" ] || [ "${GIT_BRANCH}" = "dev" ]; then
+        if [ "${ENVIRONMENT}" = "production" ]; then
             docker tag ${DOCKER_IMAGE_TAG} ${DOCKER_IMAGE_LATEST_TAG}
         fi
     fi
