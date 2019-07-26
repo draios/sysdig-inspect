@@ -36,6 +36,12 @@ pipeline {
             }
             steps {
                 sh "docker run --name sysdig-inspect-builder -v ${CWD}:/usr/bin/sysdig-inspect -v /var/run/docker.sock:/var/run/docker.sock -e INSTALL_DEPS=true -e GIT_BRANCH=${env.BRANCH_NAME} -e BUILD_NUMBER=${env.BUILD_NUMBER} -e USER_TRACKING_KEY=${env.INSPECT_USER_TRACKING_KEY} ${env.BUILDER}"
+
+                //
+                // The build creates files with owner root,
+                // and because of this the job won't be able to cleanup files.
+                //
+                sh "sudo chown -R \$(id -u):\$(id -g) deps/sysdig-linux"
             }
         }
 
