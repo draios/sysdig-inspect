@@ -27,6 +27,13 @@ pipeline {
                 // NOTE: 'checkout scm' is equivalent to
                 // git url: "https://github.com/:account/:repository", branch: "${env.BRANCH_NAME}", credentialsId: ${env.MY_CREDENTAILS_NAME}"
                 checkout scm
+
+                // Define build number
+                script {
+                    def now = new Date()
+
+                    env.VERSION_BUILD_NUMBER=now.format("yyyyMMdd.HHmmss", TimeZone.getTimeZone('UTC'))
+                }
             }
         }
 
@@ -35,7 +42,7 @@ pipeline {
                 CWD = sh(script: 'pwd', , returnStdout: true).trim()
             }
             steps {
-                sh "docker run --name sysdig-inspect-builder -v ${CWD}:/usr/bin/sysdig-inspect -v /var/run/docker.sock:/var/run/docker.sock -e INSTALL_DEPS=true -e GIT_BRANCH=${env.BRANCH_NAME} -e BUILD_NUMBER=${env.BUILD_NUMBER} -e USER_TRACKING_KEY=${env.INSPECT_USER_TRACKING_KEY} ${env.BUILDER}"
+                sh "docker run --name sysdig-inspect-builder -v ${CWD}:/usr/bin/sysdig-inspect -v /var/run/docker.sock:/var/run/docker.sock -e INSTALL_DEPS=true -e GIT_BRANCH=${env.BRANCH_NAME} -e BUILD_NUMBER=${env.VERSION_BUILD_NUMBER} -e USER_TRACKING_KEY=${env.INSPECT_USER_TRACKING_KEY} ${env.BUILDER}"
 
                 //
                 // The build creates files with owner root,
@@ -49,7 +56,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: "docker-hub", passwordVariable: "DOCKER_PASSWORD", usernameVariable: "DOCKER_USERNAME")]) {
                     sh "docker login -u=${env.DOCKER_USERNAME} -p=${env.DOCKER_PASSWORD}"
-                    sh "GIT_BRANCH=${env.BRANCH_NAME} ./build/publish.sh"
+                    sh "GIT_BRANCH=${env.BRANCH_NAME} BUILD_NUMBER=${env.VERSION_BUILD_NUMBER} ./build/publish.sh"
                 }            
             }
         }
