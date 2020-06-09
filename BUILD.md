@@ -7,7 +7,7 @@ You will need the following things properly installed on your computer.
 * [Node.js](https://nodejs.org/) (with NPM)
 * [Ember CLI](https://ember-cli.com/): `npm install -g ember-cli`
 * Sysdig!
-    1. clone https://github.com/draios/sysdig (`csysdig_json` branch)
+    1. clone https://github.com/draios/sysdig
     2. build the tool following instructions at https://github.com/draios/sysdig/wiki/How-to-Install-Sysdig-from-the-Source-Code#linux-and-osx
 * NPM nodemon
   * `npm install -g nodemon`
