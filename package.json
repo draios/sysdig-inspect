@@ -1,6 +1,6 @@
 {
   "name": "sysdig-inspect",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Sysdig Inspect",
   "author": "Sysdig Inc.",
   "license": {
