@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         }}
     </div>
 
-    {{#if areFilterOrSearchAvailable}}
+    {{#if isSearchAvailable}}
         <div class="wsd-capture-panel__controls">
             <div class="wsd-capture-panel__control">
                 {{sd-button
@@ -90,6 +90,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <div class="wsd-capture-panel__timelines">
     {{wsd-metric-timelines
         timeWindow=timeWindow
+        filter=filter
         timelines=timelines
         filePath=filePath
         selectTimeWindow=(action selectTimeWindow)
