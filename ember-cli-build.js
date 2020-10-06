@@ -29,6 +29,11 @@ module.exports = function(defaults) {
     app.import(app.bowerDirectory + '/mousetrap/mousetrap.js');
     app.import(app.bowerDirectory + '/normalize-css/normalize.css');
     app.import(app.bowerDirectory + '/oboe/dist/oboe-browser.js');
+    app.import(app.bowerDirectory + '/js-cookie/src/js.cookie.js', {
+        using: [
+            { transformation: 'amd', as: 'js-cookie' }
+        ],
+    });
 
     return app.toTree();
 };
