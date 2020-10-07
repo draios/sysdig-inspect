@@ -79,8 +79,6 @@ export default Ember.Route.extend({
             this.transitionTo('capture.views.view', drilldownInfo.viewId, {
                 queryParams: this.getCurrentQueryParams({
                     drilldownInfoParam: drilldownInfo.drilldownInfoParam,
-                    searchPattern: undefined,
-                    filter: undefined,
                 }),
             });
         },
