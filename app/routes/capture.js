@@ -22,6 +22,7 @@ export default Ember.Route.extend({
         metricTimelinesParam: { refreshModel: true },
         timeFrom: { refreshModel: true },
         timeTo: { refreshModel: true },
+        // filter: { refreshModel: true },
     },
 
     captureTimelines: Ember.inject.service('capture-timelines'),
@@ -79,8 +80,6 @@ export default Ember.Route.extend({
             this.transitionTo('capture.views.view', drilldownInfo.viewId, {
                 queryParams: this.getCurrentQueryParams({
                     drilldownInfoParam: drilldownInfo.drilldownInfoParam,
-                    searchPattern: undefined,
-                    filter: undefined,
                 }),
             });
         },
