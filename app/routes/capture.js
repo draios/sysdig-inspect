@@ -22,7 +22,6 @@ export default Ember.Route.extend({
         metricTimelinesParam: { refreshModel: true },
         timeFrom: { refreshModel: true },
         timeTo: { refreshModel: true },
-        // filter: { refreshModel: true },
     },
 
     captureTimelines: Ember.inject.service('capture-timelines'),
