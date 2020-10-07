@@ -13,6 +13,7 @@
     "d3": "4.11.0",
     "mousetrap": "1.6.1",
     "normalize-css": "7.0.0",
-    "oboe": "2.1.4"
+    "oboe": "2.1.4",
+    "js-cookie": "2.2.1"
   }
 }
