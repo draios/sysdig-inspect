@@ -1,12 +1,9 @@
 {
   "name": "sysdig-inspect",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Sysdig Inspect",
   "author": "Sysdig Inc.",
-  "license": {
-    "type": "GNU General Public License",
-    "url": "http://www.gnu.org/licenses/"
-  },
+  "license": "GNU General Public License",
   "repository": {
     "type": "git",
     "url": "https://github.com/draios/sysdig-inspect.git"
