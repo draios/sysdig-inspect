@@ -28,6 +28,7 @@
     "make:docker-image": "scripts/build-docker-image"
   },
   "devDependencies": {
+    "acorn": "^8.0.5",
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
