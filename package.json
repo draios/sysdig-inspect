@@ -28,10 +28,11 @@
     "make:docker-image": "scripts/build-docker-image"
   },
   "devDependencies": {
+    "acorn": "^8.0.5",
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
-    "bower": "1.8.4",
+    "bower": "^1.8.12",
     "broccoli-asset-rev": "3.0.0",
     "devtron": "1.4.0",
     "electron-prebuilt-compile": "3.0.13",
@@ -39,20 +40,20 @@
     "ember-ajax": "4.0.1",
     "ember-cli": "2.16.2",
     "ember-cli-app-version": "3.2.0",
-    "ember-cli-babel": "7.2.0",
+    "ember-cli-babel": "7.23.1",
     "ember-cli-dependency-checker": "2.0.1",
     "ember-cli-eslint": "5.0.0",
     "ember-cli-htmlbars": "3.0.1",
     "ember-cli-htmlbars-inline-precompile": "2.1.0",
     "ember-cli-inject-live-reload": "2.0.1",
-    "ember-cli-less": "2.0.1",
+    "ember-cli-less": "^2.0.6",
     "ember-cli-moment-shim": "3.7.1",
     "ember-cli-qunit": "4.4.0",
     "ember-cli-shims": "1.2.0",
     "ember-cli-sri": "2.1.1",
     "ember-cli-uglify": "2.1.0",
     "ember-data": "2.16.3",
-    "ember-electron": "2.10.0",
+    "ember-electron": "^2.10.2",
     "ember-export-application-global": "2.0.0",
     "ember-load-initializers": "2.0.0",
     "ember-moment": "7.8.0",
@@ -61,8 +62,9 @@
     "ember-source": "2.16.0",
     "ember-svg-jar": "1.2.2",
     "eslint-plugin-ember-suave": "1.0.0",
+    "handlebars": "^4.7.7",
     "loader.js": "4.7.0",
-    "virtual-each": "0.6.2"
+    "virtual-each": "^0.6.3"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
