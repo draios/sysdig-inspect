@@ -25,7 +25,30 @@ module.exports = {
     },
     "icon": "assets/icons/favicon",
     "osxSign": true,
-    "overwrite": true
+    "overwrite": true,
+    "extendInfo": {
+      "CFBundleTypeRole": "Viewer",
+      "CFBundleTypeIconFile": "electron.icns",
+      "UTExportedTypeDeclarations": [
+        {
+          "UTTypeConformsTo": [ "public.data" ],
+          "UTTypeDescription": "Sysdig capture file",
+          "UTTypeIdentifier": "com.sysdig.capturefile",
+          "UTTypeTagSpecification":
+            {
+              "public.filename-extension": [ "scap" ]
+            }
+        }
+      ],
+      "CFBundleDocumentTypes": [
+        {
+         "CFBundleTypeIconFiles": [],
+         "CFBundleTypeName": "Sysdig capture file",
+         "LSHandlerRank": "Owner",
+         "LSItemContentTypes": [ "com.sysdig.capturefile" ]
+        }
+      ]
+    }
   },
   "electronWinstallerConfig": {
     "title": "Sysdig Inspect",
@@ -39,19 +62,32 @@ module.exports = {
   "electronInstallerDMG": {
     "title": "Sysdig Inspect",
     "background": "assets/dmg/installer-background.png",
+    "icon": "assets/icons/favicon.icns",
     "icon-size": 80
   },
   "electronInstallerDebian": {
-    src: '...',
-    dest: '...',
-    name: 'sysdig-inspect',
-    bin: 'Sysdig Inspect'
+    "name": "sysdig-inspect",
+    "bin": "Sysdig Inspect",
+    "productName": "Sysdig Inspect",
+    "productDescription": "A powerful opensource interface for container troubleshooting and security investigation",
+    "homepage": "https://www.sysdig.org/",
+    "genericName": "Monitoring tool",
+    "icon": "assets/icons/favicon.png",
+    "categories": [
+      "System"
+    ]
   },
   "electronInstallerRedhat": {
-    src: '...',
-    dest: '...',
-    name: 'sysdig-inspect',
-    bin: 'Sysdig Inspect'
+    "name": "sysdig-inspect",
+    "bin": "Sysdig Inspect",
+    "productName": "Sysdig Inspect",
+    "productDescription": "A powerful opensource interface for container troubleshooting and security investigation",
+    "homepage": "https://www.sysdig.org/",
+    "genericName": "Monitoring tool",
+    "icon": "assets/icons/favicon.png",
+    "categories": [
+      "System"
+    ]
   },
   "github_repository": {
     "owner": "draios",
