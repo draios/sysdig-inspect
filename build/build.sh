@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SYSDIG_VERSION="0.27.1"
+SYSDIG_VERSION="0.29.1"
 SYSDIG_VERSION_MAC="0.27.0"
 
 # Env parameters
@@ -102,11 +102,11 @@ install_dependencies() {
             # Linux binaries
 
             mkdir -p deps/sysdig-linux
-    
+
             id=$(docker create sysdig/sysdig:$SYSDIG_VERSION)
-            docker cp $id:/usr/bin/sysdig deps/sysdig-linux
-            docker cp $id:/usr/bin/csysdig deps/sysdig-linux
-            docker cp $id:/usr/share/sysdig/chisels deps/sysdig-linux
+            docker cp $id:/opt/sysdig/bin/sysdig deps/sysdig-linux
+            docker cp $id:/opt/sysdig/bin/csysdig deps/sysdig-linux
+            docker cp $id:/opt/sysdig/share/sysdig/chisels deps/sysdig-linux
             docker rm -v $id
 
             # note: force is required because the builder container is using sysdig/sysdig referenced image
@@ -115,9 +115,9 @@ install_dependencies() {
 
         if [ "${BUILD_MAC}" = "true" ] || [ "${BUILD_MAC_INSTALLER}" = "true" ]; then
             # Mac binaries
-            
+
             mkdir -p deps/sysdig-mac
-            
+
             curl https://download.sysdig.com/dependencies/sysdig-${SYSDIG_VERSION_MAC}-mac.zip -o sysdig.zip
             unzip -d deps/sysdig-mac sysdig.zip
         fi
@@ -169,7 +169,7 @@ build() {
         rm -rf out/container/public/testem.js
 
         mkdir -p dist
-        cp -r out/container/* dist  
+        cp -r out/container/* dist
         docker build . -t ${DOCKER_IMAGE_TAG}
 
         if [ "${ENVIRONMENT}" = "production" ]; then
@@ -212,7 +212,7 @@ cleanup() {
         rm -rf dist
 
         npm run clean
-        
+
         docker rm ${DOCKER_IMAGE_TAG} || echo "Image ${DOCKER_IMAGE_TAG} not found!"
     fi
 }

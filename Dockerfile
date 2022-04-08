@@ -1,4 +1,4 @@
-FROM sysdig/sysdig:0.27.1
+FROM sysdig/sysdig:0.29.1
 
 
 

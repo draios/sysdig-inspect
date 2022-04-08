@@ -1,6 +1,6 @@
 {
   "name": "sysdig-inspect",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Sysdig Inspect",
   "author": "Sysdig Inc.",
   "license": "GNU General Public License",
