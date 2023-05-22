@@ -52,12 +52,12 @@ export default Controller.extend({
     actions: {
         openFileBrowser() {
             if (electronUtils.isElectron()) {
-                this.get('application').send('openFileBrowser');
+                this.application.send('openFileBrowser');
             }
         },
 
         openFile(value) {
-            this.get('application').send('openFile', value);
+            this.application.send('openFile', value);
         },
     },
 });

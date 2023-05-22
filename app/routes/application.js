@@ -28,13 +28,13 @@ export default Route.extend({
     setupController() {
         this._super(...arguments);
 
-        this.get('userTracking').set('platformInfo', electronUtils.getPlatformInfo());
+        this.userTracking.set('platformInfo', electronUtils.getPlatformInfo());
 
         electronUtils.addShortcut('mod+o', () => {
             this.send('openFileBrowser').openFile();
         });
 
-        const shortcuts = this.get('shortcutsService');
+        const shortcuts = this.shortcutsService;
         shortcuts.setShortcuts(
             [
                 shortcuts.defineCategory('general', 'General'),
@@ -74,7 +74,7 @@ export default Route.extend({
             ]
         );
 
-        this.get('colorProvider').setDefaults({
+        this.colorProvider.setDefaults({
             // http://www.color-hex.com/color/6b768e
             HISTOGRAM_COLUMN_EMPTY: '#E4E4E4',
             HISTOGRAM_COLUMN_DEFAULT: '#798399',

@@ -26,7 +26,7 @@ export default Route.extend({
         const captureModel = this.modelFor('capture');
 
         if (captureModel.queryParams.drilldownInfoParam) {
-            const steps = this.get('drilldownManager').convertFromUrl({
+            const steps = this.drilldownManager.convertFromUrl({
                 drilldownInfoParam: captureModel.queryParams.drilldownInfoParam,
             });
 

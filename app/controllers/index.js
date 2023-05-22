@@ -29,7 +29,7 @@ export default Controller.extend({
 
     actions: {
         openFileBrowser() {
-            this.get('application').send('openFileBrowser');
+            this.application.send('openFileBrowser');
         },
     },
 });
