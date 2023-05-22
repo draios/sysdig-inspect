@@ -63,6 +63,6 @@ function handleSquirrelEvents() {
         app.quit();
         return true;
     }
-};
+}
 
 module.exports = { handleSquirrelEvents };
