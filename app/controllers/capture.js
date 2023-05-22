@@ -14,10 +14,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Ember from 'ember';
+import { isNone } from '@ember/utils';
+
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Controller, { inject as controller } from '@ember/controller';
 import electronUtils from 'wsd-core/utils/electron';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
     queryParams: {
         drilldownInfoParam: 'dd',
         metricTimelinesParam: 'tl',
@@ -25,8 +29,8 @@ export default Ember.Controller.extend({
         timeTo: 't',
     },
 
-    application: Ember.inject.controller('application'),
-    captureTimelines: Ember.inject.service('capture-timelines'),
+    application: controller('application'),
+    captureTimelines: service('capture-timelines'),
 
     selectedViewId: null,
 
@@ -34,8 +38,8 @@ export default Ember.Controller.extend({
 
     drilldownInfoParam: null,
     metricTimelinesParam: null,
-    timeWindow: Ember.computed('model.queryParams.timeFrom', 'model.queryParams.timeTo', function() {
-        if (Ember.isNone(this.get('model.queryParams.timeFrom')) === false && Ember.isNone(this.get('model.queryParams.timeTo')) === false) {
+    timeWindow: computed('model.queryParams.timeFrom', 'model.queryParams.timeTo', function() {
+        if (isNone(this.get('model.queryParams.timeFrom')) === false && isNone(this.get('model.queryParams.timeTo')) === false) {
             return {
                 from: this.get('model.queryParams.timeFrom'),
                 to: this.get('model.queryParams.timeTo'),

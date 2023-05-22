@@ -14,18 +14,22 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
 
-export default Ember.Route.extend({
+import { debounce } from '@ember/runloop';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+
+export default Route.extend({
     queryParams: {
         filter: { refreshModel: true },
         searchPattern: { refreshModel: true },
     },
 
-    viewsManager: Ember.inject.service('views-manager'),
-    drilldownManager: Ember.inject.service('drilldown-manager'),
-    dataSearchService: Ember.inject.service('data-search'),
-    userTracking: Ember.inject.service('user-tracking'),
+    viewsManager: service('views-manager'),
+    drilldownManager: service('drilldown-manager'),
+    dataSearchService: service('data-search'),
+    userTracking: service('user-tracking'),
 
     model(params) {
         return new ViewModel(params.id, params.filter, params.searchPattern, this.modelFor('capture'));
@@ -50,7 +54,7 @@ export default Ember.Route.extend({
 
         // NOTE: Time selection can be changed with the mouse, and this would perform a visit every
         // "tick"
-        Ember.run.debounce(this, this.trackVisit, 300);
+        debounce(this, this.trackVisit, 300);
     },
 
     trackVisit() {
@@ -70,8 +74,8 @@ export default Ember.Route.extend({
             'previous selection': previous ? previous.selection : null,
             'drill down': drillDown.map((step) => `${step.viewId} + ${step.selection}`).join(' > '),
 
-            'sysdig filter': Ember.isEmpty(this.get('controller.model.filter')) ? null : 'set',
-            find: Ember.isEmpty(this.get('controller.model.searchPattern')) ? null : 'set',
+            'sysdig filter': isEmpty(this.get('controller.model.filter')) ? null : 'set',
+            find: isEmpty(this.get('controller.model.searchPattern')) ? null : 'set',
             from: this.get('controller.model.capture.queryParams.timeFrom'),
             to: this.get('controller.model.capture.queryParams.timeTo'),
         });
@@ -92,7 +96,7 @@ export default Ember.Route.extend({
                     if (step.viewId === 'overview') {
                         selection = step.selection || null;
                     } else {
-                        selection = Ember.isEmpty(step.selection) ? null : 'set';
+                        selection = isEmpty(step.selection) ? null : 'set';
                     }
 
                     return {

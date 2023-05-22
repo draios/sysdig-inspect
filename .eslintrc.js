@@ -20,8 +20,8 @@ module.exports = {
     // node files
     {
       files: [
-        'testem.js',
         'ember-cli-build.js',
+        'testem.js',
         'config/**/*.js',
         'lib/*/index.js'
       ],
@@ -32,15 +32,6 @@ module.exports = {
       env: {
         browser: false,
         node: true
-      }
-    },
-
-    // test files
-    {
-      files: ['tests/**/*.js'],
-      excludedFiles: ['tests/dummy/**/*.js'],
-      env: {
-        embertest: true
       }
     }
   ]
