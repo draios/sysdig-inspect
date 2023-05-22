@@ -24,7 +24,7 @@ export default Route.extend({
     setupController() {
         this._super(...arguments);
 
-        this.get('userTracking').visit({
+        this.userTracking.visit({
             route: 'index',
         });
     },

@@ -46,8 +46,8 @@ export default Route.extend({
     setupController(controller, model) {
         this._super(controller, model);
 
-        this.get('captureTimelines').setCurrent(
-            this.get('captureTimelines').deserializeFromQueryParam(model.queryParams.metricTimelinesParam)
+        this.captureTimelines.setCurrent(
+            this.captureTimelines.deserializeFromQueryParam(model.queryParams.metricTimelinesParam)
         );
     },
 
@@ -87,7 +87,7 @@ export default Route.extend({
         },
 
         applyFilter(filter) {
-            this.get('userTracking').action(this.get('userTracking').ACTIONS.INTERACTION, {
+            this.userTracking.action(this.userTracking.ACTIONS.INTERACTION, {
                 name: 'apply sysdig filter',
                 'is set': isEmpty(filter) === false,
             });
@@ -118,7 +118,7 @@ export default Route.extend({
                     }),
                 });
             } else {
-                this.get('userTracking').action(this.get('userTracking').ACTIONS.INTERACTION, {
+                this.userTracking.action(this.userTracking.ACTIONS.INTERACTION, {
                     name: 'reset timeline selection',
                 });
 
@@ -134,8 +134,8 @@ export default Route.extend({
         toggleMetricTimeline(metricName) {
             this.replaceWith('capture.views.view', this.controller.get('selectedViewId'), {
                 queryParams: this.getCurrentQueryParams({
-                    metricTimelinesParam: this.get('captureTimelines').serializeToQueryParam(
-                        this.get('captureTimelines').toggle(metricName)
+                    metricTimelinesParam: this.captureTimelines.serializeToQueryParam(
+                        this.captureTimelines.toggle(metricName)
                     ),
                 }),
             });
@@ -144,8 +144,8 @@ export default Route.extend({
         removeMetricTimeline(metricName) {
             this.replaceWith('capture.views.view', this.controller.get('selectedViewId'), {
                 queryParams: this.getCurrentQueryParams({
-                    metricTimelinesParam: this.get('captureTimelines').serializeToQueryParam(
-                        this.get('captureTimelines').remove(metricName)
+                    metricTimelinesParam: this.captureTimelines.serializeToQueryParam(
+                        this.captureTimelines.remove(metricName)
                     ),
                 }),
             });
