@@ -1,34 +1,47 @@
 module.exports = {
-    env: {
-        browser: true,
-        node: true,
-        es6: true
+  root: true,
+  parserOptions: {
+    ecmaVersion: 2017,
+    sourceType: 'module'
+  },
+  plugins: [
+    'ember'
+  ],
+  extends: [
+    'eslint:recommended',
+    'plugin:ember/recommended'
+  ],
+  env: {
+    browser: true
+  },
+  rules: {
+  },
+  overrides: [
+    // node files
+    {
+      files: [
+        'testem.js',
+        'ember-cli-build.js',
+        'config/**/*.js',
+        'lib/*/index.js'
+      ],
+      parserOptions: {
+        sourceType: 'script',
+        ecmaVersion: 2015
+      },
+      env: {
+        browser: false,
+        node: true
+      }
     },
-    root: true,
-    parserOptions: {
-        ecmaVersion: 2017,
-        sourceType: 'module'
-    },
-    extends: [
-        'eslint:recommended',
-        'plugin:ember-suave/recommended'
-    ],
-    rules: {
-        'indent': [2, 4],
-        'no-console': 'off',
-        'object-curly-spacing': ['off'],
-        'ember-suave/no-direct-property-access': 'off',
-        'ember-suave/no-const-outside-module-scope': 'off',
-        'one-var': ['error', 'never'],
-        'comma-dangle': ['error', { 'arrays': 'never', 'objects': 'always-multiline' }],
-        'no-implicit-coercion': ['error'],
-        'no-extra-boolean-cast': ['error'],
-        'indent': ['error', 4, { 'SwitchCase': 1 }],
-        'operator-linebreak': ["error", "after"]
-    },
-    globals: {
-        module: true,
-        process: false,
-        requireNode: false
+
+    // test files
+    {
+      files: ['tests/**/*.js'],
+      excludedFiles: ['tests/dummy/**/*.js'],
+      env: {
+        embertest: true
+      }
     }
+  ]
 };
