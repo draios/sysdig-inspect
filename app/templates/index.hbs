@@ -49,29 +49,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </div>
                     <div class="wsd-welcome__card-footer">
                         {{#if isElectron}}
-                            {{#sd-button
-                                iconName="file_black"
-                                classNames="sd-button--raised"
-                                size="lg"
-                                title="Open capture"
-                                click=(route-action "openFileBrowser")
-                            }}
+                            <SdButton @iconName="file_black" @classNames="sd-button--raised" @size="lg" @title="Open capture" @click={{route-action "openFileBrowser"}}>
                                 Open Capture
-                            {{/sd-button}}
+                            </SdButton>
                         {{else}}
-                            {{sd-input
-                                name="file-path"
-                                placeholder="Capture file path"
-                                isAcceptChangeMode=true
-                                changeValue=(route-action "openFile")
-                            }}
+                            <SdInput @name="file-path" @placeholder="Capture file path" @isAcceptChangeMode={{true}} @changeValue={{route-action "openFile"}} />
                         {{/if}}
                     </div>
                     <div class="wsd-welcome__card-extra-footer">
                         {{#if isElectron}}
                             or try one of the
-                            {{#link-to "capture" "capture-samples/502Error.scap"}}capture{{/link-to}}
-                            {{#link-to "capture" "capture-samples/404Error.scap"}}samples{{/link-to}}
+                            <LinkTo @route="capture" @model="capture-samples/502Error.scap">capture</LinkTo>
+                            <LinkTo @route="capture" @model="capture-samples/404Error.scap">samples</LinkTo>
                         {{/if}}
                     </div>
                 </div>
