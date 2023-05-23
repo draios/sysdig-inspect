@@ -1,8 +1,26 @@
 'use strict';
 
 module.exports = function(environment) {
+//<<<<<<< HEAD
     const rootURLParamIndex = process.argv.indexOf('--root-url');
     const rootURL = rootURLParamIndex >= 0 ? process.argv[rootURLParamIndex + 1] : '/';
+//=======
+//  let ENV = {
+//    modulePrefix: 'sysdig-inspect',
+//    environment,
+//    rootURL: '/',
+//    locationType: 'auto',
+//    EmberENV: {
+//      FEATURES: {
+//        // Here you can enable experimental features on an ember canary build
+//        // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
+//      },
+//      EXTEND_PROTOTYPES: {
+//        // Prevent Ember Data from overriding Date.parse.
+//        Date: false
+//      }
+//    },
+//>>>>>>> bd341dc (v3.4.4...v3.12.1)
 
     const targetEnvParamIndex = process.argv.indexOf('--target-env');
     const targetEnv = targetEnvParamIndex >= 0 ? process.argv[targetEnvParamIndex + 1] : 'electron';

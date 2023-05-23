@@ -15,28 +15,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --}}
 
 <div class="wsd-page__header">
-    {{wsd-capture-header
-        filePath=model.filePath
-        openFile=(action "openFile")
-        openFileBrowser=(action "openFileBrowser")
-    }}
+    <WsdCaptureHeader @filePath={{model.filePath}} @openFile={{action "openFile"}} @openFileBrowser={{action "openFileBrowser"}} />
 </div>
 
 <div class="wsd-page__content">
-    {{#wsd-capture-panel
-        filePath=model.filePath
-        drilldownInfoParam=model.queryParams.drilldownInfoParam
-        timelines=captureTimelines.timelines
-        timeWindow=timeWindow
-        selectedViewId=selectedViewId
-        filter=filter
-        navigateTo=(route-action "drillDown")
-        drillDown=(route-action "drillDown")
-        selectTimeWindow=(route-action "selectTimeWindow")
-        removeMetricTimeline=(route-action "removeMetricTimeline")
-        applyFilter=(route-action "applyFilter")
-        applySearch=(route-action "applySearch")
-    }}
+    <WsdCapturePanel @filePath={{model.filePath}} @drilldownInfoParam={{model.queryParams.drilldownInfoParam}} @timelines={{captureTimelines.timelines}} @timeWindow={{timeWindow}} @selectedViewId={{selectedViewId}} @filter={{filter}} @navigateTo={{route-action "drillDown"}} @drillDown={{route-action "drillDown"}} @selectTimeWindow={{route-action "selectTimeWindow"}} @removeMetricTimeline={{route-action "removeMetricTimeline"}} @applyFilter={{route-action "applyFilter"}} @applySearch={{route-action "applySearch"}}>
         {{outlet}}
-    {{/wsd-capture-panel}}
+    </WsdCapturePanel>
 </div>
