@@ -14,7 +14,8 @@ RUN apt-get update -qq && \
       curl \
       rpm \
       zip \
-      unzip && \
+      unzip \
+      p7zip-full && \
     apt-get install -f
 
 # Install Node.js v10

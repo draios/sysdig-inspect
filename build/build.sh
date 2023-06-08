@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SYSDIG_VERSION="0.27.1"
-SYSDIG_VERSION_MAC="0.27.0"
+SYSDIG_VERSION="0.31.5"
+SYSDIG_VERSION_MAC="0.31.5"
 
 # Env parameters
 # - CLEANUP (default: true)
@@ -117,9 +117,12 @@ install_dependencies() {
             # Mac binaries
             
             mkdir -p deps/sysdig-mac
+            cd deps/sysdig-mac
             
-            curl https://download.sysdig.com/dependencies/sysdig-${SYSDIG_VERSION_MAC}-mac.zip -o sysdig.zip
-            unzip -d deps/sysdig-mac sysdig.zip
+			curl https://github.com/draios/sysdig/releases/download/${SYSDIG_VERSION_MAC}/sysdig-${SYSDIG_VERSION_MAC}-x86_64.dmg
+			7z e ./sysdig-${SYSDIG_VERSION_MAC}-x86_64.dmg sysdig-${SYSDIG_VERSION_MAC}-x86_64/bin/'*'
+			rm -v ./sysdig-0.31.5-x86_64.dmg
+			cd -
         fi
     fi
 }
