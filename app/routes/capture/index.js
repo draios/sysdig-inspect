@@ -14,20 +14,23 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
 
-export default Ember.Route.extend({
-    drilldownManager: Ember.inject.service('drilldown-manager'),
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+
+export default Route.extend({
+    drilldownManager: service('drilldown-manager'),
 
     beforeModel() {
         const captureModel = this.modelFor('capture');
 
         if (captureModel.queryParams.drilldownInfoParam) {
-            const steps = this.get('drilldownManager').convertFromUrl({
+            const steps = this.drilldownManager.convertFromUrl({
                 drilldownInfoParam: captureModel.queryParams.drilldownInfoParam,
             });
 
-            if (Ember.isEmpty(steps)) {
+            if (isEmpty(steps)) {
                 this.replaceWith('capture.views.view', 'overview', {
                     queryParams: Object.assign({}, captureModel.queryParams),
                 });

@@ -14,20 +14,22 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Ember from 'ember';
+import { computed } from '@ember/object';
+
+import Controller, { inject as controller } from '@ember/controller';
 import electronUtils from 'wsd-core/utils/electron';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
     queryParams: ['port'],
-    application: Ember.inject.controller('application'),
+    application: controller('application'),
 
-    isElectron: Ember.computed(function() {
+    isElectron: computed(function() {
         return electronUtils.isElectron();
     }),
 
     actions: {
         openFileBrowser() {
-            this.get('application').send('openFileBrowser');
+            this.application.send('openFileBrowser');
         },
     },
 });

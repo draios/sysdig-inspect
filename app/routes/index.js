@@ -14,15 +14,17 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
 
-export default Ember.Route.extend({
-    userTracking: Ember.inject.service('user-tracking'),
+import Route from '@ember/routing/route';
+
+export default Route.extend({
+    userTracking: service('user-tracking'),
 
     setupController() {
         this._super(...arguments);
 
-        this.get('userTracking').visit({
+        this.userTracking.visit({
             route: 'index',
         });
     },

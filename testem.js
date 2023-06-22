@@ -1,4 +1,3 @@
-/* eslint-env node */
 module.exports = {
   test_page: 'tests/index.html?hidepassed',
   disable_watching: true,
@@ -9,6 +8,25 @@ module.exports = {
     "Chrome"
   ],
   browser_args: {
-    "Chrome": [ '--headless', '--disable-gpu', '--remote-debugging-port=9222' ]
+    Chrome: {
+<<<<<<< HEAD
+      mode: 'ci',
+      args: [
+        '--disable-gpu',
+        '--headless',
+        '--remote-debugging-port=9222',
+=======
+      ci: [
+        // --no-sandbox is needed when running Chrome inside a container
+        process.env.CI ? '--no-sandbox' : null,
+        '--headless',
+        '--disable-dev-shm-usage',
+        '--disable-software-rasterizer',
+        '--mute-audio',
+        '--remote-debugging-port=0',
+        '--window-size=1440,900'
+>>>>>>> d31eb24 (v3.1.4...v3.2.0)
+      ].filter(Boolean)
+    }
   }
 };

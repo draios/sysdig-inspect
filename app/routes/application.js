@@ -14,24 +14,27 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
+
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import electronUtils from 'wsd-core/utils/electron';
 
-export default Ember.Route.extend({
-    shortcutsService: Ember.inject.service('keyboard-shortcuts'),
-    colorProvider: Ember.inject.service('color-provider'),
-    userTracking: Ember.inject.service('user-tracking'),
+export default Route.extend({
+    shortcutsService: service('keyboard-shortcuts'),
+    colorProvider: service('color-provider'),
+    userTracking: service('user-tracking'),
 
     setupController() {
         this._super(...arguments);
 
-        this.get('userTracking').set('platformInfo', electronUtils.getPlatformInfo());
+        this.userTracking.set('platformInfo', electronUtils.getPlatformInfo());
 
         electronUtils.addShortcut('mod+o', () => {
             this.send('openFileBrowser').openFile();
         });
 
-        const shortcuts = this.get('shortcutsService');
+        const shortcuts = this.shortcutsService;
         shortcuts.setShortcuts(
             [
                 shortcuts.defineCategory('general', 'General'),
@@ -71,7 +74,7 @@ export default Ember.Route.extend({
             ]
         );
 
-        this.get('colorProvider').setDefaults({
+        this.colorProvider.setDefaults({
             // http://www.color-hex.com/color/6b768e
             HISTOGRAM_COLUMN_EMPTY: '#E4E4E4',
             HISTOGRAM_COLUMN_DEFAULT: '#798399',
@@ -87,7 +90,7 @@ export default Ember.Route.extend({
             if (electronUtils.isElectron()) {
                 let fileNames = electronUtils.openFileDialog();
 
-                if (Ember.isEmpty(fileNames) === false) {
+                if (isEmpty(fileNames) === false) {
                     this.send('openFile', fileNames[0]);
                 } else {
                     console.log('Not file choosen.');

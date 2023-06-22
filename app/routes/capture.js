@@ -14,9 +14,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Ember from 'ember';
+import { isEmpty, isNone } from '@ember/utils';
 
-export default Ember.Route.extend({
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+
+export default Route.extend({
     queryParams: {
         drilldownInfoParam: { refreshModel: true },
         metricTimelinesParam: { refreshModel: true },
@@ -24,9 +27,9 @@ export default Ember.Route.extend({
         timeTo: { refreshModel: true },
     },
 
-    captureTimelines: Ember.inject.service('capture-timelines'),
-    dataSearchService: Ember.inject.service('data-search'),
-    userTracking: Ember.inject.service('user-tracking'),
+    captureTimelines: service('capture-timelines'),
+    dataSearchService: service('data-search'),
+    userTracking: service('user-tracking'),
 
     model(params) {
         return new CaptureModel(
@@ -43,8 +46,8 @@ export default Ember.Route.extend({
     setupController(controller, model) {
         this._super(controller, model);
 
-        this.get('captureTimelines').setCurrent(
-            this.get('captureTimelines').deserializeFromQueryParam(model.queryParams.metricTimelinesParam)
+        this.captureTimelines.setCurrent(
+            this.captureTimelines.deserializeFromQueryParam(model.queryParams.metricTimelinesParam)
         );
     },
 
@@ -84,15 +87,15 @@ export default Ember.Route.extend({
         },
 
         applyFilter(filter) {
-            this.get('userTracking').action(this.get('userTracking').ACTIONS.INTERACTION, {
+            this.userTracking.action(this.userTracking.ACTIONS.INTERACTION, {
                 name: 'apply sysdig filter',
-                'is set': Ember.isEmpty(filter) === false,
+                'is set': isEmpty(filter) === false,
             });
 
             console.debug('route:application.capture', 'applyFilter', ...arguments);
             this.transitionTo('capture.views.view', this.controller.get('selectedViewId'), {
                 queryParams: this.getCurrentQueryParams({
-                    filter: Ember.isEmpty(filter) ? undefined : filter,
+                    filter: isEmpty(filter) ? undefined : filter,
                 }),
             });
         },
@@ -101,13 +104,13 @@ export default Ember.Route.extend({
             console.debug('route:application.capture', 'applySearch', ...arguments);
             this.transitionTo('capture.views.view', this.controller.get('selectedViewId'), {
                 queryParams: this.getCurrentQueryParams({
-                    searchPattern: Ember.isEmpty(searchPattern) ? undefined : searchPattern,
+                    searchPattern: isEmpty(searchPattern) ? undefined : searchPattern,
                 }),
             });
         },
 
         selectTimeWindow(from, to) {
-            if (Ember.isNone(from) === false && Ember.isNone(to) === false) {
+            if (isNone(from) === false && isNone(to) === false) {
                 this.replaceWith('capture.views.view', this.controller.get('selectedViewId'), {
                     queryParams: this.getCurrentQueryParams({
                         timeFrom: from,
@@ -115,7 +118,7 @@ export default Ember.Route.extend({
                     }),
                 });
             } else {
-                this.get('userTracking').action(this.get('userTracking').ACTIONS.INTERACTION, {
+                this.userTracking.action(this.userTracking.ACTIONS.INTERACTION, {
                     name: 'reset timeline selection',
                 });
 
@@ -131,8 +134,8 @@ export default Ember.Route.extend({
         toggleMetricTimeline(metricName) {
             this.replaceWith('capture.views.view', this.controller.get('selectedViewId'), {
                 queryParams: this.getCurrentQueryParams({
-                    metricTimelinesParam: this.get('captureTimelines').serializeToQueryParam(
-                        this.get('captureTimelines').toggle(metricName)
+                    metricTimelinesParam: this.captureTimelines.serializeToQueryParam(
+                        this.captureTimelines.toggle(metricName)
                     ),
                 }),
             });
@@ -141,8 +144,8 @@ export default Ember.Route.extend({
         removeMetricTimeline(metricName) {
             this.replaceWith('capture.views.view', this.controller.get('selectedViewId'), {
                 queryParams: this.getCurrentQueryParams({
-                    metricTimelinesParam: this.get('captureTimelines').serializeToQueryParam(
-                        this.get('captureTimelines').remove(metricName)
+                    metricTimelinesParam: this.captureTimelines.serializeToQueryParam(
+                        this.captureTimelines.remove(metricName)
                     ),
                 }),
             });
