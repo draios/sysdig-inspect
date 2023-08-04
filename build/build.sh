@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SYSDIG_VERSION="0.27.1"
-SYSDIG_VERSION_MAC="0.27.0"
+SYSDIG_VERSION="0.32.1"
+SYSDIG_VERSION_MAC="0.32.1"
 
 # Env parameters
 # - CLEANUP (default: true)
@@ -61,22 +61,24 @@ setup_env() {
     fi
     if [ -z ${BUILD_NUMBER} ]
     then
-        BUILD_NUMBER=42
+        BUILD_NUMBER=''
+	else
+        BUILD_NUMBER=.${BUILD_NUMBER}
     fi
 
     set -u
 
     GIT_BRANCHNAME=$(echo ${GIT_BRANCH} | cut -d"/" -f2)
 
-    if [ "${GIT_BRANCHNAME}" = "master" ]; then
+    if [ "${GIT_BRANCHNAME}" != "dev" ]; then
         ENVIRONMENT=production
     fi
 
-    INSPECT_USER_VERSION=`cat VERSION`
-    if [ "${ENVIRONMENT}" = "production" ]; then
-        INSPECT_VERSION=${INSPECT_USER_VERSION}
+	INSPECT_USER_VERSION=$(grep '"version"' package.json | cut -d\" -f4)
+    if [[ "${ENVIRONMENT}" = "production" ]]; then
+        INSPECT_VERSION=${GIT_BRANCHNAME}
     else
-        INSPECT_VERSION=${INSPECT_USER_VERSION}.${BUILD_NUMBER}
+        INSPECT_VERSION=${INSPECT_USER_VERSION}${BUILD_NUMBER}
     fi
 
     # Disabling interactive progress bar, and spinners gains 2x performances
@@ -118,8 +120,11 @@ install_dependencies() {
             
             mkdir -p deps/sysdig-mac
             
-            curl https://download.sysdig.com/dependencies/sysdig-${SYSDIG_VERSION_MAC}-mac.zip -o sysdig.zip
-            unzip -d deps/sysdig-mac sysdig.zip
+			curl -L -o sysdig.dmg "https://github.com/draios/sysdig/releases/download/${SYSDIG_VERSION_MAC}/sysdig-${SYSDIG_VERSION_MAC}-x86_64.dmg"
+			7z x sysdig.dmg || true
+			cp -v  sysdig-${SYSDIG_VERSION_MAC}-x86_64/bin/sysdig  deps/sysdig-mac/
+			cp -v  sysdig-${SYSDIG_VERSION_MAC}-x86_64/bin/csysdig deps/sysdig-mac/
+			cp -vr sysdig-${SYSDIG_VERSION_MAC}-x86_64/share/sysdig/chisels deps/sysdig-mac/
         fi
     fi
 }
@@ -147,6 +152,10 @@ build() {
         mkdir -p out/linux/installers
         cp -r electron-out/make/* out/linux/installers
         cp -r electron-out/Sysdig\ Inspect-linux-x64/* out/linux/binaries
+        cd out/linux/installers
+		mv *.rpm sysdig-inspect-linux-x86_64.rpm
+		mv *.deb sysdig-inspect-linux-x86_64.deb
+		cd -
     fi
 
     if [ "${BUILD_CONTAINER}" = "true" ]; then
@@ -196,10 +205,10 @@ build() {
         zip -ry Sysdig\ Inspect-darwin-x64.zip Sysdig\ Inspect-darwin-x64
         cd ..
         mkdir -p out/mac/binaries
-        cp electron-out/Sysdig\ Inspect-darwin-x64.zip out/mac/binaries/sysdig-inspect-${INSPECT_VERSION}-mac.zip
+        cp electron-out/Sysdig\ Inspect-darwin-x64.zip out/mac/binaries/sysdig-inspect-mac-x86_64.zip
         if [ "${BUILD_MAC_INSTALLER}" = "true" ]; then
             mkdir -p out/mac/installers
-            cp electron-out/make/Sysdig\ Inspect-${INSPECT_USER_VERSION}.dmg out/mac/installers/sysdig-inspect-${INSPECT_VERSION}-mac.dmg
+            cp electron-out/make/Sysdig\ Inspect-${INSPECT_USER_VERSION}.dmg out/mac/installers/sysdig-inspect-mac-x86_64.dmg
         fi
     fi
 }

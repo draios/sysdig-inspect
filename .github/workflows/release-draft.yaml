@@ -1,0 +1,95 @@
+name: Create sysdig-inspect draft/RC release
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+-[a-z]+'
+      - '[0-9]+.[0-9]+.[0-9]+-[a-z]+[0-9]+'
+permissions:
+  contents: write
+
+jobs:
+  build-sysdig-inspect:
+    env:
+      BUILDER: "sysdiglabs/sysdig-inspect-builder:0.2"
+      VERSION: ${{ github.ref_name }}
+
+    runs-on: ubuntu-latest
+    container:
+      image: "sysdiglabs/sysdig-inspect-builder:0.2"
+      env:
+        INSTALL_DEPS: true
+        GIT_BRANCH: ${{ github.ref_name }}
+        VERSION: ${{ github.ref_name }}
+        BUILD_MAC: true
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    steps:
+      - name: Checkout Sysdig
+        uses: actions/checkout@v3
+      - name: install 7z
+        run: |
+          cd /tmp
+          sed -i '/^mozilla\/DST_Root_CA_X3/s/^/!/' /etc/ca-certificates.conf &&
+          update-ca-certificates -f &&
+          curl -L -o 7z.tar.xz https://www.7-zip.org/a/7z2301-linux-x64.tar.xz &&
+          tar -xaf 7z.tar.xz &&
+          mv 7zz /usr/bin/7z &&
+          rm -vfr /tmp/* &&
+          cd -
+      - name: Build sysdig-inspect
+        run: ./build/build.sh
+      - name: Upload artifacts rpm
+        uses: actions/upload-artifact@v3
+        with:
+          name: sysdig-inspect-release-${{ env.VERSION }}-linux-x86_64.rpm
+          path: |
+            out/linux/installers/sysdig-inspect-linux-x86_64.rpm
+      - name: Upload artifacts deb
+        uses: actions/upload-artifact@v3
+        with:
+          name: sysdig-inspect-release-${{ env.VERSION }}-linux-x86_64.deb
+          path: |
+            out/linux/installers/sysdig-inspect-linux-x86_64.deb
+      - name: Upload artifacts dmg
+        uses: actions/upload-artifact@v3
+        with:
+          name: sysdig-inspect-release-${{ env.VERSION }}-mac-x86_64.dmg
+          path: |
+            out/mac/binaries/sysdig-inspect-${{ env.VERSION }}-mac-x86_64.dmg
+      - name: Upload artifacts zip
+        uses: actions/upload-artifact@v3
+        with:
+          name: sysdig-inspect-release-${{ env.VERSION }}-mac-x86_64.zip
+          path: |
+            out/mac/binaries/sysdig-inspect-mac-x86_64.zip
+
+  create-draft-release:
+    runs-on: ubuntu-latest
+    needs: [build-sysdig-inspect]
+    env:
+      VERSION: ${{ github.ref_name }}
+    steps:
+      - name: Download artifacts (linux-amd64 deb)
+        uses: actions/download-artifact@v3
+        with:
+          name: sysdig-inspect-release-${{ env.VERSION }}-linux-x86_64.deb
+      - name: Download artifacts (linux-amd64 rpm)
+        uses: actions/download-artifact@v3
+        with:
+          name: sysdig-inspect-release-${{ env.VERSION }}-linux-x86_64.rpm
+      - name: Download artifacts (osx-amd64)
+        uses: actions/download-artifact@v3
+        with:
+          name: sysdig-inspect-release-${{ env.VERSION }}-mac-x86_64.zip
+      - name: test
+        run: ls -lah /home/runner/work/sysdig-inspect/sysdig-inspect/
+      - name: Create draft release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            sysdig-inspect-linux*
+            sysdig-inspect-mac*
+            sysdig-inspect-win*
+          draft: true
+          generate_release_notes: true

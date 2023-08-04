@@ -1,0 +1,86 @@
+name: CI Build
+on: [push,pull_request,workflow_dispatch]
+
+jobs:
+  build-settings:
+    runs-on: ubuntu-latest
+    outputs:
+      semver: ${{ steps.get_settings.outputs.semver }}
+      version: ${{ steps.get_settings.outputs.version }}
+    steps:
+      - name: Checkout Sysdig
+        uses: actions/checkout@v3
+      - name: Get settings for this release
+        id: get_settings
+        shell: python
+        run: |
+          import os
+          import json
+          ref_name = '${{ github.ref_name }}-${{ github.run_number }}'.replace('/','-')
+          with open("package.json","r") as f:
+            v = json.load(f)['version']
+            version = f'{v}-{ref_name}'
+            semver = f'{v}'
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as ofp:
+            print(f'version={version}'.lower(), file=ofp)
+            print(f'semver={semver}'.lower(), file=ofp)
+
+
+  build-sysdig-inspect:
+    needs: [build-settings]
+    env:
+      BUILDER: "sysdiglabs/sysdig-inspect-builder:0.2"
+      SEMVER: ${{ needs.build-settings.outputs.semver }}
+      VERSION: ${{ needs.build-settings.outputs.version }}
+
+    runs-on: ubuntu-latest
+    container:
+      image: "sysdiglabs/sysdig-inspect-builder:0.2"
+      env:
+        INSTALL_DEPS: true
+        GIT_BRANCH: dev
+        SEMVER: ${{ needs.build-settings.outputs.semver }}
+        VERSION: ${{ needs.build-settings.outputs.version }}
+        BUILD_MAC: true
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    steps:
+      - name: Checkout Sysdig
+        uses: actions/checkout@v3
+      - name: install 7z
+        run: |
+          cd /tmp
+          sed -i '/^mozilla\/DST_Root_CA_X3/s/^/!/' /etc/ca-certificates.conf &&
+          update-ca-certificates -f &&
+          curl -L -o 7z.tar.xz https://www.7-zip.org/a/7z2301-linux-x64.tar.xz &&
+          tar -xaf 7z.tar.xz &&
+          mv 7zz /usr/bin/7z &&
+          rm -vfr /tmp/* &&
+          cd -
+      - name: Build sysdig-inspect
+        run: ./build/build.sh
+      - name: Upload artifacts rpm
+        uses: actions/upload-artifact@v3
+        with:
+          name: sysdig-inspect-${{ env.VERSION }}-linux-x86_64.rpm
+          path: |
+            out/linux/installers/sysdig-inspect-linux-x86_64.rpm
+      - name: Upload artifacts deb
+        uses: actions/upload-artifact@v3
+        with:
+          name: sysdig-inspect-${{ env.VERSION }}-linux-x86_64.deb
+          path: |
+            out/linux/installers/sysdig-inspect-linux-x86_64.deb
+      - name: Upload artifacts dmg
+        uses: actions/upload-artifact@v3
+        with:
+          name: sysdig-inspect-${{ env.VERSION }}-mac-x86_64.dmg
+          path: |
+            out/mac/binaries/sysdig-inspect-${{ env.SEMVER }}-mac-86_64.dmg
+      - name: Upload artifacts zip
+        uses: actions/upload-artifact@v3
+        with:
+          name: sysdig-inspect-${{ env.VERSION }}-mac-x86_64.zip
+          path: |
+            out/mac/binaries/sysdig-inspect-mac-x86_64.zip
+
