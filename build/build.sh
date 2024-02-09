@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SYSDIG_VERSION="0.34.0"
-SYSDIG_VERSION_MAC="0.34.0"
+SYSDIG_VERSION="0.35.1"
+SYSDIG_VERSION_MAC="0.35.1"
 
 # Env parameters
 # - CLEANUP (default: true)
@@ -104,7 +104,7 @@ install_dependencies() {
             # Linux binaries
 
             mkdir -p deps/sysdig-linux
-    
+
             id=$(docker create sysdig/sysdig:$SYSDIG_VERSION)
             docker cp $id:/usr/bin/sysdig deps/sysdig-linux
             docker cp $id:/usr/bin/csysdig deps/sysdig-linux
@@ -117,9 +117,9 @@ install_dependencies() {
 
         if [ "${BUILD_MAC}" = "true" ] || [ "${BUILD_MAC_INSTALLER}" = "true" ]; then
             # Mac binaries
-            
+
             mkdir -p deps/sysdig-mac
-            
+
 			curl -L -o sysdig.dmg "https://github.com/draios/sysdig/releases/download/${SYSDIG_VERSION_MAC}/sysdig-${SYSDIG_VERSION_MAC}-x86_64.dmg"
 			7z x sysdig.dmg || true
 			cp -v  sysdig-${SYSDIG_VERSION_MAC}-x86_64/bin/sysdig  deps/sysdig-mac/
@@ -178,7 +178,7 @@ build() {
         rm -rf out/container/public/testem.js
 
         mkdir -p dist
-        cp -r out/container/* dist  
+        cp -r out/container/* dist
         docker build . -t ${DOCKER_IMAGE_TAG}
 
         if [ "${ENVIRONMENT}" = "production" ]; then
@@ -221,7 +221,7 @@ cleanup() {
         rm -rf dist
 
         npm run clean
-        
+
         docker rm ${DOCKER_IMAGE_TAG} || echo "Image ${DOCKER_IMAGE_TAG} not found!"
     fi
 }
