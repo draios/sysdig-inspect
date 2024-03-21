@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "cors": "2.8.5",
-    "express": "4.17.0",
+    "express": "4.18.2",
     "forever": "^1.0.0",
     "untildify": "^4.0.0",
     "yargs": "13.2.4"
