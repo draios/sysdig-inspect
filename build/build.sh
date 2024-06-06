@@ -2,6 +2,7 @@
 
 SYSDIG_VERSION="0.37.1"
 SYSDIG_VERSION_MAC="0.37.1"
+SYSDIG_VERSION_WIN32="0.37.1"
 
 # Env parameters
 # - CLEANUP (default: true)
@@ -46,6 +47,14 @@ setup_env() {
     if [ -z ${BUILD_MAC_INSTALLER} ]
     then
         BUILD_MAC_INSTALLER=false
+    fi
+    if [ -z ${BUILD_WIN32} ]
+    then
+        BUILD_WIN32=true
+    fi
+    if [ -z ${BUILD_WIN32_INSTALLER} ]
+    then
+        BUILD_WIN32_INSTALLER=false
     fi
     if [ -z ${ENVIRONMENT} ]
     then
@@ -125,6 +134,20 @@ install_dependencies() {
 			cp -v  sysdig-${SYSDIG_VERSION_MAC}-x86_64/bin/sysdig  deps/sysdig-mac/
 			cp -v  sysdig-${SYSDIG_VERSION_MAC}-x86_64/bin/csysdig deps/sysdig-mac/
 			cp -vr sysdig-${SYSDIG_VERSION_MAC}-x86_64/share/sysdig/chisels deps/sysdig-mac/
+        fi
+
+        if [ "${BUILD_WIN32}" = "true" ] || [ "${BUILD_WIN32_INSTALLER}" = "true" ]; then
+            # WIN32 binaries
+
+            mkdir -p deps/sysdig-win32/chisels
+			mkdir win32
+			cd win32
+			curl -L -o sysdig-installer.exe "https://github.com/draios/sysdig/releases/download/${SYSDIG_VERSION_WIN32}/sysdig-${SYSDIG_VERSION_WIN32}-AMD64.exe"
+			7z e sysdig-installer.exe || true
+			cd ..
+			cp -v  win32/sysdig.exe  deps/sysdig-win32/
+			cp -v  win32/csysdig.exe deps/sysdig-win32/
+			cp -v  win32/*.lua       deps/sysdig-win32/chisels
         fi
     fi
 }
@@ -207,6 +230,33 @@ build() {
         mkdir -p out/mac/binaries
         cp electron-out/Sysdig\ Inspect-darwin-x64.zip out/mac/binaries/sysdig-inspect-mac-x86_64.zip
         if [ "${BUILD_MAC_INSTALLER}" = "true" ]; then
+            mkdir -p out/mac/installers
+            cp electron-out/make/Sysdig\ Inspect-${INSPECT_USER_VERSION}.dmg out/mac/installers/sysdig-inspect-mac-x86_64.dmg
+        fi
+    fi
+
+    if [ "${BUILD_WIN32}" = "true" ] || [ "${BUILD_WIN32_INSTALLER}" = "true" ]; then
+        #
+        # build WIN32 package
+        #
+        rm -rf out/win32
+
+        rm -rf ember-electron/resources/sysdig
+        npm run bundle -- deps/sysdig-mac
+        if [ "${BUILD_WIN32}" = "true" ]; then
+            npm run package:win -- --environment ${ENVIRONMENT} --user-tracking-key ${USER_TRACKING_KEY}
+        fi
+        if [ "${BUILD_WIN32_INSTALLER}" = "true" ]; then
+            npm run make:win -- --environment ${ENVIRONMENT} --user-tracking-key ${USER_TRACKING_KEY}
+        fi
+
+        cd electron-out
+		ls -lah
+        zip -ry Sysdig\ Inspect-darwin-x64.zip Sysdig\ Inspect-darwin-x64
+        cd ..
+        mkdir -p out/mac/binaries
+        cp electron-out/Sysdig\ Inspect-darwin-x64.zip out/mac/binaries/sysdig-inspect-mac-x86_64.zip
+        if [ "${BUILD_WIN32_INSTALLER}" = "true" ]; then
             mkdir -p out/mac/installers
             cp electron-out/make/Sysdig\ Inspect-${INSPECT_USER_VERSION}.dmg out/mac/installers/sysdig-inspect-mac-x86_64.dmg
         fi

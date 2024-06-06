@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM debian:buster
 
 
 
@@ -24,18 +24,22 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
 
 # Install the latest Docker CE binaries
 # From https://github.com/getintodevops/jenkins-withdocker/blob/master/Dockerfile
-RUN apt-get install -y \
-      apt-transport-https \
-      ca-certificates \
-      gnupg2 \
-      software-properties-common && \
-    curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey && \
-    add-apt-repository \
-      "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
-      $(lsb_release -cs) \
-      stable" && \
-   apt-get update -qq && \
-   apt-get install -y docker-ce
+RUN dpkg --add-architecture i386 && \
+		apt-get update && \
+		apt-get install -y \
+			apt-transport-https \
+			wine wine32 \
+			ca-certificates \
+			gnupg2 \
+			p7zip-full \
+			software-properties-common && \
+		curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey && \
+		add-apt-repository \
+		"deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+		$(lsb_release -cs) \
+		stable" && \
+		apt-get update -qq && \
+		apt-get install -y docker-ce
 
 # Cleanup
 RUN apt-get clean && \
