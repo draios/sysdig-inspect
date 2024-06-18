@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SYSDIG_VERSION="0.37.1"
-SYSDIG_VERSION_MAC="0.37.1"
+SYSDIG_VERSION="0.38.0"
+SYSDIG_VERSION_MAC="0.38.0"
 
 # Env parameters
 # - CLEANUP (default: true)
