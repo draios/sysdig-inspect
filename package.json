@@ -92,5 +92,8 @@
       "lib/wsd-core",
       "lib/ui-toolkit"
     ]
+  },
+  "volta": {
+    "node": "10.24.1"
   }
 }
