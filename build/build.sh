@@ -179,6 +179,7 @@ build() {
 
         mkdir -p dist
         cp -r out/container/* dist
+        echo "docker build . -t ${DOCKER_IMAGE_TAG}"
         docker build . -t ${DOCKER_IMAGE_TAG}
 
         if [ "${ENVIRONMENT}" = "production" ]; then

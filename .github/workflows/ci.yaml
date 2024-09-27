@@ -45,6 +45,7 @@ jobs:
         SEMVER: ${{ needs.build-settings.outputs.semver }}
         VERSION: ${{ needs.build-settings.outputs.version }}
         BUILD_MAC: true
+        BUILD_CONTAINER: true
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock
     steps:
