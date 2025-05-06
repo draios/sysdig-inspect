@@ -50,7 +50,7 @@ pipeline {
             }
             post {
                 always {
-                      archiveArtifacts allowEmptyArchive: true, artifacts: "out/linux/installers/sysdig-inspect_*_amd64.deb, out/linux/installers/sysdig-inspect-*.x86_64.rpm, out/mac/binaries/sysdig-inspect-*-mac.zip, out/mac/binaries/sysdig-inspect-*-mac.dmg"
+                      archiveArtifacts allowEmptyArchive: true, artifacts: "out/linux/installers/*.rpm, out/linux/installers/*.deb, out/mac/binaries/*.dmg, out/mac/binaries/*.zip"
                 }
             }
         }
