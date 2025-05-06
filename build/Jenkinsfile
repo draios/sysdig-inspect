@@ -47,14 +47,10 @@ pipeline {
                 //
                 sh "sudo chown -R \$(id -u):\$(id -g) deps/sysdig-linux"
             }
-        }
-
-        stage('Publish Docker image') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: "dockerhub-robot-account", passwordVariable: "DOCKER_PASSWORD", usernameVariable: "DOCKER_USERNAME")]) {
-                    sh "docker login -u=${env.DOCKER_USERNAME} -p=${env.DOCKER_PASSWORD}"
-                    sh "GIT_BRANCH=${env.BRANCH} BUILD_NUMBER=${env.VERSION_BUILD_NUMBER} ./build/publish.sh"
-                }            
+            post {
+                always {
+                      archiveArtifacts allowEmptyArchive: true, artifacts: "out/**"
+                }
             }
         }
     }
