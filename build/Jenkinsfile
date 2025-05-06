@@ -46,6 +46,7 @@ pipeline {
                 // and because of this the job won't be able to cleanup files.
                 //
                 sh "sudo chown -R \$(id -u):\$(id -g) deps/sysdig-linux"
+                sh "sudo chown -R \$(id -u):\$(id -g) out"
             }
             post {
                 always {
