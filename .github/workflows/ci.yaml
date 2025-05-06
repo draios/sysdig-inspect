@@ -1,5 +1,5 @@
 name: CI Build
-on: [push,pull_request,workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build-settings:
@@ -27,18 +27,17 @@ jobs:
             print(f'version={version}'.lower(), file=ofp)
             print(f'semver={semver}'.lower(), file=ofp)
 
-
   build-sysdig-inspect:
     needs: [build-settings]
     env:
-      BUILDER: "sysdiglabs/sysdig-inspect-builder:0.2"
+      BUILDER: 'sysdiglabs/sysdig-inspect-builder:0.2'
       SEMVER: ${{ needs.build-settings.outputs.semver }}
       VERSION: ${{ needs.build-settings.outputs.version }}
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
     runs-on: ubuntu-latest
     container:
-      image: "sysdiglabs/sysdig-inspect-builder:0.2"
+      image: 'sysdiglabs/sysdig-inspect-builder:0.2'
       env:
         INSTALL_DEPS: true
         GIT_BRANCH: dev
@@ -63,27 +62,26 @@ jobs:
       - name: Build sysdig-inspect
         run: ./build/build.sh
       - name: Upload artifacts rpm
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-${{ env.VERSION }}-linux-x86_64.rpm
           path: |
             out/linux/installers/sysdig-inspect-linux-x86_64.rpm
       - name: Upload artifacts deb
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-${{ env.VERSION }}-linux-x86_64.deb
           path: |
             out/linux/installers/sysdig-inspect-linux-x86_64.deb
       - name: Upload artifacts dmg
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-${{ env.VERSION }}-mac-x86_64.dmg
           path: |
             out/mac/binaries/sysdig-inspect-${{ env.SEMVER }}-mac-86_64.dmg
       - name: Upload artifacts zip
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-${{ env.VERSION }}-mac-x86_64.zip
           path: |
             out/mac/binaries/sysdig-inspect-mac-x86_64.zip
-

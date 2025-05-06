@@ -11,13 +11,13 @@ permissions:
 jobs:
   build-sysdig-inspect:
     env:
-      BUILDER: "sysdiglabs/sysdig-inspect-builder:0.2"
+      BUILDER: 'sysdiglabs/sysdig-inspect-builder:0.2'
       VERSION: ${{ github.ref_name }}
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
     runs-on: ubuntu-latest
     container:
-      image: "sysdiglabs/sysdig-inspect-builder:0.2"
+      image: 'sysdiglabs/sysdig-inspect-builder:0.2'
       env:
         INSTALL_DEPS: true
         GIT_BRANCH: ${{ github.ref_name }}
@@ -41,25 +41,25 @@ jobs:
       - name: Build sysdig-inspect
         run: ./build/build.sh
       - name: Upload artifacts rpm
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-release-${{ env.VERSION }}-linux-x86_64.rpm
           path: |
             out/linux/installers/sysdig-inspect-linux-x86_64.rpm
       - name: Upload artifacts deb
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-release-${{ env.VERSION }}-linux-x86_64.deb
           path: |
             out/linux/installers/sysdig-inspect-linux-x86_64.deb
       - name: Upload artifacts dmg
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-release-${{ env.VERSION }}-mac-x86_64.dmg
           path: |
             out/mac/binaries/sysdig-inspect-${{ env.VERSION }}-mac-x86_64.dmg
       - name: Upload artifacts zip
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-release-${{ env.VERSION }}-mac-x86_64.zip
           path: |
