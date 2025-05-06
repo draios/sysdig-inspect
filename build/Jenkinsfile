@@ -9,7 +9,6 @@ pipeline {
 
     environment {
         BUILDER = "sysdiglabs/sysdig-inspect-builder:0.2"
-        VERSION = readFile "VERSION"
     }
 
     stages {
@@ -30,7 +29,6 @@ pipeline {
                 // Define build number
                 script {
                     def now = new Date()
-
                     env.VERSION_BUILD_NUMBER=now.format("yyyyMMdd.HHmmss", TimeZone.getTimeZone('UTC'))
                 }
             }
