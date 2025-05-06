@@ -27,7 +27,7 @@ jobs:
         - /var/run/docker.sock:/var/run/docker.sock
     steps:
       - name: Checkout Sysdig
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: install 7z
         run: |
           cd /tmp
@@ -73,15 +73,15 @@ jobs:
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       - name: Download artifacts (linux-amd64 deb)
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: sysdig-inspect-release-${{ env.VERSION }}-linux-x86_64.deb
       - name: Download artifacts (linux-amd64 rpm)
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: sysdig-inspect-release-${{ env.VERSION }}-linux-x86_64.rpm
       - name: Download artifacts (osx-amd64)
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: sysdig-inspect-release-${{ env.VERSION }}-mac-x86_64.zip
       - name: test

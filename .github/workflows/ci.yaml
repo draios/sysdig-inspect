@@ -11,7 +11,7 @@ jobs:
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       - name: Checkout Sysdig
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Get settings for this release
         id: get_settings
         shell: python
@@ -48,7 +48,7 @@ jobs:
         - /var/run/docker.sock:/var/run/docker.sock
     steps:
       - name: Checkout Sysdig
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: install 7z
         run: |
           cd /tmp
