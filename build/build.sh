@@ -98,6 +98,10 @@ install_dependencies() {
     if [ "${INSTALL_DEPS}" = "true" ]; then
         echo "Installing dependencies..."
 
+        cd /tmp
+        sed -i '/^mozilla\/DST_Root_CA_X3/s/^/!/' /etc/ca-certificates.conf && update-ca-certificates -f && curl -L -o 7z.tar.xz https://www.7-zip.org/a/7z2301-linux-x64.tar.xz && tar -xaf 7z.tar.xz && mv 7zz /usr/bin/7z && rm -vfr /tmp/*
+        cd -
+
         rm -rf deps
 
         if [ "${BUILD_LINUX}" = "true" ] || [ "${BUILD_CONTAINER}" = "true" ]; then
