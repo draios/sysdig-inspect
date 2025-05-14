@@ -1,0 +1,90 @@
+/*
+Copyright (C) 2017 Draios inc.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 2 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+.sd-viz-timeline {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  
+  &__axis {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+  }
+  
+  &__hover-marker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+  }
+  
+  &__selected-area {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+  }
+  
+  &__time {
+    position: absolute;
+    bottom: 20px;
+    padding: 2px 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid @color-separator;
+    border-radius: 2px;
+    font-size: @font-size-sm;
+    white-space: nowrap;
+    
+    &--is-from {
+      transform: translateX(-100%);
+    }
+    
+    &--is-to {
+      transform: translateX(0);
+    }
+    
+    &--is-internal {
+      bottom: 50%;
+    }
+    
+    &--is-external {
+      bottom: 0;
+    }
+  }
+  
+  &__time-diff {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2px 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid @color-separator;
+    border-radius: 2px;
+    font-size: @font-size-sm;
+    white-space: nowrap;
+    
+    &--is-on-top {
+      top: 0;
+    }
+  }
+}

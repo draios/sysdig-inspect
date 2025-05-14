@@ -1,0 +1,75 @@
+/*
+Copyright (C) 2017 Draios inc.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 2 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+.sd-promise-wait-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: @z-index-overlay;
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: @layout-padding-lg;
+  }
+  
+  &__spinner {
+    width: 40px;
+    height: 40px;
+    margin-bottom: @layout-spacing-md;
+    
+    border: 4px solid @color-primary-lighten-2;
+    border-top: 4px solid @color-primary;
+    border-radius: 50%;
+    
+    animation: spin 1s linear infinite;
+  }
+  
+  &__error-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: @layout-spacing-md;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: #f44336;
+    color: white;
+    font-size: @font-size-xl;
+    font-weight: @font-weight-bold;
+    border-radius: 50%;
+  }
+  
+  &__text {
+    font-size: @font-size-md;
+    color: @color-text;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

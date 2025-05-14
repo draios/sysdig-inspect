@@ -1,0 +1,75 @@
+/*
+Copyright (C) 2017 Draios inc.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 2 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+.wsd-metric-timelines {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: @color-text-lighter;
+    font-size: @font-size-sm;
+  }
+  
+  &__list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    height: 100%;
+  }
+  
+  &__item {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    height: 100%;
+    border-right: 1px solid @color-separator;
+  }
+  
+  &__item-header {
+    display: flex;
+    align-items: center;
+    padding: 0 @layout-padding-xs;
+    height: 20px;
+    background-color: @color-background-secondary-nav-bar;
+    border-bottom: 1px solid @color-separator;
+  }
+  
+  &__item-name {
+    flex: 1;
+    font-size: @font-size-sm;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  &__item-remove {
+    background: none;
+    border: none;
+    color: @color-text-lighter;
+    cursor: pointer;
+    font-size: @font-size-md;
+    padding: 0 @layout-padding-xs;
+    
+    &:hover {
+      color: @color-text;
+    }
+  }
+}

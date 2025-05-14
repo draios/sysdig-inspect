@@ -1,0 +1,57 @@
+{
+  "name": "sysdig-inspect-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
+    "d3": "^7.8.5",
+    "js-cookie": "^3.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.2",
+    "react-router-dom": "^6.15.0",
+    "redux": "^4.2.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/d3": "^7.4.0",
+    "@types/jest": "^29.5.3",
+    "@types/node": "^16.18.48",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "customize-cra": "^1.0.0",
+    "less": "^4.1.3",
+    "less-loader": "^11.1.0",
+    "react-app-rewired": "^2.2.1",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:3000"
+}

@@ -1,0 +1,142 @@
+/*
+Copyright (C) 2017 Draios inc.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 2 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+.sd-button {
+  @layout-size-lg: 48px;
+  @layout-size-md: 36px;
+  @layout-size-sm: 24px;
+
+  @icon-size-lg: 32px;
+  @icon-size-md: 24px;
+  @icon-size-sm: 16px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: @layout-size-md * 2;
+  height: @layout-size-md;
+  padding: 0 @layout-padding-md;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  background: rgba(0, 0, 0, 0);
+  font-size: 14px;
+  font-weight: @font-weight-regular;
+  letter-spacing: .04em;
+  line-height: @layout-size-md;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  user-select: none;
+
+  cursor: pointer;
+
+  &:link,
+  &:active,
+  &:visited {
+    color: @color-text;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &--sm {
+    min-width: @layout-size-sm * 2;
+    height: @layout-size-sm;
+    line-height: @layout-size-sm;
+    font-size: 12px;
+  }
+
+  &--lg {
+    min-width: @layout-size-lg * 2;
+    height: @layout-size-lg;
+    line-height: @layout-size-lg;
+    font-size: 16px;
+  }
+
+  &--is-white {
+    color: white;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &--is-light {
+    color: @color-text-lighter;
+
+    &:hover {
+      color: @color-text;
+    }
+  }
+
+  &--is-primary {
+    color: @color-primary;
+
+    &:hover {
+      color: darken(@color-primary, 10%);
+    }
+  }
+
+  &--is-active {
+    color: @color-primary;
+  }
+
+  &--raised {
+    background-color: @color-primary;
+    color: white;
+    .z-shadow-1();
+
+    &:hover {
+      background-color: darken(@color-primary, 10%);
+      .z-shadow-2();
+    }
+  }
+
+  &--fab {
+    min-width: @layout-size-md;
+    width: @layout-size-md;
+    border-radius: 50%;
+  }
+
+  &--highlight-on-hover {
+    &:hover {
+      color: @color-primary;
+    }
+  }
+
+  &__text {
+    margin-left: @layout-spacing-xs;
+  }
+
+  .icon {
+    width: @icon-size-md;
+    height: @icon-size-md;
+  }
+
+  &--sm .icon {
+    width: @icon-size-sm;
+    height: @icon-size-sm;
+  }
+
+  &--lg .icon {
+    width: @icon-size-lg;
+    height: @icon-size-lg;
+  }
+}

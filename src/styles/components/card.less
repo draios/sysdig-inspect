@@ -1,0 +1,77 @@
+/*
+Copyright (C) 2017 Draios inc.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 2 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+.sd-card {
+  background-color: @color-card-background;
+  .z-shadow-1();
+
+  display: flex;
+  flex-direction: column;
+
+  margin: @layout-spacing-md / 2;
+
+  border-radius: 2px;
+
+  &--compact {
+    margin: @layout-spacing-sm / 2;
+  }
+
+  &--can-select {
+    cursor: pointer;
+
+    &:hover {
+      background-color: @color-card-background-hover;
+      .z-shadow-3();
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: @layout-padding-md * 2 + @font-line-height-md;
+
+    padding: @layout-padding-md;
+    padding-bottom: 0;
+
+    font-size: @font-size-md;
+    line-height: @font-line-height-md;
+    font-weight: @font-weight-regular;
+  }
+
+  &__content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: @layout-padding-md;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: @layout-padding-md * 2 + @font-line-height-md;
+
+    padding: @layout-padding-md;
+    padding-top: 0;
+
+    font-size: @font-size-md;
+    line-height: @font-line-height-md;
+    font-weight: @font-weight-regular;
+  }
+}

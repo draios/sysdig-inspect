@@ -18,6 +18,12 @@
     "start:electron": "./node_modules/.bin/ember electron",
     "start:backend": "scripts/run-backend",
     "start:webapp": "./node_modules/.bin/ember serve --proxy http://localhost:3000",
+    "start:react": "cd react-frontend && npm start",
+    "build:react": "cd react-frontend && npm run build",
+    "setup:react": "cd react-frontend && npm install",
+    "test:react": "cd react-frontend && npm test",
+    "start:react-app": "scripts/run-react-frontend",
+    "start:win:react-app": "scripts\\run-react-frontend.bat",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "test": "./node_modules/.bin/ember test",
@@ -27,7 +33,8 @@
     "package:win": "node_modules\\.bin\\ember electron:package --platform=win32",
     "make:win": "node_modules\\.bin\\ember electron:make --platform=win32",
     "start:win:backend": "scripts\\run-backend.bat",
-    "make:docker-image": "scripts/build-docker-image"
+    "make:docker-image": "scripts/build-docker-image",
+    "make:react-docker-image": "cd react-frontend && docker build -t sysdig-inspect-react ."
   },
   "devDependencies": {
     "@ember/jquery": "^0.6.0",
@@ -82,7 +89,9 @@
     "cors": "2.8.5",
     "electron-compile": "^6.4.4",
     "electron-protocol-serve": "1.3.0",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "nodemon": "^3.1.10",
+    "react-scripts": "^5.0.1"
   },
   "config": {
     "forge": "./ember-electron/electron-forge-config.js"

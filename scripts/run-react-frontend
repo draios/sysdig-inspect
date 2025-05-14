@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Start the backend server in the background
+npm run start:backend &
+BACKEND_PID=$!
+
+# Wait for the backend to start
+echo "Waiting for backend server to start..."
+sleep 3
+
+# Start the React frontend
+echo "Starting React frontend..."
+npm run start:react
+
+# When the React frontend is stopped, also stop the backend
+kill $BACKEND_PID
