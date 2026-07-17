@@ -34,54 +34,59 @@ jobs:
       BUILDER: "sysdiglabs/sysdig-inspect-builder:0.2"
       SEMVER: ${{ needs.build-settings.outputs.semver }}
       VERSION: ${{ needs.build-settings.outputs.version }}
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
     runs-on: ubuntu-latest
-    container:
-      image: "sysdiglabs/sysdig-inspect-builder:0.2"
-      env:
-        INSTALL_DEPS: true
-        GIT_BRANCH: dev
-        SEMVER: ${{ needs.build-settings.outputs.semver }}
-        VERSION: ${{ needs.build-settings.outputs.version }}
-        BUILD_MAC: true
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
     steps:
+      # NOTE: JS actions (checkout, upload-artifact) run on the host runner, not
+      # inside the builder container. The builder image has a glibc too old to
+      # run the runner-injected node20 that those actions require. Only the build
+      # itself runs inside the container, via `docker run` below.
       - name: Checkout Sysdig
-        uses: actions/checkout@v3
-      - name: install 7z
-        run: |
-          cd /tmp
-          sed -i '/^mozilla\/DST_Root_CA_X3/s/^/!/' /etc/ca-certificates.conf &&
-          update-ca-certificates -f &&
-          curl -L -o 7z.tar.xz https://www.7-zip.org/a/7z2301-linux-x64.tar.xz &&
-          tar -xaf 7z.tar.xz &&
-          mv 7zz /usr/bin/7z &&
-          rm -vfr /tmp/* &&
-          cd -
+        uses: actions/checkout@v4
       - name: Build sysdig-inspect
-        run: ./build/build.sh
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}":/workspace \
+            -w /workspace \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -e INSTALL_DEPS=true \
+            -e GIT_BRANCH=dev \
+            -e SEMVER="${SEMVER}" \
+            -e VERSION="${VERSION}" \
+            -e BUILD_MAC=true \
+            "${BUILDER}" \
+            bash -c '
+              set -e
+              cd /tmp
+              sed -i "/^mozilla\/DST_Root_CA_X3/s/^/!/" /etc/ca-certificates.conf
+              update-ca-certificates -f
+              curl -L -o 7z.tar.xz https://www.7-zip.org/a/7z2301-linux-x64.tar.xz
+              tar -xaf 7z.tar.xz
+              mv 7zz /usr/bin/7z
+              rm -vfr /tmp/*
+              cd /workspace
+              ./build/build.sh
+            '
       - name: Upload artifacts rpm
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-${{ env.VERSION }}-linux-x86_64.rpm
           path: |
             out/linux/installers/sysdig-inspect-linux-x86_64.rpm
       - name: Upload artifacts deb
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-${{ env.VERSION }}-linux-x86_64.deb
           path: |
             out/linux/installers/sysdig-inspect-linux-x86_64.deb
       - name: Upload artifacts dmg
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-${{ env.VERSION }}-mac-x86_64.dmg
           path: |
             out/mac/binaries/sysdig-inspect-${{ env.SEMVER }}-mac-86_64.dmg
       - name: Upload artifacts zip
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sysdig-inspect-${{ env.VERSION }}-mac-x86_64.zip
           path: |
